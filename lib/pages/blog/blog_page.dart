@@ -23,7 +23,7 @@ class BlogPage extends StatelessWidget {
               backgroundColor: Colors.transparent,
               appBar: AppBar(
                 backgroundColor: Colors.transparent,
-                title: Text(
+                title: const Text(
                   "Blog",
                   style: TextStyle(
                     color: Colors.white,
@@ -43,7 +43,7 @@ class BlogPage extends StatelessWidget {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.only(left: 10, right: 20),
+                    padding: const EdgeInsets.only(left: 10, right: 20),
                     child: GestureDetector(
                       child: Image.asset(
                         "assets/icons/icon_message.png",
@@ -65,17 +65,18 @@ class BlogPage extends StatelessWidget {
                   child: Container(
                     width: double.infinity,
                     height: double.infinity,
-                    margin: EdgeInsets.only(
+                    // padding: const EdgeInsets.symmetric(horizontal: 20),
+                    margin: const EdgeInsets.only(
                       top: 140,
-                      left: 20,
-                      right: 20,
                     ),
                     child: ListView.builder(
                       itemCount: 10,
                       itemBuilder: (context, index) => Container(
                         width: double.infinity,
-                        margin: EdgeInsets.only(
+                        margin: const EdgeInsets.only(
                           bottom: 20,
+                          left: 20,
+                          right: 20,
                         ),
                         height: 125,
                         decoration: BoxDecoration(
@@ -86,12 +87,12 @@ class BlogPage extends StatelessWidget {
                               color: Colors.black.withOpacity(0.25),
                               spreadRadius: 0,
                               blurRadius: 4,
-                              offset:
-                                  Offset(0, 4), // changes position of shadow
+                              offset: const Offset(
+                                  0, 4), // changes position of shadow
                             ),
                           ],
                         ),
-                        padding: EdgeInsets.only(
+                        padding: const EdgeInsets.only(
                           left: 15,
                           right: 20,
                         ),
@@ -100,7 +101,7 @@ class BlogPage extends StatelessWidget {
                             Container(
                               width: 110,
                               height: double.infinity,
-                              decoration: BoxDecoration(
+                              decoration: const BoxDecoration(
                                 borderRadius: BorderRadius.only(
                                   topLeft: Radius.circular(10),
                                   bottomLeft: Radius.circular(10),
@@ -118,18 +119,18 @@ class BlogPage extends StatelessWidget {
                               height: double.infinity,
                               color: Color(0xffFFD9D9),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               width: 15,
                             ),
                             Expanded(
                               child: Container(
-                                padding: EdgeInsets.only(
+                                padding: const EdgeInsets.only(
                                   top: 15,
                                   bottom: 15,
                                 ),
                                 child: Column(
                                   children: [
-                                    Text(
+                                    const Text(
                                       'Jordan chất điên, cháy cả cộng đồng mạng',
                                       style: TextStyle(
                                         color: Colors.black,
@@ -140,10 +141,10 @@ class BlogPage extends StatelessWidget {
                                       overflow: TextOverflow.ellipsis,
                                       textAlign: TextAlign.left,
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 5,
                                     ),
-                                    Text(
+                                    const Text(
                                       'It is a long established fact that a reader will be distracted by the readable content of a page, It is a long established fact that a reader will be distracted by the readable content of a page',
                                       style: TextStyle(
                                         color: Colors.black,
@@ -154,7 +155,7 @@ class BlogPage extends StatelessWidget {
                                       overflow: TextOverflow.ellipsis,
                                       textAlign: TextAlign.left,
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 5,
                                     ),
                                     Row(
@@ -167,10 +168,10 @@ class BlogPage extends StatelessWidget {
                                           fit: BoxFit.contain,
                                           color: Colors.black,
                                         ),
-                                        SizedBox(
+                                        const SizedBox(
                                           width: 10,
                                         ),
-                                        Text(
+                                        const Text(
                                           '10:00 - 27/02/2022',
                                           style: TextStyle(
                                             color: Colors.black,

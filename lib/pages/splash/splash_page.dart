@@ -33,6 +33,7 @@ class SpalshPage extends StatelessWidget {
                 fit: BoxFit.contain,
               ),
               Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   const Text(
                     'Wellcome',
@@ -54,6 +55,7 @@ class SpalshPage extends StatelessWidget {
                       fontWeight: FontWeight.w400,
                       decoration: TextDecoration.none,
                     ),
+                    textAlign: TextAlign.center,
                   ),
                   const SizedBox(
                     height: 20,

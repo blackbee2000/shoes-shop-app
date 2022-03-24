@@ -149,7 +149,7 @@ class SearchPage extends StatelessWidget {
                 const SizedBox(
                   height: 15,
                 ),
-                Container(
+                SizedBox(
                   width: double.infinity,
                   height: 40,
                   child: Row(
@@ -240,7 +240,7 @@ class SearchPage extends StatelessWidget {
                   child: GridView.builder(
                     gridDelegate:
                         const SliverGridDelegateWithFixedCrossAxisCount(
-                      childAspectRatio: 0.58,
+                      childAspectRatio: 0.52,
                       crossAxisSpacing: 20,
                       mainAxisSpacing: 20,
                       crossAxisCount: 2,

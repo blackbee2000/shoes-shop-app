@@ -98,7 +98,7 @@ class ProductPage extends StatelessWidget {
                           child: ListView.builder(
                             scrollDirection: Axis.horizontal,
                             itemCount: 10,
-                            itemBuilder: (context, index) => Container(
+                            itemBuilder: (context, index) => SizedBox(
                               width: 60,
                               height: double.infinity,
                               child: Center(
@@ -137,7 +137,7 @@ class ProductPage extends StatelessWidget {
                           child: GridView.builder(
                             gridDelegate:
                                 const SliverGridDelegateWithFixedCrossAxisCount(
-                              childAspectRatio: 0.58,
+                              childAspectRatio: 0.52,
                               crossAxisSpacing: 20,
                               mainAxisSpacing: 20,
                               crossAxisCount: 2,
