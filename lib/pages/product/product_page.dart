@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
+import 'package:shoes_shop_app/pages/product/detail/product_detail_page.dart';
 import 'package:shoes_shop_app/pages/product/product_controller.dart';
 
 class ProductPage extends StatelessWidget {
@@ -23,9 +24,9 @@ class ProductPage extends StatelessWidget {
               fit: BoxFit.cover,
             ),
             Scaffold(
-              backgroundColor: Colors.transparent,
+              backgroundColor: Colors.black.withOpacity(0),
               appBar: AppBar(
-                backgroundColor: Colors.transparent,
+                backgroundColor: Colors.black.withOpacity(0),
                 title: const Text(
                   "Product",
                   style: TextStyle(
@@ -143,126 +144,133 @@ class ProductPage extends StatelessWidget {
                               crossAxisCount: 2,
                             ),
                             itemCount: 6,
-                            itemBuilder: (context, index) => SizedBox(
-                              width: double.infinity,
-                              child: Column(
-                                children: [
-                                  Container(
-                                    width: double.infinity,
-                                    decoration: BoxDecoration(
-                                      color: Colors.black,
-                                      borderRadius: BorderRadius.circular(10),
+                            itemBuilder: (context, index) => GestureDetector(
+                              onTap: () {
+                                Get.to(ProductDetailPage());
+                              },
+                              child: SizedBox(
+                                width: double.infinity,
+                                child: Column(
+                                  children: [
+                                    Container(
+                                      width: double.infinity,
+                                      decoration: BoxDecoration(
+                                        color: Colors.black,
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                      child: Column(
+                                        children: [
+                                          Container(
+                                            width: double.infinity,
+                                            height: 36,
+                                            alignment: Alignment.topRight,
+                                            child: Container(
+                                              width: 41,
+                                              height: double.infinity,
+                                              decoration: const BoxDecoration(
+                                                color: Colors.white,
+                                                borderRadius: BorderRadius.only(
+                                                  topRight: Radius.circular(10),
+                                                  bottomLeft:
+                                                      Radius.circular(10),
+                                                ),
+                                              ),
+                                              child: Center(
+                                                child: Image.asset(
+                                                  "assets/icons/icon-like.png",
+                                                  width: 20,
+                                                  height: 20,
+                                                  fit: BoxFit.contain,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                          const SizedBox(
+                                            height: 15,
+                                          ),
+                                          Center(
+                                            child: Image.asset(
+                                              "assets/images/product_home.png",
+                                              width: 80,
+                                              fit: BoxFit.contain,
+                                            ),
+                                          ),
+                                          const SizedBox(
+                                            height: 15,
+                                          ),
+                                          Container(
+                                            width: double.infinity,
+                                            height: 36,
+                                            alignment: Alignment.bottomLeft,
+                                            child: Container(
+                                              width: 41,
+                                              height: double.infinity,
+                                              decoration: const BoxDecoration(
+                                                color: Colors.white,
+                                                borderRadius: BorderRadius.only(
+                                                  topRight: Radius.circular(10),
+                                                  bottomLeft:
+                                                      Radius.circular(10),
+                                                ),
+                                              ),
+                                              child: Center(
+                                                child: Image.asset(
+                                                  "assets/icons/icon-cart.png",
+                                                  width: 20,
+                                                  height: 20,
+                                                  fit: BoxFit.contain,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
                                     ),
-                                    child: Column(
+                                    const SizedBox(
+                                      height: 15,
+                                    ),
+                                    Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
                                       children: [
-                                        Container(
-                                          width: double.infinity,
-                                          height: 36,
-                                          alignment: Alignment.topRight,
-                                          child: Container(
-                                            width: 41,
-                                            height: double.infinity,
-                                            decoration: const BoxDecoration(
-                                              color: Colors.white,
-                                              borderRadius: BorderRadius.only(
-                                                topRight: Radius.circular(10),
-                                                bottomLeft: Radius.circular(10),
-                                              ),
-                                            ),
-                                            child: Center(
-                                              child: Image.asset(
-                                                "assets/icons/icon-like.png",
-                                                width: 20,
-                                                height: 20,
-                                                fit: BoxFit.contain,
-                                              ),
-                                            ),
+                                        const Text(
+                                          'Jordan 1',
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.w600,
                                           ),
                                         ),
-                                        const SizedBox(
-                                          height: 15,
-                                        ),
-                                        Center(
-                                          child: Image.asset(
-                                            "assets/images/product_home.png",
-                                            width: 80,
-                                            fit: BoxFit.contain,
-                                          ),
-                                        ),
-                                        const SizedBox(
-                                          height: 15,
-                                        ),
-                                        Container(
-                                          width: double.infinity,
-                                          height: 36,
-                                          alignment: Alignment.bottomLeft,
-                                          child: Container(
-                                            width: 41,
-                                            height: double.infinity,
-                                            decoration: const BoxDecoration(
-                                              color: Colors.white,
-                                              borderRadius: BorderRadius.only(
-                                                topRight: Radius.circular(10),
-                                                bottomLeft: Radius.circular(10),
-                                              ),
-                                            ),
-                                            child: Center(
-                                              child: Image.asset(
-                                                "assets/icons/icon-cart.png",
-                                                width: 20,
-                                                height: 20,
-                                                fit: BoxFit.contain,
-                                              ),
+                                        RichText(
+                                          text: const TextSpan(
+                                            text: '250',
+                                            style: TextStyle(
+                                              color: Colors.black,
+                                              fontSize: 20,
+                                              fontWeight: FontWeight.w600,
                                             ),
                                           ),
                                         ),
                                       ],
                                     ),
-                                  ),
-                                  const SizedBox(
-                                    height: 15,
-                                  ),
-                                  Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      const Text(
-                                        'Jordan 1',
-                                        style: TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.w600,
+                                    Container(
+                                      alignment: Alignment.topLeft,
+                                      child: RatingBarIndicator(
+                                        rating: 5,
+                                        itemBuilder: (context, index) =>
+                                            const Icon(
+                                          Icons.star,
+                                          color: Colors.amber,
                                         ),
+                                        itemCount: 5,
+                                        itemSize: 20,
+                                        direction: Axis.horizontal,
                                       ),
-                                      RichText(
-                                        text: const TextSpan(
-                                          text: '250',
-                                          style: TextStyle(
-                                            color: Colors.black,
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.w600,
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  Container(
-                                    alignment: Alignment.topLeft,
-                                    child: RatingBarIndicator(
-                                      rating: 5,
-                                      itemBuilder: (context, index) =>
-                                          const Icon(
-                                        Icons.star,
-                                        color: Colors.amber,
-                                      ),
-                                      itemCount: 5,
-                                      itemSize: 20,
-                                      direction: Axis.horizontal,
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
                             ),
                           ),

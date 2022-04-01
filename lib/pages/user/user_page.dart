@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:shoes_shop_app/pages/address/address_page.dart';
 
 class UserPage extends StatelessWidget {
   const UserPage({Key? key}) : super(key: key);
@@ -303,26 +305,31 @@ class UserPage extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Row(
-                            children: [
-                              const Text(
-                                'Address',
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w400,
+                          GestureDetector(
+                            onTap: () {
+                              Get.to(AddressPage());
+                            },
+                            child: Row(
+                              children: [
+                                const Text(
+                                  'Address',
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w400,
+                                  ),
                                 ),
-                              ),
-                              const SizedBox(
-                                width: 10,
-                              ),
-                              Image.asset(
-                                'assets/icons/icon-address.png',
-                                width: 20,
-                                height: 20,
-                                fit: BoxFit.contain,
-                              ),
-                            ],
+                                const SizedBox(
+                                  width: 10,
+                                ),
+                                Image.asset(
+                                  'assets/icons/icon-address.png',
+                                  width: 20,
+                                  height: 20,
+                                  fit: BoxFit.contain,
+                                ),
+                              ],
+                            ),
                           ),
                           const Text(
                             'Skip',

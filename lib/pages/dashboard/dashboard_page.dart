@@ -6,7 +6,6 @@ import 'package:shoes_shop_app/pages/home/home_page.dart';
 import 'package:shoes_shop_app/pages/product/product_page.dart';
 import 'package:shoes_shop_app/pages/profile/profile_page.dart';
 import 'package:shoes_shop_app/pages/search/search_page.dart';
-import 'package:shoes_shop_app/pages/user/user_page.dart';
 import 'dashboard_controller.dart';
 
 class DashboardPage extends StatelessWidget {
@@ -196,8 +195,7 @@ class DashboardPage extends StatelessWidget {
               ProductPage(),
               SearchPage(),
               BlogPage(),
-              // ProfilePage(),
-              UserPage(),
+              ProfilePage(),
             ],
           ),
         ),

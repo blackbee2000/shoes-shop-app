@@ -39,6 +39,8 @@ dependencies:
   flutter_rating_bar: ^4.0.0
   custom_navigation_bar: ^0.8.2
   dropdown_search: ^2.0.1
+  widget_mask: ^1.0.0+0
+  flutter_switch: ^0.3.2
 
 dev_dependencies:
   flutter_test:
