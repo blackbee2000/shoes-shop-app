@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shoes_shop_app/pages/auth/login/login_page.dart';
 import 'package:shoes_shop_app/pages/profile/payment/payment_page.dart';
 import 'package:shoes_shop_app/pages/profile/profile_controller.dart';
 import 'package:shoes_shop_app/pages/profile/your-order-detail/your_order_detail_page.dart';
@@ -150,19 +151,24 @@ class ProfilePage extends StatelessWidget {
                                   ),
                                   Row(
                                     children: [
-                                      Image.asset(
-                                        "assets/icons/icon-logout.png",
-                                        width: 20,
-                                        height: 20,
-                                        fit: BoxFit.contain,
-                                        color: Colors.black,
+                                      IconButton(
+                                        onPressed: () {
+                                          Get.to(const LoginPage());
+                                        },
+                                        icon: Image.asset(
+                                          "assets/icons/icon-logout.png",
+                                          width: 20,
+                                          height: 20,
+                                          fit: BoxFit.contain,
+                                          color: Colors.black,
+                                        ),
                                       ),
                                       const SizedBox(
                                         width: 15,
                                       ),
                                       IconButton(
                                         onPressed: () {
-                                          Get.to(const UserPage());
+                                          Get.to(UserPage());
                                         },
                                         icon: Image.asset(
                                           "assets/icons/icon-edit.png",

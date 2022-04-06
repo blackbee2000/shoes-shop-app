@@ -41,6 +41,8 @@ dependencies:
   dropdown_search: ^2.0.1
   widget_mask: ^1.0.0+0
   flutter_switch: ^0.3.2
+  image_picker: ^0.8.4+11
+  dio: ^4.0.6
 
 dev_dependencies:
   flutter_test:

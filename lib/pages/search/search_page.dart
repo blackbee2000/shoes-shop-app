@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:get/get.dart';
+import 'package:shoes_shop_app/pages/search/search_controller.dart';
 
 class SearchPage extends StatelessWidget {
   TextEditingController shoeName = TextEditingController();
@@ -11,8 +13,70 @@ class SearchPage extends StatelessWidget {
     'Converse',
     'Vans',
   ];
+  final searchController = Get.put(SearchController());
 
   SearchPage({Key? key}) : super(key: key);
+
+  Widget sortView() {
+    return Container(
+      decoration: const BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(30),
+          topRight: Radius.circular(30),
+        ),
+      ),
+      width: double.infinity,
+      padding: const EdgeInsets.all(20),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          GestureDetector(
+            onTap: () {
+              searchController.sortSelected.value = 'Price';
+              Get.back();
+            },
+            child: const Padding(
+              padding: EdgeInsets.only(bottom: 15),
+              child: Text(
+                'Price',
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
+            ),
+          ),
+          Container(
+            width: double.infinity,
+            height: 1,
+            color: Colors.black.withOpacity(0.05),
+          ),
+          GestureDetector(
+            onTap: () {
+              searchController.sortSelected.value = 'Shoes Name';
+              Get.back();
+            },
+            child: const Padding(
+              padding: EdgeInsets.only(top: 15),
+              child: Text(
+                'Shoes Name',
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -205,33 +269,40 @@ class SearchPage extends StatelessWidget {
                 const SizedBox(
                   height: 20,
                 ),
-                Row(
-                  children: [
-                    Container(
-                      width: 40,
-                      height: 40,
-                      decoration: BoxDecoration(
-                        color: Colors.black,
-                        borderRadius: BorderRadius.circular(5),
-                      ),
-                      child: const Icon(
-                        Icons.sort,
-                        color: Colors.white,
-                        size: 20,
-                      ),
+                Obx(
+                  () => GestureDetector(
+                    onTap: () {
+                      Get.bottomSheet(sortView());
+                    },
+                    child: Row(
+                      children: [
+                        Container(
+                          width: 40,
+                          height: 40,
+                          decoration: BoxDecoration(
+                            color: Colors.black,
+                            borderRadius: BorderRadius.circular(5),
+                          ),
+                          child: const Icon(
+                            Icons.sort,
+                            color: Colors.white,
+                            size: 20,
+                          ),
+                        ),
+                        const SizedBox(
+                          width: 10,
+                        ),
+                        Text(
+                          searchController.sortSelected.value,
+                          style: const TextStyle(
+                            color: Colors.black,
+                            fontSize: 15,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                      ],
                     ),
-                    const SizedBox(
-                      width: 10,
-                    ),
-                    const Text(
-                      'Sort',
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 15,
-                        fontWeight: FontWeight.w400,
-                      ),
-                    ),
-                  ],
+                  ),
                 ),
                 const SizedBox(
                   height: 30,

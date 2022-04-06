@@ -3,6 +3,9 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:get/get.dart';
 import 'package:shoes_shop_app/pages/home/home_controller.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:shoes_shop_app/pages/product/detail/product_detail_page.dart';
+import 'package:shoes_shop_app/pages/product/product_page.dart';
+import 'package:shoes_shop_app/pages/search/search_page.dart';
 
 class HomePage extends StatelessWidget {
   CarouselController homeCarouselController = CarouselController();
@@ -148,6 +151,8 @@ class HomePage extends StatelessWidget {
                                                   height: 20,
                                                 ),
                                                 GestureDetector(
+                                                  onTap: () =>
+                                                      Get.to(ProductPage()),
                                                   child: Container(
                                                     width: 120,
                                                     height: 30,
@@ -252,27 +257,30 @@ class HomePage extends StatelessWidget {
                                 fontWeight: FontWeight.w700,
                               ),
                             ),
-                            Row(
-                              children: [
-                                const Text(
-                                  'View all',
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w400,
+                            GestureDetector(
+                              onTap: () => Get.to(SearchPage()),
+                              child: Row(
+                                children: [
+                                  const Text(
+                                    'View all',
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w400,
+                                    ),
                                   ),
-                                ),
-                                const SizedBox(
-                                  width: 10,
-                                ),
-                                Image.asset(
-                                  "assets/icons/icon_arrow_right.png",
-                                  width: 15,
-                                  height: 15,
-                                  fit: BoxFit.contain,
-                                  color: Colors.black,
-                                ),
-                              ],
+                                  const SizedBox(
+                                    width: 10,
+                                  ),
+                                  Image.asset(
+                                    "assets/icons/icon_arrow_right.png",
+                                    width: 15,
+                                    height: 15,
+                                    fit: BoxFit.contain,
+                                    color: Colors.black,
+                                  ),
+                                ],
+                              ),
                             ),
                           ],
                         ),
@@ -350,6 +358,8 @@ class HomePage extends StatelessWidget {
                                   height: 15,
                                 ),
                                 GestureDetector(
+                                  onTap: () =>
+                                      Get.to(const ProductDetailPage()),
                                   child: Container(
                                     width: double.infinity,
                                     height: 30,
@@ -465,27 +475,30 @@ class HomePage extends StatelessWidget {
                                 fontWeight: FontWeight.w700,
                               ),
                             ),
-                            Row(
-                              children: [
-                                const Text(
-                                  'View all',
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w400,
+                            GestureDetector(
+                              onTap: () => Get.to(SearchPage()),
+                              child: Row(
+                                children: [
+                                  const Text(
+                                    'View all',
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w400,
+                                    ),
                                   ),
-                                ),
-                                const SizedBox(
-                                  width: 10,
-                                ),
-                                Image.asset(
-                                  "assets/icons/icon_arrow_right.png",
-                                  width: 15,
-                                  height: 15,
-                                  fit: BoxFit.contain,
-                                  color: Colors.black,
-                                ),
-                              ],
+                                  const SizedBox(
+                                    width: 10,
+                                  ),
+                                  Image.asset(
+                                    "assets/icons/icon_arrow_right.png",
+                                    width: 15,
+                                    height: 15,
+                                    fit: BoxFit.contain,
+                                    color: Colors.black,
+                                  ),
+                                ],
+                              ),
                             ),
                           ],
                         ),
@@ -563,6 +576,8 @@ class HomePage extends StatelessWidget {
                                   height: 15,
                                 ),
                                 GestureDetector(
+                                  onTap: () =>
+                                      Get.to(const ProductDetailPage()),
                                   child: Container(
                                     width: double.infinity,
                                     height: 30,

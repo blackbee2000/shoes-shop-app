@@ -7,6 +7,543 @@ class AddressPage extends StatelessWidget {
   AddressPage({Key? key}) : super(key: key);
 
   final addressController = Get.put(AddressController());
+
+  Widget addAddress(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.only(
+        bottom: MediaQuery.of(context).viewInsets.bottom,
+      ),
+      child: Container(
+        width: double.infinity,
+        padding: const EdgeInsets.all(30),
+        decoration: const BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(30),
+            topRight: Radius.circular(30),
+          ),
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    const Text(
+                      'Add new address',
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    Container(
+                      width: 30,
+                      height: 2,
+                      color: Colors.black,
+                    ),
+                  ],
+                ),
+                GestureDetector(
+                  onTap: () => Get.back(),
+                  child: const Icon(
+                    Icons.close,
+                    size: 20,
+                    color: Colors.black,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: 15,
+            ),
+            Container(
+              width: double.infinity,
+              height: 40,
+              decoration: BoxDecoration(
+                color: const Color(0xffF0F0F0),
+                borderRadius: BorderRadius.circular(5),
+              ),
+              child: TextField(
+                controller: addressController.customerName,
+                style: const TextStyle(
+                  color: Colors.black,
+                  fontSize: 13,
+                  fontWeight: FontWeight.w400,
+                ),
+                textAlign: TextAlign.left,
+                decoration: const InputDecoration(
+                  contentPadding: EdgeInsets.only(
+                    bottom: 7,
+                    left: 15,
+                  ),
+                  hintText: 'Enter name',
+                  hintStyle: TextStyle(
+                    color: Color(0xffD0D0D0),
+                    fontSize: 13,
+                    fontWeight: FontWeight.w400,
+                  ),
+                  border: InputBorder.none,
+                ),
+                cursorColor: Colors.black,
+              ),
+            ),
+            const SizedBox(
+              height: 15,
+            ),
+            Container(
+              width: double.infinity,
+              height: 40,
+              decoration: BoxDecoration(
+                color: const Color(0xffF0F0F0),
+                borderRadius: BorderRadius.circular(5),
+              ),
+              child: TextField(
+                controller: addressController.customerAddress,
+                style: const TextStyle(
+                  color: Colors.black,
+                  fontSize: 13,
+                  fontWeight: FontWeight.w400,
+                ),
+                textAlign: TextAlign.left,
+                decoration: const InputDecoration(
+                  contentPadding: EdgeInsets.only(
+                    bottom: 7,
+                    left: 15,
+                  ),
+                  hintText: 'Enter address',
+                  hintStyle: TextStyle(
+                    color: Color(0xffD0D0D0),
+                    fontSize: 13,
+                    fontWeight: FontWeight.w400,
+                  ),
+                  border: InputBorder.none,
+                ),
+                cursorColor: Colors.black,
+              ),
+            ),
+            const SizedBox(
+              height: 15,
+            ),
+            SizedBox(
+              width: double.infinity,
+              height: 40,
+              child: Row(
+                children: [
+                  Expanded(
+                    child: GestureDetector(
+                      onTap: () => Get.back(),
+                      child: Container(
+                        width: double.infinity,
+                        height: double.infinity,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          border: Border.all(
+                            color: Colors.black,
+                          ),
+                        ),
+                        child: const Center(
+                          child: Text(
+                            'Cancel',
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 15,
+                  ),
+                  Expanded(
+                    child: Container(
+                      width: double.infinity,
+                      height: double.infinity,
+                      decoration: const BoxDecoration(
+                        color: Colors.black,
+                      ),
+                      child: const Center(
+                        child: Text(
+                          'Confirm',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget editAddress(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.only(
+        bottom: MediaQuery.of(context).viewInsets.bottom,
+      ),
+      child: Container(
+        width: double.infinity,
+        // height: 300,
+        padding: const EdgeInsets.all(30),
+        decoration: const BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(30),
+            topRight: Radius.circular(30),
+          ),
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    const Text(
+                      'Edit address',
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    Container(
+                      width: 30,
+                      height: 2,
+                      color: Colors.black,
+                    ),
+                  ],
+                ),
+                GestureDetector(
+                  onTap: () => Navigator.pop(context),
+                  child: const Icon(
+                    Icons.close,
+                    size: 20,
+                    color: Colors.black,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: 15,
+            ),
+            Container(
+              width: double.infinity,
+              height: 40,
+              decoration: BoxDecoration(
+                color: const Color(0xffF0F0F0),
+                borderRadius: BorderRadius.circular(5),
+              ),
+              child: TextField(
+                controller: addressController.customerNameEdit,
+                style: const TextStyle(
+                  color: Colors.black,
+                  fontSize: 13,
+                  fontWeight: FontWeight.w400,
+                ),
+                textAlign: TextAlign.left,
+                decoration: const InputDecoration(
+                  contentPadding: EdgeInsets.only(
+                    bottom: 7,
+                    left: 15,
+                  ),
+                  hintText: 'Enter name',
+                  hintStyle: TextStyle(
+                    color: Color(0xffD0D0D0),
+                    fontSize: 13,
+                    fontWeight: FontWeight.w400,
+                  ),
+                  border: InputBorder.none,
+                ),
+                cursorColor: Colors.black,
+              ),
+            ),
+            const SizedBox(
+              height: 15,
+            ),
+            Container(
+              width: double.infinity,
+              height: 40,
+              decoration: BoxDecoration(
+                color: const Color(0xffF0F0F0),
+                borderRadius: BorderRadius.circular(5),
+              ),
+              child: TextField(
+                controller: addressController.customerAddressEdit,
+                style: const TextStyle(
+                  color: Colors.black,
+                  fontSize: 13,
+                  fontWeight: FontWeight.w400,
+                ),
+                textAlign: TextAlign.left,
+                decoration: const InputDecoration(
+                  contentPadding: EdgeInsets.only(
+                    bottom: 7,
+                    left: 15,
+                  ),
+                  hintText: 'Enter address',
+                  hintStyle: TextStyle(
+                    color: Color(0xffD0D0D0),
+                    fontSize: 13,
+                    fontWeight: FontWeight.w400,
+                  ),
+                  border: InputBorder.none,
+                ),
+                cursorColor: Colors.black,
+              ),
+            ),
+            const SizedBox(
+              height: 15,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Obx(
+                  () => FlutterSwitch(
+                    width: 45,
+                    height: 25,
+                    value: addressController.statusSwitch.value,
+                    activeColor: Colors.black,
+                    onToggle: (val) {
+                      addressController.statusSwitch.value = val;
+                    },
+                  ),
+                ),
+                const SizedBox(
+                  width: 10,
+                ),
+                const Text(
+                  'Set default address',
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 14,
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: 15,
+            ),
+            SizedBox(
+              width: double.infinity,
+              height: 40,
+              child: Row(
+                children: [
+                  Expanded(
+                    child: GestureDetector(
+                      onTap: () => Navigator.pop(context),
+                      child: Container(
+                        width: double.infinity,
+                        height: double.infinity,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          border: Border.all(
+                            color: Colors.black,
+                          ),
+                        ),
+                        child: const Center(
+                          child: Text(
+                            'Cancel',
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 15,
+                  ),
+                  Expanded(
+                    child: Container(
+                      width: double.infinity,
+                      height: double.infinity,
+                      decoration: const BoxDecoration(
+                        color: Colors.black,
+                      ),
+                      child: const Center(
+                        child: Text(
+                          'Confirm',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget deleteAddress(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.only(
+        bottom: MediaQuery.of(context).viewInsets.bottom,
+      ),
+      child: Container(
+        width: double.infinity,
+        padding: const EdgeInsets.all(30),
+        decoration: const BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(30),
+            topRight: Radius.circular(30),
+          ),
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    const Text(
+                      'Delete address',
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    Container(
+                      width: 30,
+                      height: 2,
+                      color: Colors.black,
+                    ),
+                  ],
+                ),
+                GestureDetector(
+                  onTap: () => Navigator.pop(context),
+                  child: const Icon(
+                    Icons.close,
+                    size: 20,
+                    color: Colors.black,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: 15,
+            ),
+            const Align(
+              alignment: Alignment.center,
+              child: Text(
+                'Do you want to delete it?',
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 15,
+            ),
+            SizedBox(
+              width: double.infinity,
+              height: 40,
+              child: Row(
+                children: [
+                  Expanded(
+                    child: GestureDetector(
+                      onTap: () => Navigator.pop(context),
+                      child: Container(
+                        width: double.infinity,
+                        height: double.infinity,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          border: Border.all(
+                            color: Colors.black,
+                          ),
+                        ),
+                        child: const Center(
+                          child: Text(
+                            'Cancel',
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 15,
+                  ),
+                  Expanded(
+                    child: Container(
+                      width: double.infinity,
+                      height: double.infinity,
+                      decoration: const BoxDecoration(
+                        color: Colors.black,
+                      ),
+                      child: const Center(
+                        child: Text(
+                          'Confirm',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -141,9 +678,10 @@ class AddressPage extends StatelessWidget {
                                   ),
                                   GestureDetector(
                                     onTap: () {
-                                      addressController.isShowEditPopup.value =
-                                          !addressController
-                                              .isShowEditPopup.value;
+                                      Get.bottomSheet(
+                                        editAddress(context),
+                                        isScrollControlled: true,
+                                      );
                                     },
                                     child: Image.asset(
                                       'assets/icons/icon-edit.png',
@@ -157,10 +695,10 @@ class AddressPage extends StatelessWidget {
                                   ),
                                   GestureDetector(
                                     onTap: () {
-                                      addressController
-                                              .isShowDeletePopup.value =
-                                          !addressController
-                                              .isShowDeletePopup.value;
+                                      Get.bottomSheet(
+                                        deleteAddress(context),
+                                        isScrollControlled: true,
+                                      );
                                     },
                                     child: Image.asset(
                                       'assets/icons/icon-trash.png',
@@ -279,12 +817,10 @@ class AddressPage extends StatelessWidget {
                                               ),
                                               GestureDetector(
                                                 onTap: () {
-                                                  addressController
-                                                          .isShowEditPopup
-                                                          .value =
-                                                      !addressController
-                                                          .isShowEditPopup
-                                                          .value;
+                                                  Get.bottomSheet(
+                                                    editAddress(context),
+                                                    isScrollControlled: true,
+                                                  );
                                                 },
                                                 child: Image.asset(
                                                   'assets/icons/icon-edit.png',
@@ -298,12 +834,10 @@ class AddressPage extends StatelessWidget {
                                               ),
                                               GestureDetector(
                                                 onTap: () {
-                                                  addressController
-                                                          .isShowDeletePopup
-                                                          .value =
-                                                      !addressController
-                                                          .isShowDeletePopup
-                                                          .value;
+                                                  Get.bottomSheet(
+                                                    deleteAddress(context),
+                                                    isScrollControlled: true,
+                                                  );
                                                 },
                                                 child: Image.asset(
                                                   'assets/icons/icon-trash.png',
@@ -333,8 +867,10 @@ class AddressPage extends StatelessWidget {
                     right: 0,
                     child: GestureDetector(
                       onTap: () {
-                        addressController.isShowAddPopup.value =
-                            !addressController.isShowAddPopup.value;
+                        Get.bottomSheet(
+                          addAddress(context),
+                          isScrollControlled: true,
+                        );
                       },
                       child: Container(
                         width: 170,
@@ -387,637 +923,6 @@ class AddressPage extends StatelessWidget {
                 ],
               ),
             ),
-            Obx(
-              () => Visibility(
-                visible: addressController.isShowAddPopup.value == true,
-                child: Stack(
-                  children: [
-                    GestureDetector(
-                      onTap: () {
-                        addressController.isShowAddPopup.value =
-                            !addressController.isShowAddPopup.value;
-                      },
-                      child: Container(
-                        color: Colors.black54,
-                      ),
-                    ),
-                    Positioned(
-                      bottom: 0,
-                      left: 0,
-                      right: 0,
-                      child: SizedBox(
-                        width: context.width - 30,
-                        child: AddAddressPopup(),
-                      ),
-                    )
-                  ],
-                ),
-              ),
-            ),
-            Obx(
-              () => Visibility(
-                visible: addressController.isShowEditPopup.value == true,
-                child: Stack(
-                  children: [
-                    GestureDetector(
-                      onTap: () {
-                        addressController.isShowEditPopup.value =
-                            !addressController.isShowEditPopup.value;
-                      },
-                      child: Container(
-                        color: Colors.black54,
-                      ),
-                    ),
-                    Positioned(
-                      bottom: 0,
-                      left: 0,
-                      right: 0,
-                      child: SizedBox(
-                        width: context.width - 30,
-                        child: EditAddressPopup(),
-                      ),
-                    )
-                  ],
-                ),
-              ),
-            ),
-            Obx(
-              () => Visibility(
-                visible: addressController.isShowDeletePopup.value == true,
-                child: Stack(
-                  children: [
-                    GestureDetector(
-                      onTap: () {
-                        addressController.isShowDeletePopup.value =
-                            !addressController.isShowDeletePopup.value;
-                      },
-                      child: Container(
-                        color: Colors.black54,
-                      ),
-                    ),
-                    Positioned(
-                      bottom: 0,
-                      left: 0,
-                      right: 0,
-                      child: SizedBox(
-                        width: context.width - 30,
-                        child: DeleteAddressPopup(),
-                      ),
-                    )
-                  ],
-                ),
-              ),
-            )
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class AddAddressPopup extends StatelessWidget {
-  AddAddressPopup({Key? key}) : super(key: key);
-  final addressController = Get.put(AddressController());
-  @override
-  Widget build(BuildContext context) {
-    return Material(
-      borderRadius: const BorderRadius.only(
-        topLeft: Radius.circular(30),
-        topRight: Radius.circular(30),
-      ),
-      child: Container(
-        width: double.infinity,
-        padding: const EdgeInsets.all(30),
-        decoration: const BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(30),
-            topRight: Radius.circular(30),
-          ),
-        ),
-        child: Column(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    const Text(
-                      'Add new address',
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 5,
-                    ),
-                    Container(
-                      width: 30,
-                      height: 2,
-                      color: Colors.black,
-                    ),
-                  ],
-                ),
-                GestureDetector(
-                  onTap: () {
-                    addressController.isShowAddPopup.value =
-                        !addressController.isShowAddPopup.value;
-                  },
-                  child: const Icon(
-                    Icons.close,
-                    size: 20,
-                    color: Colors.black,
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(
-              height: 15,
-            ),
-            Container(
-              width: double.infinity,
-              height: 40,
-              decoration: BoxDecoration(
-                color: const Color(0xffF0F0F0),
-                borderRadius: BorderRadius.circular(5),
-              ),
-              child: TextField(
-                controller: addressController.customerName,
-                style: const TextStyle(
-                  color: Colors.black,
-                  fontSize: 13,
-                  fontWeight: FontWeight.w400,
-                ),
-                textAlign: TextAlign.left,
-                decoration: const InputDecoration(
-                  contentPadding: EdgeInsets.only(
-                    bottom: 7,
-                    left: 15,
-                  ),
-                  hintText: 'Enter name',
-                  hintStyle: TextStyle(
-                    color: Color(0xffD0D0D0),
-                    fontSize: 13,
-                    fontWeight: FontWeight.w400,
-                  ),
-                  border: InputBorder.none,
-                ),
-                cursorColor: Colors.black,
-              ),
-            ),
-            const SizedBox(
-              height: 15,
-            ),
-            Container(
-              width: double.infinity,
-              height: 40,
-              decoration: BoxDecoration(
-                color: const Color(0xffF0F0F0),
-                borderRadius: BorderRadius.circular(5),
-              ),
-              child: TextField(
-                controller: addressController.customerAddress,
-                style: const TextStyle(
-                  color: Colors.black,
-                  fontSize: 13,
-                  fontWeight: FontWeight.w400,
-                ),
-                textAlign: TextAlign.left,
-                decoration: const InputDecoration(
-                  contentPadding: EdgeInsets.only(
-                    bottom: 7,
-                    left: 15,
-                  ),
-                  hintText: 'Enter address',
-                  hintStyle: TextStyle(
-                    color: Color(0xffD0D0D0),
-                    fontSize: 13,
-                    fontWeight: FontWeight.w400,
-                  ),
-                  border: InputBorder.none,
-                ),
-                cursorColor: Colors.black,
-              ),
-            ),
-            const SizedBox(
-              height: 15,
-            ),
-            SizedBox(
-              width: double.infinity,
-              height: 40,
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Container(
-                      width: double.infinity,
-                      height: double.infinity,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        border: Border.all(
-                          color: Colors.black,
-                        ),
-                      ),
-                      child: const Center(
-                        child: Text(
-                          'Cancel',
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(
-                    width: 15,
-                  ),
-                  Expanded(
-                    child: Container(
-                      width: double.infinity,
-                      height: double.infinity,
-                      decoration: const BoxDecoration(
-                        color: Colors.black,
-                      ),
-                      child: const Center(
-                        child: Text(
-                          'Confirm',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            )
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class EditAddressPopup extends StatelessWidget {
-  EditAddressPopup({Key? key}) : super(key: key);
-  final addressController = Get.put(AddressController());
-  @override
-  Widget build(BuildContext context) {
-    return Material(
-      borderRadius: const BorderRadius.only(
-        topLeft: Radius.circular(30),
-        topRight: Radius.circular(30),
-      ),
-      child: Container(
-        width: double.infinity,
-        padding: const EdgeInsets.all(30),
-        decoration: const BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(30),
-            topRight: Radius.circular(30),
-          ),
-        ),
-        child: Column(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    const Text(
-                      'Edit address',
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 5,
-                    ),
-                    Container(
-                      width: 30,
-                      height: 2,
-                      color: Colors.black,
-                    ),
-                  ],
-                ),
-                GestureDetector(
-                  onTap: () {
-                    addressController.isShowEditPopup.value =
-                        !addressController.isShowEditPopup.value;
-                  },
-                  child: const Icon(
-                    Icons.close,
-                    size: 20,
-                    color: Colors.black,
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(
-              height: 15,
-            ),
-            Container(
-              width: double.infinity,
-              height: 40,
-              decoration: BoxDecoration(
-                color: const Color(0xffF0F0F0),
-                borderRadius: BorderRadius.circular(5),
-              ),
-              child: TextField(
-                controller: addressController.customerNameEdit,
-                style: const TextStyle(
-                  color: Colors.black,
-                  fontSize: 13,
-                  fontWeight: FontWeight.w400,
-                ),
-                textAlign: TextAlign.left,
-                decoration: const InputDecoration(
-                  contentPadding: EdgeInsets.only(
-                    bottom: 7,
-                    left: 15,
-                  ),
-                  hintText: 'Enter name',
-                  hintStyle: TextStyle(
-                    color: Color(0xffD0D0D0),
-                    fontSize: 13,
-                    fontWeight: FontWeight.w400,
-                  ),
-                  border: InputBorder.none,
-                ),
-                cursorColor: Colors.black,
-              ),
-            ),
-            const SizedBox(
-              height: 15,
-            ),
-            Container(
-              width: double.infinity,
-              height: 40,
-              decoration: BoxDecoration(
-                color: const Color(0xffF0F0F0),
-                borderRadius: BorderRadius.circular(5),
-              ),
-              child: TextField(
-                controller: addressController.customerAddressEdit,
-                style: const TextStyle(
-                  color: Colors.black,
-                  fontSize: 13,
-                  fontWeight: FontWeight.w400,
-                ),
-                textAlign: TextAlign.left,
-                decoration: const InputDecoration(
-                  contentPadding: EdgeInsets.only(
-                    bottom: 7,
-                    left: 15,
-                  ),
-                  hintText: 'Enter address',
-                  hintStyle: TextStyle(
-                    color: Color(0xffD0D0D0),
-                    fontSize: 13,
-                    fontWeight: FontWeight.w400,
-                  ),
-                  border: InputBorder.none,
-                ),
-                cursorColor: Colors.black,
-              ),
-            ),
-            const SizedBox(
-              height: 15,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Obx(
-                  () => FlutterSwitch(
-                    width: 45,
-                    height: 25,
-                    value: addressController.statusSwitch.value,
-                    activeColor: Colors.black,
-                    onToggle: (val) {
-                      addressController.statusSwitch.value = val;
-                    },
-                  ),
-                ),
-                const SizedBox(
-                  width: 10,
-                ),
-                const Text(
-                  'Set default address',
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 14,
-                    fontWeight: FontWeight.w400,
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(
-              height: 15,
-            ),
-            SizedBox(
-              width: double.infinity,
-              height: 40,
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Container(
-                      width: double.infinity,
-                      height: double.infinity,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        border: Border.all(
-                          color: Colors.black,
-                        ),
-                      ),
-                      child: const Center(
-                        child: Text(
-                          'Cancel',
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(
-                    width: 15,
-                  ),
-                  Expanded(
-                    child: Container(
-                      width: double.infinity,
-                      height: double.infinity,
-                      decoration: const BoxDecoration(
-                        color: Colors.black,
-                      ),
-                      child: const Center(
-                        child: Text(
-                          'Confirm',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            )
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class DeleteAddressPopup extends StatelessWidget {
-  DeleteAddressPopup({Key? key}) : super(key: key);
-  final addressController = Get.put(AddressController());
-  @override
-  Widget build(BuildContext context) {
-    return Material(
-      borderRadius: const BorderRadius.only(
-        topLeft: Radius.circular(30),
-        topRight: Radius.circular(30),
-      ),
-      child: Container(
-        width: double.infinity,
-        padding: const EdgeInsets.all(30),
-        decoration: const BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(30),
-            topRight: Radius.circular(30),
-          ),
-        ),
-        child: Column(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    const Text(
-                      'Delete address',
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 5,
-                    ),
-                    Container(
-                      width: 30,
-                      height: 2,
-                      color: Colors.black,
-                    ),
-                  ],
-                ),
-                GestureDetector(
-                  onTap: () {
-                    addressController.isShowDeletePopup.value =
-                        !addressController.isShowDeletePopup.value;
-                  },
-                  child: const Icon(
-                    Icons.close,
-                    size: 20,
-                    color: Colors.black,
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(
-              height: 15,
-            ),
-            const Align(
-              alignment: Alignment.center,
-              child: Text(
-                'Do you want to delete it?',
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-            ),
-            const SizedBox(
-              height: 15,
-            ),
-            SizedBox(
-              width: double.infinity,
-              height: 40,
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Container(
-                      width: double.infinity,
-                      height: double.infinity,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        border: Border.all(
-                          color: Colors.black,
-                        ),
-                      ),
-                      child: const Center(
-                        child: Text(
-                          'Cancel',
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(
-                    width: 15,
-                  ),
-                  Expanded(
-                    child: Container(
-                      width: double.infinity,
-                      height: double.infinity,
-                      decoration: const BoxDecoration(
-                        color: Colors.black,
-                      ),
-                      child: const Center(
-                        child: Text(
-                          'Confirm',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            )
           ],
         ),
       ),

@@ -3,8 +3,6 @@ import 'package:get/get.dart';
 
 class AddressController extends GetxController {
   final isShowAddPopup = false.obs;
-  final isShowEditPopup = false.obs;
-  final isShowDeletePopup = false.obs;
   TextEditingController customerName = TextEditingController();
   TextEditingController customerAddress = TextEditingController();
   TextEditingController customerNameEdit = TextEditingController();
