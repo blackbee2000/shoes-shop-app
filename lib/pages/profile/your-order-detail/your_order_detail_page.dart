@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shoes_shop_app/utils/app_constant.dart';
 
 class YourOrderDetailPage extends StatelessWidget {
   const YourOrderDetailPage({Key? key}) : super(key: key);
@@ -22,7 +23,7 @@ class YourOrderDetailPage extends StatelessWidget {
                 backgroundColor: Colors.black.withOpacity(0),
                 leading: IconButton(
                   onPressed: () {
-                    Get.back();
+                    Get.back(id: AppConstant.PROFILE);
                   },
                   icon: const Icon(
                     Icons.arrow_back_ios,

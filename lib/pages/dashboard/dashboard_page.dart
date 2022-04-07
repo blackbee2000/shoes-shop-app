@@ -36,8 +36,8 @@ class DashboardPage extends StatelessWidget {
             ),
             child: CustomNavigationBar(
               iconSize: 25,
-              selectedColor: Color(0xff040307),
-              strokeColor: Color(0x30040307),
+              selectedColor: const Color(0xff040307),
+              strokeColor: const Color(0x30040307),
               opacity: 1,
               elevation: 0,
               backgroundColor: Colors.transparent,

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shoes_shop_app/pages/address/address_page.dart';
 import 'package:shoes_shop_app/pages/profile/payment/payment_controller.dart';
+import 'package:shoes_shop_app/utils/app_constant.dart';
 
 class PaymentPage extends StatelessWidget {
   PaymentPage({Key? key}) : super(key: key);
@@ -18,7 +19,7 @@ class PaymentPage extends StatelessWidget {
             backgroundColor: Colors.white,
             leading: IconButton(
               onPressed: () {
-                Get.back();
+                Get.back(id: AppConstant.PROFILE);
               },
               icon: const Icon(
                 Icons.arrow_back_ios,

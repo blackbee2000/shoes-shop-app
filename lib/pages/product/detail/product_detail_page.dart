@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
 import 'package:shoes_shop_app/pages/product/detail/product_detail_controller.dart';
+import 'package:shoes_shop_app/utils/app_constant.dart';
 
 class ProductDetailPage extends StatefulWidget {
   const ProductDetailPage({Key? key}) : super(key: key);
@@ -34,7 +35,9 @@ class ProductDetailState extends State<ProductDetailPage>
             backgroundColor: Colors.white,
             leading: IconButton(
               onPressed: () {
-                Get.back();
+                Get.back(id: AppConstant.HOME);
+                Get.back(id: AppConstant.PRODUCT);
+                Get.back(id: AppConstant.SEARCH);
               },
               icon: const Icon(
                 Icons.arrow_back_ios,

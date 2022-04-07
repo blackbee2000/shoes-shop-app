@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shoes_shop_app/pages/blog/detail/blog_detail_controller.dart';
+import 'package:shoes_shop_app/utils/app_constant.dart';
 import 'package:widget_mask/widget_mask.dart';
 
 class BlogDetailPage extends StatelessWidget {
@@ -26,7 +27,7 @@ class BlogDetailPage extends StatelessWidget {
               appBar: AppBar(
                 leading: IconButton(
                   onPressed: () {
-                    Get.back();
+                    Get.back(id: AppConstant.BLOG);
                   },
                   icon: const Icon(
                     Icons.arrow_back_ios,
