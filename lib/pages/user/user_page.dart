@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shoes_shop_app/pages/address/address_page.dart';
+import 'package:shoes_shop_app/pages/dashboard/dashboard_page.dart';
 import 'package:shoes_shop_app/pages/user/user_controller.dart';
+import 'package:shoes_shop_app/utils/app_constant.dart';
 
 class UserPage extends StatelessWidget {
-  UserPage({Key? key}) : super(key: key);
+  final int id;
+  UserPage({
+    Key? key,
+    required this.id,
+  }) : super(key: key);
   final userController = Get.put(UserController());
 
   Widget selectedProvide() {
@@ -84,6 +90,18 @@ class UserPage extends StatelessWidget {
             Scaffold(
               appBar: AppBar(
                 backgroundColor: Colors.transparent,
+                leading: id == AppConstant.PROFILE
+                    ? IconButton(
+                        onPressed: () {
+                          Get.back(id: AppConstant.PROFILE);
+                        },
+                        icon: const Icon(
+                          Icons.arrow_back_ios,
+                          size: 20,
+                          color: Colors.white,
+                        ),
+                      )
+                    : Container(),
                 title: const Text(
                   'Update information',
                   style: TextStyle(
@@ -434,12 +452,17 @@ class UserPage extends StatelessWidget {
                                 ],
                               ),
                             ),
-                            const Text(
-                              'Skip',
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 14,
-                                fontWeight: FontWeight.w400,
+                            TextButton(
+                              onPressed: () {
+                                Get.offAll(DashboardPage());
+                              },
+                              child: const Text(
+                                'Skip',
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w400,
+                                ),
                               ),
                             ),
                           ],
@@ -450,23 +473,28 @@ class UserPage extends StatelessWidget {
                       ),
                       SizedBox(
                         width: double.infinity,
-                        child: Stack(
-                          alignment: AlignmentDirectional.center,
-                          children: [
-                            ClipOval(
-                              child: Container(
-                                width: 60,
-                                height: 60,
-                                color: Colors.black,
+                        child: GestureDetector(
+                          onTap: () {
+                            Get.offAll(DashboardPage());
+                          },
+                          child: Stack(
+                            alignment: AlignmentDirectional.center,
+                            children: [
+                              ClipOval(
+                                child: Container(
+                                  width: 60,
+                                  height: 60,
+                                  color: Colors.black,
+                                ),
                               ),
-                            ),
-                            Image.asset(
-                              'assets/icons/icon-right-button.png',
-                              width: 25,
-                              height: 25,
-                              fit: BoxFit.contain,
-                            ),
-                          ],
+                              Image.asset(
+                                'assets/icons/icon-right-button.png',
+                                width: 25,
+                                height: 25,
+                                fit: BoxFit.contain,
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ],

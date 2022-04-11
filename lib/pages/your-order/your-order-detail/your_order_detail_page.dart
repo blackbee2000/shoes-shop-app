@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shoes_shop_app/pages/cart/cart_page.dart';
 import 'package:shoes_shop_app/utils/app_constant.dart';
 
 class YourOrderDetailPage extends StatelessWidget {
@@ -42,6 +43,10 @@ class YourOrderDetailPage extends StatelessWidget {
                 centerTitle: false,
                 actions: [
                   GestureDetector(
+                    onTap: () {
+                      Get.to(CartPage(id: AppConstant.PROFILE),
+                          id: AppConstant.PROFILE);
+                    },
                     child: Image.asset(
                       "assets/icons/icon_cart.png",
                       width: 20,

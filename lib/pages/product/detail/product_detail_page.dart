@@ -2,11 +2,15 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
+import 'package:shoes_shop_app/pages/cart/cart_page.dart';
 import 'package:shoes_shop_app/pages/product/detail/product_detail_controller.dart';
-import 'package:shoes_shop_app/utils/app_constant.dart';
 
 class ProductDetailPage extends StatefulWidget {
-  const ProductDetailPage({Key? key}) : super(key: key);
+  final int id;
+  const ProductDetailPage({
+    Key? key,
+    required this.id,
+  }) : super(key: key);
 
   @override
   State<ProductDetailPage> createState() => ProductDetailState();
@@ -35,9 +39,7 @@ class ProductDetailState extends State<ProductDetailPage>
             backgroundColor: Colors.white,
             leading: IconButton(
               onPressed: () {
-                Get.back(id: AppConstant.HOME);
-                Get.back(id: AppConstant.PRODUCT);
-                Get.back(id: AppConstant.SEARCH);
+                Get.back(id: widget.id);
               },
               icon: const Icon(
                 Icons.arrow_back_ios,
@@ -56,6 +58,9 @@ class ProductDetailState extends State<ProductDetailPage>
             centerTitle: false,
             actions: [
               GestureDetector(
+                onTap: () {
+                  Get.to(CartPage(id: widget.id), id: widget.id);
+                },
                 child: Image.asset(
                   "assets/icons/icon_cart.png",
                   width: 20,

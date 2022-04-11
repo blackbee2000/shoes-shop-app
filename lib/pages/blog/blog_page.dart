@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shoes_shop_app/pages/blog/blog_controller.dart';
 import 'package:shoes_shop_app/pages/blog/detail/blog_detail_page.dart';
+import 'package:shoes_shop_app/pages/cart/cart_page.dart';
 import 'package:shoes_shop_app/utils/app_constant.dart';
 
 class BlogPage extends StatelessWidget {
@@ -38,9 +39,9 @@ class BlogPage extends StatelessWidget {
                   backgroundColor: Colors.black.withOpacity(0),
                   appBar: AppBar(
                     backgroundColor: Colors.black.withOpacity(0),
-                    title: const Text(
-                      "Blog",
-                      style: TextStyle(
+                    title: Text(
+                      "blog_title".tr,
+                      style: const TextStyle(
                         color: Colors.white,
                         fontSize: 20,
                         fontWeight: FontWeight.w600,
@@ -49,6 +50,12 @@ class BlogPage extends StatelessWidget {
                     centerTitle: false,
                     actions: [
                       GestureDetector(
+                        onTap: () {
+                          Get.to(
+                            CartPage(id: AppConstant.BLOG),
+                            id: AppConstant.BLOG,
+                          );
+                        },
                         child: Image.asset(
                           "assets/icons/icon_cart.png",
                           width: 20,

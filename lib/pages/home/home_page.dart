@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:get/get.dart';
+import 'package:shoes_shop_app/pages/cart/cart_page.dart';
 import 'package:shoes_shop_app/pages/dashboard/dashboard_controller.dart';
 import 'package:shoes_shop_app/pages/home/home_controller.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -36,6 +37,12 @@ class HomePage extends StatelessWidget {
                 centerTitle: false,
                 actions: [
                   GestureDetector(
+                    onTap: () {
+                      Get.to(
+                        CartPage(id: AppConstant.HOME),
+                        id: AppConstant.HOME,
+                      );
+                    },
                     child: Image.asset(
                       "assets/icons/icon_cart.png",
                       width: 20,
@@ -97,9 +104,9 @@ class HomePage extends StatelessWidget {
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
                                             children: [
-                                              const Text(
-                                                'New Collection',
-                                                style: TextStyle(
+                                              Text(
+                                                'home_new_collection'.tr,
+                                                style: const TextStyle(
                                                   color: Colors.black,
                                                   fontSize: 22,
                                                   fontWeight: FontWeight.w600,
@@ -182,9 +189,11 @@ class HomePage extends StatelessWidget {
                                                               CrossAxisAlignment
                                                                   .center,
                                                           children: [
-                                                            const Text(
-                                                              'Shop now',
-                                                              style: TextStyle(
+                                                            Text(
+                                                              'home_shop_now'
+                                                                  .tr,
+                                                              style:
+                                                                  const TextStyle(
                                                                 color: Colors
                                                                     .white,
                                                                 fontSize: 14,
@@ -267,9 +276,9 @@ class HomePage extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                const Text(
-                                  'Sales',
-                                  style: TextStyle(
+                                Text(
+                                  'home_sales'.tr,
+                                  style: const TextStyle(
                                     color: Colors.black,
                                     fontSize: 18,
                                     fontWeight: FontWeight.w700,
@@ -280,9 +289,9 @@ class HomePage extends StatelessWidget {
                                       dashboardController.tabIndex.value = 3,
                                   child: Row(
                                     children: [
-                                      const Text(
-                                        'View all',
-                                        style: TextStyle(
+                                      Text(
+                                        'home_view_all'.tr,
+                                        style: const TextStyle(
                                           color: Colors.black,
                                           fontSize: 12,
                                           fontWeight: FontWeight.w400,
@@ -380,7 +389,9 @@ class HomePage extends StatelessWidget {
                                     ),
                                     GestureDetector(
                                       onTap: () => Get.to(
-                                          const ProductDetailPage(),
+                                          const ProductDetailPage(
+                                            id: AppConstant.HOME,
+                                          ),
                                           id: AppConstant.HOME),
                                       child: Container(
                                         width: double.infinity,
@@ -396,9 +407,9 @@ class HomePage extends StatelessWidget {
                                           crossAxisAlignment:
                                               CrossAxisAlignment.center,
                                           children: [
-                                            const Text(
-                                              'Go detail',
-                                              style: TextStyle(
+                                            Text(
+                                              'home_go_detail'.tr,
+                                              style: const TextStyle(
                                                 color: Colors.white,
                                                 fontSize: 14,
                                                 fontWeight: FontWeight.w400,
@@ -429,9 +440,9 @@ class HomePage extends StatelessWidget {
                           Container(
                             width: double.infinity,
                             padding: const EdgeInsets.symmetric(horizontal: 20),
-                            child: const Text(
-                              'Brands',
-                              style: TextStyle(
+                            child: Text(
+                              'home_brands'.tr,
+                              style: const TextStyle(
                                 color: Colors.black,
                                 fontSize: 18,
                                 fontWeight: FontWeight.w700,
@@ -489,9 +500,9 @@ class HomePage extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                const Text(
-                                  'New Arrivals',
-                                  style: TextStyle(
+                                Text(
+                                  'home_news_arrivals'.tr,
+                                  style: const TextStyle(
                                     color: Colors.black,
                                     fontSize: 18,
                                     fontWeight: FontWeight.w700,
@@ -501,9 +512,9 @@ class HomePage extends StatelessWidget {
                                   onTap: () => Get.to(SearchPage()),
                                   child: Row(
                                     children: [
-                                      const Text(
-                                        'View all',
-                                        style: TextStyle(
+                                      Text(
+                                        'home_view_all'.tr,
+                                        style: const TextStyle(
                                           color: Colors.black,
                                           fontSize: 12,
                                           fontWeight: FontWeight.w400,
@@ -601,7 +612,9 @@ class HomePage extends StatelessWidget {
                                     ),
                                     GestureDetector(
                                       onTap: () => Get.to(
-                                          const ProductDetailPage(),
+                                          const ProductDetailPage(
+                                            id: AppConstant.PRODUCT,
+                                          ),
                                           id: AppConstant.HOME),
                                       child: Container(
                                         width: double.infinity,
@@ -617,9 +630,9 @@ class HomePage extends StatelessWidget {
                                           crossAxisAlignment:
                                               CrossAxisAlignment.center,
                                           children: [
-                                            const Text(
-                                              'Go detail',
-                                              style: TextStyle(
+                                            Text(
+                                              'home_go_detail'.tr,
+                                              style: const TextStyle(
                                                 color: Colors.white,
                                                 fontSize: 14,
                                                 fontWeight: FontWeight.w400,

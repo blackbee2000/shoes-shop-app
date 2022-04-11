@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lottie/lottie.dart';
 import 'package:shoes_shop_app/pages/dashboard/dashboard_page.dart';
 
 class SpalshPage extends StatelessWidget {
@@ -70,6 +71,18 @@ class SpalshPage extends StatelessWidget {
                   ),
                   GestureDetector(
                     onTap: () {
+                      // Future.delayed(const Duration(milliseconds: 500), () {
+                      //   Get.dialog(
+                      //     Lottie.asset(
+                      //       'assets/loading/shoes_loading.json',
+                      //       width: 100,
+                      //       height: 100,
+                      //       fit: BoxFit.fill,
+                      //     ),
+                      //     barrierDismissible: false,
+                      //   );
+                      // });
+                      // Get.back();
                       Get.offAll(DashboardPage());
                     },
                     child: Container(

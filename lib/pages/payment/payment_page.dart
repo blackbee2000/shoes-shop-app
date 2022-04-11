@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shoes_shop_app/pages/address/address_page.dart';
-import 'package:shoes_shop_app/pages/profile/payment/payment_controller.dart';
-import 'package:shoes_shop_app/utils/app_constant.dart';
+import 'package:shoes_shop_app/pages/payment/payment_controller.dart';
 
 class PaymentPage extends StatelessWidget {
-  PaymentPage({Key? key}) : super(key: key);
+  final int id;
+  PaymentPage({
+    Key? key,
+    required this.id,
+  }) : super(key: key);
   final paymentController = Get.put(PaymentController());
   @override
   Widget build(BuildContext context) {
@@ -19,7 +22,7 @@ class PaymentPage extends StatelessWidget {
             backgroundColor: Colors.white,
             leading: IconButton(
               onPressed: () {
-                Get.back(id: AppConstant.PROFILE);
+                Get.back(id: id);
               },
               icon: const Icon(
                 Icons.arrow_back_ios,
@@ -35,17 +38,8 @@ class PaymentPage extends StatelessWidget {
                 fontWeight: FontWeight.w600,
               ),
             ),
-            centerTitle: false,
+            centerTitle: true,
             actions: [
-              GestureDetector(
-                child: Image.asset(
-                  "assets/icons/icon_cart.png",
-                  width: 20,
-                  height: 20,
-                  fit: BoxFit.contain,
-                  color: Colors.black,
-                ),
-              ),
               Padding(
                 padding: const EdgeInsets.only(left: 10, right: 20),
                 child: GestureDetector(

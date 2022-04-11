@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
+import 'package:shoes_shop_app/pages/cart/cart_page.dart';
 import 'package:shoes_shop_app/pages/product/detail/product_detail_page.dart';
 import 'package:shoes_shop_app/pages/product/product_controller.dart';
 import 'package:shoes_shop_app/utils/app_constant.dart';
@@ -31,9 +32,9 @@ class ProductPage extends StatelessWidget {
                   backgroundColor: Colors.black.withOpacity(0),
                   appBar: AppBar(
                     backgroundColor: Colors.black.withOpacity(0),
-                    title: const Text(
-                      "Product",
-                      style: TextStyle(
+                    title: Text(
+                      "product_title".tr,
+                      style: const TextStyle(
                         color: Colors.white,
                         fontSize: 20,
                         fontWeight: FontWeight.w600,
@@ -42,6 +43,12 @@ class ProductPage extends StatelessWidget {
                     centerTitle: false,
                     actions: [
                       GestureDetector(
+                        onTap: () {
+                          Get.to(
+                            CartPage(id: AppConstant.PRODUCT),
+                            id: AppConstant.PRODUCT,
+                          );
+                        },
                         child: Image.asset(
                           "assets/icons/icon_cart.png",
                           width: 20,
@@ -153,7 +160,10 @@ class ProductPage extends StatelessWidget {
                                 itemBuilder: (context, index) =>
                                     GestureDetector(
                                   onTap: () {
-                                    Get.to(const ProductDetailPage(),
+                                    Get.to(
+                                        const ProductDetailPage(
+                                          id: AppConstant.PRODUCT,
+                                        ),
                                         id: AppConstant.PRODUCT);
                                   },
                                   child: SizedBox(

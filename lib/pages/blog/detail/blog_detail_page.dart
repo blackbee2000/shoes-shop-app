@@ -1,13 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shoes_shop_app/pages/blog/detail/blog_detail_controller.dart';
+import 'package:shoes_shop_app/pages/cart/cart_page.dart';
 import 'package:shoes_shop_app/utils/app_constant.dart';
 import 'package:widget_mask/widget_mask.dart';
+import 'package:flutter_share/flutter_share.dart';
 
 class BlogDetailPage extends StatelessWidget {
   final blogDetailController = Get.put(BlogDetailController());
 
   BlogDetailPage({Key? key}) : super(key: key);
+
+  Future<void> share() async {
+    await FlutterShare.share(
+        title: 'Example share',
+        text: 'Example share text',
+        linkUrl: 'https://flutter.dev/',
+        chooserTitle: 'Example Chooser Title');
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -36,9 +47,9 @@ class BlogDetailPage extends StatelessWidget {
                   ),
                 ),
                 backgroundColor: Colors.black.withOpacity(0),
-                title: const Text(
-                  "Blog Detail",
-                  style: TextStyle(
+                title: Text(
+                  "blog_detail_title".tr,
+                  style: const TextStyle(
                     color: Colors.white,
                     fontSize: 20,
                     fontWeight: FontWeight.w600,
@@ -47,6 +58,12 @@ class BlogDetailPage extends StatelessWidget {
                 centerTitle: false,
                 actions: [
                   GestureDetector(
+                    onTap: () {
+                      Get.to(
+                        CartPage(id: AppConstant.BLOG),
+                        id: AppConstant.BLOG,
+                      );
+                    },
                     child: Image.asset(
                       "assets/icons/icon_cart.png",
                       width: 20,
@@ -143,20 +160,23 @@ class BlogDetailPage extends StatelessWidget {
                             flex: 3,
                             child: Container(
                               alignment: Alignment.centerRight,
-                              child: Container(
-                                width: 50,
-                                height: 50,
-                                decoration: BoxDecoration(
-                                  color: Colors.black,
-                                  border: Border.all(color: Colors.white),
-                                  shape: BoxShape.circle,
-                                ),
-                                child: Center(
-                                  child: Image.asset(
-                                    'assets/icons/icon-share.png',
-                                    width: 30,
-                                    height: 30,
-                                    fit: BoxFit.contain,
+                              child: GestureDetector(
+                                onTap: share,
+                                child: Container(
+                                  width: 50,
+                                  height: 50,
+                                  decoration: BoxDecoration(
+                                    color: Colors.black,
+                                    border: Border.all(color: Colors.white),
+                                    shape: BoxShape.circle,
+                                  ),
+                                  child: Center(
+                                    child: Image.asset(
+                                      'assets/icons/icon-share.png',
+                                      width: 30,
+                                      height: 30,
+                                      fit: BoxFit.contain,
+                                    ),
                                   ),
                                 ),
                               ),
@@ -208,9 +228,9 @@ class BlogDetailPage extends StatelessWidget {
                     ),
                     WidgetMask(
                       blendMode: BlendMode.difference,
-                      mask: const Text(
-                        'Related Blog',
-                        style: TextStyle(
+                      mask: Text(
+                        'blog_detail_related'.tr,
+                        style: const TextStyle(
                           color: Colors.white,
                           fontSize: 16,
                           fontWeight: FontWeight.w600,
@@ -226,11 +246,19 @@ class BlogDetailPage extends StatelessWidget {
                     const SizedBox(
                       height: 10,
                     ),
-                    Container(
-                      alignment: Alignment.center,
-                      width: 50,
-                      height: 1,
-                      color: Colors.black,
+                    WidgetMask(
+                      blendMode: BlendMode.difference,
+                      mask: Container(
+                        alignment: Alignment.center,
+                        width: 50,
+                        height: 1,
+                        color: Colors.black,
+                      ),
+                      child: Container(
+                        width: 50,
+                        height: 1,
+                        color: Colors.black,
+                      ),
                     ),
                     const SizedBox(
                       height: 20,
@@ -327,7 +355,7 @@ class BlogDetailPage extends StatelessWidget {
                                               textAlign: TextAlign.left,
                                             ),
                                             const SizedBox(
-                                              height: 5,
+                                              height: 10,
                                             ),
                                             Row(
                                               mainAxisAlignment:

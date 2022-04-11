@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
+import 'package:shoes_shop_app/pages/cart/cart_page.dart';
 import 'package:shoes_shop_app/pages/product/detail/product_detail_page.dart';
 import 'package:shoes_shop_app/pages/search/search_controller.dart';
 import 'package:shoes_shop_app/utils/app_constant.dart';
@@ -37,14 +38,14 @@ class SearchPage extends StatelessWidget {
         children: [
           GestureDetector(
             onTap: () {
-              searchController.sortSelected.value = 'Price';
+              searchController.sortSelected.value = 'search_price'.tr;
               Get.back();
             },
-            child: const Padding(
-              padding: EdgeInsets.only(bottom: 15),
+            child: Padding(
+              padding: const EdgeInsets.only(bottom: 15),
               child: Text(
-                'Price',
-                style: TextStyle(
+                'search_price'.tr,
+                style: const TextStyle(
                   color: Colors.black,
                   fontSize: 16,
                   fontWeight: FontWeight.w400,
@@ -59,14 +60,14 @@ class SearchPage extends StatelessWidget {
           ),
           GestureDetector(
             onTap: () {
-              searchController.sortSelected.value = 'Shoes Name';
+              searchController.sortSelected.value = 'search_shoes_name'.tr;
               Get.back();
             },
-            child: const Padding(
-              padding: EdgeInsets.only(top: 15),
+            child: Padding(
+              padding: const EdgeInsets.only(top: 15),
               child: Text(
-                'Shoes Name',
-                style: TextStyle(
+                'search_shoes_name'.tr,
+                style: const TextStyle(
                   color: Colors.black,
                   fontSize: 16,
                   fontWeight: FontWeight.w400,
@@ -93,15 +94,44 @@ class SearchPage extends StatelessWidget {
               backgroundColor: Colors.white,
               appBar: AppBar(
                 backgroundColor: Colors.white,
-                title: const Text(
-                  "Search",
-                  style: TextStyle(
+                title: Text(
+                  "search_title".tr,
+                  style: const TextStyle(
                     color: Colors.black,
                     fontSize: 20,
                     fontWeight: FontWeight.w600,
                   ),
                 ),
-                centerTitle: true,
+                centerTitle: false,
+                actions: [
+                  GestureDetector(
+                    onTap: () {
+                      Get.to(
+                        CartPage(id: AppConstant.SEARCH),
+                        id: AppConstant.SEARCH,
+                      );
+                    },
+                    child: Image.asset(
+                      "assets/icons/icon_cart.png",
+                      width: 20,
+                      height: 20,
+                      fit: BoxFit.contain,
+                      color: Colors.black,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 10, right: 20),
+                    child: GestureDetector(
+                      child: Image.asset(
+                        "assets/icons/icon_message.png",
+                        width: 20,
+                        height: 20,
+                        fit: BoxFit.contain,
+                        color: Colors.black,
+                      ),
+                    ),
+                  ),
+                ],
               ),
               body: Container(
                 width: double.infinity,
@@ -129,13 +159,13 @@ class SearchPage extends StatelessWidget {
                           fontWeight: FontWeight.w400,
                         ),
                         textAlign: TextAlign.left,
-                        decoration: const InputDecoration(
-                          contentPadding: EdgeInsets.only(
+                        decoration: InputDecoration(
+                          contentPadding: const EdgeInsets.only(
                             bottom: 7,
                             left: 15,
                           ),
-                          hintText: 'Enter shoe name',
-                          hintStyle: TextStyle(
+                          hintText: 'search_enter_shoes_name'.tr,
+                          hintStyle: const TextStyle(
                             color: Color(0xffD0D0D0),
                             fontSize: 13,
                             fontWeight: FontWeight.w400,
@@ -156,7 +186,7 @@ class SearchPage extends StatelessWidget {
                         borderRadius: BorderRadius.circular(5),
                       ),
                       child: DropdownSearch<String>(
-                        showClearButton: true,
+                        showClearButton: false,
                         clearButton: const Icon(
                           Icons.close,
                           color: Colors.black,
@@ -188,11 +218,11 @@ class SearchPage extends StatelessWidget {
                           ),
                         ),
                         itemAsString: (item) {
-                          return item ?? 'Select brand';
+                          return item ?? 'search_select_brand'.tr;
                         },
                         dropdownBuilder: (context, item) {
                           return Text(
-                            item ?? 'Select brand',
+                            item ?? 'search_select_brand'.tr,
                             style: TextStyle(
                               color: item == null
                                   ? const Color(0xffD0D0D0)
@@ -233,10 +263,10 @@ class SearchPage extends StatelessWidget {
                                 color: Colors.black,
                                 borderRadius: BorderRadius.circular(5),
                               ),
-                              child: const Center(
+                              child: Center(
                                 child: Text(
-                                  'Search',
-                                  style: TextStyle(
+                                  'search_title'.tr,
+                                  style: const TextStyle(
                                     color: Colors.white,
                                     fontSize: 13,
                                     fontWeight: FontWeight.w400,
@@ -257,10 +287,10 @@ class SearchPage extends StatelessWidget {
                                 color: Colors.black,
                                 borderRadius: BorderRadius.circular(5),
                               ),
-                              child: const Center(
+                              child: Center(
                                 child: Text(
-                                  'Clear',
-                                  style: TextStyle(
+                                  'search_clear'.tr,
+                                  style: const TextStyle(
                                     color: Colors.white,
                                     fontSize: 13,
                                     fontWeight: FontWeight.w400,
@@ -325,7 +355,10 @@ class SearchPage extends StatelessWidget {
                         itemCount: 6,
                         itemBuilder: (context, index) => GestureDetector(
                           onTap: () {
-                            Get.to(const ProductDetailPage(),
+                            Get.to(
+                                const ProductDetailPage(
+                                  id: AppConstant.SEARCH,
+                                ),
                                 id: AppConstant.SEARCH);
                           },
                           child: SizedBox(
