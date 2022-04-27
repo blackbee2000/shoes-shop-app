@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:shoes_shop_app/pages/auth/login/login_controller.dart';
 import 'package:shoes_shop_app/pages/auth/register/register_page.dart';
 import 'package:shoes_shop_app/pages/dashboard/dashboard_page.dart';
-import 'package:shoes_shop_app/services/auth_service.dart';
+import 'package:shoes_shop_app/services/api_service.dart';
 
 class LoginPage extends StatelessWidget {
   LoginPage({Key? key}) : super(key: key);
@@ -33,9 +33,9 @@ class LoginPage extends StatelessWidget {
                       const SizedBox(
                         height: 120,
                       ),
-                      const Text(
-                        'Sign In',
-                        style: TextStyle(
+                      Text(
+                        'sign_in'.tr,
+                        style: const TextStyle(
                           color: Colors.white,
                           fontSize: 50,
                           fontWeight: FontWeight.w700,
@@ -69,7 +69,7 @@ class LoginPage extends StatelessWidget {
                             alignment: AlignmentDirectional.centerStart,
                             children: [
                               Image.asset(
-                                'assets/icons/icon-user.png',
+                                'assets/icons/icon-phone.png',
                                 width: 20,
                                 height: 20,
                                 fit: BoxFit.contain,
@@ -81,11 +81,12 @@ class LoginPage extends StatelessWidget {
                                   fontSize: 14,
                                   fontWeight: FontWeight.w400,
                                 ),
-                                decoration: const InputDecoration(
-                                  contentPadding: EdgeInsets.only(left: 35),
+                                decoration: InputDecoration(
+                                  contentPadding:
+                                      const EdgeInsets.only(left: 35),
                                   border: InputBorder.none,
-                                  hintText: 'Your name',
-                                  hintStyle: TextStyle(
+                                  hintText: 'login_your_phone'.tr,
+                                  hintStyle: const TextStyle(
                                     color: Color(0xffD0D0D0),
                                     fontSize: 14,
                                     fontWeight: FontWeight.w400,
@@ -136,11 +137,12 @@ class LoginPage extends StatelessWidget {
                                   fontSize: 14,
                                   fontWeight: FontWeight.w400,
                                 ),
-                                decoration: const InputDecoration(
-                                  contentPadding: EdgeInsets.only(left: 35),
+                                decoration: InputDecoration(
+                                  contentPadding:
+                                      const EdgeInsets.only(left: 35),
                                   border: InputBorder.none,
-                                  hintText: 'Your password',
-                                  hintStyle: TextStyle(
+                                  hintText: 'login_your_password'.tr,
+                                  hintStyle: const TextStyle(
                                     color: Color(0xffD0D0D0),
                                     fontSize: 14,
                                     fontWeight: FontWeight.w400,
@@ -165,18 +167,18 @@ class LoginPage extends StatelessWidget {
                               onTap: () {
                                 Get.to(const RegisterPage());
                               },
-                              child: const Text(
-                                'Don’t have an account?',
-                                style: TextStyle(
+                              child: Text(
+                                'login_not_account'.tr,
+                                style: const TextStyle(
                                   color: Colors.black,
                                   fontSize: 14,
                                   fontWeight: FontWeight.w400,
                                 ),
                               ),
                             ),
-                            const Text(
-                              'Forget Password?',
-                              style: TextStyle(
+                            Text(
+                              'login_forget_password'.tr,
+                              style: const TextStyle(
                                 color: Colors.black,
                                 fontSize: 14,
                                 fontWeight: FontWeight.w400,
@@ -188,37 +190,37 @@ class LoginPage extends StatelessWidget {
                       const SizedBox(
                         height: 60,
                       ),
-                      Align(
-                        alignment: Alignment.center,
-                        child: GestureDetector(
-                          onTap: () {
-                            // if (loginController.phone.text.isEmpty &&
-                            //     loginController.password.text.isEmpty) {
-                            //   Get.snackbar(
-                            //     'Validation',
-                            //     'Phone, password is empty',
-                            //     colorText: Colors.black,
-                            //     backgroundColor: Colors.white,
-                            //   );
-                            // }
-                            // else {
-                            //   AuthService.to.login(controller.phone.text,
-                            //       controller.password.text);
-                            //   Get.offAll(DashboardPage());
-                            // }
-                            Get.to(DashboardPage());
-                          },
-                          child: ClipOval(
-                            child: Container(
-                              width: 60,
-                              height: 60,
-                              color: Colors.black,
-                              child: Center(
-                                child: Image.asset(
-                                  'assets/icons/icon-right-button.png',
-                                  width: 25,
-                                  height: 25,
-                                  fit: BoxFit.contain,
+                      GetBuilder<LoginController>(
+                        init: loginController,
+                        builder: (controller) => Align(
+                          alignment: Alignment.center,
+                          child: GestureDetector(
+                            onTap: () {
+                              if (loginController.phone.text.isEmpty &&
+                                  loginController.password.text.isEmpty) {
+                                Get.snackbar(
+                                  'Validation',
+                                  'Phone, password is empty',
+                                  colorText: Colors.black,
+                                  backgroundColor: Colors.white,
+                                );
+                              } else {
+                                controller.login(controller.phone.text,
+                                    controller.password.text);
+                              }
+                            },
+                            child: ClipOval(
+                              child: Container(
+                                width: 60,
+                                height: 60,
+                                color: Colors.black,
+                                child: Center(
+                                  child: Image.asset(
+                                    'assets/icons/icon-right-button.png',
+                                    width: 25,
+                                    height: 25,
+                                    fit: BoxFit.contain,
+                                  ),
                                 ),
                               ),
                             ),
@@ -231,9 +233,9 @@ class LoginPage extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          const Text(
-                            'Login with google',
-                            style: TextStyle(
+                          Text(
+                            'login_with_google'.tr,
+                            style: const TextStyle(
                               color: Colors.black,
                               fontSize: 16,
                               fontWeight: FontWeight.w400,

@@ -1,12 +1,14 @@
-import 'package:shoes_shop_app/library/api_request.dart';
+import 'package:dio/dio.dart';
 import 'package:shoes_shop_app/models/auth.dart';
+import 'package:shoes_shop_app/services/api_service.dart';
 import 'package:shoes_shop_app/utils/api_constant.dart';
 
 abstract class AuthAPIProtocol {
   login({
     required Map<String, dynamic> params,
+    required Options option,
     required Function() beforeSend,
-    required Function(Auth auth) onSuccess,
+    required Function(Auth data) onSuccess,
     required Function(dynamic error) onError,
   });
 }
@@ -15,16 +17,17 @@ class AuthProvider extends AuthAPIProtocol {
   @override
   login(
       {required Map<String, dynamic> params,
+      required Options option,
       required Function() beforeSend,
-      required Function(Auth auth) onSuccess,
+      required Function(Auth data) onSuccess,
       required Function(dynamic error) onError}) {
-    ApiRequest(
+    ApiService(
       path: ApiConstant.LOGIN,
       params: params,
+      option: option,
     ).post(
       beforeSend: () => {beforeSend()},
       onSuccess: (data) {
-        print('LOGIN ${data.toString()}');
         onSuccess(Auth.fromJson(data));
       },
       onError: (error) => {onError(error)},

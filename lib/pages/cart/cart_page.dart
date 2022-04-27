@@ -33,9 +33,9 @@ class CartPage extends StatelessWidget {
                 color: Colors.black,
               ),
             ),
-            title: const Text(
-              'Cart',
-              style: TextStyle(
+            title: Text(
+              'cart_title'.tr,
+              style: const TextStyle(
                 color: Colors.black,
                 fontSize: 20,
                 fontWeight: FontWeight.w600,
@@ -95,9 +95,9 @@ class CartPage extends StatelessWidget {
                         children: [
                           Row(
                             children: [
-                              const Text(
-                                'Address',
-                                style: TextStyle(
+                              Text(
+                                'cart_address'.tr,
+                                style: const TextStyle(
                                   color: Colors.black,
                                   fontSize: 16,
                                   fontWeight: FontWeight.w600,
@@ -404,7 +404,7 @@ class CartPage extends StatelessWidget {
                 Align(
                   alignment: Alignment.center,
                   child: Container(
-                    width: 280,
+                    width: 300,
                     height: 60,
                     decoration: BoxDecoration(
                       color: Colors.white,
@@ -429,9 +429,9 @@ class CartPage extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const Text(
-                          'Select all',
-                          style: TextStyle(
+                        Text(
+                          'cart_select_all'.tr,
+                          style: const TextStyle(
                             color: Colors.black,
                             fontSize: 16,
                             fontWeight: FontWeight.w400,
@@ -445,16 +445,16 @@ class CartPage extends StatelessWidget {
                             Get.to(PaymentPage(id: id), id: id);
                           },
                           child: Container(
-                            width: 90,
+                            width: 120,
                             height: 30,
                             decoration: BoxDecoration(
                               color: Colors.black,
                               borderRadius: BorderRadius.circular(10),
                             ),
-                            child: const Center(
+                            child: Center(
                               child: Text(
-                                'Payment',
-                                style: TextStyle(
+                                'cart_payment'.tr,
+                                style: const TextStyle(
                                   color: Colors.white,
                                   fontSize: 16,
                                   fontWeight: FontWeight.w400,
@@ -466,9 +466,9 @@ class CartPage extends StatelessWidget {
                         const SizedBox(
                           width: 15,
                         ),
-                        const Text(
-                          'Delete',
-                          style: TextStyle(
+                        Text(
+                          'cart_delete'.tr,
+                          style: const TextStyle(
                             color: Colors.black,
                             fontSize: 16,
                             fontWeight: FontWeight.w400,

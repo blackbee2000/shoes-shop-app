@@ -34,9 +34,9 @@ class AddressPage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    const Text(
-                      'Add new address',
-                      style: TextStyle(
+                    Text(
+                      'address_add'.tr,
+                      style: const TextStyle(
                         color: Colors.black,
                         fontSize: 16,
                         fontWeight: FontWeight.w600,
@@ -80,13 +80,13 @@ class AddressPage extends StatelessWidget {
                   fontWeight: FontWeight.w400,
                 ),
                 textAlign: TextAlign.left,
-                decoration: const InputDecoration(
-                  contentPadding: EdgeInsets.only(
+                decoration: InputDecoration(
+                  contentPadding: const EdgeInsets.only(
                     bottom: 7,
                     left: 15,
                   ),
-                  hintText: 'Enter name',
-                  hintStyle: TextStyle(
+                  hintText: 'address_enter_name'.tr,
+                  hintStyle: const TextStyle(
                     color: Color(0xffD0D0D0),
                     fontSize: 13,
                     fontWeight: FontWeight.w400,
@@ -114,13 +114,13 @@ class AddressPage extends StatelessWidget {
                   fontWeight: FontWeight.w400,
                 ),
                 textAlign: TextAlign.left,
-                decoration: const InputDecoration(
-                  contentPadding: EdgeInsets.only(
+                decoration: InputDecoration(
+                  contentPadding: const EdgeInsets.only(
                     bottom: 7,
                     left: 15,
                   ),
-                  hintText: 'Enter address',
-                  hintStyle: TextStyle(
+                  hintText: 'address_enter_address'.tr,
+                  hintStyle: const TextStyle(
                     color: Color(0xffD0D0D0),
                     fontSize: 13,
                     fontWeight: FontWeight.w400,
@@ -150,10 +150,10 @@ class AddressPage extends StatelessWidget {
                             color: Colors.black,
                           ),
                         ),
-                        child: const Center(
+                        child: Center(
                           child: Text(
-                            'Cancel',
-                            style: TextStyle(
+                            'address_cancel'.tr,
+                            style: const TextStyle(
                               color: Colors.black,
                               fontSize: 14,
                               fontWeight: FontWeight.w600,
@@ -173,10 +173,10 @@ class AddressPage extends StatelessWidget {
                       decoration: const BoxDecoration(
                         color: Colors.black,
                       ),
-                      child: const Center(
+                      child: Center(
                         child: Text(
-                          'Confirm',
-                          style: TextStyle(
+                          'address_confirm'.tr,
+                          style: const TextStyle(
                             color: Colors.white,
                             fontSize: 14,
                             fontWeight: FontWeight.w600,
@@ -221,9 +221,9 @@ class AddressPage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    const Text(
-                      'Edit address',
-                      style: TextStyle(
+                    Text(
+                      'address_edit'.tr,
+                      style: const TextStyle(
                         color: Colors.black,
                         fontSize: 16,
                         fontWeight: FontWeight.w600,
@@ -267,13 +267,13 @@ class AddressPage extends StatelessWidget {
                   fontWeight: FontWeight.w400,
                 ),
                 textAlign: TextAlign.left,
-                decoration: const InputDecoration(
-                  contentPadding: EdgeInsets.only(
+                decoration: InputDecoration(
+                  contentPadding: const EdgeInsets.only(
                     bottom: 7,
                     left: 15,
                   ),
-                  hintText: 'Enter name',
-                  hintStyle: TextStyle(
+                  hintText: 'address_enter_name'.tr,
+                  hintStyle: const TextStyle(
                     color: Color(0xffD0D0D0),
                     fontSize: 13,
                     fontWeight: FontWeight.w400,
@@ -301,13 +301,13 @@ class AddressPage extends StatelessWidget {
                   fontWeight: FontWeight.w400,
                 ),
                 textAlign: TextAlign.left,
-                decoration: const InputDecoration(
-                  contentPadding: EdgeInsets.only(
+                decoration: InputDecoration(
+                  contentPadding: const EdgeInsets.only(
                     bottom: 7,
                     left: 15,
                   ),
-                  hintText: 'Enter address',
-                  hintStyle: TextStyle(
+                  hintText: 'address_enter_address'.tr,
+                  hintStyle: const TextStyle(
                     color: Color(0xffD0D0D0),
                     fontSize: 13,
                     fontWeight: FontWeight.w400,
@@ -338,9 +338,9 @@ class AddressPage extends StatelessWidget {
                 const SizedBox(
                   width: 10,
                 ),
-                const Text(
-                  'Set default address',
-                  style: TextStyle(
+                Text(
+                  'address_set_default_address'.tr,
+                  style: const TextStyle(
                     color: Colors.black,
                     fontSize: 14,
                     fontWeight: FontWeight.w400,
@@ -368,10 +368,10 @@ class AddressPage extends StatelessWidget {
                             color: Colors.black,
                           ),
                         ),
-                        child: const Center(
+                        child: Center(
                           child: Text(
-                            'Cancel',
-                            style: TextStyle(
+                            'address_cancel'.tr,
+                            style: const TextStyle(
                               color: Colors.black,
                               fontSize: 14,
                               fontWeight: FontWeight.w600,
@@ -391,10 +391,10 @@ class AddressPage extends StatelessWidget {
                       decoration: const BoxDecoration(
                         color: Colors.black,
                       ),
-                      child: const Center(
+                      child: Center(
                         child: Text(
-                          'Confirm',
-                          style: TextStyle(
+                          'address_confirm'.tr,
+                          style: const TextStyle(
                             color: Colors.white,
                             fontSize: 14,
                             fontWeight: FontWeight.w600,
@@ -438,9 +438,9 @@ class AddressPage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    const Text(
-                      'Delete address',
-                      style: TextStyle(
+                    Text(
+                      'address_delete'.tr,
+                      style: const TextStyle(
                         color: Colors.black,
                         fontSize: 16,
                         fontWeight: FontWeight.w600,
@@ -469,11 +469,11 @@ class AddressPage extends StatelessWidget {
             const SizedBox(
               height: 15,
             ),
-            const Align(
+            Align(
               alignment: Alignment.center,
               child: Text(
-                'Do you want to delete it?',
-                style: TextStyle(
+                'address_warning'.tr,
+                style: const TextStyle(
                   color: Colors.black,
                   fontSize: 16,
                   fontWeight: FontWeight.w600,
@@ -500,10 +500,10 @@ class AddressPage extends StatelessWidget {
                             color: Colors.black,
                           ),
                         ),
-                        child: const Center(
+                        child: Center(
                           child: Text(
-                            'Cancel',
-                            style: TextStyle(
+                            'address_cancel'.tr,
+                            style: const TextStyle(
                               color: Colors.black,
                               fontSize: 14,
                               fontWeight: FontWeight.w600,
@@ -523,10 +523,10 @@ class AddressPage extends StatelessWidget {
                       decoration: const BoxDecoration(
                         color: Colors.black,
                       ),
-                      child: const Center(
+                      child: Center(
                         child: Text(
-                          'Confirm',
-                          style: TextStyle(
+                          'address_confirm'.tr,
+                          style: const TextStyle(
                             color: Colors.white,
                             fontSize: 14,
                             fontWeight: FontWeight.w600,
@@ -567,9 +567,9 @@ class AddressPage extends StatelessWidget {
                     color: Colors.black,
                   ),
                 ),
-                title: const Text(
-                  'Address',
-                  style: TextStyle(
+                title: Text(
+                  'cart_address'.tr,
+                  style: const TextStyle(
                     color: Colors.black,
                     fontSize: 20,
                     fontWeight: FontWeight.w600,
@@ -596,9 +596,9 @@ class AddressPage extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            const Text(
-                              'Default Address',
-                              style: TextStyle(
+                            Text(
+                              'address_default'.tr,
+                              style: const TextStyle(
                                 color: Colors.black,
                                 fontSize: 16,
                                 fontWeight: FontWeight.w600,
@@ -722,9 +722,9 @@ class AddressPage extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            const Text(
-                              'Others Address',
-                              style: TextStyle(
+                            Text(
+                              'address_other'.tr,
+                              style: const TextStyle(
                                 color: Colors.black,
                                 fontSize: 16,
                                 fontWeight: FontWeight.w600,
@@ -907,9 +907,9 @@ class AddressPage extends StatelessWidget {
                             const SizedBox(
                               width: 10,
                             ),
-                            const Text(
-                              'Add new address',
-                              style: TextStyle(
+                            Text(
+                              'address_new_add'.tr,
+                              style: const TextStyle(
                                 color: Colors.white,
                                 fontSize: 14,
                                 fontWeight: FontWeight.w400,

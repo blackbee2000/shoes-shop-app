@@ -35,9 +35,9 @@ class YourOrderPage extends StatelessWidget {
                     color: Colors.white,
                   ),
                 ),
-                title: const Text(
-                  'Your Order',
-                  style: TextStyle(
+                title: Text(
+                  'your_order_title'.tr,
+                  style: const TextStyle(
                     color: Colors.white,
                     fontSize: 20,
                     fontWeight: FontWeight.w600,

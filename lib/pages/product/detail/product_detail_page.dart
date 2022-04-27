@@ -47,9 +47,9 @@ class ProductDetailState extends State<ProductDetailPage>
                 color: Colors.black,
               ),
             ),
-            title: const Text(
-              'Product detail',
-              style: TextStyle(
+            title: Text(
+              'product_detail_title'.tr,
+              style: const TextStyle(
                 color: Colors.black,
                 fontSize: 20,
                 fontWeight: FontWeight.w600,
@@ -209,9 +209,9 @@ class ProductDetailState extends State<ProductDetailPage>
                             Row(
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                const Text(
-                                  'Size:',
-                                  style: TextStyle(
+                                Text(
+                                  'product_detail_size'.tr,
+                                  style: const TextStyle(
                                     color: Colors.black,
                                     fontSize: 20,
                                     fontWeight: FontWeight.w600,
@@ -382,9 +382,9 @@ class ProductDetailState extends State<ProductDetailPage>
                               mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                const Text(
-                                  'Add to cart',
-                                  style: TextStyle(
+                                Text(
+                                  'product_detail_add_cart'.tr,
+                                  style: const TextStyle(
                                     color: Colors.white,
                                     fontSize: 14,
                                     fontWeight: FontWeight.w600,
@@ -458,11 +458,11 @@ class ProductDetailState extends State<ProductDetailPage>
                           ),
                         ),
                       ),
-                      tabs: const <Widget>[
+                      tabs: [
                         Tab(
                           child: Text(
-                            'Description',
-                            style: TextStyle(
+                            'product_detail_description'.tr,
+                            style: const TextStyle(
                               color: Colors.black,
                               fontSize: 16,
                               fontWeight: FontWeight.w400,
@@ -471,8 +471,8 @@ class ProductDetailState extends State<ProductDetailPage>
                         ),
                         Tab(
                           child: Text(
-                            'Other',
-                            style: TextStyle(
+                            'product_detail_other'.tr,
+                            style: const TextStyle(
                               color: Colors.black,
                               fontSize: 16,
                               fontWeight: FontWeight.w400,
@@ -539,9 +539,9 @@ class ProductDetailState extends State<ProductDetailPage>
                     margin: const EdgeInsets.symmetric(horizontal: 20),
                     child: Column(
                       children: [
-                        const Text(
-                          'Related Products',
-                          style: TextStyle(
+                        Text(
+                          'product_detail_related'.tr,
+                          style: const TextStyle(
                             color: Colors.black,
                             fontSize: 16,
                             fontWeight: FontWeight.w600,

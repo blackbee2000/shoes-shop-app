@@ -12,7 +12,7 @@ import 'routes/app_routes.dart';
 void main() async {
   FlavorConfig(
     values: FlavorValues(
-      baseUrl: 'https://mmv-service-api-prod-bu2gitz46q-as.a.run.app',
+      baseUrl: 'http://192.168.1.13:3000/api',
     ),
   );
   WidgetsFlutterBinding.ensureInitialized();

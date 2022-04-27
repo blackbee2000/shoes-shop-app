@@ -64,22 +64,22 @@ class RegisterPage extends StatelessWidget {
                           alignment: AlignmentDirectional.centerStart,
                           children: [
                             Image.asset(
-                              'assets/icons/icon-user.png',
+                              'assets/icons/icon-phone.png',
                               width: 20,
                               height: 20,
                               fit: BoxFit.contain,
                             ),
-                            const TextField(
-                              style: TextStyle(
+                            TextField(
+                              style: const TextStyle(
                                 color: Colors.black,
                                 fontSize: 14,
                                 fontWeight: FontWeight.w400,
                               ),
                               decoration: InputDecoration(
-                                contentPadding: EdgeInsets.only(left: 35),
+                                contentPadding: const EdgeInsets.only(left: 35),
                                 border: InputBorder.none,
-                                hintText: 'Your name',
-                                hintStyle: TextStyle(
+                                hintText: 'login_your_phone'.tr,
+                                hintStyle: const TextStyle(
                                   color: Color(0xffD0D0D0),
                                   fontSize: 14,
                                   fontWeight: FontWeight.w400,
@@ -120,8 +120,8 @@ class RegisterPage extends StatelessWidget {
                               height: 20,
                               fit: BoxFit.contain,
                             ),
-                            const TextField(
-                              style: TextStyle(
+                            TextField(
+                              style: const TextStyle(
                                 color: Colors.black,
                                 fontSize: 14,
                                 fontWeight: FontWeight.w400,
@@ -129,8 +129,8 @@ class RegisterPage extends StatelessWidget {
                               decoration: InputDecoration(
                                 contentPadding: EdgeInsets.only(left: 35),
                                 border: InputBorder.none,
-                                hintText: 'Your password',
-                                hintStyle: TextStyle(
+                                hintText: 'login_your_password'.tr,
+                                hintStyle: const TextStyle(
                                   color: Color(0xffD0D0D0),
                                   fontSize: 14,
                                   fontWeight: FontWeight.w400,
@@ -166,22 +166,22 @@ class RegisterPage extends StatelessWidget {
                           alignment: AlignmentDirectional.centerStart,
                           children: [
                             Image.asset(
-                              'assets/icons/icon-phone.png',
+                              'assets/icons/icon-email.png',
                               width: 20,
                               height: 20,
                               fit: BoxFit.contain,
                             ),
-                            const TextField(
-                              style: TextStyle(
+                            TextField(
+                              style: const TextStyle(
                                 color: Colors.black,
                                 fontSize: 14,
                                 fontWeight: FontWeight.w400,
                               ),
                               decoration: InputDecoration(
-                                contentPadding: EdgeInsets.only(left: 35),
+                                contentPadding: const EdgeInsets.only(left: 35),
                                 border: InputBorder.none,
-                                hintText: 'Your phone',
-                                hintStyle: TextStyle(
+                                hintText: 'register_your_email'.tr,
+                                hintStyle: const TextStyle(
                                   color: Color(0xffD0D0D0),
                                   fontSize: 14,
                                   fontWeight: FontWeight.w400,

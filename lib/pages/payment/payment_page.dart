@@ -30,9 +30,9 @@ class PaymentPage extends StatelessWidget {
                 color: Colors.black,
               ),
             ),
-            title: const Text(
-              'Payment',
-              style: TextStyle(
+            title: Text(
+              'cart_payment'.tr,
+              style: const TextStyle(
                 color: Colors.black,
                 fontSize: 20,
                 fontWeight: FontWeight.w600,
@@ -93,9 +93,9 @@ class PaymentPage extends StatelessWidget {
                           children: [
                             Row(
                               children: [
-                                const Text(
-                                  'Address',
-                                  style: TextStyle(
+                                Text(
+                                  'cart_address'.tr,
+                                  style: const TextStyle(
                                     color: Colors.black,
                                     fontSize: 16,
                                     fontWeight: FontWeight.w600,
@@ -170,9 +170,9 @@ class PaymentPage extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        const Text(
-                          'Product',
-                          style: TextStyle(
+                        Text(
+                          'product_title'.tr,
+                          style: const TextStyle(
                             color: Colors.black,
                             fontSize: 16,
                             fontWeight: FontWeight.w600,
@@ -365,10 +365,10 @@ class PaymentPage extends StatelessWidget {
                                       bottomRight: Radius.circular(10),
                                     ),
                                   ),
-                                  child: const Center(
+                                  child: Center(
                                     child: Text(
-                                      'Xoá',
-                                      style: TextStyle(
+                                      'cart_delete'.tr,
+                                      style: const TextStyle(
                                         color: Colors.white,
                                         fontSize: 12,
                                         fontWeight: FontWeight.w400,
@@ -399,9 +399,9 @@ class PaymentPage extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        const Text(
-                          'Payment method',
-                          style: TextStyle(
+                        Text(
+                          'payment_method'.tr,
+                          style: const TextStyle(
                             color: Colors.black,
                             fontSize: 16,
                             fontWeight: FontWeight.w600,
@@ -536,14 +536,14 @@ class PaymentPage extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 20),
                     child: RichText(
-                      text: const TextSpan(
-                        text: 'Shipping: ',
-                        style: TextStyle(
+                      text: TextSpan(
+                        text: 'payment_shipping'.tr,
+                        style: const TextStyle(
                           color: Colors.black,
                           fontSize: 18,
                           fontWeight: FontWeight.w400,
                         ),
-                        children: [
+                        children: const [
                           TextSpan(
                             text: '2',
                             style: TextStyle(
@@ -562,14 +562,14 @@ class PaymentPage extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 20),
                     child: RichText(
-                      text: const TextSpan(
-                        text: 'Total product: ',
-                        style: TextStyle(
+                      text: TextSpan(
+                        text: 'payment_total_product'.tr,
+                        style: const TextStyle(
                           color: Colors.black,
                           fontSize: 18,
                           fontWeight: FontWeight.w400,
                         ),
-                        children: [
+                        children: const [
                           TextSpan(
                             text: '250',
                             style: TextStyle(
@@ -588,14 +588,14 @@ class PaymentPage extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 20),
                     child: RichText(
-                      text: const TextSpan(
-                        text: 'Total bill: ',
-                        style: TextStyle(
+                      text: TextSpan(
+                        text: 'payment_total_bill'.tr,
+                        style: const TextStyle(
                           color: Colors.black,
                           fontSize: 18,
                           fontWeight: FontWeight.w400,
                         ),
-                        children: [
+                        children: const [
                           TextSpan(
                             text: '252',
                             style: TextStyle(
@@ -621,7 +621,7 @@ class PaymentPage extends StatelessWidget {
                     ),
                     child: Center(
                       child: Text(
-                        'payment'.toUpperCase(),
+                        'cart_payment'.tr.toUpperCase(),
                         style: const TextStyle(
                           color: Colors.white,
                           fontSize: 16,

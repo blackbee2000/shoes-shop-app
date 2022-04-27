@@ -32,9 +32,9 @@ class YourOrderDetailPage extends StatelessWidget {
                     color: Colors.white,
                   ),
                 ),
-                title: const Text(
-                  'Your order detail',
-                  style: TextStyle(
+                title: Text(
+                  'your_order_detail'.tr,
+                  style: const TextStyle(
                     color: Colors.white,
                     fontSize: 20,
                     fontWeight: FontWeight.w600,

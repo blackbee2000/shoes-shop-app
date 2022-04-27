@@ -34,11 +34,11 @@ class UserPage extends StatelessWidget {
               userController.getImage();
               Get.back();
             },
-            child: const Padding(
-              padding: EdgeInsets.only(bottom: 15),
+            child: Padding(
+              padding: const EdgeInsets.only(bottom: 15),
               child: Text(
-                'Camera',
-                style: TextStyle(
+                'user_camera'.tr,
+                style: const TextStyle(
                   color: Colors.black,
                   fontSize: 16,
                   fontWeight: FontWeight.w400,
@@ -56,11 +56,11 @@ class UserPage extends StatelessWidget {
               userController.getPhoto();
               Get.back();
             },
-            child: const Padding(
-              padding: EdgeInsets.only(top: 15),
+            child: Padding(
+              padding: const EdgeInsets.only(top: 15),
               child: Text(
-                'Galery',
-                style: TextStyle(
+                'user_galery'.tr,
+                style: const TextStyle(
                   color: Colors.black,
                   fontSize: 16,
                   fontWeight: FontWeight.w400,
@@ -102,9 +102,9 @@ class UserPage extends StatelessWidget {
                         ),
                       )
                     : Container(),
-                title: const Text(
-                  'Update information',
-                  style: TextStyle(
+                title: Text(
+                  'user_update_information'.tr,
+                  style: const TextStyle(
                     color: Colors.white,
                     fontSize: 20,
                     fontWeight: FontWeight.w600,
@@ -243,8 +243,8 @@ class UserPage extends StatelessWidget {
                               height: 20,
                               fit: BoxFit.contain,
                             ),
-                            const TextField(
-                              style: TextStyle(
+                            TextField(
+                              style: const TextStyle(
                                 color: Colors.black,
                                 fontSize: 14,
                                 fontWeight: FontWeight.w400,
@@ -252,8 +252,8 @@ class UserPage extends StatelessWidget {
                               decoration: InputDecoration(
                                 contentPadding: EdgeInsets.only(left: 35),
                                 border: InputBorder.none,
-                                hintText: 'Your name',
-                                hintStyle: TextStyle(
+                                hintText: 'user_your_name'.tr,
+                                hintStyle: const TextStyle(
                                   color: Color(0xffD0D0D0),
                                   fontSize: 14,
                                   fontWeight: FontWeight.w400,
@@ -294,17 +294,17 @@ class UserPage extends StatelessWidget {
                               height: 20,
                               fit: BoxFit.contain,
                             ),
-                            const TextField(
-                              style: TextStyle(
+                            TextField(
+                              style: const TextStyle(
                                 color: Colors.black,
                                 fontSize: 14,
                                 fontWeight: FontWeight.w400,
                               ),
                               decoration: InputDecoration(
-                                contentPadding: EdgeInsets.only(left: 35),
+                                contentPadding: const EdgeInsets.only(left: 35),
                                 border: InputBorder.none,
-                                hintText: 'Your password',
-                                hintStyle: TextStyle(
+                                hintText: 'login_your_password'.tr,
+                                hintStyle: const TextStyle(
                                   color: Color(0xffD0D0D0),
                                   fontSize: 14,
                                   fontWeight: FontWeight.w400,
@@ -345,17 +345,17 @@ class UserPage extends StatelessWidget {
                               height: 20,
                               fit: BoxFit.contain,
                             ),
-                            const TextField(
-                              style: TextStyle(
+                            TextField(
+                              style: const TextStyle(
                                 color: Colors.black,
                                 fontSize: 14,
                                 fontWeight: FontWeight.w400,
                               ),
                               decoration: InputDecoration(
-                                contentPadding: EdgeInsets.only(left: 35),
+                                contentPadding: const EdgeInsets.only(left: 35),
                                 border: InputBorder.none,
-                                hintText: 'Your phone',
-                                hintStyle: TextStyle(
+                                hintText: 'login_your_phone'.tr,
+                                hintStyle: const TextStyle(
                                   color: Color(0xffD0D0D0),
                                   fontSize: 14,
                                   fontWeight: FontWeight.w400,
@@ -396,17 +396,17 @@ class UserPage extends StatelessWidget {
                               height: 20,
                               fit: BoxFit.contain,
                             ),
-                            const TextField(
-                              style: TextStyle(
+                            TextField(
+                              style: const TextStyle(
                                 color: Colors.black,
                                 fontSize: 14,
                                 fontWeight: FontWeight.w400,
                               ),
                               decoration: InputDecoration(
-                                contentPadding: EdgeInsets.only(left: 35),
+                                contentPadding: const EdgeInsets.only(left: 35),
                                 border: InputBorder.none,
-                                hintText: 'Your email',
-                                hintStyle: TextStyle(
+                                hintText: 'register_your_email'.tr,
+                                hintStyle: const TextStyle(
                                   color: Color(0xffD0D0D0),
                                   fontSize: 14,
                                   fontWeight: FontWeight.w400,
@@ -432,9 +432,9 @@ class UserPage extends StatelessWidget {
                               },
                               child: Row(
                                 children: [
-                                  const Text(
-                                    'Address',
-                                    style: TextStyle(
+                                  Text(
+                                    'cart_address'.tr,
+                                    style: const TextStyle(
                                       color: Colors.black,
                                       fontSize: 14,
                                       fontWeight: FontWeight.w400,
@@ -456,9 +456,9 @@ class UserPage extends StatelessWidget {
                               onPressed: () {
                                 Get.offAll(DashboardPage());
                               },
-                              child: const Text(
-                                'Skip',
-                                style: TextStyle(
+                              child: Text(
+                                'user_skip'.tr,
+                                style: const TextStyle(
                                   color: Colors.black,
                                   fontSize: 14,
                                   fontWeight: FontWeight.w400,
