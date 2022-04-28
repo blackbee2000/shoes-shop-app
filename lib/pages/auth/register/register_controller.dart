@@ -1,23 +1,23 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 import 'package:shoes_shop_app/pages/auth/auth_provider.dart';
-import 'package:shoes_shop_app/pages/dashboard/dashboard_page.dart';
-import 'package:shoes_shop_app/services/api_token.dart';
+import 'package:shoes_shop_app/pages/user/user_page.dart';
 
-class LoginController extends GetxController {
+class RegisterController extends GetxController {
   TextEditingController phone = TextEditingController();
   TextEditingController password = TextEditingController();
-  final storage = GetStorage();
+  TextEditingController email = TextEditingController();
 
-  setToken(token) async {
-    await storage.write('token', token);
-  }
-
-  login(String phone, String password) {
-    AuthProvider().login(
-      params: {"phoneNumber": phone, "password": password},
+  register(String phone, String password, String email) {
+    AuthProvider().register(
+      params: {
+        "fullName": null,
+        "email": email,
+        "phoneNumber": phone,
+        "password": password,
+        "role": "USER"
+      },
       option: Options(
         headers: {
           'Content-Type': 'application/json; charset=UTF-8',
@@ -39,21 +39,21 @@ class LoginController extends GetxController {
         );
       },
       onSuccess: (res) {
-        print('LOGIN SUCESSS =>>>>>> ${res.toString()}');
-        setToken(res.data?.token);
-        print('TOKEN NEFFFFFFF =>>>>>> ${ApiToken.to.appToken}');
-        Get.offAll(DashboardPage());
-        update();
+        print('REGISTER SUCESS =>>>>> ${res.toString()}');
+        Get.to(
+          UserPage(
+            id: 1,
+          ),
+        );
       },
       onError: (e) {
+        print('REGISTER FAIL =>>>>> ${e.toString()}');
         Get.snackbar(
           'Fail',
-          'Lỗi đăng nhập',
+          'Lỗi đăng ký',
           colorText: Colors.black,
           backgroundColor: Colors.white,
         );
-        print('LOGIN FAIL =>>> ${e.toString()}');
-        update();
       },
     );
   }

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:shoes_shop_app/pages/dashboard/dashboard_page.dart';
-import 'package:shoes_shop_app/pages/user/user_page.dart';
+import 'package:shoes_shop_app/pages/auth/register/register_controller.dart';
 
 class RegisterPage extends StatelessWidget {
-  const RegisterPage({Key? key}) : super(key: key);
+  final registerController = Get.put(RegisterController());
+  RegisterPage({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -42,154 +42,168 @@ class RegisterPage extends StatelessWidget {
                       const SizedBox(
                         height: 40,
                       ),
-                      Container(
-                        width: double.infinity,
-                        height: 50,
-                        padding: const EdgeInsets.symmetric(horizontal: 15),
-                        margin: const EdgeInsets.symmetric(horizontal: 30),
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(10),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black.withOpacity(0.25),
-                              spreadRadius: 0,
-                              blurRadius: 4,
-                              offset: const Offset(
-                                  0, 4), // changes position of shadow
-                            ),
-                          ],
-                        ),
-                        child: Stack(
-                          alignment: AlignmentDirectional.centerStart,
-                          children: [
-                            Image.asset(
-                              'assets/icons/icon-phone.png',
-                              width: 20,
-                              height: 20,
-                              fit: BoxFit.contain,
-                            ),
-                            TextField(
-                              style: const TextStyle(
-                                color: Colors.black,
-                                fontSize: 14,
-                                fontWeight: FontWeight.w400,
+                      GetBuilder<RegisterController>(
+                        init: registerController,
+                        builder: (controller) => Container(
+                          width: double.infinity,
+                          height: 50,
+                          padding: const EdgeInsets.symmetric(horizontal: 15),
+                          margin: const EdgeInsets.symmetric(horizontal: 30),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(10),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black.withOpacity(0.25),
+                                spreadRadius: 0,
+                                blurRadius: 4,
+                                offset: const Offset(
+                                    0, 4), // changes position of shadow
                               ),
-                              decoration: InputDecoration(
-                                contentPadding: const EdgeInsets.only(left: 35),
-                                border: InputBorder.none,
-                                hintText: 'login_your_phone'.tr,
-                                hintStyle: const TextStyle(
-                                  color: Color(0xffD0D0D0),
+                            ],
+                          ),
+                          child: Stack(
+                            alignment: AlignmentDirectional.centerStart,
+                            children: [
+                              Image.asset(
+                                'assets/icons/icon-phone.png',
+                                width: 20,
+                                height: 20,
+                                fit: BoxFit.contain,
+                              ),
+                              TextField(
+                                controller: controller.phone,
+                                style: const TextStyle(
+                                  color: Colors.black,
                                   fontSize: 14,
                                   fontWeight: FontWeight.w400,
                                 ),
+                                decoration: InputDecoration(
+                                  contentPadding:
+                                      const EdgeInsets.only(left: 35),
+                                  border: InputBorder.none,
+                                  hintText: 'login_your_phone'.tr,
+                                  hintStyle: const TextStyle(
+                                    color: Color(0xffD0D0D0),
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                ),
+                                cursorColor: Colors.black,
                               ),
-                              cursorColor: Colors.black,
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ),
                       const SizedBox(
                         height: 30,
                       ),
-                      Container(
-                        width: double.infinity,
-                        height: 50,
-                        padding: const EdgeInsets.symmetric(horizontal: 15),
-                        margin: const EdgeInsets.symmetric(horizontal: 30),
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(10),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black.withOpacity(0.25),
-                              spreadRadius: 0,
-                              blurRadius: 4,
-                              offset: const Offset(
-                                  0, 4), // changes position of shadow
-                            ),
-                          ],
-                        ),
-                        child: Stack(
-                          alignment: AlignmentDirectional.centerStart,
-                          children: [
-                            Image.asset(
-                              'assets/icons/icon-lock.png',
-                              width: 20,
-                              height: 20,
-                              fit: BoxFit.contain,
-                            ),
-                            TextField(
-                              style: const TextStyle(
-                                color: Colors.black,
-                                fontSize: 14,
-                                fontWeight: FontWeight.w400,
+                      GetBuilder<RegisterController>(
+                        init: registerController,
+                        builder: (controller) => Container(
+                          width: double.infinity,
+                          height: 50,
+                          padding: const EdgeInsets.symmetric(horizontal: 15),
+                          margin: const EdgeInsets.symmetric(horizontal: 30),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(10),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black.withOpacity(0.25),
+                                spreadRadius: 0,
+                                blurRadius: 4,
+                                offset: const Offset(
+                                    0, 4), // changes position of shadow
                               ),
-                              decoration: InputDecoration(
-                                contentPadding: EdgeInsets.only(left: 35),
-                                border: InputBorder.none,
-                                hintText: 'login_your_password'.tr,
-                                hintStyle: const TextStyle(
-                                  color: Color(0xffD0D0D0),
+                            ],
+                          ),
+                          child: Stack(
+                            alignment: AlignmentDirectional.centerStart,
+                            children: [
+                              Image.asset(
+                                'assets/icons/icon-lock.png',
+                                width: 20,
+                                height: 20,
+                                fit: BoxFit.contain,
+                              ),
+                              TextField(
+                                controller: controller.password,
+                                style: const TextStyle(
+                                  color: Colors.black,
                                   fontSize: 14,
                                   fontWeight: FontWeight.w400,
                                 ),
+                                decoration: InputDecoration(
+                                  contentPadding: EdgeInsets.only(left: 35),
+                                  border: InputBorder.none,
+                                  hintText: 'login_your_password'.tr,
+                                  hintStyle: const TextStyle(
+                                    color: Color(0xffD0D0D0),
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                ),
+                                cursorColor: Colors.black,
                               ),
-                              cursorColor: Colors.black,
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ),
                       const SizedBox(
                         height: 30,
                       ),
-                      Container(
-                        width: double.infinity,
-                        height: 50,
-                        padding: const EdgeInsets.symmetric(horizontal: 15),
-                        margin: const EdgeInsets.symmetric(horizontal: 30),
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(10),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black.withOpacity(0.25),
-                              spreadRadius: 0,
-                              blurRadius: 4,
-                              offset: const Offset(
-                                  0, 4), // changes position of shadow
-                            ),
-                          ],
-                        ),
-                        child: Stack(
-                          alignment: AlignmentDirectional.centerStart,
-                          children: [
-                            Image.asset(
-                              'assets/icons/icon-email.png',
-                              width: 20,
-                              height: 20,
-                              fit: BoxFit.contain,
-                            ),
-                            TextField(
-                              style: const TextStyle(
-                                color: Colors.black,
-                                fontSize: 14,
-                                fontWeight: FontWeight.w400,
+                      GetBuilder<RegisterController>(
+                        init: registerController,
+                        builder: (controller) => Container(
+                          width: double.infinity,
+                          height: 50,
+                          padding: const EdgeInsets.symmetric(horizontal: 15),
+                          margin: const EdgeInsets.symmetric(horizontal: 30),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(10),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black.withOpacity(0.25),
+                                spreadRadius: 0,
+                                blurRadius: 4,
+                                offset: const Offset(
+                                    0, 4), // changes position of shadow
                               ),
-                              decoration: InputDecoration(
-                                contentPadding: const EdgeInsets.only(left: 35),
-                                border: InputBorder.none,
-                                hintText: 'register_your_email'.tr,
-                                hintStyle: const TextStyle(
-                                  color: Color(0xffD0D0D0),
+                            ],
+                          ),
+                          child: Stack(
+                            alignment: AlignmentDirectional.centerStart,
+                            children: [
+                              Image.asset(
+                                'assets/icons/icon-email.png',
+                                width: 20,
+                                height: 20,
+                                fit: BoxFit.contain,
+                              ),
+                              TextField(
+                                controller: controller.email,
+                                style: const TextStyle(
+                                  color: Colors.black,
                                   fontSize: 14,
                                   fontWeight: FontWeight.w400,
                                 ),
+                                decoration: InputDecoration(
+                                  contentPadding:
+                                      const EdgeInsets.only(left: 35),
+                                  border: InputBorder.none,
+                                  hintText: 'register_your_email'.tr,
+                                  hintStyle: const TextStyle(
+                                    color: Color(0xffD0D0D0),
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                ),
+                                cursorColor: Colors.black,
                               ),
-                              cursorColor: Colors.black,
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ),
                       const SizedBox(
@@ -199,11 +213,8 @@ class RegisterPage extends StatelessWidget {
                         width: double.infinity,
                         child: GestureDetector(
                           onTap: () {
-                            Get.to(
-                              UserPage(
-                                id: 1,
-                              ),
-                            );
+                            print(
+                                'INPUTT ${registerController.phone.text}, ${registerController.password.text}, ${registerController.email.text}');
                           },
                           child: Stack(
                             alignment: AlignmentDirectional.center,

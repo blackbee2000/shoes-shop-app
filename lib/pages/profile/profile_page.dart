@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:get/get.dart';
-import 'package:shoes_shop_app/pages/auth/login/login_page.dart';
 import 'package:shoes_shop_app/pages/cart/cart_page.dart';
 import 'package:shoes_shop_app/pages/profile/profile_controller.dart';
 import 'package:shoes_shop_app/pages/user/user_page.dart';
@@ -10,9 +9,28 @@ import 'package:shoes_shop_app/theme/app_theme.dart';
 import 'package:shoes_shop_app/translations/app_translation.dart';
 import 'package:shoes_shop_app/utils/app_constant.dart';
 
-class ProfilePage extends StatelessWidget {
-  final profileController = Get.put(ProfileController());
+class ProfilePage extends StatefulWidget {
   ProfilePage({Key? key}) : super(key: key);
+
+  @override
+  ProfileState createState() => ProfileState();
+}
+
+class ProfileState extends State<ProfilePage> {
+  final profileController = Get.put(ProfileController());
+
+  @override
+  void initState() {
+    super.initState();
+    print(
+        'DATAAAAAAAAAAAAAA =>>>>>>>> ${profileController.profile.toString()}');
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
   Widget selectedLanguage() {
     return Container(
       decoration: const BoxDecoration(
@@ -531,26 +549,29 @@ class ProfilePage extends StatelessWidget {
                             const SizedBox(
                               height: 20,
                             ),
-                            GestureDetector(
-                              onTap: () {
-                                Get.to(LoginPage());
-                              },
-                              child: Container(
-                                width: double.infinity,
-                                height: 50,
-                                margin:
-                                    const EdgeInsets.symmetric(horizontal: 20),
-                                decoration: BoxDecoration(
-                                  color: Colors.black,
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                child: Center(
-                                  child: Text(
-                                    'profile_logout'.tr.toUpperCase(),
-                                    style: const TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w600,
+                            GetBuilder<ProfileController>(
+                              init: profileController,
+                              builder: (controller) => GestureDetector(
+                                onTap: () {
+                                  profileController.logOut();
+                                },
+                                child: Container(
+                                  width: double.infinity,
+                                  height: 50,
+                                  margin: const EdgeInsets.symmetric(
+                                      horizontal: 20),
+                                  decoration: BoxDecoration(
+                                    color: Colors.black,
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  child: Center(
+                                    child: Text(
+                                      'profile_logout'.tr.toUpperCase(),
+                                      style: const TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w600,
+                                      ),
                                     ),
                                   ),
                                 ),

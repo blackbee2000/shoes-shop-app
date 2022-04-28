@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 import 'package:shoes_shop_app/pages/dashboard/dashboard_binding.dart';
-import 'package:shoes_shop_app/pages/home/home_page.dart';
+import 'package:shoes_shop_app/pages/dashboard/dashboard_page.dart';
 import 'package:shoes_shop_app/pages/splash/splash_page.dart';
 import 'app_routes.dart';
 
@@ -12,8 +12,8 @@ class AppPages {
       binding: DashboardBinding(),
     ),
     GetPage(
-      name: AppRoutes.HOME,
-      page: () => HomePage(),
+      name: AppRoutes.DASHBORAD,
+      page: () => DashboardPage(),
     ),
   ];
 }

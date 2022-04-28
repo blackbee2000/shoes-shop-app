@@ -3,9 +3,9 @@ part of 'company_response.dart';
 CompanyResponse _$CompanyResponseFromJson(Map<String, dynamic> json) {
   return CompanyResponse(
     json['message'] as String?,
-    json['data'] == null
-        ? null
-        : Company.fromJson(json['data'] as Map<String, dynamic>),
+    (json['data'] as List<dynamic>?)
+        ?.map((e) => Company.fromJson(e as Map<String, dynamic>))
+        .toList(),
   );
 }
 

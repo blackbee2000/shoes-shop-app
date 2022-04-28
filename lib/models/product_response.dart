@@ -5,7 +5,7 @@ part 'product_response.g.dart';
 @JsonSerializable()
 class ProductResponse {
   String? message;
-  Product? data;
+  List<Product>? data;
 
   ProductResponse(
     this.message,

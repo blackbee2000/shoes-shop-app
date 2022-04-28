@@ -3,9 +3,9 @@ part of 'address_response.dart';
 AddressResponse _$AddressResponseFromJson(Map<String, dynamic> json) {
   return AddressResponse(
     json['message'] as String?,
-    json['data'] == null
-        ? null
-        : Address.fromJson(json['data'] as Map<String, dynamic>),
+    (json['data'] as List<dynamic>?)
+        ?.map((e) => Address.fromJson(e as Map<String, dynamic>))
+        .toList(),
   );
 }
 

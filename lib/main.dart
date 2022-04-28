@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:shoes_shop_app/config/flavor_config.dart';
+import 'package:shoes_shop_app/services/api_token.dart';
 import 'package:shoes_shop_app/theme/app_theme.dart';
 import 'package:shoes_shop_app/translations/app_translation.dart';
 import 'package:shoes_shop_app/translations/locale_string.dart';
@@ -29,7 +30,8 @@ class MyApp extends StatelessWidget {
       initialBinding: BindingsBuilder(
         () {},
       ),
-      initialRoute: AppRoutes.SPLASH,
+      initialRoute:
+          ApiToken.to.isTokenExisted ? AppRoutes.DASHBORAD : AppRoutes.SPLASH,
       getPages: AppPages.list,
       debugShowCheckedModeBanner: false,
       translations: LocaleString(),

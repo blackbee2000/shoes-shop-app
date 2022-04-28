@@ -5,7 +5,7 @@ part 'blog_response.g.dart';
 @JsonSerializable()
 class BlogResponse {
   String? message;
-  Blog? data;
+  List<Blog>? data;
 
   BlogResponse(
     this.message,

@@ -165,7 +165,7 @@ class LoginPage extends StatelessWidget {
                           children: [
                             GestureDetector(
                               onTap: () {
-                                Get.to(const RegisterPage());
+                                Get.to(RegisterPage());
                               },
                               child: Text(
                                 'login_not_account'.tr,

@@ -5,7 +5,7 @@ part 'address_response.g.dart';
 @JsonSerializable()
 class AddressResponse {
   String? message;
-  Address? data;
+  List<Address>? data;
 
   AddressResponse(
     this.message,
