@@ -37,8 +37,8 @@ class LoginController extends GetxController {
       },
       onError: (e) {
         Get.snackbar(
-          'Validation',
-          'Phone, password is empty',
+          'Fail',
+          'Lỗi đăng nhập',
           colorText: Colors.black,
           backgroundColor: Colors.white,
         );
