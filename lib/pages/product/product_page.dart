@@ -5,6 +5,7 @@ import 'package:shoes_shop_app/pages/cart/cart_page.dart';
 import 'package:shoes_shop_app/pages/product/detail/product_detail_page.dart';
 import 'package:shoes_shop_app/pages/product/product_controller.dart';
 import 'package:shoes_shop_app/utils/app_constant.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class ProductPage extends StatelessWidget {
   final productController = Get.put(ProductController());
@@ -34,7 +35,7 @@ class ProductPage extends StatelessWidget {
                     backgroundColor: Colors.black.withOpacity(0),
                     title: Text(
                       "product_title".tr,
-                      style: const TextStyle(
+                      style: GoogleFonts.ebGaramond(
                         color: Colors.white,
                         fontSize: 20,
                         fontWeight: FontWeight.w600,
@@ -130,9 +131,9 @@ class ProductPage extends StatelessWidget {
                                         const SizedBox(
                                           height: 5,
                                         ),
-                                        const Text(
+                                        Text(
                                           'Nike',
-                                          style: TextStyle(
+                                          style: GoogleFonts.ebGaramond(
                                             color: Colors.black,
                                             fontSize: 13,
                                             fontWeight: FontWeight.w400,
@@ -260,18 +261,18 @@ class ProductPage extends StatelessWidget {
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceBetween,
                                           children: [
-                                            const Text(
+                                            Text(
                                               'Jordan 1',
-                                              style: TextStyle(
+                                              style: GoogleFonts.ebGaramond(
                                                 color: Colors.black,
                                                 fontSize: 14,
                                                 fontWeight: FontWeight.w600,
                                               ),
                                             ),
                                             RichText(
-                                              text: const TextSpan(
+                                              text: TextSpan(
                                                 text: '250',
-                                                style: TextStyle(
+                                                style: GoogleFonts.ebGaramond(
                                                   color: Colors.black,
                                                   fontSize: 20,
                                                   fontWeight: FontWeight.w600,

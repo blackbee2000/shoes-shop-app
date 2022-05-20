@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:shoes_shop_app/pages/address/address_page.dart';
 import 'package:shoes_shop_app/pages/cart/cart_controller.dart';
 import 'package:shoes_shop_app/pages/payment/payment_page.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class CartPage extends StatelessWidget {
   final int id;
@@ -35,7 +36,7 @@ class CartPage extends StatelessWidget {
             ),
             title: Text(
               'cart_title'.tr,
-              style: const TextStyle(
+              style: GoogleFonts.ebGaramond(
                 color: Colors.black,
                 fontSize: 20,
                 fontWeight: FontWeight.w600,
@@ -97,7 +98,7 @@ class CartPage extends StatelessWidget {
                             children: [
                               Text(
                                 'cart_address'.tr,
-                                style: const TextStyle(
+                                style: GoogleFonts.ebGaramond(
                                   color: Colors.black,
                                   fontSize: 16,
                                   fontWeight: FontWeight.w600,
@@ -117,9 +118,9 @@ class CartPage extends StatelessWidget {
                           const SizedBox(
                             height: 5,
                           ),
-                          const Text(
+                          Text(
                             'Trần Thái Tuấn',
-                            style: TextStyle(
+                            style: GoogleFonts.ebGaramond(
                               color: Colors.black,
                               fontSize: 14,
                               fontWeight: FontWeight.w600,
@@ -128,9 +129,9 @@ class CartPage extends StatelessWidget {
                           const SizedBox(
                             height: 5,
                           ),
-                          const Text(
+                          Text(
                             '108 Sao Hoả, Hệ Mặt Trời',
-                            style: TextStyle(
+                            style: GoogleFonts.ebGaramond(
                               color: Colors.black,
                               fontSize: 14,
                               fontWeight: FontWeight.w400,
@@ -280,9 +281,10 @@ class CartPage extends StatelessWidget {
                                                   crossAxisAlignment:
                                                       CrossAxisAlignment.start,
                                                   children: [
-                                                    const Text(
+                                                    Text(
                                                       'Jordan chất điên, cháy cả cộng đồng mạng',
-                                                      style: TextStyle(
+                                                      style: GoogleFonts
+                                                          .ebGaramond(
                                                         color: Colors.black,
                                                         fontSize: 16,
                                                         fontWeight:
@@ -295,9 +297,10 @@ class CartPage extends StatelessWidget {
                                                     const SizedBox(
                                                       height: 5,
                                                     ),
-                                                    const Text(
+                                                    Text(
                                                       'Price: 250',
-                                                      style: TextStyle(
+                                                      style: GoogleFonts
+                                                          .ebGaramond(
                                                         color: Colors.black,
                                                         fontSize: 14,
                                                         fontWeight:
@@ -307,9 +310,10 @@ class CartPage extends StatelessWidget {
                                                     const SizedBox(
                                                       height: 5,
                                                     ),
-                                                    const Text(
+                                                    Text(
                                                       'Total: 250',
-                                                      style: TextStyle(
+                                                      style: GoogleFonts
+                                                          .ebGaramond(
                                                         color: Colors.black,
                                                         fontSize: 14,
                                                         fontWeight:
@@ -329,11 +333,11 @@ class CartPage extends StatelessWidget {
                                                             width: 25,
                                                             height: 25,
                                                             color: Colors.black,
-                                                            child: const Center(
+                                                            child: Center(
                                                               child: Text(
                                                                 '-',
-                                                                style:
-                                                                    TextStyle(
+                                                                style: GoogleFonts
+                                                                    .ebGaramond(
                                                                   color: Colors
                                                                       .white,
                                                                   fontSize: 14,
@@ -348,9 +352,10 @@ class CartPage extends StatelessWidget {
                                                         const SizedBox(
                                                           width: 15,
                                                         ),
-                                                        const Text(
+                                                        Text(
                                                           '1',
-                                                          style: TextStyle(
+                                                          style: GoogleFonts
+                                                              .ebGaramond(
                                                             color: Colors.black,
                                                             fontSize: 14,
                                                             fontWeight:
@@ -365,11 +370,11 @@ class CartPage extends StatelessWidget {
                                                             width: 25,
                                                             height: 25,
                                                             color: Colors.black,
-                                                            child: const Center(
+                                                            child: Center(
                                                               child: Text(
                                                                 '+',
-                                                                style:
-                                                                    TextStyle(
+                                                                style: GoogleFonts
+                                                                    .ebGaramond(
                                                                   color: Colors
                                                                       .white,
                                                                   fontSize: 14,
@@ -431,7 +436,7 @@ class CartPage extends StatelessWidget {
                       children: [
                         Text(
                           'cart_select_all'.tr,
-                          style: const TextStyle(
+                          style: GoogleFonts.ebGaramond(
                             color: Colors.black,
                             fontSize: 16,
                             fontWeight: FontWeight.w400,
@@ -454,7 +459,7 @@ class CartPage extends StatelessWidget {
                             child: Center(
                               child: Text(
                                 'cart_payment'.tr,
-                                style: const TextStyle(
+                                style: GoogleFonts.ebGaramond(
                                   color: Colors.white,
                                   fontSize: 16,
                                   fontWeight: FontWeight.w400,
@@ -468,7 +473,7 @@ class CartPage extends StatelessWidget {
                         ),
                         Text(
                           'cart_delete'.tr,
-                          style: const TextStyle(
+                          style: GoogleFonts.ebGaramond(
                             color: Colors.black,
                             fontSize: 16,
                             fontWeight: FontWeight.w400,

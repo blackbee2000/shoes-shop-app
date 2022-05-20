@@ -14,7 +14,7 @@ class ProfileController extends GetxController {
   final theme = AppTheme.instance.theme.obs;
   final language = AppTranslation.instance.language.obs;
   final storage = GetStorage();
-  dynamic profile;
+  final profile = Profile.fromJson({}).obs;
 
   @override
   void onInit() async {
@@ -41,7 +41,7 @@ class ProfileController extends GetxController {
       beforeSend: () {},
       onSuccess: (res) {
         print('GET INFO PROFILE SUCESS =>>>>>>> ${res.toString()}');
-        profile = res.data?.first;
+        profile.value = res.data?.first ?? {} as Profile;
         print(
             'GET INFO PROFILE SUCESS HAHAAHAAA =>>>>>>> ${profile.toString()}');
       },

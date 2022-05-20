@@ -1,5 +1,3 @@
 import 'package:flutter/material.dart';
 
-ThemeData lightTheme = ThemeData(
-  fontFamily: 'MMC',
-);
+ThemeData lightTheme = ThemeData();

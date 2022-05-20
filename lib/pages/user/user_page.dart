@@ -4,6 +4,7 @@ import 'package:shoes_shop_app/pages/address/address_page.dart';
 import 'package:shoes_shop_app/pages/dashboard/dashboard_page.dart';
 import 'package:shoes_shop_app/pages/user/user_controller.dart';
 import 'package:shoes_shop_app/utils/app_constant.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class UserPage extends StatelessWidget {
   final int id;
@@ -38,7 +39,7 @@ class UserPage extends StatelessWidget {
               padding: const EdgeInsets.only(bottom: 15),
               child: Text(
                 'user_camera'.tr,
-                style: const TextStyle(
+                style: GoogleFonts.ebGaramond(
                   color: Colors.black,
                   fontSize: 16,
                   fontWeight: FontWeight.w400,
@@ -60,7 +61,7 @@ class UserPage extends StatelessWidget {
               padding: const EdgeInsets.only(top: 15),
               child: Text(
                 'user_galery'.tr,
-                style: const TextStyle(
+                style: GoogleFonts.ebGaramond(
                   color: Colors.black,
                   fontSize: 16,
                   fontWeight: FontWeight.w400,
@@ -104,7 +105,7 @@ class UserPage extends StatelessWidget {
                     : Container(),
                 title: Text(
                   'user_update_information'.tr,
-                  style: const TextStyle(
+                  style: GoogleFonts.ebGaramond(
                     color: Colors.white,
                     fontSize: 20,
                     fontWeight: FontWeight.w600,
@@ -247,17 +248,18 @@ class UserPage extends StatelessWidget {
                               ),
                               TextField(
                                 controller: controller.name,
-                                style: const TextStyle(
+                                style: GoogleFonts.ebGaramond(
                                   color: Colors.black,
                                   fontSize: 14,
                                   fontWeight: FontWeight.w400,
                                 ),
                                 decoration: InputDecoration(
-                                  contentPadding: EdgeInsets.only(left: 35),
+                                  contentPadding:
+                                      const EdgeInsets.only(left: 35),
                                   border: InputBorder.none,
                                   hintText: 'user_your_name'.tr,
-                                  hintStyle: const TextStyle(
-                                    color: Color(0xffD0D0D0),
+                                  hintStyle: GoogleFonts.ebGaramond(
+                                    color: const Color(0xffD0D0D0),
                                     fontSize: 14,
                                     fontWeight: FontWeight.w400,
                                   ),
@@ -302,7 +304,7 @@ class UserPage extends StatelessWidget {
                               ),
                               TextField(
                                 controller: controller.phone,
-                                style: const TextStyle(
+                                style: GoogleFonts.ebGaramond(
                                   color: Colors.black,
                                   fontSize: 14,
                                   fontWeight: FontWeight.w400,
@@ -312,8 +314,8 @@ class UserPage extends StatelessWidget {
                                       const EdgeInsets.only(left: 35),
                                   border: InputBorder.none,
                                   hintText: 'login_your_phone'.tr,
-                                  hintStyle: const TextStyle(
-                                    color: Color(0xffD0D0D0),
+                                  hintStyle: GoogleFonts.ebGaramond(
+                                    color: const Color(0xffD0D0D0),
                                     fontSize: 14,
                                     fontWeight: FontWeight.w400,
                                   ),
@@ -358,7 +360,7 @@ class UserPage extends StatelessWidget {
                               ),
                               TextField(
                                 controller: controller.email,
-                                style: const TextStyle(
+                                style: GoogleFonts.ebGaramond(
                                   color: Colors.black,
                                   fontSize: 14,
                                   fontWeight: FontWeight.w400,
@@ -368,8 +370,8 @@ class UserPage extends StatelessWidget {
                                       const EdgeInsets.only(left: 35),
                                   border: InputBorder.none,
                                   hintText: 'register_your_email'.tr,
-                                  hintStyle: const TextStyle(
-                                    color: Color(0xffD0D0D0),
+                                  hintStyle: GoogleFonts.ebGaramond(
+                                    color: const Color(0xffD0D0D0),
                                     fontSize: 14,
                                     fontWeight: FontWeight.w400,
                                   ),
@@ -397,7 +399,7 @@ class UserPage extends StatelessWidget {
                                 children: [
                                   Text(
                                     'cart_address'.tr,
-                                    style: const TextStyle(
+                                    style: GoogleFonts.ebGaramond(
                                       color: Colors.black,
                                       fontSize: 14,
                                       fontWeight: FontWeight.w400,
@@ -421,7 +423,7 @@ class UserPage extends StatelessWidget {
                               },
                               child: Text(
                                 'user_skip'.tr,
-                                style: const TextStyle(
+                                style: GoogleFonts.ebGaramond(
                                   color: Colors.black,
                                   fontSize: 14,
                                   fontWeight: FontWeight.w400,
@@ -434,29 +436,34 @@ class UserPage extends StatelessWidget {
                       const SizedBox(
                         height: 40,
                       ),
-                      SizedBox(
-                        width: double.infinity,
-                        child: GestureDetector(
-                          onTap: () {
-                            Get.offAll(DashboardPage());
-                          },
-                          child: Stack(
-                            alignment: AlignmentDirectional.center,
-                            children: [
-                              ClipOval(
-                                child: Container(
-                                  width: 60,
-                                  height: 60,
-                                  color: Colors.black,
+                      GetBuilder<UserController>(
+                        init: userController,
+                        builder: (controller) => SizedBox(
+                          width: double.infinity,
+                          child: GestureDetector(
+                            onTap: () {
+                              // Get.offAll(DashboardPage());
+                              controller.updateProfile(controller.name.text,
+                                  controller.phone.text, controller.email.text);
+                            },
+                            child: Stack(
+                              alignment: AlignmentDirectional.center,
+                              children: [
+                                ClipOval(
+                                  child: Container(
+                                    width: 60,
+                                    height: 60,
+                                    color: Colors.black,
+                                  ),
                                 ),
-                              ),
-                              Image.asset(
-                                'assets/icons/icon-right-button.png',
-                                width: 25,
-                                height: 25,
-                                fit: BoxFit.contain,
-                              ),
-                            ],
+                                Image.asset(
+                                  'assets/icons/icon-right-button.png',
+                                  width: 25,
+                                  height: 25,
+                                  fit: BoxFit.contain,
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ),

@@ -13,7 +13,7 @@ import 'routes/app_routes.dart';
 void main() async {
   FlavorConfig(
     values: FlavorValues(
-      baseUrl: 'http://192.168.1.13:3000/api',
+      baseUrl: 'http://192.168.1.10:3000/api',
     ),
   );
   WidgetsFlutterBinding.ensureInitialized();

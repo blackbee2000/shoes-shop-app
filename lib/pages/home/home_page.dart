@@ -8,6 +8,7 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:shoes_shop_app/pages/product/detail/product_detail_page.dart';
 import 'package:shoes_shop_app/pages/search/search_page.dart';
 import 'package:shoes_shop_app/utils/app_constant.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class HomePage extends StatelessWidget {
   CarouselController homeCarouselController = CarouselController();
@@ -106,7 +107,7 @@ class HomePage extends StatelessWidget {
                                             children: [
                                               Text(
                                                 'home_new_collection'.tr,
-                                                style: const TextStyle(
+                                                style: GoogleFonts.ebGaramond(
                                                   color: Colors.black,
                                                   fontSize: 22,
                                                   fontWeight: FontWeight.w600,
@@ -115,9 +116,9 @@ class HomePage extends StatelessWidget {
                                               const SizedBox(
                                                 height: 5,
                                               ),
-                                              const Text(
+                                              Text(
                                                 'Nike Original 2022',
-                                                style: TextStyle(
+                                                style: GoogleFonts.ebGaramond(
                                                   color: Colors.black,
                                                   fontSize: 12,
                                                   fontWeight: FontWeight.w400,
@@ -141,9 +142,10 @@ class HomePage extends StatelessWidget {
                                                   crossAxisAlignment:
                                                       CrossAxisAlignment.start,
                                                   children: [
-                                                    const Text(
+                                                    Text(
                                                       'Jordan Off-White',
-                                                      style: TextStyle(
+                                                      style: GoogleFonts
+                                                          .ebGaramond(
                                                         color: Colors.white,
                                                         fontSize: 16,
                                                         fontWeight:
@@ -153,9 +155,10 @@ class HomePage extends StatelessWidget {
                                                     const SizedBox(
                                                       height: 5,
                                                     ),
-                                                    const Text(
+                                                    Text(
                                                       'Jordan',
-                                                      style: TextStyle(
+                                                      style: GoogleFonts
+                                                          .ebGaramond(
                                                         color: Colors.white,
                                                         fontSize: 12,
                                                         fontWeight:
@@ -192,8 +195,8 @@ class HomePage extends StatelessWidget {
                                                             Text(
                                                               'home_shop_now'
                                                                   .tr,
-                                                              style:
-                                                                  const TextStyle(
+                                                              style: GoogleFonts
+                                                                  .ebGaramond(
                                                                 color: Colors
                                                                     .white,
                                                                 fontSize: 14,
@@ -278,7 +281,7 @@ class HomePage extends StatelessWidget {
                               children: [
                                 Text(
                                   'home_sales'.tr,
-                                  style: const TextStyle(
+                                  style: GoogleFonts.ebGaramond(
                                     color: Colors.black,
                                     fontSize: 18,
                                     fontWeight: FontWeight.w700,
@@ -291,7 +294,7 @@ class HomePage extends StatelessWidget {
                                     children: [
                                       Text(
                                         'home_view_all'.tr,
-                                        style: const TextStyle(
+                                        style: GoogleFonts.ebGaramond(
                                           color: Colors.black,
                                           fontSize: 12,
                                           fontWeight: FontWeight.w400,
@@ -319,7 +322,7 @@ class HomePage extends StatelessWidget {
                           Container(
                             width: double.infinity,
                             padding: const EdgeInsets.symmetric(horizontal: 10),
-                            height: 305,
+                            height: 310,
                             child: ListView.builder(
                               scrollDirection: Axis.horizontal,
                               itemCount: 5,
@@ -335,9 +338,9 @@ class HomePage extends StatelessWidget {
                                 ),
                                 child: Column(
                                   children: [
-                                    const Text(
+                                    Text(
                                       'Jordan 1',
-                                      style: TextStyle(
+                                      style: GoogleFonts.ebGaramond(
                                         color: Colors.white,
                                         fontSize: 14,
                                         fontWeight: FontWeight.w600,
@@ -357,9 +360,9 @@ class HomePage extends StatelessWidget {
                                     Container(
                                       alignment: Alignment.topLeft,
                                       child: RichText(
-                                        text: const TextSpan(
+                                        text: TextSpan(
                                           text: '250',
-                                          style: TextStyle(
+                                          style: GoogleFonts.ebGaramond(
                                             color: Colors.white,
                                             fontSize: 20,
                                             fontWeight: FontWeight.w600,
@@ -409,7 +412,7 @@ class HomePage extends StatelessWidget {
                                           children: [
                                             Text(
                                               'home_go_detail'.tr,
-                                              style: const TextStyle(
+                                              style: GoogleFonts.ebGaramond(
                                                 color: Colors.white,
                                                 fontSize: 14,
                                                 fontWeight: FontWeight.w400,
@@ -442,7 +445,7 @@ class HomePage extends StatelessWidget {
                             padding: const EdgeInsets.symmetric(horizontal: 20),
                             child: Text(
                               'home_brands'.tr,
-                              style: const TextStyle(
+                              style: GoogleFonts.ebGaramond(
                                 color: Colors.black,
                                 fontSize: 18,
                                 fontWeight: FontWeight.w700,
@@ -502,7 +505,7 @@ class HomePage extends StatelessWidget {
                               children: [
                                 Text(
                                   'home_news_arrivals'.tr,
-                                  style: const TextStyle(
+                                  style: GoogleFonts.ebGaramond(
                                     color: Colors.black,
                                     fontSize: 18,
                                     fontWeight: FontWeight.w700,
@@ -514,7 +517,7 @@ class HomePage extends StatelessWidget {
                                     children: [
                                       Text(
                                         'home_view_all'.tr,
-                                        style: const TextStyle(
+                                        style: GoogleFonts.ebGaramond(
                                           color: Colors.black,
                                           fontSize: 12,
                                           fontWeight: FontWeight.w400,
@@ -542,7 +545,7 @@ class HomePage extends StatelessWidget {
                           Container(
                             width: double.infinity,
                             padding: const EdgeInsets.symmetric(horizontal: 10),
-                            height: 305,
+                            height: 310,
                             child: ListView.builder(
                               scrollDirection: Axis.horizontal,
                               itemCount: 5,
@@ -558,9 +561,9 @@ class HomePage extends StatelessWidget {
                                 ),
                                 child: Column(
                                   children: [
-                                    const Text(
+                                    Text(
                                       'Jordan 1',
-                                      style: TextStyle(
+                                      style: GoogleFonts.ebGaramond(
                                         color: Colors.white,
                                         fontSize: 14,
                                         fontWeight: FontWeight.w600,
@@ -580,9 +583,9 @@ class HomePage extends StatelessWidget {
                                     Container(
                                       alignment: Alignment.topLeft,
                                       child: RichText(
-                                        text: const TextSpan(
+                                        text: TextSpan(
                                           text: '250',
-                                          style: TextStyle(
+                                          style: GoogleFonts.ebGaramond(
                                             color: Colors.white,
                                             fontSize: 20,
                                             fontWeight: FontWeight.w600,
@@ -632,7 +635,7 @@ class HomePage extends StatelessWidget {
                                           children: [
                                             Text(
                                               'home_go_detail'.tr,
-                                              style: const TextStyle(
+                                              style: GoogleFonts.ebGaramond(
                                                 color: Colors.white,
                                                 fontSize: 14,
                                                 fontWeight: FontWeight.w400,

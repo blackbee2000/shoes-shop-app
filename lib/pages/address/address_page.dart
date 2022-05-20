@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'address_controller.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class AddressPage extends StatelessWidget {
   AddressPage({Key? key}) : super(key: key);
@@ -36,7 +37,7 @@ class AddressPage extends StatelessWidget {
                   children: [
                     Text(
                       'address_add'.tr,
-                      style: const TextStyle(
+                      style: GoogleFonts.ebGaramond(
                         color: Colors.black,
                         fontSize: 16,
                         fontWeight: FontWeight.w600,
@@ -74,7 +75,7 @@ class AddressPage extends StatelessWidget {
               ),
               child: TextField(
                 controller: addressController.customerName,
-                style: const TextStyle(
+                style: GoogleFonts.ebGaramond(
                   color: Colors.black,
                   fontSize: 13,
                   fontWeight: FontWeight.w400,
@@ -86,8 +87,8 @@ class AddressPage extends StatelessWidget {
                     left: 15,
                   ),
                   hintText: 'address_enter_name'.tr,
-                  hintStyle: const TextStyle(
-                    color: Color(0xffD0D0D0),
+                  hintStyle: GoogleFonts.ebGaramond(
+                    color: const Color(0xffD0D0D0),
                     fontSize: 13,
                     fontWeight: FontWeight.w400,
                   ),
@@ -108,7 +109,7 @@ class AddressPage extends StatelessWidget {
               ),
               child: TextField(
                 controller: addressController.customerAddress,
-                style: const TextStyle(
+                style: GoogleFonts.ebGaramond(
                   color: Colors.black,
                   fontSize: 13,
                   fontWeight: FontWeight.w400,
@@ -120,8 +121,8 @@ class AddressPage extends StatelessWidget {
                     left: 15,
                   ),
                   hintText: 'address_enter_address'.tr,
-                  hintStyle: const TextStyle(
-                    color: Color(0xffD0D0D0),
+                  hintStyle: GoogleFonts.ebGaramond(
+                    color: const Color(0xffD0D0D0),
                     fontSize: 13,
                     fontWeight: FontWeight.w400,
                   ),
@@ -153,7 +154,7 @@ class AddressPage extends StatelessWidget {
                         child: Center(
                           child: Text(
                             'address_cancel'.tr,
-                            style: const TextStyle(
+                            style: GoogleFonts.ebGaramond(
                               color: Colors.black,
                               fontSize: 14,
                               fontWeight: FontWeight.w600,
@@ -176,7 +177,7 @@ class AddressPage extends StatelessWidget {
                       child: Center(
                         child: Text(
                           'address_confirm'.tr,
-                          style: const TextStyle(
+                          style: GoogleFonts.ebGaramond(
                             color: Colors.white,
                             fontSize: 14,
                             fontWeight: FontWeight.w600,
@@ -223,7 +224,7 @@ class AddressPage extends StatelessWidget {
                   children: [
                     Text(
                       'address_edit'.tr,
-                      style: const TextStyle(
+                      style: GoogleFonts.ebGaramond(
                         color: Colors.black,
                         fontSize: 16,
                         fontWeight: FontWeight.w600,
@@ -261,7 +262,7 @@ class AddressPage extends StatelessWidget {
               ),
               child: TextField(
                 controller: addressController.customerNameEdit,
-                style: const TextStyle(
+                style: GoogleFonts.ebGaramond(
                   color: Colors.black,
                   fontSize: 13,
                   fontWeight: FontWeight.w400,
@@ -273,8 +274,8 @@ class AddressPage extends StatelessWidget {
                     left: 15,
                   ),
                   hintText: 'address_enter_name'.tr,
-                  hintStyle: const TextStyle(
-                    color: Color(0xffD0D0D0),
+                  hintStyle: GoogleFonts.ebGaramond(
+                    color: const Color(0xffD0D0D0),
                     fontSize: 13,
                     fontWeight: FontWeight.w400,
                   ),
@@ -295,7 +296,7 @@ class AddressPage extends StatelessWidget {
               ),
               child: TextField(
                 controller: addressController.customerAddressEdit,
-                style: const TextStyle(
+                style: GoogleFonts.ebGaramond(
                   color: Colors.black,
                   fontSize: 13,
                   fontWeight: FontWeight.w400,
@@ -307,8 +308,8 @@ class AddressPage extends StatelessWidget {
                     left: 15,
                   ),
                   hintText: 'address_enter_address'.tr,
-                  hintStyle: const TextStyle(
-                    color: Color(0xffD0D0D0),
+                  hintStyle: GoogleFonts.ebGaramond(
+                    color: const Color(0xffD0D0D0),
                     fontSize: 13,
                     fontWeight: FontWeight.w400,
                   ),
@@ -340,7 +341,7 @@ class AddressPage extends StatelessWidget {
                 ),
                 Text(
                   'address_set_default_address'.tr,
-                  style: const TextStyle(
+                  style: GoogleFonts.ebGaramond(
                     color: Colors.black,
                     fontSize: 14,
                     fontWeight: FontWeight.w400,
@@ -371,7 +372,7 @@ class AddressPage extends StatelessWidget {
                         child: Center(
                           child: Text(
                             'address_cancel'.tr,
-                            style: const TextStyle(
+                            style: GoogleFonts.ebGaramond(
                               color: Colors.black,
                               fontSize: 14,
                               fontWeight: FontWeight.w600,
@@ -394,7 +395,7 @@ class AddressPage extends StatelessWidget {
                       child: Center(
                         child: Text(
                           'address_confirm'.tr,
-                          style: const TextStyle(
+                          style: GoogleFonts.ebGaramond(
                             color: Colors.white,
                             fontSize: 14,
                             fontWeight: FontWeight.w600,
@@ -440,7 +441,7 @@ class AddressPage extends StatelessWidget {
                   children: [
                     Text(
                       'address_delete'.tr,
-                      style: const TextStyle(
+                      style: GoogleFonts.ebGaramond(
                         color: Colors.black,
                         fontSize: 16,
                         fontWeight: FontWeight.w600,
@@ -473,7 +474,7 @@ class AddressPage extends StatelessWidget {
               alignment: Alignment.center,
               child: Text(
                 'address_warning'.tr,
-                style: const TextStyle(
+                style: GoogleFonts.ebGaramond(
                   color: Colors.black,
                   fontSize: 16,
                   fontWeight: FontWeight.w600,
@@ -503,7 +504,7 @@ class AddressPage extends StatelessWidget {
                         child: Center(
                           child: Text(
                             'address_cancel'.tr,
-                            style: const TextStyle(
+                            style: GoogleFonts.ebGaramond(
                               color: Colors.black,
                               fontSize: 14,
                               fontWeight: FontWeight.w600,
@@ -526,7 +527,7 @@ class AddressPage extends StatelessWidget {
                       child: Center(
                         child: Text(
                           'address_confirm'.tr,
-                          style: const TextStyle(
+                          style: GoogleFonts.ebGaramond(
                             color: Colors.white,
                             fontSize: 14,
                             fontWeight: FontWeight.w600,
@@ -569,7 +570,7 @@ class AddressPage extends StatelessWidget {
                 ),
                 title: Text(
                   'cart_address'.tr,
-                  style: const TextStyle(
+                  style: GoogleFonts.ebGaramond(
                     color: Colors.black,
                     fontSize: 20,
                     fontWeight: FontWeight.w600,
@@ -598,7 +599,7 @@ class AddressPage extends StatelessWidget {
                           children: [
                             Text(
                               'address_default'.tr,
-                              style: const TextStyle(
+                              style: GoogleFonts.ebGaramond(
                                 color: Colors.black,
                                 fontSize: 16,
                                 fontWeight: FontWeight.w600,
@@ -643,21 +644,21 @@ class AddressPage extends StatelessWidget {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   mainAxisAlignment: MainAxisAlignment.center,
-                                  children: const [
+                                  children: [
                                     Text(
                                       'Trần Thái Tuấn',
-                                      style: TextStyle(
+                                      style: GoogleFonts.ebGaramond(
                                         color: Colors.black,
                                         fontSize: 14,
                                         fontWeight: FontWeight.w600,
                                       ),
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 3,
                                     ),
                                     Text(
                                       '180 Sao Hoả, Hệ Mặt Trời',
-                                      style: TextStyle(
+                                      style: GoogleFonts.ebGaramond(
                                         color: Colors.black,
                                         fontSize: 14,
                                         fontWeight: FontWeight.w400,
@@ -724,7 +725,7 @@ class AddressPage extends StatelessWidget {
                           children: [
                             Text(
                               'address_other'.tr,
-                              style: const TextStyle(
+                              style: GoogleFonts.ebGaramond(
                                 color: Colors.black,
                                 fontSize: 16,
                                 fontWeight: FontWeight.w600,
@@ -782,21 +783,21 @@ class AddressPage extends StatelessWidget {
                                                   CrossAxisAlignment.start,
                                               mainAxisAlignment:
                                                   MainAxisAlignment.center,
-                                              children: const [
+                                              children: [
                                                 Text(
                                                   'Trần Thái Tuấn',
-                                                  style: TextStyle(
+                                                  style: GoogleFonts.ebGaramond(
                                                     color: Colors.black,
                                                     fontSize: 14,
                                                     fontWeight: FontWeight.w600,
                                                   ),
                                                 ),
-                                                SizedBox(
+                                                const SizedBox(
                                                   height: 3,
                                                 ),
                                                 Text(
                                                   '180 Sao Hoả, Hệ Mặt Trời',
-                                                  style: TextStyle(
+                                                  style: GoogleFonts.ebGaramond(
                                                     color: Colors.black,
                                                     fontSize: 14,
                                                     fontWeight: FontWeight.w400,
@@ -909,7 +910,7 @@ class AddressPage extends StatelessWidget {
                             ),
                             Text(
                               'address_new_add'.tr,
-                              style: const TextStyle(
+                              style: GoogleFonts.ebGaramond(
                                 color: Colors.white,
                                 fontSize: 14,
                                 fontWeight: FontWeight.w400,

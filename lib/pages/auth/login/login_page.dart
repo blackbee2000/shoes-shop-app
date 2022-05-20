@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shoes_shop_app/pages/auth/login/login_controller.dart';
 import 'package:shoes_shop_app/pages/auth/register/register_page.dart';
-import 'package:shoes_shop_app/pages/dashboard/dashboard_page.dart';
-import 'package:shoes_shop_app/services/api_service.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class LoginPage extends StatelessWidget {
   LoginPage({Key? key}) : super(key: key);
@@ -35,7 +34,7 @@ class LoginPage extends StatelessWidget {
                       ),
                       Text(
                         'sign_in'.tr,
-                        style: const TextStyle(
+                        style: GoogleFonts.ebGaramond(
                           color: Colors.white,
                           fontSize: 50,
                           fontWeight: FontWeight.w700,
@@ -76,7 +75,7 @@ class LoginPage extends StatelessWidget {
                               ),
                               TextField(
                                 controller: controller.phone,
-                                style: const TextStyle(
+                                style: GoogleFonts.ebGaramond(
                                   color: Colors.black,
                                   fontSize: 14,
                                   fontWeight: FontWeight.w400,
@@ -86,8 +85,8 @@ class LoginPage extends StatelessWidget {
                                       const EdgeInsets.only(left: 35),
                                   border: InputBorder.none,
                                   hintText: 'login_your_phone'.tr,
-                                  hintStyle: const TextStyle(
-                                    color: Color(0xffD0D0D0),
+                                  hintStyle: GoogleFonts.ebGaramond(
+                                    color: const Color(0xffD0D0D0),
                                     fontSize: 14,
                                     fontWeight: FontWeight.w400,
                                   ),
@@ -132,7 +131,7 @@ class LoginPage extends StatelessWidget {
                               ),
                               TextField(
                                 controller: controller.password,
-                                style: const TextStyle(
+                                style: GoogleFonts.ebGaramond(
                                   color: Colors.black,
                                   fontSize: 14,
                                   fontWeight: FontWeight.w400,
@@ -142,8 +141,8 @@ class LoginPage extends StatelessWidget {
                                       const EdgeInsets.only(left: 35),
                                   border: InputBorder.none,
                                   hintText: 'login_your_password'.tr,
-                                  hintStyle: const TextStyle(
-                                    color: Color(0xffD0D0D0),
+                                  hintStyle: GoogleFonts.ebGaramond(
+                                    color: const Color(0xffD0D0D0),
                                     fontSize: 14,
                                     fontWeight: FontWeight.w400,
                                   ),
@@ -169,7 +168,7 @@ class LoginPage extends StatelessWidget {
                               },
                               child: Text(
                                 'login_not_account'.tr,
-                                style: const TextStyle(
+                                style: GoogleFonts.ebGaramond(
                                   color: Colors.black,
                                   fontSize: 14,
                                   fontWeight: FontWeight.w400,
@@ -178,7 +177,7 @@ class LoginPage extends StatelessWidget {
                             ),
                             Text(
                               'login_forget_password'.tr,
-                              style: const TextStyle(
+                              style: GoogleFonts.ebGaramond(
                                 color: Colors.black,
                                 fontSize: 14,
                                 fontWeight: FontWeight.w400,
@@ -235,7 +234,7 @@ class LoginPage extends StatelessWidget {
                         children: [
                           Text(
                             'login_with_google'.tr,
-                            style: const TextStyle(
+                            style: GoogleFonts.ebGaramond(
                               color: Colors.black,
                               fontSize: 16,
                               fontWeight: FontWeight.w400,

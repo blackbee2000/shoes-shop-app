@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shoes_shop_app/pages/auth/register/register_controller.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class RegisterPage extends StatelessWidget {
   final registerController = Get.put(RegisterController());
@@ -30,9 +31,9 @@ class RegisterPage extends StatelessWidget {
                       const SizedBox(
                         height: 90,
                       ),
-                      const Text(
+                      Text(
                         'Register',
-                        style: TextStyle(
+                        style: GoogleFonts.ebGaramond(
                           color: Colors.white,
                           fontSize: 50,
                           fontWeight: FontWeight.w700,
@@ -73,7 +74,7 @@ class RegisterPage extends StatelessWidget {
                               ),
                               TextField(
                                 controller: controller.phone,
-                                style: const TextStyle(
+                                style: GoogleFonts.ebGaramond(
                                   color: Colors.black,
                                   fontSize: 14,
                                   fontWeight: FontWeight.w400,
@@ -83,8 +84,8 @@ class RegisterPage extends StatelessWidget {
                                       const EdgeInsets.only(left: 35),
                                   border: InputBorder.none,
                                   hintText: 'login_your_phone'.tr,
-                                  hintStyle: const TextStyle(
-                                    color: Color(0xffD0D0D0),
+                                  hintStyle: GoogleFonts.ebGaramond(
+                                    color: const Color(0xffD0D0D0),
                                     fontSize: 14,
                                     fontWeight: FontWeight.w400,
                                   ),
@@ -129,17 +130,18 @@ class RegisterPage extends StatelessWidget {
                               ),
                               TextField(
                                 controller: controller.password,
-                                style: const TextStyle(
+                                style: GoogleFonts.ebGaramond(
                                   color: Colors.black,
                                   fontSize: 14,
                                   fontWeight: FontWeight.w400,
                                 ),
                                 decoration: InputDecoration(
-                                  contentPadding: EdgeInsets.only(left: 35),
+                                  contentPadding:
+                                      const EdgeInsets.only(left: 35),
                                   border: InputBorder.none,
                                   hintText: 'login_your_password'.tr,
-                                  hintStyle: const TextStyle(
-                                    color: Color(0xffD0D0D0),
+                                  hintStyle: GoogleFonts.ebGaramond(
+                                    color: const Color(0xffD0D0D0),
                                     fontSize: 14,
                                     fontWeight: FontWeight.w400,
                                   ),
@@ -184,7 +186,7 @@ class RegisterPage extends StatelessWidget {
                               ),
                               TextField(
                                 controller: controller.email,
-                                style: const TextStyle(
+                                style: GoogleFonts.ebGaramond(
                                   color: Colors.black,
                                   fontSize: 14,
                                   fontWeight: FontWeight.w400,
@@ -194,8 +196,8 @@ class RegisterPage extends StatelessWidget {
                                       const EdgeInsets.only(left: 35),
                                   border: InputBorder.none,
                                   hintText: 'register_your_email'.tr,
-                                  hintStyle: const TextStyle(
-                                    color: Color(0xffD0D0D0),
+                                  hintStyle: GoogleFonts.ebGaramond(
+                                    color: const Color(0xffD0D0D0),
                                     fontSize: 14,
                                     fontWeight: FontWeight.w400,
                                   ),
@@ -209,30 +211,35 @@ class RegisterPage extends StatelessWidget {
                       const SizedBox(
                         height: 60,
                       ),
-                      SizedBox(
-                        width: double.infinity,
-                        child: GestureDetector(
-                          onTap: () {
-                            print(
-                                'INPUTT ${registerController.phone.text}, ${registerController.password.text}, ${registerController.email.text}');
-                          },
-                          child: Stack(
-                            alignment: AlignmentDirectional.center,
-                            children: [
-                              ClipOval(
-                                child: Container(
-                                  width: 60,
-                                  height: 60,
-                                  color: Colors.black,
+                      GetBuilder<RegisterController>(
+                        init: registerController,
+                        builder: (controller) => SizedBox(
+                          width: double.infinity,
+                          child: GestureDetector(
+                            onTap: () {
+                              controller.register(
+                                  controller.phone.text,
+                                  controller.password.text,
+                                  controller.email.text);
+                            },
+                            child: Stack(
+                              alignment: AlignmentDirectional.center,
+                              children: [
+                                ClipOval(
+                                  child: Container(
+                                    width: 60,
+                                    height: 60,
+                                    color: Colors.black,
+                                  ),
                                 ),
-                              ),
-                              Image.asset(
-                                'assets/icons/icon-right-button.png',
-                                width: 25,
-                                height: 25,
-                                fit: BoxFit.contain,
-                              ),
-                            ],
+                                Image.asset(
+                                  'assets/icons/icon-right-button.png',
+                                  width: 25,
+                                  height: 25,
+                                  fit: BoxFit.contain,
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ),

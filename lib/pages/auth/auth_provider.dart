@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:shoes_shop_app/models/auth.dart';
 import 'package:shoes_shop_app/models/profile_response.dart';
+import 'package:shoes_shop_app/models/register_response.dart';
 import 'package:shoes_shop_app/services/api_service.dart';
 import 'package:shoes_shop_app/utils/api_constant.dart';
 
@@ -16,7 +17,7 @@ abstract class AuthAPIProtocol {
     required Map<String, dynamic> params,
     required Options option,
     required Function() beforeSend,
-    required Function(ProfileResponse data) onSuccess,
+    required Function(RegisterResponse data) onSuccess,
     required Function(dynamic error) onError,
   });
 }
@@ -47,7 +48,7 @@ class AuthProvider extends AuthAPIProtocol {
       {required Map<String, dynamic> params,
       required Options option,
       required Function() beforeSend,
-      required Function(ProfileResponse data) onSuccess,
+      required Function(RegisterResponse data) onSuccess,
       required Function(dynamic error) onError}) {
     ApiService(
       path: ApiConstant.REGISTER,
@@ -56,7 +57,7 @@ class AuthProvider extends AuthAPIProtocol {
     ).post(
       beforeSend: () => {beforeSend()},
       onSuccess: (data) {
-        onSuccess(ProfileResponse.fromJson(data));
+        onSuccess(RegisterResponse.fromJson(data));
       },
       onError: (error) => {onError(error)},
     );

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:lottie/lottie.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:shoes_shop_app/pages/dashboard/dashboard_page.dart';
 
 class SpalshPage extends StatelessWidget {
@@ -36,23 +36,23 @@ class SpalshPage extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  const Text(
+                  Text(
                     'Wellcome',
-                    style: TextStyle(
+                    style: GoogleFonts.ebGaramond(
                       color: Colors.white,
-                      fontSize: 40,
+                      fontSize: 45,
                       fontWeight: FontWeight.w900,
                       decoration: TextDecoration.none,
                     ),
                   ),
                   const SizedBox(
-                    height: 20,
+                    height: 10,
                   ),
-                  const Text(
+                  Text(
                     'Hello there, nice to meet you!',
-                    style: TextStyle(
+                    style: GoogleFonts.ebGaramond(
                       color: Colors.white,
-                      fontSize: 20,
+                      fontSize: 22,
                       fontWeight: FontWeight.w400,
                       decoration: TextDecoration.none,
                     ),
@@ -71,19 +71,24 @@ class SpalshPage extends StatelessWidget {
                   ),
                   GestureDetector(
                     onTap: () {
-                      // Future.delayed(const Duration(milliseconds: 500), () {
-                      //   Get.dialog(
-                      //     Lottie.asset(
-                      //       'assets/loading/shoes_loading.json',
-                      //       width: 100,
-                      //       height: 100,
-                      //       fit: BoxFit.fill,
-                      //     ),
-                      //     barrierDismissible: false,
-                      //   );
-                      // });
-                      // Get.back();
-                      Get.offAll(DashboardPage());
+                      Get.dialog(
+                        const SizedBox(
+                          height: 15,
+                          width: 15,
+                          child: Center(
+                            child: CircularProgressIndicator(
+                              valueColor: AlwaysStoppedAnimation(Colors.white),
+                              strokeWidth: 2,
+                            ),
+                          ),
+                        ),
+                        barrierDismissible: false,
+                      );
+                      Future.delayed(const Duration(milliseconds: 1000))
+                          .then((value) {
+                        Get.back();
+                        Get.offAll(DashboardPage());
+                      });
                     },
                     child: Container(
                       width: 180,
@@ -102,14 +107,14 @@ class SpalshPage extends StatelessWidget {
                           ],
                         ),
                       ),
-                      child: const Center(
+                      child: Center(
                         child: Padding(
-                          padding: EdgeInsets.only(top: 20),
+                          padding: const EdgeInsets.only(top: 20),
                           child: Text(
                             'Start',
-                            style: TextStyle(
+                            style: GoogleFonts.ebGaramond(
                               color: Colors.white,
-                              fontSize: 30,
+                              fontSize: 35,
                               fontWeight: FontWeight.w900,
                               decoration: TextDecoration.none,
                             ),

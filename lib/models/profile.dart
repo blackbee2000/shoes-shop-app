@@ -1,10 +1,9 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:shoes_shop_app/models/type_product.dart';
 part 'profile.g.dart';
 
 @JsonSerializable()
 class Profile {
-  String? _id;
+  String? id;
   String? fullName;
   String? phoneNumber;
   String? email;
@@ -18,7 +17,7 @@ class Profile {
   dynamic favourites;
 
   Profile(
-    this._id,
+    this.id,
     this.fullName,
     this.phoneNumber,
     this.email,

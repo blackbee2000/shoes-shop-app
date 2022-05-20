@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shoes_shop_app/pages/address/address_page.dart';
 import 'package:shoes_shop_app/pages/payment/payment_controller.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class PaymentPage extends StatelessWidget {
   final int id;
@@ -32,7 +33,7 @@ class PaymentPage extends StatelessWidget {
             ),
             title: Text(
               'cart_payment'.tr,
-              style: const TextStyle(
+              style: GoogleFonts.ebGaramond(
                 color: Colors.black,
                 fontSize: 20,
                 fontWeight: FontWeight.w600,
@@ -95,7 +96,7 @@ class PaymentPage extends StatelessWidget {
                               children: [
                                 Text(
                                   'cart_address'.tr,
-                                  style: const TextStyle(
+                                  style: GoogleFonts.ebGaramond(
                                     color: Colors.black,
                                     fontSize: 16,
                                     fontWeight: FontWeight.w600,
@@ -115,9 +116,9 @@ class PaymentPage extends StatelessWidget {
                             const SizedBox(
                               height: 5,
                             ),
-                            const Text(
+                            Text(
                               'Trần Thái Tuấn',
-                              style: TextStyle(
+                              style: GoogleFonts.ebGaramond(
                                 color: Colors.black,
                                 fontSize: 14,
                                 fontWeight: FontWeight.w600,
@@ -126,9 +127,9 @@ class PaymentPage extends StatelessWidget {
                             const SizedBox(
                               height: 5,
                             ),
-                            const Text(
+                            Text(
                               '108 Sao Hoả, Hệ Mặt Trời',
-                              style: TextStyle(
+                              style: GoogleFonts.ebGaramond(
                                 color: Colors.black,
                                 fontSize: 14,
                                 fontWeight: FontWeight.w400,
@@ -172,7 +173,7 @@ class PaymentPage extends StatelessWidget {
                       children: [
                         Text(
                           'product_title'.tr,
-                          style: const TextStyle(
+                          style: GoogleFonts.ebGaramond(
                             color: Colors.black,
                             fontSize: 16,
                             fontWeight: FontWeight.w600,
@@ -254,9 +255,9 @@ class PaymentPage extends StatelessWidget {
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
                                           children: [
-                                            const Text(
+                                            Text(
                                               'Jordan chất điên, cháy cả cộng đồng mạng',
-                                              style: TextStyle(
+                                              style: GoogleFonts.ebGaramond(
                                                 color: Colors.black,
                                                 fontSize: 16,
                                                 fontWeight: FontWeight.w600,
@@ -267,9 +268,9 @@ class PaymentPage extends StatelessWidget {
                                             const SizedBox(
                                               height: 5,
                                             ),
-                                            const Text(
+                                            Text(
                                               'Price: 250',
-                                              style: TextStyle(
+                                              style: GoogleFonts.ebGaramond(
                                                 color: Colors.black,
                                                 fontSize: 14,
                                                 fontWeight: FontWeight.w400,
@@ -287,10 +288,11 @@ class PaymentPage extends StatelessWidget {
                                                     width: 25,
                                                     height: 25,
                                                     color: Colors.black,
-                                                    child: const Center(
+                                                    child: Center(
                                                       child: Text(
                                                         '-',
-                                                        style: TextStyle(
+                                                        style: GoogleFonts
+                                                            .ebGaramond(
                                                           color: Colors.white,
                                                           fontSize: 14,
                                                           fontWeight:
@@ -303,9 +305,9 @@ class PaymentPage extends StatelessWidget {
                                                 const SizedBox(
                                                   width: 15,
                                                 ),
-                                                const Text(
+                                                Text(
                                                   '1',
-                                                  style: TextStyle(
+                                                  style: GoogleFonts.ebGaramond(
                                                     color: Colors.black,
                                                     fontSize: 14,
                                                     fontWeight: FontWeight.w400,
@@ -319,10 +321,11 @@ class PaymentPage extends StatelessWidget {
                                                     width: 25,
                                                     height: 25,
                                                     color: Colors.black,
-                                                    child: const Center(
+                                                    child: Center(
                                                       child: Text(
                                                         '+',
-                                                        style: TextStyle(
+                                                        style: GoogleFonts
+                                                            .ebGaramond(
                                                           color: Colors.white,
                                                           fontSize: 14,
                                                           fontWeight:
@@ -337,9 +340,9 @@ class PaymentPage extends StatelessWidget {
                                             const SizedBox(
                                               height: 5,
                                             ),
-                                            const Text(
+                                            Text(
                                               'Total: 250',
-                                              style: TextStyle(
+                                              style: GoogleFonts.ebGaramond(
                                                 color: Colors.black,
                                                 fontSize: 14,
                                                 fontWeight: FontWeight.w400,
@@ -368,7 +371,7 @@ class PaymentPage extends StatelessWidget {
                                   child: Center(
                                     child: Text(
                                       'cart_delete'.tr,
-                                      style: const TextStyle(
+                                      style: GoogleFonts.ebGaramond(
                                         color: Colors.white,
                                         fontSize: 12,
                                         fontWeight: FontWeight.w400,
@@ -401,7 +404,7 @@ class PaymentPage extends StatelessWidget {
                       children: [
                         Text(
                           'payment_method'.tr,
-                          style: const TextStyle(
+                          style: GoogleFonts.ebGaramond(
                             color: Colors.black,
                             fontSize: 16,
                             fontWeight: FontWeight.w600,
@@ -452,10 +455,10 @@ class PaymentPage extends StatelessWidget {
                                         ),
                                       ],
                                     ),
-                                    child: const Center(
+                                    child: Center(
                                       child: Text(
                                         'Pay via VN Pay',
-                                        style: TextStyle(
+                                        style: GoogleFonts.ebGaramond(
                                           color: Colors.black,
                                           fontSize: 16,
                                           fontWeight: FontWeight.w400,
@@ -538,15 +541,15 @@ class PaymentPage extends StatelessWidget {
                     child: RichText(
                       text: TextSpan(
                         text: 'payment_shipping'.tr,
-                        style: const TextStyle(
+                        style: GoogleFonts.ebGaramond(
                           color: Colors.black,
                           fontSize: 18,
                           fontWeight: FontWeight.w400,
                         ),
-                        children: const [
+                        children: [
                           TextSpan(
                             text: '2',
-                            style: TextStyle(
+                            style: GoogleFonts.ebGaramond(
                               color: Colors.black,
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
@@ -564,15 +567,15 @@ class PaymentPage extends StatelessWidget {
                     child: RichText(
                       text: TextSpan(
                         text: 'payment_total_product'.tr,
-                        style: const TextStyle(
+                        style: GoogleFonts.ebGaramond(
                           color: Colors.black,
                           fontSize: 18,
                           fontWeight: FontWeight.w400,
                         ),
-                        children: const [
+                        children: [
                           TextSpan(
                             text: '250',
-                            style: TextStyle(
+                            style: GoogleFonts.ebGaramond(
                               color: Colors.black,
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
@@ -590,15 +593,15 @@ class PaymentPage extends StatelessWidget {
                     child: RichText(
                       text: TextSpan(
                         text: 'payment_total_bill'.tr,
-                        style: const TextStyle(
+                        style: GoogleFonts.ebGaramond(
                           color: Colors.black,
                           fontSize: 18,
                           fontWeight: FontWeight.w400,
                         ),
-                        children: const [
+                        children: [
                           TextSpan(
                             text: '252',
-                            style: TextStyle(
+                            style: GoogleFonts.ebGaramond(
                               color: Colors.black,
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
@@ -622,7 +625,7 @@ class PaymentPage extends StatelessWidget {
                     child: Center(
                       child: Text(
                         'cart_payment'.tr.toUpperCase(),
-                        style: const TextStyle(
+                        style: GoogleFonts.ebGaramond(
                           color: Colors.white,
                           fontSize: 16,
                           fontWeight: FontWeight.w600,

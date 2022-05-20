@@ -4,6 +4,7 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
 import 'package:shoes_shop_app/pages/cart/cart_page.dart';
 import 'package:shoes_shop_app/pages/product/detail/product_detail_controller.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class ProductDetailPage extends StatefulWidget {
   final int id;
@@ -49,7 +50,7 @@ class ProductDetailState extends State<ProductDetailPage>
             ),
             title: Text(
               'product_detail_title'.tr,
-              style: const TextStyle(
+              style: GoogleFonts.ebGaramond(
                 color: Colors.black,
                 fontSize: 20,
                 fontWeight: FontWeight.w600,
@@ -152,9 +153,9 @@ class ProductDetailState extends State<ProductDetailPage>
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            const Text(
+                            Text(
                               'Jordan 1',
-                              style: TextStyle(
+                              style: GoogleFonts.ebGaramond(
                                 color: Colors.black,
                                 fontSize: 20,
                                 fontWeight: FontWeight.w600,
@@ -164,9 +165,9 @@ class ProductDetailState extends State<ProductDetailPage>
                               height: 10,
                             ),
                             RichText(
-                              text: const TextSpan(
+                              text: TextSpan(
                                 text: '250',
-                                style: TextStyle(
+                                style: GoogleFonts.ebGaramond(
                                   color: Colors.black,
                                   fontSize: 25,
                                   fontWeight: FontWeight.w600,
@@ -211,7 +212,7 @@ class ProductDetailState extends State<ProductDetailPage>
                               children: [
                                 Text(
                                   'product_detail_size'.tr,
-                                  style: const TextStyle(
+                                  style: GoogleFonts.ebGaramond(
                                     color: Colors.black,
                                     fontSize: 20,
                                     fontWeight: FontWeight.w600,
@@ -230,7 +231,7 @@ class ProductDetailState extends State<ProductDetailPage>
                                     ),
                                     iconSize: 20,
                                     underline: Container(),
-                                    style: const TextStyle(
+                                    style: GoogleFonts.ebGaramond(
                                       color: Colors.black,
                                       fontSize: 20,
                                       fontWeight: FontWeight.w600,
@@ -255,7 +256,7 @@ class ProductDetailState extends State<ProductDetailPage>
                                         value: value,
                                         child: Text(
                                           value,
-                                          style: const TextStyle(
+                                          style: GoogleFonts.ebGaramond(
                                             color: Colors.black,
                                             fontSize: 20,
                                             fontWeight: FontWeight.w600,
@@ -308,10 +309,10 @@ class ProductDetailState extends State<ProductDetailPage>
                                         bottomLeft: Radius.circular(10),
                                       ),
                                     ),
-                                    child: const Center(
+                                    child: Center(
                                       child: Text(
                                         '-',
-                                        style: TextStyle(
+                                        style: GoogleFonts.ebGaramond(
                                           color: Colors.white,
                                           fontSize: 16,
                                           fontWeight: FontWeight.w600,
@@ -320,7 +321,7 @@ class ProductDetailState extends State<ProductDetailPage>
                                     ),
                                   ),
                                 ),
-                                const Expanded(
+                                Expanded(
                                   flex: 6,
                                   child: SizedBox(
                                     width: double.infinity,
@@ -328,7 +329,7 @@ class ProductDetailState extends State<ProductDetailPage>
                                     child: Center(
                                       child: Text(
                                         '1',
-                                        style: TextStyle(
+                                        style: GoogleFonts.ebGaramond(
                                           color: Colors.black,
                                           fontSize: 16,
                                           fontWeight: FontWeight.w600,
@@ -349,10 +350,10 @@ class ProductDetailState extends State<ProductDetailPage>
                                         bottomRight: Radius.circular(10),
                                       ),
                                     ),
-                                    child: const Center(
+                                    child: Center(
                                       child: Text(
                                         '+',
-                                        style: TextStyle(
+                                        style: GoogleFonts.ebGaramond(
                                           color: Colors.white,
                                           fontSize: 16,
                                           fontWeight: FontWeight.w600,
@@ -384,7 +385,7 @@ class ProductDetailState extends State<ProductDetailPage>
                               children: [
                                 Text(
                                   'product_detail_add_cart'.tr,
-                                  style: const TextStyle(
+                                  style: GoogleFonts.ebGaramond(
                                     color: Colors.white,
                                     fontSize: 14,
                                     fontWeight: FontWeight.w600,
@@ -462,7 +463,7 @@ class ProductDetailState extends State<ProductDetailPage>
                         Tab(
                           child: Text(
                             'product_detail_description'.tr,
-                            style: const TextStyle(
+                            style: GoogleFonts.ebGaramond(
                               color: Colors.black,
                               fontSize: 16,
                               fontWeight: FontWeight.w400,
@@ -472,7 +473,7 @@ class ProductDetailState extends State<ProductDetailPage>
                         Tab(
                           child: Text(
                             'product_detail_other'.tr,
-                            style: const TextStyle(
+                            style: GoogleFonts.ebGaramond(
                               color: Colors.black,
                               fontSize: 16,
                               fontWeight: FontWeight.w400,
@@ -494,9 +495,9 @@ class ProductDetailState extends State<ProductDetailPage>
                       children: [
                         Container(
                           margin: const EdgeInsets.symmetric(horizontal: 20),
-                          child: const Text(
+                          child: Text(
                             "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a typespecimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-                            style: TextStyle(
+                            style: GoogleFonts.ebGaramond(
                               color: Colors.black,
                               fontSize: 16,
                               fontWeight: FontWeight.w400,
@@ -508,10 +509,10 @@ class ProductDetailState extends State<ProductDetailPage>
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.start,
-                            children: const [
+                            children: [
                               Text(
                                 'Material: Canvas',
-                                style: TextStyle(
+                                style: GoogleFonts.ebGaramond(
                                   color: Colors.black,
                                   fontSize: 16,
                                   fontWeight: FontWeight.w400,
@@ -519,7 +520,7 @@ class ProductDetailState extends State<ProductDetailPage>
                               ),
                               Text(
                                 'Shoe code: JD01',
-                                style: TextStyle(
+                                style: GoogleFonts.ebGaramond(
                                   color: Colors.black,
                                   fontSize: 16,
                                   fontWeight: FontWeight.w400,
@@ -541,7 +542,7 @@ class ProductDetailState extends State<ProductDetailPage>
                       children: [
                         Text(
                           'product_detail_related'.tr,
-                          style: const TextStyle(
+                          style: GoogleFonts.ebGaramond(
                             color: Colors.black,
                             fontSize: 16,
                             fontWeight: FontWeight.w600,
@@ -591,9 +592,9 @@ class ProductDetailState extends State<ProductDetailPage>
                                 const SizedBox(
                                   height: 20,
                                 ),
-                                const Text(
+                                Text(
                                   'Jordan Off White',
-                                  style: TextStyle(
+                                  style: GoogleFonts.ebGaramond(
                                     color: Colors.white,
                                     fontSize: 16,
                                     fontWeight: FontWeight.w400,

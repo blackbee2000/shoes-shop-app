@@ -6,6 +6,7 @@ import 'package:shoes_shop_app/pages/cart/cart_page.dart';
 import 'package:shoes_shop_app/pages/product/detail/product_detail_page.dart';
 import 'package:shoes_shop_app/pages/search/search_controller.dart';
 import 'package:shoes_shop_app/utils/app_constant.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class SearchPage extends StatelessWidget {
   TextEditingController shoeName = TextEditingController();
@@ -45,7 +46,7 @@ class SearchPage extends StatelessWidget {
               padding: const EdgeInsets.only(bottom: 15),
               child: Text(
                 'search_price'.tr,
-                style: const TextStyle(
+                style: GoogleFonts.ebGaramond(
                   color: Colors.black,
                   fontSize: 16,
                   fontWeight: FontWeight.w400,
@@ -67,7 +68,7 @@ class SearchPage extends StatelessWidget {
               padding: const EdgeInsets.only(top: 15),
               child: Text(
                 'search_shoes_name'.tr,
-                style: const TextStyle(
+                style: GoogleFonts.ebGaramond(
                   color: Colors.black,
                   fontSize: 16,
                   fontWeight: FontWeight.w400,
@@ -96,7 +97,7 @@ class SearchPage extends StatelessWidget {
                 backgroundColor: Colors.white,
                 title: Text(
                   "search_title".tr,
-                  style: const TextStyle(
+                  style: GoogleFonts.ebGaramond(
                     color: Colors.black,
                     fontSize: 20,
                     fontWeight: FontWeight.w600,
@@ -153,7 +154,7 @@ class SearchPage extends StatelessWidget {
                       ),
                       child: TextField(
                         controller: shoeName,
-                        style: const TextStyle(
+                        style: GoogleFonts.ebGaramond(
                           color: Colors.black,
                           fontSize: 13,
                           fontWeight: FontWeight.w400,
@@ -165,8 +166,8 @@ class SearchPage extends StatelessWidget {
                             left: 15,
                           ),
                           hintText: 'search_enter_shoes_name'.tr,
-                          hintStyle: const TextStyle(
-                            color: Color(0xffD0D0D0),
+                          hintStyle: GoogleFonts.ebGaramond(
+                            color: const Color(0xffD0D0D0),
                             fontSize: 13,
                             fontWeight: FontWeight.w400,
                           ),
@@ -210,7 +211,7 @@ class SearchPage extends StatelessWidget {
                           padding: const EdgeInsets.all(16),
                           child: Text(
                             item,
-                            style: const TextStyle(
+                            style: GoogleFonts.ebGaramond(
                               color: Colors.black,
                               fontSize: 13,
                               fontWeight: FontWeight.w400,
@@ -223,7 +224,7 @@ class SearchPage extends StatelessWidget {
                         dropdownBuilder: (context, item) {
                           return Text(
                             item ?? 'search_select_brand'.tr,
-                            style: TextStyle(
+                            style: GoogleFonts.ebGaramond(
                               color: item == null
                                   ? const Color(0xffD0D0D0)
                                   : Colors.black,
@@ -234,12 +235,12 @@ class SearchPage extends StatelessWidget {
                         },
                         onSaved: (item) {},
                         onChanged: (item) {},
-                        dropdownSearchDecoration: const InputDecoration(
-                          contentPadding: EdgeInsets.only(left: 15),
+                        dropdownSearchDecoration: InputDecoration(
+                          contentPadding: const EdgeInsets.only(left: 15),
                           isDense: true,
                           border: InputBorder.none,
-                          hintStyle: TextStyle(
-                            color: Color(0xffD0D0D0),
+                          hintStyle: GoogleFonts.ebGaramond(
+                            color: const Color(0xffD0D0D0),
                             fontSize: 13,
                             fontWeight: FontWeight.w400,
                           ),
@@ -266,7 +267,7 @@ class SearchPage extends StatelessWidget {
                               child: Center(
                                 child: Text(
                                   'search_title'.tr,
-                                  style: const TextStyle(
+                                  style: GoogleFonts.ebGaramond(
                                     color: Colors.white,
                                     fontSize: 13,
                                     fontWeight: FontWeight.w400,
@@ -290,7 +291,7 @@ class SearchPage extends StatelessWidget {
                               child: Center(
                                 child: Text(
                                   'search_clear'.tr,
-                                  style: const TextStyle(
+                                  style: GoogleFonts.ebGaramond(
                                     color: Colors.white,
                                     fontSize: 13,
                                     fontWeight: FontWeight.w400,
@@ -330,7 +331,7 @@ class SearchPage extends StatelessWidget {
                             ),
                             Text(
                               searchController.sortSelected.value,
-                              style: const TextStyle(
+                              style: GoogleFonts.ebGaramond(
                                 color: Colors.black,
                                 fontSize: 15,
                                 fontWeight: FontWeight.w400,
@@ -445,18 +446,18 @@ class SearchPage extends StatelessWidget {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
-                                    const Text(
+                                    Text(
                                       'Jordan 1',
-                                      style: TextStyle(
+                                      style: GoogleFonts.ebGaramond(
                                         color: Colors.black,
                                         fontSize: 14,
                                         fontWeight: FontWeight.w600,
                                       ),
                                     ),
                                     RichText(
-                                      text: const TextSpan(
+                                      text: TextSpan(
                                         text: '250',
-                                        style: TextStyle(
+                                        style: GoogleFonts.ebGaramond(
                                           color: Colors.black,
                                           fontSize: 20,
                                           fontWeight: FontWeight.w600,

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shoes_shop_app/pages/cart/cart_page.dart';
 import 'package:shoes_shop_app/utils/app_constant.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class YourOrderDetailPage extends StatelessWidget {
   const YourOrderDetailPage({Key? key}) : super(key: key);
@@ -34,7 +35,7 @@ class YourOrderDetailPage extends StatelessWidget {
                 ),
                 title: Text(
                   'your_order_detail'.tr,
-                  style: const TextStyle(
+                  style: GoogleFonts.ebGaramond(
                     color: Colors.white,
                     fontSize: 20,
                     fontWeight: FontWeight.w600,
@@ -133,45 +134,45 @@ class YourOrderDetailPage extends StatelessWidget {
                               ),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
-                                children: const [
+                                children: [
                                   Text(
                                     '20092000T21',
-                                    style: TextStyle(
+                                    style: GoogleFonts.ebGaramond(
                                       color: Colors.black,
                                       fontSize: 16,
                                       fontWeight: FontWeight.w600,
                                     ),
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 5,
                                   ),
                                   Text(
                                     'Total: 250',
-                                    style: TextStyle(
+                                    style: GoogleFonts.ebGaramond(
                                       color: Colors.black,
                                       fontSize: 14,
                                       fontWeight: FontWeight.w400,
                                     ),
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 5,
                                   ),
                                   Text(
                                     'Order date: 20/09/2000',
-                                    style: TextStyle(
+                                    style: GoogleFonts.ebGaramond(
                                       color: Colors.black,
                                       fontSize: 14,
                                       fontWeight: FontWeight.w400,
                                     ),
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 5,
                                   ),
                                   Align(
                                     alignment: Alignment.topRight,
                                     child: Text(
                                       'Delivered',
-                                      style: TextStyle(
+                                      style: GoogleFonts.ebGaramond(
                                         color: Color(0xff00C32B),
                                         fontSize: 14,
                                         fontWeight: FontWeight.w600,
@@ -247,10 +248,10 @@ class YourOrderDetailPage extends StatelessWidget {
                                             child: Column(
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.start,
-                                              children: const [
+                                              children: [
                                                 Text(
                                                   'Jordan chất điên, cháy cả cộng đồng mạng',
-                                                  style: TextStyle(
+                                                  style: GoogleFonts.ebGaramond(
                                                     color: Colors.black,
                                                     fontSize: 16,
                                                     fontWeight: FontWeight.w600,
@@ -259,34 +260,34 @@ class YourOrderDetailPage extends StatelessWidget {
                                                   overflow:
                                                       TextOverflow.ellipsis,
                                                 ),
-                                                SizedBox(
+                                                const SizedBox(
                                                   height: 5,
                                                 ),
                                                 Text(
                                                   'Price: 250',
-                                                  style: TextStyle(
+                                                  style: GoogleFonts.ebGaramond(
                                                     color: Colors.black,
                                                     fontSize: 14,
                                                     fontWeight: FontWeight.w400,
                                                   ),
                                                 ),
-                                                SizedBox(
+                                                const SizedBox(
                                                   height: 5,
                                                 ),
                                                 Text(
                                                   'Total: 250',
-                                                  style: TextStyle(
+                                                  style: GoogleFonts.ebGaramond(
                                                     color: Colors.black,
                                                     fontSize: 14,
                                                     fontWeight: FontWeight.w400,
                                                   ),
                                                 ),
-                                                SizedBox(
+                                                const SizedBox(
                                                   height: 5,
                                                 ),
                                                 Text(
                                                   'Amount: 1',
-                                                  style: TextStyle(
+                                                  style: GoogleFonts.ebGaramond(
                                                     color: Colors.black,
                                                     fontSize: 14,
                                                     fontWeight: FontWeight.w400,

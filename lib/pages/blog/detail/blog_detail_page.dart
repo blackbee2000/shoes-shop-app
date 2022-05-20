@@ -5,6 +5,7 @@ import 'package:shoes_shop_app/pages/cart/cart_page.dart';
 import 'package:shoes_shop_app/utils/app_constant.dart';
 import 'package:widget_mask/widget_mask.dart';
 import 'package:flutter_share/flutter_share.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class BlogDetailPage extends StatelessWidget {
   final blogDetailController = Get.put(BlogDetailController());
@@ -49,7 +50,7 @@ class BlogDetailPage extends StatelessWidget {
                 backgroundColor: Colors.black.withOpacity(0),
                 title: Text(
                   "blog_detail_title".tr,
-                  style: const TextStyle(
+                  style: GoogleFonts.ebGaramond(
                     color: Colors.white,
                     fontSize: 20,
                     fontWeight: FontWeight.w600,
@@ -117,9 +118,9 @@ class BlogDetailPage extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
-                                const Text(
+                                Text(
                                   "Jordan chất điên, cháy cả cộng đồng mạng",
-                                  style: TextStyle(
+                                  style: GoogleFonts.ebGaramond(
                                     color: Colors.white,
                                     fontSize: 18,
                                     fontWeight: FontWeight.w600,
@@ -143,9 +144,9 @@ class BlogDetailPage extends StatelessWidget {
                                     const SizedBox(
                                       width: 10,
                                     ),
-                                    const Text(
+                                    Text(
                                       '10:00 - 27/02/2022',
-                                      style: TextStyle(
+                                      style: GoogleFonts.ebGaramond(
                                         color: Colors.white,
                                         fontSize: 11,
                                         fontWeight: FontWeight.w400,
@@ -203,9 +204,9 @@ class BlogDetailPage extends StatelessWidget {
                       ),
                       child: Column(
                         children: [
-                          const Text(
+                          Text(
                             'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a typespecimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
-                            style: TextStyle(
+                            style: GoogleFonts.ebGaramond(
                               color: Colors.black,
                               fontSize: 13,
                               fontWeight: FontWeight.w400,
@@ -230,7 +231,7 @@ class BlogDetailPage extends StatelessWidget {
                       blendMode: BlendMode.difference,
                       mask: Text(
                         'blog_detail_related'.tr,
-                        style: const TextStyle(
+                        style: GoogleFonts.ebGaramond(
                           color: Colors.white,
                           fontSize: 16,
                           fontWeight: FontWeight.w600,
@@ -329,9 +330,9 @@ class BlogDetailPage extends StatelessWidget {
                                         ),
                                         child: Column(
                                           children: [
-                                            const Text(
+                                            Text(
                                               'Jordan chất điên, cháy cả cộng đồng mạng',
-                                              style: TextStyle(
+                                              style: GoogleFonts.ebGaramond(
                                                 color: Colors.black,
                                                 fontSize: 14,
                                                 fontWeight: FontWeight.w600,
@@ -343,9 +344,9 @@ class BlogDetailPage extends StatelessWidget {
                                             const SizedBox(
                                               height: 5,
                                             ),
-                                            const Text(
+                                            Text(
                                               'It is a long established fact that a reader will be distracted by the readable content of a page, It is a long established fact that a reader will be distracted by the readable content of a page',
-                                              style: TextStyle(
+                                              style: GoogleFonts.ebGaramond(
                                                 color: Colors.black,
                                                 fontSize: 11,
                                                 fontWeight: FontWeight.w400,
@@ -371,9 +372,9 @@ class BlogDetailPage extends StatelessWidget {
                                                 const SizedBox(
                                                   width: 10,
                                                 ),
-                                                const Text(
+                                                Text(
                                                   '10:00 - 27/02/2022',
-                                                  style: TextStyle(
+                                                  style: GoogleFonts.ebGaramond(
                                                     color: Colors.black,
                                                     fontSize: 9,
                                                     fontWeight: FontWeight.w400,

@@ -54,6 +54,7 @@ class RegisterController extends GetxController {
           colorText: Colors.black,
           backgroundColor: Colors.white,
         );
+        Get.back();
       },
     );
   }

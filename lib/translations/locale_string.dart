@@ -73,6 +73,7 @@ class LocaleString extends Translations {
           "address_default": "Default Address",
           "address_other": "Others Address",
           "address_new_add": "Add new address",
+          "no_information": "No information",
         },
         "vi_VN": {
           "product_title": "Sản phẩm",
@@ -144,6 +145,7 @@ class LocaleString extends Translations {
           "address_default": "Địa chỉ mặc định",
           "address_other": "Địa chỉ khác",
           "address_new_add": "Thêm địa chỉ",
+          "no_information": "Không có dữ liệu",
         }
       };
 }
