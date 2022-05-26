@@ -3,8 +3,11 @@ import 'package:get/get.dart';
 import 'package:shoes_shop_app/pages/blog/blog_controller.dart';
 import 'package:shoes_shop_app/pages/blog/detail/blog_detail_page.dart';
 import 'package:shoes_shop_app/pages/cart/cart_page.dart';
+import 'package:shoes_shop_app/translations/app_translation.dart';
 import 'package:shoes_shop_app/utils/app_constant.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:intl/intl.dart';
 
 class BlogPage extends StatelessWidget {
   final blogController = Get.put(BlogController());
@@ -92,10 +95,13 @@ class BlogPage extends StatelessWidget {
                           top: 140,
                         ),
                         child: ListView.builder(
-                          itemCount: 10,
+                          itemCount: controller.listBlog.length,
                           itemBuilder: (context, index) => GestureDetector(
                             onTap: () {
-                              Get.to(BlogDetailPage(), id: AppConstant.BLOG);
+                              Get.to(
+                                  BlogDetailPage(
+                                      blog: controller.listBlog[index]),
+                                  id: AppConstant.BLOG);
                             },
                             child: Container(
                               width: double.infinity,
@@ -104,7 +110,7 @@ class BlogPage extends StatelessWidget {
                                 left: 20,
                                 right: 20,
                               ),
-                              height: 125,
+                              height: 130,
                               decoration: BoxDecoration(
                                 color: Colors.white,
                                 borderRadius: BorderRadius.circular(10),
@@ -132,11 +138,31 @@ class BlogPage extends StatelessWidget {
                                         topLeft: Radius.circular(10),
                                         bottomLeft: Radius.circular(10),
                                       ),
-                                      image: DecorationImage(
-                                        image: AssetImage(
-                                          "assets/images/blog-item.jpg",
+                                    ),
+                                    child: CachedNetworkImage(
+                                      fit: BoxFit.cover,
+                                      imageUrl: controller
+                                              .listBlog[index].imageBlog ??
+                                          '',
+                                      useOldImageOnUrlChange: false,
+                                      progressIndicatorBuilder:
+                                          (context, url, downloadProgress) =>
+                                              SizedBox(
+                                        height: 15,
+                                        width: 15,
+                                        child: Center(
+                                          child: CircularProgressIndicator(
+                                            value: downloadProgress.progress,
+                                            valueColor:
+                                                const AlwaysStoppedAnimation(
+                                                    Colors.white),
+                                            strokeWidth: 2,
+                                          ),
                                         ),
-                                        fit: BoxFit.cover,
+                                      ),
+                                      errorWidget: (context, url, error) =>
+                                          ClipOval(
+                                        child: Container(),
                                       ),
                                     ),
                                   ),
@@ -160,10 +186,10 @@ class BlogPage extends StatelessWidget {
                                             'Jordan chất điên, cháy cả cộng đồng mạng',
                                             style: GoogleFonts.ebGaramond(
                                               color: Colors.black,
-                                              fontSize: 14,
+                                              fontSize: 16,
                                               fontWeight: FontWeight.w600,
                                             ),
-                                            maxLines: 2,
+                                            maxLines: 1,
                                             overflow: TextOverflow.ellipsis,
                                             textAlign: TextAlign.left,
                                           ),
@@ -171,10 +197,10 @@ class BlogPage extends StatelessWidget {
                                             height: 5,
                                           ),
                                           Text(
-                                            'It is a long established fact that a reader will be distracted by the readable content of a page, It is a long established fact that a reader will be distracted by the readable content of a page',
+                                            '${AppTranslation.instance.language == AppTranslation.english ? (controller.listBlog[index].descriptionShortEn != null && controller.listBlog[index].descriptionShortEn!.isNotEmpty ? controller.listBlog[index].descriptionShortEn : '--') : (controller.listBlog[index].descriptionShortVi != null && controller.listBlog[index].descriptionShortVi!.isNotEmpty ? controller.listBlog[index].descriptionShortVi : '--')}',
                                             style: GoogleFonts.ebGaramond(
                                               color: Colors.black,
-                                              fontSize: 11,
+                                              fontSize: 13,
                                               fontWeight: FontWeight.w400,
                                             ),
                                             maxLines: 3,
@@ -199,10 +225,26 @@ class BlogPage extends StatelessWidget {
                                                 width: 10,
                                               ),
                                               Text(
-                                                '10:00 - 27/02/2022',
+                                                controller.listBlog[index]
+                                                                .time !=
+                                                            null &&
+                                                        controller
+                                                            .listBlog[index]
+                                                            .time!
+                                                            .isNotEmpty
+                                                    ? DateFormat(
+                                                            'HH:mm dd/MM/yyyy')
+                                                        .format(DateTime.parse(
+                                                                controller
+                                                                        .listBlog[
+                                                                            index]
+                                                                        .time ??
+                                                                    '')
+                                                            .toLocal())
+                                                    : '--',
                                                 style: GoogleFonts.ebGaramond(
                                                   color: Colors.black,
-                                                  fontSize: 9,
+                                                  fontSize: 12,
                                                   fontWeight: FontWeight.w400,
                                                 ),
                                               ),

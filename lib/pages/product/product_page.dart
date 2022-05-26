@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:shoes_shop_app/pages/cart/cart_page.dart';
 import 'package:shoes_shop_app/pages/product/detail/product_detail_page.dart';
 import 'package:shoes_shop_app/pages/product/product_controller.dart';
+import 'package:shoes_shop_app/translations/app_translation.dart';
 import 'package:shoes_shop_app/utils/app_constant.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -157,12 +158,14 @@ class ProductPage extends StatelessWidget {
                                   mainAxisSpacing: 20,
                                   crossAxisCount: 2,
                                 ),
-                                itemCount: 6,
+                                itemCount: controller.listProduct.length,
                                 itemBuilder: (context, index) =>
                                     GestureDetector(
                                   onTap: () {
                                     Get.to(
-                                        const ProductDetailPage(
+                                        ProductDetailPage(
+                                          product:
+                                              controller.listProduct[index],
                                           id: AppConstant.PRODUCT,
                                         ),
                                         id: AppConstant.PRODUCT);
@@ -255,31 +258,36 @@ class ProductPage extends StatelessWidget {
                                         const SizedBox(
                                           height: 15,
                                         ),
-                                        Row(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Text(
-                                              'Jordan 1',
+                                        Text(
+                                          '${AppTranslation.instance.language == AppTranslation.english ? (controller.listProduct[index].nameProductEn != null && controller.listProduct[index].nameProductEn!.isNotEmpty ? controller.listProduct[index].nameProductEn : '--') : (controller.listProduct[index].nameProductVi != null && controller.listProduct[index].nameProductVi!.isNotEmpty ? controller.listProduct[index].nameProductVi : '--')}',
+                                          style: GoogleFonts.ebGaramond(
+                                            color: Colors.black,
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.w600,
+                                          ),
+                                          maxLines: 1,
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
+                                        const SizedBox(
+                                          height: 10,
+                                        ),
+                                        Align(
+                                          alignment: Alignment.topLeft,
+                                          child: RichText(
+                                            textAlign: TextAlign.start,
+                                            text: TextSpan(
+                                              text:
+                                                  '${controller.listProduct[index].price ?? '--'}',
                                               style: GoogleFonts.ebGaramond(
                                                 color: Colors.black,
-                                                fontSize: 14,
+                                                fontSize: 20,
                                                 fontWeight: FontWeight.w600,
                                               ),
                                             ),
-                                            RichText(
-                                              text: TextSpan(
-                                                text: '250',
-                                                style: GoogleFonts.ebGaramond(
-                                                  color: Colors.black,
-                                                  fontSize: 20,
-                                                  fontWeight: FontWeight.w600,
-                                                ),
-                                              ),
-                                            ),
-                                          ],
+                                          ),
+                                        ),
+                                        const SizedBox(
+                                          height: 10,
                                         ),
                                         Container(
                                           alignment: Alignment.topLeft,

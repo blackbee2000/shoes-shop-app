@@ -5,7 +5,7 @@ part 'profile_response.g.dart';
 @JsonSerializable()
 class ProfileResponse {
   String? message;
-  List<Profile>? data;
+  Profile? data;
 
   ProfileResponse(
     this.message,

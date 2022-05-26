@@ -25,7 +25,7 @@ class UserProvider extends UserAPIProtocol {
       params: params,
       path: ApiConstant.UPDATE,
       option: option,
-    ).getAll(
+    ).put(
       beforeSend: () => {beforeSend()},
       onSuccess: (data) {
         onSuccess(ProfileResponse.fromJson(data));

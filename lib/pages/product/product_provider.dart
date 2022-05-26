@@ -20,7 +20,7 @@ class ProductProvider extends ProductAPIProtocol {
       required Function(ProductResponse data) onSuccess,
       required Function(dynamic error) onError}) {
     ApiService(
-      path: ApiConstant.BLOG,
+      path: ApiConstant.PRODUCT,
       option: option,
     ).getAll(
       beforeSend: () => {beforeSend()},

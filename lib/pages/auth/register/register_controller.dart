@@ -2,9 +2,12 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shoes_shop_app/pages/auth/auth_provider.dart';
-import 'package:shoes_shop_app/pages/user/user_page.dart';
+import 'package:shoes_shop_app/pages/auth/login/login_controller.dart';
+import 'package:shoes_shop_app/pages/profile/profile_controller.dart';
 
 class RegisterController extends GetxController {
+  final loginController = Get.put(LoginController());
+  final profileController = Get.put(ProfileController());
   TextEditingController phone = TextEditingController();
   TextEditingController password = TextEditingController();
   TextEditingController email = TextEditingController();
@@ -40,11 +43,7 @@ class RegisterController extends GetxController {
       },
       onSuccess: (res) {
         print('REGISTER SUCESS =>>>>> ${res.toString()}');
-        Get.to(
-          UserPage(
-            id: 1,
-          ),
-        );
+        loginController.login(phone, password, 'register');
       },
       onError: (e) {
         print('REGISTER FAIL =>>>>> ${e.toString()}');

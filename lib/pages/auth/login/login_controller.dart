@@ -5,6 +5,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:shoes_shop_app/pages/auth/auth_provider.dart';
 import 'package:shoes_shop_app/pages/dashboard/dashboard_page.dart';
 import 'package:shoes_shop_app/pages/profile/profile_controller.dart';
+import 'package:shoes_shop_app/pages/user/user_page.dart';
 import 'package:shoes_shop_app/services/api_token.dart';
 
 class LoginController extends GetxController {
@@ -17,7 +18,7 @@ class LoginController extends GetxController {
     await storage.write('token', token);
   }
 
-  login(String phone, String password) {
+  login(String phone, String password, String type) {
     AuthProvider().login(
       params: {"phoneNumber": phone, "password": password},
       option: Options(
@@ -44,8 +45,16 @@ class LoginController extends GetxController {
         print('LOGIN SUCESSS =>>>>>> ${res.toString()}');
         setToken(res.data?.token);
         print('TOKEN NEFFFFFFF =>>>>>> ${ApiToken.to.appToken}');
-        profileController.getProfile();
-        Get.offAll(DashboardPage());
+        profileController.onInit();
+        if (type == 'login') {
+          Get.offAll(DashboardPage());
+        } else if (type == 'register') {
+          Get.to(
+            UserPage(
+              id: 1,
+            ),
+          );
+        }
         update();
       },
       onError: (e) {
@@ -55,6 +64,7 @@ class LoginController extends GetxController {
           colorText: Colors.black,
           backgroundColor: Colors.white,
         );
+        // Get.back();
         print('LOGIN FAIL =>>> ${e.toString()}');
         update();
       },

@@ -41,7 +41,7 @@ class ProfileController extends GetxController {
       beforeSend: () {},
       onSuccess: (res) {
         print('GET INFO PROFILE SUCESS =>>>>>>> ${res.toString()}');
-        profile.value = res.data?.first ?? {} as Profile;
+        profile.value = res.data!;
         print(
             'GET INFO PROFILE SUCESS HAHAAHAAA =>>>>>>> ${profile.toString()}');
       },

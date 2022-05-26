@@ -3,9 +3,9 @@ part of 'profile_response.dart';
 ProfileResponse _$ProfileResponseFromJson(Map<String, dynamic> json) {
   return ProfileResponse(
     json['message'] as String?,
-    (json['data'] as List<dynamic>?)
-        ?.map((e) => Profile.fromJson(e as Map<String, dynamic>))
-        .toList(),
+    json['data'] == null
+        ? null
+        : Profile.fromJson(json['data'] as Map<String, dynamic>),
   );
 }
 

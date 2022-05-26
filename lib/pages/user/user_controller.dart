@@ -4,6 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:shoes_shop_app/pages/dashboard/dashboard_page.dart';
 import 'package:shoes_shop_app/pages/profile/profile_controller.dart';
 import 'package:shoes_shop_app/pages/user/user_provider.dart';
 import 'package:shoes_shop_app/services/api_token.dart';
@@ -53,52 +54,54 @@ class UserController extends GetxController {
 
   updateProfile(String name, String phone, String email) {
     print('PROFILE =>>>>>>> ${DateTime.now().toUtc().toString()}');
-    // UserProvider().updateProfile(
-    //   params: {
-    //     "fullName": name,
-    //     "phoneNumber": phone,
-    //     "email": email,
-    //     "password": profileController.profile.value.password,
-    //     "role": profileController.profile.value.role,
-    //     "_id": "6218a6b2e767b4274c0c7122",
-    //     "createdAt": profileController.profile.value.createdAt,
-    //     "updatedAt": DateTime.now().toUtc().toString()
-    //   },
-    //   option: Options(
-    //     headers: {
-    //       'Content-Type': 'application/json; charset=UTF-8',
-    //       'Authorization': 'Bearer ${ApiToken.to.appToken}',
-    //     },
-    //   ),
-    //   beforeSend: () {
-    //     Get.dialog(
-    //       const SizedBox(
-    //         height: 15,
-    //         width: 15,
-    //         child: Center(
-    //           child: CircularProgressIndicator(
-    //             valueColor: AlwaysStoppedAnimation(Colors.white),
-    //             strokeWidth: 2,
-    //           ),
-    //         ),
-    //       ),
-    //       barrierDismissible: false,
-    //     );
-    //   },
-    //   onSuccess: (res) {
-    //     print('UPDATE PROFILE SUCESSS =>>>>>> ${res.toString()}');
-    //     update();
-    //   },
-    //   onError: (e) {
-    //     Get.snackbar(
-    //       'Fail',
-    //       'Lỗi cập nhật thông tin',
-    //       colorText: Colors.black,
-    //       backgroundColor: Colors.white,
-    //     );
-    //     print('UPDATE PROFILE FAIL =>>> ${e.toString()}');
-    //     update();
-    //   },
-    // );
+    UserProvider().updateProfile(
+      params: {
+        "fullName": name,
+        "phoneNumber": phone,
+        "email": email,
+        "password": profileController.profile.value.password,
+        "role": profileController.profile.value.role,
+        "_id": profileController.profile.value.id,
+        "createdAt": profileController.profile.value.createdAt,
+        "updatedAt": DateTime.now().toUtc().toString()
+      },
+      option: Options(
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': 'Bearer ${ApiToken.to.appToken}',
+        },
+      ),
+      beforeSend: () {
+        Get.dialog(
+          const SizedBox(
+            height: 15,
+            width: 15,
+            child: Center(
+              child: CircularProgressIndicator(
+                valueColor: AlwaysStoppedAnimation(Colors.white),
+                strokeWidth: 2,
+              ),
+            ),
+          ),
+          barrierDismissible: false,
+        );
+        print('IDDDDD ${profileController.profile.value.id}');
+      },
+      onSuccess: (res) {
+        print('UPDATE PROFILE SUCESSS =>>>>>> ${res.toString()}');
+        Get.offAll(DashboardPage());
+        update();
+      },
+      onError: (e) {
+        Get.snackbar(
+          'Fail',
+          'Lỗi cập nhật thông tin',
+          colorText: Colors.black,
+          backgroundColor: Colors.white,
+        );
+        print('UPDATE PROFILE FAIL =>>> ${e.toString()}');
+        update();
+      },
+    );
   }
 }

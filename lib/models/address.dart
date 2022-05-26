@@ -9,7 +9,7 @@ class Address {
   String? street;
   bool? status;
   String? nameReciever;
-  String? phoneReciever;
+  // String? phoneReciever;
   bool? isDeleted;
   String? createdAt;
   String? updatedAt;
@@ -23,7 +23,7 @@ class Address {
     this.street,
     this.status,
     this.nameReciever,
-    this.phoneReciever,
+    // this.phoneReciever,
     this.isDeleted,
     this.createdAt,
     this.updatedAt,

@@ -5,7 +5,8 @@ import 'address_controller.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class AddressPage extends StatelessWidget {
-  AddressPage({Key? key}) : super(key: key);
+  final id;
+  AddressPage({Key? key, required this.id}) : super(key: key);
 
   final addressController = Get.put(AddressController());
 
@@ -545,6 +546,382 @@ class AddressPage extends StatelessWidget {
     );
   }
 
+  // @override
+  // Widget build(BuildContext context) {
+  //   return SafeArea(
+  //     child: Container(
+  //       width: double.infinity,
+  //       height: double.infinity,
+  //       color: Colors.white,
+  //       child: Stack(
+  //         children: [
+  //           Scaffold(
+  //             backgroundColor: Colors.white,
+  //             appBar: AppBar(
+  //               backgroundColor: Colors.white,
+  //               leading: IconButton(
+  //                 onPressed: () {
+  //                   Get.back();
+  //                 },
+  //                 icon: const Icon(
+  //                   Icons.arrow_back_ios,
+  //                   size: 20,
+  //                   color: Colors.black,
+  //                 ),
+  //               ),
+  //               title: Text(
+  //                 'cart_address'.tr,
+  //                 style: GoogleFonts.ebGaramond(
+  //                   color: Colors.black,
+  //                   fontSize: 20,
+  //                   fontWeight: FontWeight.w600,
+  //                 ),
+  //               ),
+  //               centerTitle: true,
+  //             ),
+  //             body: Stack(
+  //               children: [
+  //                 Container(
+  //                   padding: const EdgeInsets.symmetric(
+  //                     horizontal: 20,
+  //                   ),
+  //                   width: double.infinity,
+  //                   height: double.infinity,
+  //                   child: Column(
+  //                     crossAxisAlignment: CrossAxisAlignment.start,
+  //                     mainAxisAlignment: MainAxisAlignment.start,
+  //                     children: [
+  //                       const SizedBox(
+  //                         height: 30,
+  //                       ),
+  //                       Column(
+  //                         crossAxisAlignment: CrossAxisAlignment.start,
+  //                         mainAxisAlignment: MainAxisAlignment.start,
+  //                         children: [
+  //                           Text(
+  //                             'address_default'.tr,
+  //                             style: GoogleFonts.ebGaramond(
+  //                               color: Colors.black,
+  //                               fontSize: 16,
+  //                               fontWeight: FontWeight.w600,
+  //                             ),
+  //                           ),
+  //                           const SizedBox(
+  //                             height: 5,
+  //                           ),
+  //                           Container(
+  //                             width: 30,
+  //                             height: 2,
+  //                             color: Colors.black,
+  //                           ),
+  //                         ],
+  //                       ),
+  //                       const SizedBox(
+  //                         height: 20,
+  //                       ),
+  //                       Container(
+  //                         width: double.infinity,
+  //                         height: 65,
+  //                         decoration: BoxDecoration(
+  //                           color: Colors.white,
+  //                           borderRadius: BorderRadius.circular(10),
+  //                           boxShadow: [
+  //                             BoxShadow(
+  //                               color: Colors.black.withOpacity(0.25),
+  //                               spreadRadius: 0,
+  //                               blurRadius: 4,
+  //                               offset: const Offset(
+  //                                   0, 4), // changes position of shadow
+  //                             ),
+  //                           ],
+  //                         ),
+  //                         child: Row(
+  //                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  //                           crossAxisAlignment: CrossAxisAlignment.center,
+  //                           children: [
+  //                             Container(
+  //                               padding: const EdgeInsets.all(15),
+  //                               height: double.infinity,
+  //                               child: Column(
+  //                                 crossAxisAlignment: CrossAxisAlignment.start,
+  //                                 mainAxisAlignment: MainAxisAlignment.center,
+  //                                 children: [
+  //                                   Text(
+  //                                     'Trần Thái Tuấn',
+  //                                     style: GoogleFonts.ebGaramond(
+  //                                       color: Colors.black,
+  //                                       fontSize: 14,
+  //                                       fontWeight: FontWeight.w600,
+  //                                     ),
+  //                                   ),
+  //                                   const SizedBox(
+  //                                     height: 3,
+  //                                   ),
+  //                                   Text(
+  //                                     '180 Sao Hoả, Hệ Mặt Trời',
+  //                                     style: GoogleFonts.ebGaramond(
+  //                                       color: Colors.black,
+  //                                       fontSize: 14,
+  //                                       fontWeight: FontWeight.w400,
+  //                                     ),
+  //                                   ),
+  //                                 ],
+  //                               ),
+  //                             ),
+  //                             Row(
+  //                               children: [
+  //                                 Container(
+  //                                   width: 10,
+  //                                   height: double.infinity,
+  //                                   color: const Color(0xffFFD9D9),
+  //                                 ),
+  //                                 const SizedBox(
+  //                                   width: 15,
+  //                                 ),
+  //                                 GestureDetector(
+  //                                   onTap: () {
+  //                                     Get.bottomSheet(
+  //                                       editAddress(context),
+  //                                       isScrollControlled: true,
+  //                                     );
+  //                                   },
+  //                                   child: Image.asset(
+  //                                     'assets/icons/icon-edit.png',
+  //                                     width: 20,
+  //                                     height: 20,
+  //                                     fit: BoxFit.contain,
+  //                                   ),
+  //                                 ),
+  //                                 const SizedBox(
+  //                                   width: 10,
+  //                                 ),
+  //                                 GestureDetector(
+  //                                   onTap: () {
+  //                                     Get.bottomSheet(
+  //                                       deleteAddress(context),
+  //                                       isScrollControlled: true,
+  //                                     );
+  //                                   },
+  //                                   child: Image.asset(
+  //                                     'assets/icons/icon-trash.png',
+  //                                     width: 20,
+  //                                     height: 20,
+  //                                     fit: BoxFit.contain,
+  //                                   ),
+  //                                 ),
+  //                                 const SizedBox(
+  //                                   width: 15,
+  //                                 ),
+  //                               ],
+  //                             ),
+  //                           ],
+  //                         ),
+  //                       ),
+  //                       const SizedBox(
+  //                         height: 30,
+  //                       ),
+  //                       Column(
+  //                         crossAxisAlignment: CrossAxisAlignment.start,
+  //                         mainAxisAlignment: MainAxisAlignment.start,
+  //                         children: [
+  //                           Text(
+  //                             'address_other'.tr,
+  //                             style: GoogleFonts.ebGaramond(
+  //                               color: Colors.black,
+  //                               fontSize: 16,
+  //                               fontWeight: FontWeight.w600,
+  //                             ),
+  //                           ),
+  //                           const SizedBox(
+  //                             height: 5,
+  //                           ),
+  //                           Container(
+  //                             width: 30,
+  //                             height: 2,
+  //                             color: Colors.black,
+  //                           ),
+  //                         ],
+  //                       ),
+  //                       const SizedBox(
+  //                         height: 20,
+  //                       ),
+  //                       Expanded(
+  //                         child: ListView.builder(
+  //                           itemCount: 10,
+  //                           itemBuilder: (context, index) => Container(
+  //                             width: double.infinity,
+  //                             height: 65,
+  //                             margin: const EdgeInsets.only(bottom: 20),
+  //                             decoration: BoxDecoration(
+  //                               color: Colors.white,
+  //                               borderRadius: BorderRadius.circular(10),
+  //                               boxShadow: [
+  //                                 BoxShadow(
+  //                                   color: Colors.black.withOpacity(0.25),
+  //                                   spreadRadius: 0,
+  //                                   blurRadius: 4,
+  //                                   offset: const Offset(
+  //                                       0, 4), // changes position of shadow
+  //                                 ),
+  //                               ],
+  //                             ),
+  //                             child: Row(
+  //                               mainAxisAlignment:
+  //                                   MainAxisAlignment.spaceBetween,
+  //                               crossAxisAlignment: CrossAxisAlignment.center,
+  //                               children: [
+  //                                 Container(
+  //                                   padding: const EdgeInsets.all(15),
+  //                                   height: double.infinity,
+  //                                   child: Column(
+  //                                     crossAxisAlignment:
+  //                                         CrossAxisAlignment.start,
+  //                                     mainAxisAlignment:
+  //                                         MainAxisAlignment.center,
+  //                                     children: [
+  //                                       Text(
+  //                                         'Trần Thái Tuấn',
+  //                                         style: GoogleFonts.ebGaramond(
+  //                                           color: Colors.black,
+  //                                           fontSize: 14,
+  //                                           fontWeight: FontWeight.w600,
+  //                                         ),
+  //                                       ),
+  //                                       const SizedBox(
+  //                                         height: 3,
+  //                                       ),
+  //                                       Text(
+  //                                         '180 Sao Hoả, Hệ Mặt Trời',
+  //                                         style: GoogleFonts.ebGaramond(
+  //                                           color: Colors.black,
+  //                                           fontSize: 14,
+  //                                           fontWeight: FontWeight.w400,
+  //                                         ),
+  //                                       ),
+  //                                     ],
+  //                                   ),
+  //                                 ),
+  //                                 Row(
+  //                                   children: [
+  //                                     Container(
+  //                                       width: 10,
+  //                                       height: double.infinity,
+  //                                       color: const Color(0xffFFD9D9),
+  //                                     ),
+  //                                     const SizedBox(
+  //                                       width: 15,
+  //                                     ),
+  //                                     GestureDetector(
+  //                                       onTap: () {
+  //                                         Get.bottomSheet(
+  //                                           editAddress(context),
+  //                                           isScrollControlled: true,
+  //                                         );
+  //                                       },
+  //                                       child: Image.asset(
+  //                                         'assets/icons/icon-edit.png',
+  //                                         width: 20,
+  //                                         height: 20,
+  //                                         fit: BoxFit.contain,
+  //                                       ),
+  //                                     ),
+  //                                     const SizedBox(
+  //                                       width: 10,
+  //                                     ),
+  //                                     GestureDetector(
+  //                                       onTap: () {
+  //                                         Get.bottomSheet(
+  //                                           deleteAddress(context),
+  //                                           isScrollControlled: true,
+  //                                         );
+  //                                       },
+  //                                       child: Image.asset(
+  //                                         'assets/icons/icon-trash.png',
+  //                                         width: 20,
+  //                                         height: 20,
+  //                                         fit: BoxFit.contain,
+  //                                       ),
+  //                                     ),
+  //                                     const SizedBox(
+  //                                       width: 15,
+  //                                     ),
+  //                                   ],
+  //                                 ),
+  //                               ],
+  //                             ),
+  //                           ),
+  //                         ),
+  //                       ),
+  //                     ],
+  //                   ),
+  //                 ),
+  //                 Positioned(
+  //                   bottom: 80,
+  //                   right: 0,
+  //                   child: GestureDetector(
+  //                     onTap: () {
+  //                       Get.bottomSheet(
+  //                         addAddress(context),
+  //                         isScrollControlled: true,
+  //                       );
+  //                     },
+  //                     child: Container(
+  //                       width: 170,
+  //                       height: 45,
+  //                       decoration: const BoxDecoration(
+  //                         color: Colors.black,
+  //                         borderRadius: BorderRadius.only(
+  //                           topLeft: Radius.circular(30),
+  //                           bottomLeft: Radius.circular(30),
+  //                         ),
+  //                       ),
+  //                       child: Row(
+  //                         mainAxisAlignment: MainAxisAlignment.center,
+  //                         crossAxisAlignment: CrossAxisAlignment.center,
+  //                         children: [
+  //                           Container(
+  //                             width: 30,
+  //                             height: 30,
+  //                             decoration: BoxDecoration(
+  //                               color: Colors.black,
+  //                               border: Border.all(color: Colors.white),
+  //                               shape: BoxShape.circle,
+  //                             ),
+  //                             child: Center(
+  //                               child: Image.asset(
+  //                                 'assets/icons/icon-address-add.png',
+  //                                 width: 20,
+  //                                 height: 20,
+  //                                 fit: BoxFit.contain,
+  //                                 color: Colors.white,
+  //                               ),
+  //                             ),
+  //                           ),
+  //                           const SizedBox(
+  //                             width: 10,
+  //                           ),
+  //                           Text(
+  //                             'address_new_add'.tr,
+  //                             style: GoogleFonts.ebGaramond(
+  //                               color: Colors.white,
+  //                               fontSize: 14,
+  //                               fontWeight: FontWeight.w400,
+  //                             ),
+  //                           ),
+  //                         ],
+  //                       ),
+  //                     ),
+  //                   ),
+  //                 ),
+  //               ],
+  //             ),
+  //           ),
+  //         ],
+  //       ),
+  //     ),
+  //   );
+  // }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -552,379 +929,134 @@ class AddressPage extends StatelessWidget {
         width: double.infinity,
         height: double.infinity,
         color: Colors.white,
-        child: Stack(
-          children: [
-            Scaffold(
-              backgroundColor: Colors.white,
-              appBar: AppBar(
-                backgroundColor: Colors.white,
-                leading: IconButton(
-                  onPressed: () {
-                    Get.back();
-                  },
-                  icon: const Icon(
-                    Icons.arrow_back_ios,
-                    size: 20,
-                    color: Colors.black,
-                  ),
-                ),
-                title: Text(
-                  'cart_address'.tr,
-                  style: GoogleFonts.ebGaramond(
-                    color: Colors.black,
-                    fontSize: 20,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-                centerTitle: true,
+        child: Scaffold(
+          backgroundColor: Colors.white,
+          appBar: AppBar(
+            backgroundColor: Colors.white,
+            leading: IconButton(
+              onPressed: () {
+                Get.back(id: id);
+              },
+              icon: const Icon(
+                Icons.arrow_back_ios,
+                size: 20,
+                color: Colors.black,
               ),
-              body: Stack(
-                children: [
-                  Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 20,
+            ),
+            title: Text(
+              'cart_address'.tr,
+              style: GoogleFonts.ebGaramond(
+                color: Colors.black,
+                fontSize: 20,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+            centerTitle: true,
+          ),
+          body: GetBuilder<AddressController>(
+            init: addressController,
+            builder: (controller) => ListView.builder(
+              itemCount: controller.listAddress.length,
+              itemBuilder: (context, index) => Container(
+                width: double.infinity,
+                height: 65,
+                margin: const EdgeInsets.only(bottom: 20),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(10),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.25),
+                      spreadRadius: 0,
+                      blurRadius: 4,
+                      offset: const Offset(0, 4), // changes position of shadow
                     ),
-                    width: double.infinity,
-                    height: double.infinity,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.start,
+                  ],
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.all(15),
+                      height: double.infinity,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'Trần Thái Tuấn',
+                            style: GoogleFonts.ebGaramond(
+                              color: Colors.black,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 3,
+                          ),
+                          Text(
+                            '180 Sao Hoả, Hệ Mặt Trời',
+                            style: GoogleFonts.ebGaramond(
+                              color: Colors.black,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Row(
                       children: [
-                        const SizedBox(
-                          height: 30,
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Text(
-                              'address_default'.tr,
-                              style: GoogleFonts.ebGaramond(
-                                color: Colors.black,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 5,
-                            ),
-                            Container(
-                              width: 30,
-                              height: 2,
-                              color: Colors.black,
-                            ),
-                          ],
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
                         Container(
-                          width: double.infinity,
-                          height: 65,
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(10),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black.withOpacity(0.25),
-                                spreadRadius: 0,
-                                blurRadius: 4,
-                                offset: const Offset(
-                                    0, 4), // changes position of shadow
-                              ),
-                            ],
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Container(
-                                padding: const EdgeInsets.all(15),
-                                height: double.infinity,
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                      'Trần Thái Tuấn',
-                                      style: GoogleFonts.ebGaramond(
-                                        color: Colors.black,
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.w600,
-                                      ),
-                                    ),
-                                    const SizedBox(
-                                      height: 3,
-                                    ),
-                                    Text(
-                                      '180 Sao Hoả, Hệ Mặt Trời',
-                                      style: GoogleFonts.ebGaramond(
-                                        color: Colors.black,
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.w400,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Row(
-                                children: [
-                                  Container(
-                                    width: 10,
-                                    height: double.infinity,
-                                    color: const Color(0xffFFD9D9),
-                                  ),
-                                  const SizedBox(
-                                    width: 15,
-                                  ),
-                                  GestureDetector(
-                                    onTap: () {
-                                      Get.bottomSheet(
-                                        editAddress(context),
-                                        isScrollControlled: true,
-                                      );
-                                    },
-                                    child: Image.asset(
-                                      'assets/icons/icon-edit.png',
-                                      width: 20,
-                                      height: 20,
-                                      fit: BoxFit.contain,
-                                    ),
-                                  ),
-                                  const SizedBox(
-                                    width: 10,
-                                  ),
-                                  GestureDetector(
-                                    onTap: () {
-                                      Get.bottomSheet(
-                                        deleteAddress(context),
-                                        isScrollControlled: true,
-                                      );
-                                    },
-                                    child: Image.asset(
-                                      'assets/icons/icon-trash.png',
-                                      width: 20,
-                                      height: 20,
-                                      fit: BoxFit.contain,
-                                    ),
-                                  ),
-                                  const SizedBox(
-                                    width: 15,
-                                  ),
-                                ],
-                              ),
-                            ],
+                          width: 10,
+                          height: double.infinity,
+                          color: const Color(0xffFFD9D9),
+                        ),
+                        const SizedBox(
+                          width: 15,
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            Get.bottomSheet(
+                              editAddress(context),
+                              isScrollControlled: true,
+                            );
+                          },
+                          child: Image.asset(
+                            'assets/icons/icon-edit.png',
+                            width: 20,
+                            height: 20,
+                            fit: BoxFit.contain,
                           ),
                         ),
                         const SizedBox(
-                          height: 30,
+                          width: 10,
                         ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Text(
-                              'address_other'.tr,
-                              style: GoogleFonts.ebGaramond(
-                                color: Colors.black,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 5,
-                            ),
-                            Container(
-                              width: 30,
-                              height: 2,
-                              color: Colors.black,
-                            ),
-                          ],
+                        GestureDetector(
+                          onTap: () {
+                            Get.bottomSheet(
+                              deleteAddress(context),
+                              isScrollControlled: true,
+                            );
+                          },
+                          child: Image.asset(
+                            'assets/icons/icon-trash.png',
+                            width: 20,
+                            height: 20,
+                            fit: BoxFit.contain,
+                          ),
                         ),
                         const SizedBox(
-                          height: 20,
-                        ),
-                        Expanded(
-                          child: SingleChildScrollView(
-                            child: Column(
-                              children: [1, 2, 3, 4, 5, 6, 7]
-                                  .asMap()
-                                  .entries
-                                  .map(
-                                    (e) => Container(
-                                      width: double.infinity,
-                                      height: 65,
-                                      margin: const EdgeInsets.only(bottom: 20),
-                                      decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        borderRadius: BorderRadius.circular(10),
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color:
-                                                Colors.black.withOpacity(0.25),
-                                            spreadRadius: 0,
-                                            blurRadius: 4,
-                                            offset: const Offset(0,
-                                                4), // changes position of shadow
-                                          ),
-                                        ],
-                                      ),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        children: [
-                                          Container(
-                                            padding: const EdgeInsets.all(15),
-                                            height: double.infinity,
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                Text(
-                                                  'Trần Thái Tuấn',
-                                                  style: GoogleFonts.ebGaramond(
-                                                    color: Colors.black,
-                                                    fontSize: 14,
-                                                    fontWeight: FontWeight.w600,
-                                                  ),
-                                                ),
-                                                const SizedBox(
-                                                  height: 3,
-                                                ),
-                                                Text(
-                                                  '180 Sao Hoả, Hệ Mặt Trời',
-                                                  style: GoogleFonts.ebGaramond(
-                                                    color: Colors.black,
-                                                    fontSize: 14,
-                                                    fontWeight: FontWeight.w400,
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                          Row(
-                                            children: [
-                                              Container(
-                                                width: 10,
-                                                height: double.infinity,
-                                                color: const Color(0xffFFD9D9),
-                                              ),
-                                              const SizedBox(
-                                                width: 15,
-                                              ),
-                                              GestureDetector(
-                                                onTap: () {
-                                                  Get.bottomSheet(
-                                                    editAddress(context),
-                                                    isScrollControlled: true,
-                                                  );
-                                                },
-                                                child: Image.asset(
-                                                  'assets/icons/icon-edit.png',
-                                                  width: 20,
-                                                  height: 20,
-                                                  fit: BoxFit.contain,
-                                                ),
-                                              ),
-                                              const SizedBox(
-                                                width: 10,
-                                              ),
-                                              GestureDetector(
-                                                onTap: () {
-                                                  Get.bottomSheet(
-                                                    deleteAddress(context),
-                                                    isScrollControlled: true,
-                                                  );
-                                                },
-                                                child: Image.asset(
-                                                  'assets/icons/icon-trash.png',
-                                                  width: 20,
-                                                  height: 20,
-                                                  fit: BoxFit.contain,
-                                                ),
-                                              ),
-                                              const SizedBox(
-                                                width: 15,
-                                              ),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  )
-                                  .toList(),
-                            ),
-                          ),
+                          width: 15,
                         ),
                       ],
                     ),
-                  ),
-                  Positioned(
-                    bottom: 80,
-                    right: 0,
-                    child: GestureDetector(
-                      onTap: () {
-                        Get.bottomSheet(
-                          addAddress(context),
-                          isScrollControlled: true,
-                        );
-                      },
-                      child: Container(
-                        width: 170,
-                        height: 45,
-                        decoration: const BoxDecoration(
-                          color: Colors.black,
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(30),
-                            bottomLeft: Radius.circular(30),
-                          ),
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Container(
-                              width: 30,
-                              height: 30,
-                              decoration: BoxDecoration(
-                                color: Colors.black,
-                                border: Border.all(color: Colors.white),
-                                shape: BoxShape.circle,
-                              ),
-                              child: Center(
-                                child: Image.asset(
-                                  'assets/icons/icon-address-add.png',
-                                  width: 20,
-                                  height: 20,
-                                  fit: BoxFit.contain,
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ),
-                            const SizedBox(
-                              width: 10,
-                            ),
-                            Text(
-                              'address_new_add'.tr,
-                              style: GoogleFonts.ebGaramond(
-                                color: Colors.white,
-                                fontSize: 14,
-                                fontWeight: FontWeight.w400,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
-          ],
+          ),
         ),
       ),
     );

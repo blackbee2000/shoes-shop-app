@@ -139,7 +139,11 @@ class PaymentPage extends StatelessWidget {
                         ),
                         GestureDetector(
                           onTap: () {
-                            Get.to(AddressPage());
+                            Get.to(
+                                AddressPage(
+                                  id: id,
+                                ),
+                                id: id);
                           },
                           child: Container(
                             width: 40,

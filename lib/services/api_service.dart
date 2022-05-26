@@ -50,4 +50,17 @@ class ApiService {
       onError(e);
     });
   }
+
+  void put({
+    required Function() beforeSend,
+    required Function(dynamic data) onSuccess,
+    required Function(dynamic error) onError,
+  }) {
+    beforeSend();
+    dio.put(path, data: params, options: option).then((res) {
+      onSuccess(res.data);
+    }).catchError((e) {
+      onError(e);
+    });
+  }
 }

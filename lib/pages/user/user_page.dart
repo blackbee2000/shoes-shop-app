@@ -393,7 +393,11 @@ class UserPage extends StatelessWidget {
                           children: [
                             GestureDetector(
                               onTap: () {
-                                Get.to(AddressPage());
+                                Get.to(
+                                    AddressPage(
+                                      id: id,
+                                    ),
+                                    id: id);
                               },
                               child: Row(
                                 children: [

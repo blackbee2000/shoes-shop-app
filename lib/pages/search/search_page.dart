@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
+import 'package:shoes_shop_app/models/product.dart';
 import 'package:shoes_shop_app/pages/cart/cart_page.dart';
 import 'package:shoes_shop_app/pages/product/detail/product_detail_page.dart';
 import 'package:shoes_shop_app/pages/search/search_controller.dart';
@@ -357,7 +358,8 @@ class SearchPage extends StatelessWidget {
                         itemBuilder: (context, index) => GestureDetector(
                           onTap: () {
                             Get.to(
-                                const ProductDetailPage(
+                                ProductDetailPage(
+                                  product: Product.fromJson({}),
                                   id: AppConstant.SEARCH,
                                 ),
                                 id: AppConstant.SEARCH);

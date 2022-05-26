@@ -3,11 +3,13 @@ part 'type_product.g.dart';
 
 @JsonSerializable()
 class TypeProduct {
+  String? id;
   String? size;
   int? quantity;
   String? color;
 
   TypeProduct(
+    this.id,
     this.size,
     this.quantity,
     this.color,

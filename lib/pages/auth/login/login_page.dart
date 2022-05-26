@@ -205,7 +205,7 @@ class LoginPage extends StatelessWidget {
                                 );
                               } else {
                                 controller.login(controller.phone.text,
-                                    controller.password.text);
+                                    controller.password.text, 'login');
                               }
                             },
                             child: ClipOval(
@@ -264,7 +264,24 @@ class LoginPage extends StatelessWidget {
                   ),
                 ),
               ),
-            )
+            ),
+            Positioned(
+              bottom: 20,
+              left: 20,
+              child: RotatedBox(
+                quarterTurns: 2,
+                child: GestureDetector(
+                  onTap: () => Get.back(),
+                  child: Image.asset(
+                    'assets/icons/icon-right-button.png',
+                    width: 25,
+                    height: 25,
+                    color: Colors.black,
+                    fit: BoxFit.contain,
+                  ),
+                ),
+              ),
+            ),
           ],
         ),
       ),

@@ -7,10 +7,12 @@ class Product {
   String? _id;
   String? nameProductVi;
   String? nameProductEn;
-  String? imageProduct;
+  List<String>? imageProduct;
   String? descriptionVi;
   String? descriptionEn;
   dynamic rating;
+  int? quantitySold;
+  int? discount;
   List<TypeProduct>? type;
   String? idCompany;
   int? price;
@@ -28,6 +30,8 @@ class Product {
     this.descriptionVi,
     this.descriptionEn,
     this.rating,
+    this.quantitySold,
+    this.discount,
     this.type,
     this.idCompany,
     this.price,

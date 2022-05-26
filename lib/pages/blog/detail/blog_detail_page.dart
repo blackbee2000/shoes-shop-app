@@ -1,16 +1,23 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
+import 'package:shoes_shop_app/models/blog.dart';
 import 'package:shoes_shop_app/pages/blog/detail/blog_detail_controller.dart';
 import 'package:shoes_shop_app/pages/cart/cart_page.dart';
+import 'package:shoes_shop_app/translations/app_translation.dart';
 import 'package:shoes_shop_app/utils/app_constant.dart';
 import 'package:widget_mask/widget_mask.dart';
 import 'package:flutter_share/flutter_share.dart';
 import 'package:google_fonts/google_fonts.dart';
+// import 'package:flutter_html/flutter_html.dart';
+import 'package:html/parser.dart' show parse;
 
 class BlogDetailPage extends StatelessWidget {
+  final Blog blog;
   final blogDetailController = Get.put(BlogDetailController());
 
-  BlogDetailPage({Key? key}) : super(key: key);
+  BlogDetailPage({Key? key, required this.blog}) : super(key: key);
 
   Future<void> share() async {
     await FlutterShare.share(
@@ -96,11 +103,26 @@ class BlogDetailPage extends StatelessWidget {
                       margin: const EdgeInsets.symmetric(horizontal: 20),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
-                        image: const DecorationImage(
-                          image: AssetImage(
-                            'assets/images/blog_detail_banner.jpg',
+                      ),
+                      child: CachedNetworkImage(
+                        fit: BoxFit.cover,
+                        imageUrl: blog.imageBlog ?? '',
+                        useOldImageOnUrlChange: false,
+                        progressIndicatorBuilder:
+                            (context, url, downloadProgress) => SizedBox(
+                          height: 15,
+                          width: 15,
+                          child: Center(
+                            child: CircularProgressIndicator(
+                              value: downloadProgress.progress,
+                              valueColor:
+                                  const AlwaysStoppedAnimation(Colors.white),
+                              strokeWidth: 2,
+                            ),
                           ),
-                          fit: BoxFit.cover,
+                        ),
+                        errorWidget: (context, url, error) => ClipOval(
+                          child: Container(),
                         ),
                       ),
                     ),
@@ -122,7 +144,7 @@ class BlogDetailPage extends StatelessWidget {
                                   "Jordan chất điên, cháy cả cộng đồng mạng",
                                   style: GoogleFonts.ebGaramond(
                                     color: Colors.white,
-                                    fontSize: 18,
+                                    fontSize: 22,
                                     fontWeight: FontWeight.w600,
                                   ),
                                   maxLines: 2,
@@ -133,6 +155,7 @@ class BlogDetailPage extends StatelessWidget {
                                 ),
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
                                     Image.asset(
                                       "assets/icons/icon_calendar.png",
@@ -145,10 +168,15 @@ class BlogDetailPage extends StatelessWidget {
                                       width: 10,
                                     ),
                                     Text(
-                                      '10:00 - 27/02/2022',
+                                      blog.time != null && blog.time!.isNotEmpty
+                                          ? DateFormat('HH:mm dd/MM/yyyy')
+                                              .format(DateTime.parse(
+                                                      blog.time ?? '')
+                                                  .toLocal())
+                                          : '--',
                                       style: GoogleFonts.ebGaramond(
                                         color: Colors.white,
-                                        fontSize: 11,
+                                        fontSize: 13,
                                         fontWeight: FontWeight.w400,
                                       ),
                                     ),
@@ -202,27 +230,52 @@ class BlogDetailPage extends StatelessWidget {
                           ),
                         ],
                       ),
-                      child: Column(
-                        children: [
-                          Text(
-                            'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a typespecimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
-                            style: GoogleFonts.ebGaramond(
-                              color: Colors.black,
-                              fontSize: 13,
-                              fontWeight: FontWeight.w400,
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 15,
-                          ),
-                          Image.asset(
-                            'assets/images/blog_detail_banner.jpg',
-                            width: double.infinity,
-                            height: 200,
-                            fit: BoxFit.contain,
-                          ),
-                        ],
-                      ),
+                      child: AppTranslation.instance.language ==
+                              AppTranslation.english
+                          ? (blog.contentEn != null &&
+                                  blog.contentEn!.isNotEmpty
+                              ? Text(
+                                  parse(blog.contentEn).outerHtml,
+                                )
+                              : Column(
+                                  children: [
+                                    const Icon(
+                                      Icons.block,
+                                      color: Colors.black,
+                                      size: 16,
+                                    ),
+                                    Text(
+                                      'no_information'.tr,
+                                      style: GoogleFonts.ebGaramond(
+                                        color: const Color(0xff404040),
+                                        fontSize: 12,
+                                      ),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ],
+                                ))
+                          : (blog.contentVi != null &&
+                                  blog.contentVi!.isNotEmpty
+                              ? Text(
+                                  parse(blog.contentVi).outerHtml,
+                                )
+                              : Column(
+                                  children: [
+                                    const Icon(
+                                      Icons.block,
+                                      color: Colors.black,
+                                      size: 16,
+                                    ),
+                                    Text(
+                                      'no_information'.tr,
+                                      style: GoogleFonts.ebGaramond(
+                                        color: const Color(0xff404040),
+                                        fontSize: 12,
+                                      ),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ],
+                                )),
                     ),
                     const SizedBox(
                       height: 15,
@@ -278,7 +331,7 @@ class BlogDetailPage extends StatelessWidget {
                                   left: 20,
                                   right: 20,
                                 ),
-                                height: 125,
+                                height: 130,
                                 decoration: BoxDecoration(
                                   color: Colors.white,
                                   borderRadius: BorderRadius.circular(10),
@@ -306,11 +359,29 @@ class BlogDetailPage extends StatelessWidget {
                                           topLeft: Radius.circular(10),
                                           bottomLeft: Radius.circular(10),
                                         ),
-                                        image: DecorationImage(
-                                          image: AssetImage(
-                                            "assets/images/blog-item.jpg",
+                                      ),
+                                      child: CachedNetworkImage(
+                                        fit: BoxFit.cover,
+                                        imageUrl: '',
+                                        useOldImageOnUrlChange: false,
+                                        progressIndicatorBuilder:
+                                            (context, url, downloadProgress) =>
+                                                SizedBox(
+                                          height: 15,
+                                          width: 15,
+                                          child: Center(
+                                            child: CircularProgressIndicator(
+                                              value: downloadProgress.progress,
+                                              valueColor:
+                                                  const AlwaysStoppedAnimation(
+                                                      Colors.white),
+                                              strokeWidth: 2,
+                                            ),
                                           ),
-                                          fit: BoxFit.cover,
+                                        ),
+                                        errorWidget: (context, url, error) =>
+                                            ClipOval(
+                                          child: Container(),
                                         ),
                                       ),
                                     ),
@@ -334,10 +405,10 @@ class BlogDetailPage extends StatelessWidget {
                                               'Jordan chất điên, cháy cả cộng đồng mạng',
                                               style: GoogleFonts.ebGaramond(
                                                 color: Colors.black,
-                                                fontSize: 14,
+                                                fontSize: 16,
                                                 fontWeight: FontWeight.w600,
                                               ),
-                                              maxLines: 2,
+                                              maxLines: 1,
                                               overflow: TextOverflow.ellipsis,
                                               textAlign: TextAlign.left,
                                             ),
@@ -345,10 +416,10 @@ class BlogDetailPage extends StatelessWidget {
                                               height: 5,
                                             ),
                                             Text(
-                                              'It is a long established fact that a reader will be distracted by the readable content of a page, It is a long established fact that a reader will be distracted by the readable content of a page',
+                                              'This is my shoes, say la la laa',
                                               style: GoogleFonts.ebGaramond(
                                                 color: Colors.black,
-                                                fontSize: 11,
+                                                fontSize: 13,
                                                 fontWeight: FontWeight.w400,
                                               ),
                                               maxLines: 3,
@@ -356,7 +427,7 @@ class BlogDetailPage extends StatelessWidget {
                                               textAlign: TextAlign.left,
                                             ),
                                             const SizedBox(
-                                              height: 10,
+                                              height: 5,
                                             ),
                                             Row(
                                               mainAxisAlignment:
@@ -373,10 +444,10 @@ class BlogDetailPage extends StatelessWidget {
                                                   width: 10,
                                                 ),
                                                 Text(
-                                                  '10:00 - 27/02/2022',
+                                                  '00:00 20/09/2000',
                                                   style: GoogleFonts.ebGaramond(
                                                     color: Colors.black,
-                                                    fontSize: 9,
+                                                    fontSize: 12,
                                                     fontWeight: FontWeight.w400,
                                                   ),
                                                 ),

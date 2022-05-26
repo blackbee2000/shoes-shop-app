@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shoes_shop_app/pages/dashboard/dashboard_page.dart';
+import 'package:shoes_shop_app/pages/home/home_controller.dart';
 
 class SpalshPage extends StatelessWidget {
-  const SpalshPage({Key? key}) : super(key: key);
+  final homeController = Get.put(HomeController());
+  SpalshPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -71,22 +73,9 @@ class SpalshPage extends StatelessWidget {
                   ),
                   GestureDetector(
                     onTap: () {
-                      Get.dialog(
-                        const SizedBox(
-                          height: 15,
-                          width: 15,
-                          child: Center(
-                            child: CircularProgressIndicator(
-                              valueColor: AlwaysStoppedAnimation(Colors.white),
-                              strokeWidth: 2,
-                            ),
-                          ),
-                        ),
-                        barrierDismissible: false,
-                      );
                       Future.delayed(const Duration(milliseconds: 1000))
                           .then((value) {
-                        Get.back();
+                        homeController.onInit();
                         Get.offAll(DashboardPage());
                       });
                     },

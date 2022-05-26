@@ -17,7 +17,8 @@ class ProductController extends GetxController {
       beforeSend: () {},
       onSuccess: (res) {
         listProduct = res.data ?? [];
-        print('SUCESSSSSS =>>>>>>> ${res.toString()}');
+        print('LEGNTTTTTTTT ${res.data!.length}');
+        print('SUCESSSSSS =>>>>>>> ${res.data.toString()}');
         update();
       },
       onError: (e) {
