@@ -27,8 +27,10 @@ class ProfileController extends GetxController {
   }
 
   logOut() async {
+    profile.value = Profile.fromJson({});
+    update();
     await removeToken();
-    Get.to(LoginPage());
+    Get.to(const LoginPage());
   }
 
   getProfile() {
@@ -42,11 +44,13 @@ class ProfileController extends GetxController {
       onSuccess: (res) {
         print('GET INFO PROFILE SUCESS =>>>>>>> ${res.toString()}');
         profile.value = res.data!;
+        update();
         print(
             'GET INFO PROFILE SUCESS HAHAAHAAA =>>>>>>> ${profile.toString()}');
       },
       onError: (e) {
         print('GET INFO PROFILE FAIL =>>>>>>> ${e.toString()}');
+        update();
       },
     );
   }

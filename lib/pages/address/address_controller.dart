@@ -38,6 +38,7 @@ class AddressController extends GetxController {
       onSuccess: (res) {
         print('GET ALL ADDRESS SUCCESS =>>>>> ${res.data.toString()}');
         listAddress = res.data ?? [];
+        print('LIST ADDRESSSSSS =>>>>> ${listAddress.toString()}');
       },
       onError: (e) {
         print('GET ALL ADDRESS FAIL =>>>>> ${e.toString()}');

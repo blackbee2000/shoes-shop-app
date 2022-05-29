@@ -3,9 +3,16 @@ import 'package:get/get.dart';
 import 'package:shoes_shop_app/pages/auth/login/login_controller.dart';
 import 'package:shoes_shop_app/pages/auth/register/register_page.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shoes_shop_app/pages/dashboard/dashboard_page.dart';
 
-class LoginPage extends StatelessWidget {
-  LoginPage({Key? key}) : super(key: key);
+class LoginPage extends StatefulWidget {
+  const LoginPage({Key? key}) : super(key: key);
+
+  @override
+  LoginState createState() => LoginState();
+}
+
+class LoginState extends State<LoginPage> {
   final loginController = Get.put(LoginController());
   @override
   Widget build(BuildContext context) {
@@ -271,7 +278,7 @@ class LoginPage extends StatelessWidget {
               child: RotatedBox(
                 quarterTurns: 2,
                 child: GestureDetector(
-                  onTap: () => Get.back(),
+                  onTap: () => Get.offAll(const DashboardPage()),
                   child: Image.asset(
                     'assets/icons/icon-right-button.png',
                     width: 25,

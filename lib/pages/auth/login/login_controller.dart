@@ -45,7 +45,8 @@ class LoginController extends GetxController {
         print('LOGIN SUCESSS =>>>>>> ${res.toString()}');
         setToken(res.data?.token);
         print('TOKEN NEFFFFFFF =>>>>>> ${ApiToken.to.appToken}');
-        profileController.onInit();
+        // profileController.onInit();
+        // profileController.update();
         if (type == 'login') {
           Get.offAll(DashboardPage());
         } else if (type == 'register') {

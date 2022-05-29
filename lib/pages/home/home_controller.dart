@@ -11,14 +11,19 @@ class HomeController extends GetxController {
   List<Product> listDiscountProduct = <Product>[].obs;
   List<Product> listTrendingProduct = <Product>[].obs;
 
-  @override
-  void onInit() {
-    getAllCompany();
-    getNewProduct();
-    getDiscountProduct();
-    getTrendingProduct();
-    super.onInit();
-  }
+  // @override
+  // void onInit() {
+  //   super.onInit();
+  //   getAllCompany();
+  //   getNewProduct();
+  //   getDiscountProduct();
+  //   getTrendingProduct();
+  // }
+
+  // @override
+  // void dispose() {
+  //   super.dispose();
+  // }
 
   getAllCompany() {
     HomeProvider().getAllCompany(

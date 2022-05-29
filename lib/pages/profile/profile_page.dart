@@ -7,31 +7,15 @@ import 'package:shoes_shop_app/pages/user/user_page.dart';
 import 'package:shoes_shop_app/pages/your-order/your_order_page.dart';
 import 'package:shoes_shop_app/services/api_token.dart';
 import 'package:shoes_shop_app/theme/app_theme.dart';
+import 'package:shoes_shop_app/theme/theme_controller.dart';
 import 'package:shoes_shop_app/translations/app_translation.dart';
 import 'package:shoes_shop_app/utils/app_constant.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class ProfilePage extends StatefulWidget {
-  ProfilePage({Key? key}) : super(key: key);
-
-  @override
-  ProfileState createState() => ProfileState();
-}
-
-class ProfileState extends State<ProfilePage> {
+class ProfilePage extends GetView<ProfileController> {
   final profileController = Get.put(ProfileController());
 
-  @override
-  void initState() {
-    super.initState();
-    print(
-        'DATAAAAAAAAAAAAAA =>>>>>>>> ${profileController.profile.value.phoneNumber}');
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-  }
+  ProfilePage({Key? key}) : super(key: key);
 
   Widget selectedLanguage() {
     return Container(
@@ -103,63 +87,71 @@ class ProfileState extends State<ProfilePage> {
       key: Get.nestedKey(AppConstant.PROFILE),
       onGenerateRoute: (settings) => MaterialPageRoute(
         builder: (_) => SafeArea(
-          child: Container(
-            width: double.infinity,
-            height: double.infinity,
-            color: Colors.white,
-            child: Scaffold(
-              appBar: AppBar(
-                backgroundColor: Colors.white,
-                title: Text(
-                  'profile_title'.tr,
-                  style: GoogleFonts.ebGaramond(
-                    color: Colors.black,
-                    fontSize: 20,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-                centerTitle: false,
-                actions: [
-                  GestureDetector(
-                    onTap: () {
-                      Get.to(
-                        CartPage(id: AppConstant.PROFILE),
-                        id: AppConstant.PROFILE,
-                      );
-                    },
-                    child: Image.asset(
-                      "assets/icons/icon_cart.png",
-                      width: 20,
-                      height: 20,
-                      fit: BoxFit.contain,
-                      color: Colors.black,
+          child: GetBuilder<ThemeController>(
+            builder: (theme) => Container(
+              width: double.infinity,
+              height: double.infinity,
+              color:
+                  theme.theme == ThemeMode.light ? Colors.white : Colors.black,
+              child: Scaffold(
+                appBar: AppBar(
+                  backgroundColor: theme.theme == ThemeMode.light
+                      ? Colors.white
+                      : Colors.black,
+                  title: Text(
+                    'profile_title'.tr,
+                    style: GoogleFonts.ebGaramond(
+                      color: theme.theme == ThemeMode.light
+                          ? Colors.black
+                          : Colors.white,
+                      fontSize: 20,
+                      fontWeight: FontWeight.w600,
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 10, right: 20),
-                    child: GestureDetector(
+                  centerTitle: false,
+                  actions: [
+                    GestureDetector(
+                      onTap: () {
+                        Get.to(
+                          CartPage(id: AppConstant.PROFILE),
+                          id: AppConstant.PROFILE,
+                        );
+                      },
                       child: Image.asset(
-                        "assets/icons/icon_message.png",
+                        "assets/icons/icon_cart.png",
                         width: 20,
                         height: 20,
                         fit: BoxFit.contain,
-                        color: Colors.black,
+                        color: theme.theme == ThemeMode.light
+                            ? Colors.black
+                            : Colors.white,
                       ),
                     ),
-                  ),
-                ],
-              ),
-              backgroundColor: Colors.transparent,
-              body: SizedBox(
-                width: double.infinity,
-                height: double.infinity,
-                child: Column(
-                  children: [
-                    Expanded(
-                      child: SingleChildScrollView(
-                        child: GetBuilder<ProfileController>(
-                          init: profileController,
-                          builder: (controller) => Column(
+                    Padding(
+                      padding: const EdgeInsets.only(left: 10, right: 20),
+                      child: GestureDetector(
+                        child: Image.asset(
+                          "assets/icons/icon_message.png",
+                          width: 20,
+                          height: 20,
+                          fit: BoxFit.contain,
+                          color: theme.theme == ThemeMode.light
+                              ? Colors.black
+                              : Colors.white,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                backgroundColor: Colors.transparent,
+                body: SizedBox(
+                  width: double.infinity,
+                  height: double.infinity,
+                  child: Column(
+                    children: [
+                      Expanded(
+                        child: SingleChildScrollView(
+                          child: Column(
                             children: [
                               const SizedBox(
                                 height: 20,
@@ -170,9 +162,15 @@ class ProfileState extends State<ProfilePage> {
                                         width: 150,
                                         height: 150,
                                         decoration: BoxDecoration(
-                                          color: Colors.white,
+                                          color: theme.theme == ThemeMode.light
+                                              ? Colors.white
+                                              : Colors.black,
                                           border: Border.all(
-                                              color: Colors.black, width: 2),
+                                              color:
+                                                  theme.theme == ThemeMode.light
+                                                      ? Colors.black
+                                                      : Colors.white,
+                                              width: 2),
                                           shape: BoxShape.circle,
                                         ),
                                         child: Center(
@@ -181,9 +179,15 @@ class ProfileState extends State<ProfilePage> {
                                               width: 135,
                                               height: 135,
                                               decoration: BoxDecoration(
-                                                color: Colors.black,
+                                                color: theme.theme ==
+                                                        ThemeMode.light
+                                                    ? Colors.black
+                                                    : Colors.white,
                                                 border: Border.all(
-                                                    color: Colors.black,
+                                                    color: theme.theme ==
+                                                            ThemeMode.light
+                                                        ? Colors.black
+                                                        : Colors.white,
                                                     width: 2),
                                                 shape: BoxShape.circle,
                                                 image: const DecorationImage(
@@ -288,83 +292,89 @@ class ProfileState extends State<ProfilePage> {
                                           const SizedBox(
                                             height: 20,
                                           ),
-                                          Row(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.center,
-                                            children: [
-                                              Image.asset(
-                                                "assets/icons/icon-user.png",
-                                                width: 20,
-                                                height: 20,
-                                                fit: BoxFit.contain,
-                                                color: Colors.black,
-                                              ),
-                                              const SizedBox(
-                                                width: 10,
-                                              ),
-                                              Text(
-                                                '${controller.profile.value.fullName != null && controller.profile.value.fullName!.isNotEmpty ? controller.profile.value.fullName : 'no_information'.tr}',
-                                                style: GoogleFonts.ebGaramond(
+                                          Obx(
+                                            () => Row(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.center,
+                                              children: [
+                                                Image.asset(
+                                                  "assets/icons/icon-user.png",
+                                                  width: 20,
+                                                  height: 20,
+                                                  fit: BoxFit.contain,
                                                   color: Colors.black,
-                                                  fontSize: 14,
-                                                  fontWeight: FontWeight.w400,
                                                 ),
-                                              ),
-                                            ],
+                                                const SizedBox(
+                                                  width: 10,
+                                                ),
+                                                Text(
+                                                  '${controller.profile.value.fullName != null && controller.profile.value.fullName!.isNotEmpty ? controller.profile.value.fullName : 'no_information'.tr}',
+                                                  style: GoogleFonts.ebGaramond(
+                                                    color: Colors.black,
+                                                    fontSize: 14,
+                                                    fontWeight: FontWeight.w400,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
                                           ),
                                           const SizedBox(
                                             height: 10,
                                           ),
-                                          Row(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.center,
-                                            children: [
-                                              Image.asset(
-                                                "assets/icons/icon-phone.png",
-                                                width: 20,
-                                                height: 20,
-                                                fit: BoxFit.contain,
-                                                color: Colors.black,
-                                              ),
-                                              const SizedBox(
-                                                width: 10,
-                                              ),
-                                              Text(
-                                                '${controller.profile.value.phoneNumber != null && controller.profile.value.phoneNumber!.isNotEmpty ? controller.profile.value.phoneNumber : 'no_information'.tr}',
-                                                style: GoogleFonts.ebGaramond(
+                                          Obx(
+                                            () => Row(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.center,
+                                              children: [
+                                                Image.asset(
+                                                  "assets/icons/icon-phone.png",
+                                                  width: 20,
+                                                  height: 20,
+                                                  fit: BoxFit.contain,
                                                   color: Colors.black,
-                                                  fontSize: 14,
-                                                  fontWeight: FontWeight.w400,
                                                 ),
-                                              ),
-                                            ],
+                                                const SizedBox(
+                                                  width: 10,
+                                                ),
+                                                Text(
+                                                  '${controller.profile.value.phoneNumber != null && controller.profile.value.phoneNumber!.isNotEmpty ? controller.profile.value.phoneNumber : 'no_information'.tr}',
+                                                  style: GoogleFonts.ebGaramond(
+                                                    color: Colors.black,
+                                                    fontSize: 14,
+                                                    fontWeight: FontWeight.w400,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
                                           ),
                                           const SizedBox(
                                             height: 10,
                                           ),
-                                          Row(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.center,
-                                            children: [
-                                              Image.asset(
-                                                "assets/icons/icon-email.png",
-                                                width: 20,
-                                                height: 20,
-                                                fit: BoxFit.contain,
-                                                color: Colors.black,
-                                              ),
-                                              const SizedBox(
-                                                width: 10,
-                                              ),
-                                              Text(
-                                                '${controller.profile.value.email != null && controller.profile.value.email!.isNotEmpty ? controller.profile.value.email : 'no_information'.tr}',
-                                                style: GoogleFonts.ebGaramond(
+                                          Obx(
+                                            () => Row(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.center,
+                                              children: [
+                                                Image.asset(
+                                                  "assets/icons/icon-email.png",
+                                                  width: 20,
+                                                  height: 20,
+                                                  fit: BoxFit.contain,
                                                   color: Colors.black,
-                                                  fontSize: 14,
-                                                  fontWeight: FontWeight.w400,
                                                 ),
-                                              ),
-                                            ],
+                                                const SizedBox(
+                                                  width: 10,
+                                                ),
+                                                Text(
+                                                  '${controller.profile.value.email != null && controller.profile.value.email!.isNotEmpty ? controller.profile.value.email : 'no_information'.tr}',
+                                                  style: GoogleFonts.ebGaramond(
+                                                    color: Colors.black,
+                                                    fontSize: 14,
+                                                    fontWeight: FontWeight.w400,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
                                           ),
                                         ],
                                       ),
@@ -490,6 +500,45 @@ class ProfileState extends State<ProfilePage> {
                                 ),
                               ),
                               ApiToken().isTokenExisted
+                                  ? GetBuilder<ProfileController>(
+                                      init: profileController,
+                                      builder: (controller) => GestureDetector(
+                                        onTap: () {
+                                          profileController.logOut();
+                                        },
+                                        child: Container(
+                                          width: double.infinity,
+                                          height: 50,
+                                          margin: const EdgeInsets.symmetric(
+                                              horizontal: 20, vertical: 20),
+                                          decoration: BoxDecoration(
+                                            color:
+                                                theme.theme == ThemeMode.light
+                                                    ? Colors.black
+                                                    : Colors.white,
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                          ),
+                                          child: Center(
+                                            child: Text(
+                                              'change_password'
+                                                  .tr
+                                                  .toUpperCase(),
+                                              style: GoogleFonts.ebGaramond(
+                                                color: theme.theme ==
+                                                        ThemeMode.light
+                                                    ? Colors.white
+                                                    : Colors.black,
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.w600,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    )
+                                  : Container(),
+                              ApiToken().isTokenExisted
                                   ? Container(
                                       margin: const EdgeInsets.only(
                                         top: 20,
@@ -585,7 +634,9 @@ class ProfileState extends State<ProfilePage> {
                                     margin: const EdgeInsets.symmetric(
                                         horizontal: 20),
                                     decoration: BoxDecoration(
-                                      color: Colors.black,
+                                      color: theme.theme == ThemeMode.light
+                                          ? Colors.black
+                                          : Colors.white,
                                       borderRadius: BorderRadius.circular(10),
                                     ),
                                     child: Center(
@@ -594,7 +645,9 @@ class ProfileState extends State<ProfilePage> {
                                             ? 'profile_logout'.tr.toUpperCase()
                                             : 'sign_in'.tr.toUpperCase(),
                                         style: GoogleFonts.ebGaramond(
-                                          color: Colors.white,
+                                          color: theme.theme == ThemeMode.light
+                                              ? Colors.white
+                                              : Colors.black,
                                           fontSize: 16,
                                           fontWeight: FontWeight.w600,
                                         ),
@@ -610,8 +663,8 @@ class ProfileState extends State<ProfilePage> {
                           ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ),

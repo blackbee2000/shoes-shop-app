@@ -26,6 +26,10 @@ class HomePageState extends State<HomePage> {
 
   @override
   void initState() {
+    homeController.getNewProduct();
+    homeController.getDiscountProduct();
+    homeController.getAllCompany();
+    homeController.getTrendingProduct();
     super.initState();
   }
 

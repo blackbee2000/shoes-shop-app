@@ -21,6 +21,7 @@ class Product {
   String? createdAt;
   String? updatedAt;
   int? __v;
+  bool? isLike;
 
   Product(
     this._id,
@@ -40,6 +41,7 @@ class Product {
     this.createdAt,
     this.updatedAt,
     this.__v,
+    this.isLike,
   );
 
   factory Product.fromJson(Map<String, dynamic> json) =>

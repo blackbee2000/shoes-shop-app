@@ -89,7 +89,11 @@ class UserController extends GetxController {
       },
       onSuccess: (res) {
         print('UPDATE PROFILE SUCESSS =>>>>>> ${res.toString()}');
-        Get.offAll(DashboardPage());
+        profileController.onInit();
+        profileController.update();
+        Future.delayed(const Duration(milliseconds: 1000)).then((_) {
+          Get.offAll(const DashboardPage());
+        });
         update();
       },
       onError: (e) {

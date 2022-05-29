@@ -2,10 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shoes_shop_app/pages/dashboard/dashboard_page.dart';
-import 'package:shoes_shop_app/pages/home/home_controller.dart';
 
 class SpalshPage extends StatelessWidget {
-  final homeController = Get.put(HomeController());
   SpalshPage({Key? key}) : super(key: key);
 
   @override
@@ -73,11 +71,7 @@ class SpalshPage extends StatelessWidget {
                   ),
                   GestureDetector(
                     onTap: () {
-                      Future.delayed(const Duration(milliseconds: 1000))
-                          .then((value) {
-                        homeController.onInit();
-                        Get.offAll(DashboardPage());
-                      });
+                      Get.offAll(const DashboardPage());
                     },
                     child: Container(
                       width: 180,
