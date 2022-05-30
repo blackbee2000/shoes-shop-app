@@ -79,6 +79,13 @@ class LocaleString extends Translations {
           "user_old_password": "Old password",
           "user_new_password": "New password",
           "user_confirm_password": "Confirm password",
+          "enter_number_phone": "Enter phone number",
+          "otp": "Otp",
+          "otp_enter": "Enter the OTP that was sent to your phone number",
+          "otp_resend": "Resend otp",
+          "reset_password": "Reset password",
+          "enter_new_password_please": "Please enter new password",
+          "confirm_change": "Confirm change",
         },
         "vi_VN": {
           "product_title": "Sản phẩm",
@@ -156,6 +163,14 @@ class LocaleString extends Translations {
           "user_old_password": "Mật khẩu cũ",
           "user_new_password": "Mật khẩu mới",
           "user_confirm_password": "Xác nhận mật khẩu",
+          "enter_number_phone": "Nhập số điện thoại",
+          "otp": "Otp",
+          "otp_enter": "Nhập OTP được gửi đến số điện thoại của Quý khách",
+          "otp_expires": "Mã OTP hết hạn sau",
+          "otp_resend": "Gửi lại otp",
+          "reset_password": "Đặt lại mật khẩu",
+          "enter_new_password_please": "Vui lòng nhập mật khẩu mới",
+          "cofirm_change": "Xác nhận thay đổi",
         }
       };
 }

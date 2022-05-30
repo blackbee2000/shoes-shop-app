@@ -51,6 +51,7 @@ dependencies:
   cached_network_image: ^3.2.0
   intl: ^0.17.0
   html: ^0.15.0
+  pin_code_fields: ^7.4.0
 
 dev_dependencies:
   flutter_test:
