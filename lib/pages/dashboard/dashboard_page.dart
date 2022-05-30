@@ -1,6 +1,7 @@
 import 'package:custom_navigation_bar/custom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:provider/provider.dart';
 import 'package:shoes_shop_app/pages/blog/blog_page.dart';
 import 'package:shoes_shop_app/pages/home/home_page.dart';
 import 'package:shoes_shop_app/pages/product/product_page.dart';
@@ -8,6 +9,7 @@ import 'package:shoes_shop_app/pages/profile/profile_page.dart';
 import 'package:shoes_shop_app/pages/search/search_page.dart';
 import 'package:shoes_shop_app/theme/theme_controller.dart';
 import 'package:shoes_shop_app/utils/app_constant.dart';
+import '../home/home_provider.dart';
 import 'dashboard_controller.dart';
 
 class DashboardPage extends StatefulWidget {
@@ -19,6 +21,7 @@ class DashboardPage extends StatefulWidget {
 
 class DashboardState extends State<DashboardPage> {
   final controller = Get.put(DashboardController());
+  bool isLoading = true;
 
   @override
   void initState() {

@@ -9,7 +9,7 @@ class BlogController extends GetxController {
   @override
   void onInit() async {
     super.onInit();
-    getAllBlog();
+
   }
 
   getAllBlog() {

@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:shoes_shop_app/pages/cart/cart_page.dart';
 import 'package:shoes_shop_app/pages/product/detail/product_detail_page.dart';
 import 'package:shoes_shop_app/pages/product/product_controller.dart';
@@ -16,6 +17,7 @@ class ProductPage extends StatelessWidget {
   ProductPage({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    final formatNumber = NumberFormat.currency(locale: "vi", symbol: '');
     return Navigator(
       key: Get.nestedKey(AppConstant.PRODUCT),
       onGenerateRoute: (settings) => MaterialPageRoute(
@@ -283,8 +285,6 @@ class ProductPage extends StatelessWidget {
                                                                   .listProduct[
                                                                       index]
                                                                   .isLike!;
-                                                          print(
-                                                              'HELOOOOOOOOOOOOO ${productController.listProduct[index].isLike}');
                                                         },
                                                         child: Center(
                                                           child: Image.asset(
@@ -381,8 +381,18 @@ class ProductPage extends StatelessWidget {
                                               child: RichText(
                                                 textAlign: TextAlign.start,
                                                 text: TextSpan(
-                                                  text:
-                                                      '${productController.listProduct[index].price ?? '--'}',
+                                                  text: formatNumber
+                                                      .format(productController
+                                                              .listProduct[
+                                                                  index]
+                                                              .price! *
+                                                          (100 -
+                                                              productController
+                                                                  .listProduct[
+                                                                      index]
+                                                                  .discount!) /
+                                                          100)
+                                                      .toString(),
                                                   style: GoogleFonts.ebGaramond(
                                                     color: theme.theme ==
                                                             ThemeMode.light

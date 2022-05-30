@@ -1,16 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
+import 'package:shoes_shop_app/models/company.dart';
 import 'package:shoes_shop_app/models/product.dart';
 import 'package:shoes_shop_app/pages/cart/cart_page.dart';
 import 'package:shoes_shop_app/pages/dashboard/dashboard_controller.dart';
 import 'package:shoes_shop_app/pages/home/home_controller.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:shoes_shop_app/pages/home/home_provider.dart';
 import 'package:shoes_shop_app/pages/product/detail/product_detail_page.dart';
 import 'package:shoes_shop_app/theme/theme_controller.dart';
 import 'package:shoes_shop_app/translations/app_translation.dart';
 import 'package:shoes_shop_app/utils/app_constant.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import '../blog/blog_controller.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key? key}) : super(key: key);
@@ -22,7 +28,10 @@ class HomePage extends StatefulWidget {
 class HomePageState extends State<HomePage> {
   CarouselController homeCarouselController = CarouselController();
   final homeController = Get.put(HomeController());
+  final blogController = Get.put(BlogController());
   final dashboardController = Get.put(DashboardController());
+
+  List<Company> lstCompany = [];
 
   @override
   void initState() {
@@ -30,6 +39,8 @@ class HomePageState extends State<HomePage> {
     homeController.getDiscountProduct();
     homeController.getAllCompany();
     homeController.getTrendingProduct();
+    // blogController.getAllBlog();
+
     super.initState();
   }
 
@@ -40,6 +51,8 @@ class HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final formatNumber = NumberFormat.currency(locale: "vi", symbol: '');
+    // print(lstCompany[0].logoCompany ?? null);
     return Navigator(
       key: Get.nestedKey(AppConstant.HOME),
       onGenerateRoute: (settings) => MaterialPageRoute(
@@ -428,6 +441,8 @@ class HomePageState extends State<HomePage> {
                                           fontSize: 14,
                                           fontWeight: FontWeight.w600,
                                         ),
+                                        overflow: TextOverflow.ellipsis,
+                                        maxLines: 1,
                                       ),
                                       const SizedBox(
                                         height: 15,
@@ -444,7 +459,18 @@ class HomePageState extends State<HomePage> {
                                         alignment: Alignment.topLeft,
                                         child: RichText(
                                           text: TextSpan(
-                                            text: '250',
+                                            text: formatNumber
+                                                .format(controller
+                                                        .listDiscountProduct[
+                                                            index]
+                                                        .price! *
+                                                    (100 -
+                                                        controller
+                                                            .listDiscountProduct[
+                                                                index]
+                                                            .discount!) /
+                                                    100)
+                                                .toString(),
                                             style: GoogleFonts.ebGaramond(
                                               color: Colors.white,
                                               fontSize: 20,
@@ -542,45 +568,65 @@ class HomePageState extends State<HomePage> {
                             const SizedBox(
                               height: 10,
                             ),
-                            Container(
-                              width: double.infinity,
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 10),
-                              height: 120,
-                              child: ListView.builder(
-                                scrollDirection: Axis.horizontal,
-                                itemCount: controller.listCompany.length,
-                                itemBuilder: (context, index) => Container(
-                                  margin: const EdgeInsets.symmetric(
-                                    horizontal: 10,
-                                    vertical: 10,
-                                  ),
-                                  width: 100,
-                                  height: double.infinity,
-                                  padding: const EdgeInsets.all(10),
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                    color: Colors.white,
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Colors.black.withOpacity(0.25),
-                                        spreadRadius: 0,
-                                        blurRadius: 4,
-                                        offset: const Offset(
-                                            0, 4), // changes position of shadow
-                                      ),
-                                    ],
-                                  ),
-                                  child: Center(
-                                    child: Image.asset(
-                                      "assets/images/jordan.png",
-                                      width: 80,
-                                      fit: BoxFit.contain,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
+                            FutureBuilder<List<Company>>(
+                                future: Provider.of<HomeProvider>(context,
+                                        listen: true)
+                                    .getAllCompany(),
+                                builder: (BuildContext context,
+                                    AsyncSnapshot<dynamic> snapshot) {
+                                  return !snapshot.hasData
+                                      ? Container()
+                                      : Container(
+                                          width: double.infinity,
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 10),
+                                          height: 120,
+                                          child: ListView.builder(
+                                            scrollDirection: Axis.horizontal,
+                                            itemCount: snapshot.data.length,
+                                            itemBuilder: (context, index) =>
+                                                Container(
+                                              margin:
+                                                  const EdgeInsets.symmetric(
+                                                horizontal: 10,
+                                                vertical: 10,
+                                              ),
+                                              width: 100,
+                                              height: double.infinity,
+                                              padding: const EdgeInsets.all(10),
+                                              decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
+                                                color: Colors.white,
+                                                boxShadow: [
+                                                  BoxShadow(
+                                                    color: Colors.black
+                                                        .withOpacity(0.25),
+                                                    spreadRadius: 0,
+                                                    blurRadius: 4,
+                                                    offset: const Offset(0,
+                                                        4), // changes position of shadow
+                                                  ),
+                                                ],
+                                              ),
+                                              child: Center(
+                                                child: Container(
+                                                  decoration: BoxDecoration(
+                                                    shape: BoxShape.circle,
+                                                    image: DecorationImage(
+                                                      image: NetworkImage(
+                                                          snapshot.data[index]
+                                                              .logoCompany!),
+                                                      fit: BoxFit.cover,
+                                                    ),
+                                                  ),
+                                                  width: 80,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        );
+                                }),
                             const SizedBox(
                               height: 20,
                             ),
@@ -691,7 +737,18 @@ class HomePageState extends State<HomePage> {
                                         alignment: Alignment.topLeft,
                                         child: RichText(
                                           text: TextSpan(
-                                            text: '250',
+                                            text: formatNumber
+                                                .format(controller
+                                                        .listTrendingProduct[
+                                                            index]
+                                                        .price! *
+                                                    (100 -
+                                                        controller
+                                                            .listTrendingProduct[
+                                                                index]
+                                                            .discount!) /
+                                                    100)
+                                                .toString(),
                                             style: GoogleFonts.ebGaramond(
                                               color:
                                                   theme.theme == ThemeMode.light

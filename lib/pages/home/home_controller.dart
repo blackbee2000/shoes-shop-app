@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 import 'package:shoes_shop_app/models/company.dart';
 import 'package:shoes_shop_app/models/product.dart';
-import 'package:shoes_shop_app/pages/home/home_provider.dart';
+import 'package:shoes_shop_app/pages/home/home_repository.dart';
 
 class HomeController extends GetxController {
   final indexSelected = 0.obs;
@@ -26,7 +26,7 @@ class HomeController extends GetxController {
   // }
 
   getAllCompany() {
-    HomeProvider().getAllCompany(
+    HomeRepository().getAllCompany(
       option: Options(),
       beforeSend: () {},
       onSuccess: (res) {
@@ -40,7 +40,7 @@ class HomeController extends GetxController {
   }
 
   getNewProduct() {
-    HomeProvider().getNewProduct(
+    HomeRepository().getNewProduct(
       option: Options(),
       beforeSend: () {},
       onSuccess: (res) {
@@ -54,7 +54,7 @@ class HomeController extends GetxController {
   }
 
   getDiscountProduct() {
-    HomeProvider().getDiscountProduct(
+    HomeRepository().getDiscountProduct(
       option: Options(),
       beforeSend: () {},
       onSuccess: (res) {
@@ -68,7 +68,7 @@ class HomeController extends GetxController {
   }
 
   getTrendingProduct() {
-    HomeProvider().getTrendingProduct(
+    HomeRepository().getTrendingProduct(
       option: Options(),
       beforeSend: () {},
       onSuccess: (res) {

@@ -1,10 +1,37 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'package:shoes_shop_app/pages/dashboard/dashboard_page.dart';
 
-class SpalshPage extends StatelessWidget {
+import '../blog/blog_controller.dart';
+import '../home/home_controller.dart';
+import '../home/home_provider.dart';
+
+class SpalshPage extends StatefulWidget {
   SpalshPage({Key? key}) : super(key: key);
+
+  @override
+  State<SpalshPage> createState() => _SpalshPageState();
+}
+
+class _SpalshPageState extends State<SpalshPage> {
+  final homeController = Get.put(HomeController());
+  final blogController = Get.put(BlogController());
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    // homeController.getNewProduct();
+    // homeController.getDiscountProduct();
+    // homeController.getAllCompany();
+    // homeController.getTrendingProduct();
+    // blogController.getAllBlog();
+    // Future.delayed(Duration.zero).then((value) async =>
+    //     await Provider.of<HomeProvider>(context, listen: false)
+    //         .getAllCompany()
+    //         .then((value) {}));
+  }
 
   @override
   Widget build(BuildContext context) {

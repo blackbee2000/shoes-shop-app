@@ -1,106 +1,34 @@
 import 'package:dio/dio.dart';
-import 'package:shoes_shop_app/models/company_response.dart';
-import 'package:shoes_shop_app/models/product_response.dart';
-import 'package:shoes_shop_app/services/api_service.dart';
-import 'package:shoes_shop_app/utils/api_constant.dart';
+import 'package:flutter/material.dart';
 
-abstract class HomeAPIProtocol {
-  getAllCompany({
-    required Options option,
-    required Function() beforeSend,
-    required Function(CompanyResponse data) onSuccess,
-    required Function(dynamic error) onError,
-  });
-  getNewProduct({
-    required Options option,
-    required Function() beforeSend,
-    required Function(ProductResponse data) onSuccess,
-    required Function(dynamic error) onError,
-  });
-  getDiscountProduct({
-    required Options option,
-    required Function() beforeSend,
-    required Function(ProductResponse data) onSuccess,
-    required Function(dynamic error) onError,
-  });
-  getTrendingProduct({
-    required Options option,
-    required Function() beforeSend,
-    required Function(ProductResponse data) onSuccess,
-    required Function(dynamic error) onError,
-  });
-}
+import '../../models/company.dart';
+import 'home_repository.dart';
 
-class HomeProvider extends HomeAPIProtocol {
-  @override
-  getAllCompany(
-      {required Options option,
-      required Function() beforeSend,
-      required Function(CompanyResponse data) onSuccess,
-      required Function(dynamic error) onError}) {
-    ApiService(
-      path: ApiConstant.COMPANY,
-      option: option,
-    ).getAll(
-      beforeSend: () => {beforeSend()},
-      onSuccess: (data) {
-        onSuccess(CompanyResponse.fromJson(data));
-      },
-      onError: (error) => {onError(error)},
-    );
+class HomeProvider extends ChangeNotifier {
+  List<Company> _listCompany = [];
+  HomeRepository homeRepo = HomeRepository();
+
+  List<Company> get listCompany {
+    return [..._listCompany];
   }
 
-  @override
-  getNewProduct(
-      {required Options option,
-      required Function() beforeSend,
-      required Function(ProductResponse data) onSuccess,
-      required Function(dynamic error) onError}) {
-    ApiService(
-      path: ApiConstant.NEWPRODUCT,
-      option: option,
-    ).getAll(
-      beforeSend: () => {beforeSend()},
-      onSuccess: (data) {
-        onSuccess(ProductResponse.fromJson(data));
-      },
-      onError: (error) => {onError(error)},
-    );
-  }
-
-  @override
-  getDiscountProduct(
-      {required Options option,
-      required Function() beforeSend,
-      required Function(ProductResponse data) onSuccess,
-      required Function(dynamic error) onError}) {
-    ApiService(
-      path: ApiConstant.DISCOUNTPRODUCT,
-      option: option,
-    ).getAll(
-      beforeSend: () => {beforeSend()},
-      onSuccess: (data) {
-        onSuccess(ProductResponse.fromJson(data));
-      },
-      onError: (error) => {onError(error)},
-    );
-  }
-
-  @override
-  getTrendingProduct(
-      {required Options option,
-      required Function() beforeSend,
-      required Function(ProductResponse data) onSuccess,
-      required Function(dynamic error) onError}) {
-    ApiService(
-      path: ApiConstant.TRENDINGPRODUCT,
-      option: option,
-    ).getAll(
-      beforeSend: () => {beforeSend()},
-      onSuccess: (data) {
-        onSuccess(ProductResponse.fromJson(data));
-      },
-      onError: (error) => {onError(error)},
-    );
+  Future<List<Company>> getAllCompany() async {
+    List<Company> _lst = [];
+    await homeRepo.getAllCompany(
+        option: Options(),
+        beforeSend: () {},
+        onSuccess: (res) {
+          if (res != null) {
+            _listCompany = res.data ?? [];
+            notifyListeners();
+          }
+        },
+        onError: (e) {
+          print("Error get all company");
+        });
+    _lst = _listCompany;
+    return _lst;
   }
 }
+
+HomeProvider homeProvider = HomeProvider();
