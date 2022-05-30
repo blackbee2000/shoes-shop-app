@@ -11,6 +11,7 @@ import 'package:shoes_shop_app/services/api_token.dart';
 class LoginController extends GetxController {
   TextEditingController phone = TextEditingController();
   TextEditingController password = TextEditingController();
+  TextEditingController numberPhone = TextEditingController();
   final storage = GetStorage();
   final profileController = Get.put(ProfileController());
 
