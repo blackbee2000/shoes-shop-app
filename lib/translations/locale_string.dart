@@ -76,6 +76,9 @@ class LocaleString extends Translations {
           "address_new_add": "Add new address",
           "no_information": "No information",
           "change_password": "Change password",
+          "user_old_password": "Old password",
+          "user_new_password": "New password",
+          "user_confirm_password": "Confirm password",
         },
         "vi_VN": {
           "product_title": "Sản phẩm",
@@ -150,6 +153,9 @@ class LocaleString extends Translations {
           "address_new_add": "Thêm địa chỉ",
           "no_information": "Không có dữ liệu",
           "change_password": "Đổi mật khẩu",
+          "user_old_password": "Mật khẩu cũ",
+          "user_new_password": "Mật khẩu mới",
+          "user_confirm_password": "Xác nhận mật khẩu",
         }
       };
 }
