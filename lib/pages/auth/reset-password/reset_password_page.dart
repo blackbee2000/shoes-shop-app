@@ -73,8 +73,8 @@ class ResetPasswordPage extends StatelessWidget {
                 textAlign: TextAlign.left,
                 decoration: InputDecoration(
                   contentPadding: const EdgeInsets.only(
-                    bottom: 7,
                     left: 15,
+                    right: 15,
                   ),
                   hintText: 'login_your_password'.tr,
                   hintStyle: GoogleFonts.ebGaramond(
