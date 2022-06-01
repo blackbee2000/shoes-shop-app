@@ -5,6 +5,7 @@ import 'package:shoes_shop_app/utils/api_constant.dart';
 
 abstract class ProductAPIProtocol {
   getAllProduct({
+    required Map<String, dynamic> params,
     required Options option,
     required Function() beforeSend,
     required Function(ProductResponse data) onSuccess,
@@ -15,14 +16,16 @@ abstract class ProductAPIProtocol {
 class ProductProvider extends ProductAPIProtocol {
   @override
   getAllProduct(
-      {required Options option,
+      {required Map<String, dynamic> params,
+      required Options option,
       required Function() beforeSend,
       required Function(ProductResponse data) onSuccess,
       required Function(dynamic error) onError}) {
     ApiService(
-      path: ApiConstant.PRODUCT,
+      params: params,
+      path: ApiConstant.PRODUCTBYCOMPANY,
       option: option,
-    ).getAll(
+    ).post(
       beforeSend: () => {beforeSend()},
       onSuccess: (data) {
         onSuccess(ProductResponse.fromJson(data));

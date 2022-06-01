@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shoes_shop_app/pages/change-password/change_password_controller.dart';
+import 'package:shoes_shop_app/pages/profile/profile_controller.dart';
 import 'package:shoes_shop_app/utils/app_constant.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -10,6 +11,7 @@ class ChangePasswordPage extends StatelessWidget {
   }) : super(key: key);
 
   final changePasswordController = Get.put(ChangePasswordController());
+  final profileController = Get.put(ProfileController());
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -145,6 +147,7 @@ class ChangePasswordPage extends StatelessWidget {
                               ),
                               TextField(
                                 controller: controller.newPassword,
+                                obscureText: true,
                                 style: GoogleFonts.ebGaramond(
                                   color: Colors.black,
                                   fontSize: 14,
@@ -201,6 +204,7 @@ class ChangePasswordPage extends StatelessWidget {
                               ),
                               TextField(
                                 controller: controller.confirmPassword,
+                                obscureText: true,
                                 style: GoogleFonts.ebGaramond(
                                   color: Colors.black,
                                   fontSize: 14,
@@ -210,7 +214,7 @@ class ChangePasswordPage extends StatelessWidget {
                                   contentPadding:
                                       const EdgeInsets.only(left: 35),
                                   border: InputBorder.none,
-                                  hintText: 'register_your_email'.tr,
+                                  hintText: 'confirm_password'.tr,
                                   hintStyle: GoogleFonts.ebGaramond(
                                     color: const Color(0xffD0D0D0),
                                     fontSize: 14,
@@ -232,18 +236,20 @@ class ChangePasswordPage extends StatelessWidget {
                           width: double.infinity,
                           child: GestureDetector(
                             onTap: () {
-                              if (controller.confirmPassword.text !=
-                                  controller.newPassword.text) {
+                              if (controller.newPassword.text !=
+                                  controller.confirmPassword.text) {
                                 Get.snackbar(
-                                  'Fail',
-                                  'Xác nhận mật khẩu và mật khẩu mới không đồng nhất',
+                                  'Validation',
+                                  'Mật khẩu mới và xác nhận mật khẩu không trùng khớp',
                                   colorText: Colors.black,
                                   backgroundColor: Colors.white,
                                 );
-                              } else {
-                                print(controller.oldPassword);
-                                print(controller.newPassword);
+                                return;
                               }
+                              controller.changePassword(
+                                  controller.oldPassword.text,
+                                  controller.newPassword.text,
+                                  controller.confirmPassword.text);
                             },
                             child: Stack(
                               alignment: AlignmentDirectional.center,

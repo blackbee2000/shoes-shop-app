@@ -3,7 +3,7 @@ part 'address.g.dart';
 
 @JsonSerializable()
 class Address {
-  String? _id;
+  String? id;
   String? district;
   String? ward;
   String? street;
@@ -17,7 +17,7 @@ class Address {
   String? idAccount;
 
   Address(
-    this._id,
+    this.id,
     this.district,
     this.ward,
     this.street,

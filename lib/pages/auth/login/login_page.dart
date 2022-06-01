@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:shoes_shop_app/pages/auth/login/login_controller.dart';
+import 'package:shoes_shop_app/pages/auth/otp/otp_controller.dart';
 import 'package:shoes_shop_app/pages/auth/otp/otp_page.dart';
 import 'package:shoes_shop_app/pages/auth/register/register_page.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -15,6 +17,7 @@ class LoginPage extends StatefulWidget {
 
 class LoginState extends State<LoginPage> {
   final loginController = Get.put(LoginController());
+  final otpController = Get.put(OtpControler());
 
   Widget enterNumberPhone(BuildContext context) {
     return Padding(
@@ -102,6 +105,10 @@ class LoginState extends State<LoginPage> {
                   border: InputBorder.none,
                 ),
                 cursorColor: Colors.black,
+                keyboardType: TextInputType.number,
+                inputFormatters: <TextInputFormatter>[
+                  FilteringTextInputFormatter.digitsOnly
+                ], // Only numbers can be entered
               ),
             ),
             const SizedBox(
@@ -143,8 +150,18 @@ class LoginState extends State<LoginPage> {
                   Expanded(
                     child: GestureDetector(
                       onTap: () {
-                        Get.to(
-                            OtpPage(phone: loginController.numberPhone.text));
+                        if (loginController.numberPhone.text.isEmpty) {
+                          Get.snackbar(
+                            'Validation',
+                            'Vui lòng nhập số điện thoại',
+                            colorText: Colors.black,
+                            backgroundColor: Colors.white,
+                          );
+                          return;
+                        }
+
+                        loginController
+                            .sendOtp(loginController.numberPhone.text);
                       },
                       child: Container(
                         width: double.infinity,
@@ -298,6 +315,7 @@ class LoginState extends State<LoginPage> {
                               ),
                               TextField(
                                 controller: controller.password,
+                                obscureText: true,
                                 style: GoogleFonts.ebGaramond(
                                   color: Colors.black,
                                   fontSize: 14,

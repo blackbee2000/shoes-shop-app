@@ -3,7 +3,7 @@ part 'blog.g.dart';
 
 @JsonSerializable()
 class Blog {
-  String? _id;
+  String? id;
   String? contentVi;
   String? contentEn;
   String? time;
@@ -16,7 +16,7 @@ class Blog {
   int? __v;
 
   Blog(
-    this._id,
+    this.id,
     this.contentVi,
     this.contentEn,
     this.time,

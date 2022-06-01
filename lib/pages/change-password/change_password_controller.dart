@@ -1,15 +1,16 @@
-import 'dart:io';
-// import 'package:dio/dio.dart' as dio;
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:shoes_shop_app/pages/user/user_provider.dart';
+import 'package:shoes_shop_app/pages/change-password/change_password_provider.dart';
+import 'package:shoes_shop_app/pages/profile/profile_controller.dart';
+import 'package:shoes_shop_app/pages/profile/profile_page.dart';
 import 'package:shoes_shop_app/services/api_token.dart';
 
 class ChangePasswordController extends GetxController {
   TextEditingController oldPassword = TextEditingController();
   TextEditingController newPassword = TextEditingController();
   TextEditingController confirmPassword = TextEditingController();
+  final profileController = Get.put(ProfileController());
 
   @override
   void onInit() async {
@@ -18,8 +19,7 @@ class ChangePasswordController extends GetxController {
 
   changePassword(
       String oldPassword, String newPassword, String confirmPassword) {
-    print('PROFILE =>>>>>>> ${DateTime.now().toUtc().toString()}');
-    UserProvider().updateProfile(
+    ChangePasswordProvider().changePassword(
       params: {"oldPassword": oldPassword, "newPassword": newPassword},
       option: Options(
         headers: {
@@ -43,16 +43,22 @@ class ChangePasswordController extends GetxController {
         );
       },
       onSuccess: (res) {
-        update();
-      },
-      onError: (e) {
+        profileController.profile.value = res.data!;
         Get.snackbar(
-          'Fail',
-          'Lỗi cập nhật thông tin',
+          '',
+          'Đổi mật khẩu thành công',
           colorText: Colors.black,
           backgroundColor: Colors.white,
         );
-        print('UPDATE PROFILE FAIL =>>> ${e.toString()}');
+        // Future.delayed(const Duration(milliseconds: 500)).then((_) {
+        //   Get.to(ProfilePage());
+        // });
+        update();
+      },
+      onError: (e) {
+        Get.back();
+        print('CHANGE PASSWORD FAIL =>>> ${e.toString()}');
+        Get.back();
         update();
       },
     );

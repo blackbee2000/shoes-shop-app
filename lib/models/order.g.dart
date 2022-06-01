@@ -21,7 +21,7 @@ Order _$OrderFromJson(Map<String, dynamic> json) {
 }
 
 Map<String, dynamic> _$OrderToJson(Order instance) => <String, dynamic>{
-      '_id': instance._id,
+      '_id': instance.id,
       'lstCart': instance.lstCart,
       'idAccount': instance.idAccount,
       'status': instance.status,

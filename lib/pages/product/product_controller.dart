@@ -12,11 +12,6 @@ class ProductController extends GetxController {
   @override
   void onInit() async {
     super.onInit();
-    init();
-  }
-
-  init() {
-    getAllProduct();
     getAllCompany();
   }
 
@@ -27,29 +22,37 @@ class ProductController extends GetxController {
       onSuccess: (res) {
         listCompany = res.data ?? [];
         nameBrand.value = listCompany.first.nameCompany ?? '';
-        print('SUCESSSSSSSS ======>>>>>> ${listCompany.toString()}');
+        getAllProduct(listCompany.first.id!);
+        print(
+            'SUCESSSSSSSS COMPANY IN PRODUCT ======>>>>>> ${listCompany.first.id.toString()}');
+        update();
       },
       onError: (e) {
         print('FAILLL =>>>>>>>> ${e.toString()}');
+        update();
       },
     );
   }
 
-  getAllProduct() {
+  getAllProduct(String idCompany) {
     ProductProvider().getAllProduct(
-      option: Options(),
+      params: {"idCompany": idCompany, "skip": 2, "limit": 5},
+      option: Options(
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+      ),
       beforeSend: () {},
       onSuccess: (res) {
         listProduct = res.data ?? [];
-        // listProduct.map((e) => e.isLike = false);
         for (int i = 0; i < listProduct.length; i++) {
           listProduct[i].isLike = false;
         }
-        print('SUCESSSSSS =>>>>>>> ${listProduct.first.isLike}');
+        print('GET PRODUCT SUCESSSSSS =>>>>>>> ${listProduct.first.isLike}');
         update();
       },
       onError: (e) {
-        print('FAIL ==>>>>>>> ${e.toString()}');
+        print('GET PRODUCT FAIL ==>>>>>>> ${e.toString()}');
         update();
       },
     );

@@ -4,7 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:shoes_shop_app/pages/dashboard/dashboard_page.dart';
 
 class SpalshPage extends StatelessWidget {
-  SpalshPage({Key? key}) : super(key: key);
+  const SpalshPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

@@ -1,11 +1,14 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
+import 'package:shoes_shop_app/models/company.dart';
 import 'package:shoes_shop_app/models/product.dart';
 import 'package:shoes_shop_app/pages/cart/cart_page.dart';
 import 'package:shoes_shop_app/pages/product/detail/product_detail_controller.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shoes_shop_app/pages/product/product_controller.dart';
 import 'package:shoes_shop_app/translations/app_translation.dart';
 
 class ProductDetailPage extends StatefulWidget {
@@ -25,11 +28,122 @@ class ProductDetailState extends State<ProductDetailPage>
     with TickerProviderStateMixin {
   final productDetailController = Get.put(ProductDetailController());
   late TabController tabController;
+  var listSize = <String>[];
+  final productController = Get.put(ProductController());
+  var companyData = Company.fromJson({});
 
   @override
   void initState() {
     super.initState();
+    if (widget.product.type!.isNotEmpty) {
+      productDetailController.sizeShoes.value =
+          widget.product.type!.first.size!;
+      widget.product.type?.forEach((e) {
+        listSize.add(e.size!.toString());
+      });
+    } else {
+      listSize = [];
+    }
+
+    for (var e in productController.listCompany) {
+      if (e.id == widget.product.idCompany) {
+        companyData = e;
+      }
+    }
+
     tabController = TabController(length: 2, vsync: this);
+  }
+
+  Widget chooseSize(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.only(
+        bottom: MediaQuery.of(context).viewInsets.bottom,
+      ),
+      child: Container(
+        width: double.infinity,
+        padding: const EdgeInsets.all(30),
+        decoration: const BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(30),
+            topRight: Radius.circular(30),
+          ),
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Text(
+                      'product_detail_size_choose'.tr,
+                      style: GoogleFonts.ebGaramond(
+                        color: Colors.black,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    Container(
+                      width: 30,
+                      height: 2,
+                      color: Colors.black,
+                    ),
+                  ],
+                ),
+                GestureDetector(
+                  onTap: () => Get.back(),
+                  child: const Icon(
+                    Icons.close,
+                    size: 20,
+                    color: Colors.black,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: 15,
+            ),
+            Container(
+              width: double.infinity,
+              height: 1,
+              color: Colors.black.withOpacity(0.3),
+            ),
+            const SizedBox(
+              height: 15,
+            ),
+            Column(
+              children: listSize
+                  .map(
+                    (e) => GestureDetector(
+                      onTap: () {
+                        productDetailController.sizeShoes.value = e;
+                        Get.back();
+                      },
+                      child: Text(
+                        e.toString(),
+                        style: GoogleFonts.ebGaramond(
+                          color: Colors.black,
+                          fontSize: 20,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ),
+                  )
+                  .toList()
+                  .cast(),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 
   @override
@@ -188,17 +302,16 @@ class ProductDetailState extends State<ProductDetailPage>
                                   ),
                                 ),
                               ),
-                              const SizedBox(
-                                height: 10,
-                              ),
                               Wrap(
                                 children: widget.product.type!
                                     .asMap()
                                     .entries
                                     .map(
                                       (e) => Container(
-                                        margin:
-                                            const EdgeInsets.only(right: 15),
+                                        margin: const EdgeInsets.only(
+                                          right: 15,
+                                          top: 10,
+                                        ),
                                         width: 28,
                                         height: 28,
                                         color: Colors.black,
@@ -222,66 +335,44 @@ class ProductDetailState extends State<ProductDetailPage>
                                   direction: Axis.horizontal,
                                 ),
                               ),
-                              Row(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    'product_detail_size'.tr,
-                                    style: GoogleFonts.ebGaramond(
-                                      color: Colors.black,
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.w600,
-                                    ),
-                                  ),
-                                  const SizedBox(
-                                    width: 15,
-                                  ),
-                                  Obx(
-                                    () => DropdownButton<String>(
-                                      value: productDetailController
-                                          .sizeShoes.value,
-                                      icon: const Icon(
-                                        Icons.arrow_drop_down,
-                                        color: Colors.black,
-                                      ),
-                                      iconSize: 20,
-                                      underline: Container(),
+                              GestureDetector(
+                                onTap: () {
+                                  Get.bottomSheet(chooseSize(context));
+                                },
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      'product_detail_size'.tr,
                                       style: GoogleFonts.ebGaramond(
                                         color: Colors.black,
                                         fontSize: 20,
                                         fontWeight: FontWeight.w600,
                                       ),
-                                      onChanged: (String? newValue) {
-                                        productDetailController
-                                            .sizeShoes.value = newValue!;
-                                      },
-                                      items: <String>[
-                                        '35',
-                                        '36',
-                                        '37',
-                                        '38',
-                                        '39',
-                                        '40',
-                                        '41',
-                                        '42',
-                                        '43'
-                                      ].map<DropdownMenuItem<String>>(
-                                          (String value) {
-                                        return DropdownMenuItem<String>(
-                                          value: value,
-                                          child: Text(
-                                            value,
-                                            style: GoogleFonts.ebGaramond(
-                                              color: Colors.black,
-                                              fontSize: 20,
-                                              fontWeight: FontWeight.w600,
-                                            ),
-                                          ),
-                                        );
-                                      }).toList(),
                                     ),
-                                  ),
-                                ],
+                                    const SizedBox(
+                                      width: 15,
+                                    ),
+                                    Obx(
+                                      () => Text(
+                                        productDetailController.sizeShoes.value,
+                                        style: GoogleFonts.ebGaramond(
+                                          color: Colors.black,
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.w600,
+                                        ),
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                      width: 5,
+                                    ),
+                                    const Icon(
+                                      Icons.arrow_drop_down,
+                                      color: Colors.black,
+                                      size: 20,
+                                    ),
+                                  ],
+                                ),
                               ),
                               Container(
                                 width: 100,
@@ -448,11 +539,29 @@ class ProductDetailState extends State<ProductDetailPage>
                                 border:
                                     Border.all(color: Colors.black, width: 2),
                                 shape: BoxShape.circle,
-                                image: const DecorationImage(
-                                  image: AssetImage(
-                                    'assets/images/jordan.png',
+                              ),
+                              child: CachedNetworkImage(
+                                width: double.infinity,
+                                height: double.infinity,
+                                fit: BoxFit.cover,
+                                imageUrl: companyData.logoCompany ?? '',
+                                useOldImageOnUrlChange: false,
+                                progressIndicatorBuilder:
+                                    (context, url, downloadProgress) =>
+                                        SizedBox(
+                                  height: 15,
+                                  width: 15,
+                                  child: Center(
+                                    child: CircularProgressIndicator(
+                                      value: downloadProgress.progress,
+                                      valueColor: const AlwaysStoppedAnimation(
+                                          Colors.white),
+                                      strokeWidth: 2,
+                                    ),
                                   ),
-                                  fit: BoxFit.contain,
+                                ),
+                                errorWidget: (context, url, error) => ClipOval(
+                                  child: Container(),
                                 ),
                               ),
                             ),

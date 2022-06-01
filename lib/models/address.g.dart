@@ -18,7 +18,7 @@ Address _$AddressFromJson(Map<String, dynamic> json) {
 }
 
 Map<String, dynamic> _$AddressToJson(Address instance) => <String, dynamic>{
-      '_id': instance._id,
+      '_id': instance.id,
       'district': instance.district,
       'ward': instance.ward,
       'street': instance.street,

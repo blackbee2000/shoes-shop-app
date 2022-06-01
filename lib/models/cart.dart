@@ -4,7 +4,7 @@ part 'cart.g.dart';
 
 @JsonSerializable()
 class Cart {
-  String? _id;
+  String? id;
   ProductOrder? lstProduct;
   int? amount;
   int? totalPrice;
@@ -15,7 +15,7 @@ class Cart {
   int? __v;
 
   Cart(
-    this._id,
+    this.id,
     this.lstProduct,
     this.amount,
     this.totalPrice,

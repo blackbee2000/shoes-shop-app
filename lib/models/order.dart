@@ -5,7 +5,7 @@ part 'order.g.dart';
 
 @JsonSerializable()
 class Order {
-  String? _id;
+  String? id;
   List<ListCart>? lstCart;
   String? idAccount;
   int? status;
@@ -18,7 +18,7 @@ class Order {
   int? __v;
 
   Order(
-    this._id,
+    this.id,
     this.lstCart,
     this.idAccount,
     this.status,

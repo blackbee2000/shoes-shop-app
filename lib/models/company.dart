@@ -3,7 +3,7 @@ part 'company.g.dart';
 
 @JsonSerializable()
 class Company {
-  String? _id;
+  String? id;
   String? nameCompany;
   String? logoCompany;
   bool? isDeleted;
@@ -12,7 +12,7 @@ class Company {
   int? __v;
 
   Company(
-    this._id,
+    this.id,
     this.nameCompany,
     this.logoCompany,
     this.isDeleted,

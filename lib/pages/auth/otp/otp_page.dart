@@ -2,12 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:get/get.dart';
+import 'package:shoes_shop_app/pages/auth/otp/otp_controller.dart';
 import 'package:shoes_shop_app/pages/auth/reset-password/reset_password_page.dart';
 
-class OtpPage extends StatelessWidget {
-  final String phone;
-
-  const OtpPage({Key? key, required this.phone}) : super(key: key);
+class OtpPage extends GetView<OtpControler> {
+  const OtpPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

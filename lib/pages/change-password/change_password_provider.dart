@@ -4,7 +4,7 @@ import 'package:shoes_shop_app/services/api_service.dart';
 import 'package:shoes_shop_app/utils/api_constant.dart';
 
 abstract class ChangePasswordAPIProtocol {
-  updateProfile({
+  changePassword({
     required Map<String, dynamic> params,
     required Options option,
     required Function() beforeSend,
@@ -15,7 +15,7 @@ abstract class ChangePasswordAPIProtocol {
 
 class ChangePasswordProvider extends ChangePasswordAPIProtocol {
   @override
-  updateProfile(
+  changePassword(
       {required Map<String, dynamic> params,
       required Options option,
       required Function() beforeSend,

@@ -86,6 +86,8 @@ class LocaleString extends Translations {
           "reset_password": "Reset password",
           "enter_new_password_please": "Please enter new password",
           "confirm_change": "Confirm change",
+          "confirm_password": "Enter confirm password",
+          "product_detail_size_choose": "Choose size shoes",
         },
         "vi_VN": {
           "product_title": "Sản phẩm",
@@ -171,6 +173,8 @@ class LocaleString extends Translations {
           "reset_password": "Đặt lại mật khẩu",
           "enter_new_password_please": "Vui lòng nhập mật khẩu mới",
           "cofirm_change": "Xác nhận thay đổi",
+          "confirm_password": "Nhập xác nhận mật khẩu",
+          "product_detail_size_choose": "Chọn kích thước",
         }
       };
 }

@@ -130,6 +130,7 @@ class RegisterPage extends StatelessWidget {
                               ),
                               TextField(
                                 controller: controller.password,
+                                obscureText: true,
                                 style: GoogleFonts.ebGaramond(
                                   color: Colors.black,
                                   fontSize: 14,
