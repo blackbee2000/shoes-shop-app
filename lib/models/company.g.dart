@@ -13,7 +13,7 @@ Company _$CompanyFromJson(Map<String, dynamic> json) {
 }
 
 Map<String, dynamic> _$CompanyToJson(Company instance) => <String, dynamic>{
-      '_id': instance._id,
+      '_id': instance.id,
       'nameCompany': instance.nameCompany,
       'logoCompany': instance.logoCompany,
       'isDeleted': instance.isDeleted,

@@ -17,7 +17,7 @@ class ProductController extends GetxController {
 
   init() {
     getAllProduct();
-    getAllCompany();
+    // getAllCompany();
   }
 
   getAllCompany() {

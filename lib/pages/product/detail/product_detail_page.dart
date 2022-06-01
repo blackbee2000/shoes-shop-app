@@ -2,11 +2,15 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
+import 'package:provider/provider.dart';
 import 'package:shoes_shop_app/models/product.dart';
 import 'package:shoes_shop_app/pages/cart/cart_page.dart';
 import 'package:shoes_shop_app/pages/product/detail/product_detail_controller.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shoes_shop_app/translations/app_translation.dart';
+
+import '../../../models/type_product.dart';
+import '../../home/home_provider.dart';
 
 class ProductDetailPage extends StatefulWidget {
   final int id;
@@ -25,10 +29,21 @@ class ProductDetailState extends State<ProductDetailPage>
     with TickerProviderStateMixin {
   final productDetailController = Get.put(ProductDetailController());
   late TabController tabController;
+  String logoCompany = '';
+  List<TypeProduct> lstTypeProduct = [];
+  List<String> lstSizeProduct = [];
+  String sizeDefault = "0";
+  int quantity = 1;
 
   @override
   void initState() {
     super.initState();
+    final homeProvider = Provider.of<HomeProvider>(context, listen: false);
+    logoCompany = homeProvider.getLogoCompany(widget.product.idCompany!)!;
+    lstSizeProduct = homeProvider.getListSize(widget.product);
+    sizeDefault = lstSizeProduct[0];
+    lstTypeProduct = widget.product.type!;
+
     tabController = TabController(length: 2, vsync: this);
   }
 
@@ -192,7 +207,7 @@ class ProductDetailState extends State<ProductDetailPage>
                                 height: 10,
                               ),
                               Wrap(
-                                children: widget.product.type!
+                                children: lstTypeProduct
                                     .asMap()
                                     .entries
                                     .map(
@@ -201,7 +216,7 @@ class ProductDetailState extends State<ProductDetailPage>
                                             const EdgeInsets.only(right: 15),
                                         width: 28,
                                         height: 28,
-                                        color: Colors.black,
+                                        color: const Color(0xffffffff),
                                       ),
                                     )
                                     .toList(),
@@ -236,50 +251,37 @@ class ProductDetailState extends State<ProductDetailPage>
                                   const SizedBox(
                                     width: 15,
                                   ),
-                                  Obx(
-                                    () => DropdownButton<String>(
-                                      value: productDetailController
-                                          .sizeShoes.value,
-                                      icon: const Icon(
-                                        Icons.arrow_drop_down,
-                                        color: Colors.black,
-                                      ),
-                                      iconSize: 20,
-                                      underline: Container(),
-                                      style: GoogleFonts.ebGaramond(
-                                        color: Colors.black,
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.w600,
-                                      ),
-                                      onChanged: (String? newValue) {
-                                        productDetailController
-                                            .sizeShoes.value = newValue!;
-                                      },
-                                      items: <String>[
-                                        '35',
-                                        '36',
-                                        '37',
-                                        '38',
-                                        '39',
-                                        '40',
-                                        '41',
-                                        '42',
-                                        '43'
-                                      ].map<DropdownMenuItem<String>>(
-                                          (String value) {
-                                        return DropdownMenuItem<String>(
-                                          value: value,
-                                          child: Text(
-                                            value,
-                                            style: GoogleFonts.ebGaramond(
-                                              color: Colors.black,
-                                              fontSize: 20,
-                                              fontWeight: FontWeight.w600,
-                                            ),
-                                          ),
-                                        );
-                                      }).toList(),
+                                  DropdownButton<String>(
+                                    value: sizeDefault,
+                                    icon: const Icon(
+                                      Icons.arrow_drop_down,
+                                      color: Colors.black,
                                     ),
+                                    iconSize: 20,
+                                    underline: Container(),
+                                    style: GoogleFonts.ebGaramond(
+                                      color: Colors.black,
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                    onChanged: (String? newValue) {
+                                      sizeDefault = newValue!;
+                                    },
+                                    items: lstSizeProduct
+                                        .map<DropdownMenuItem<String>>(
+                                            (String value) {
+                                      return DropdownMenuItem<String>(
+                                        value: value,
+                                        child: Text(
+                                          value,
+                                          style: GoogleFonts.ebGaramond(
+                                            color: Colors.black,
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.w600,
+                                          ),
+                                        ),
+                                      );
+                                    }).toList(),
                                   ),
                                 ],
                               ),
@@ -315,23 +317,32 @@ class ProductDetailState extends State<ProductDetailPage>
                               children: [
                                 Expanded(
                                   flex: 3,
-                                  child: Container(
-                                    width: 30,
-                                    height: double.infinity,
-                                    decoration: const BoxDecoration(
-                                      color: Colors.black,
-                                      borderRadius: BorderRadius.only(
-                                        topLeft: Radius.circular(10),
-                                        bottomLeft: Radius.circular(10),
+                                  child: InkWell(
+                                    onTap: () {
+                                      if (quantity != 1) {
+                                        setState(() {
+                                          quantity -= 1;
+                                        });
+                                      }
+                                    },
+                                    child: Container(
+                                      width: 30,
+                                      height: double.infinity,
+                                      decoration: const BoxDecoration(
+                                        color: Colors.black,
+                                        borderRadius: BorderRadius.only(
+                                          topLeft: Radius.circular(10),
+                                          bottomLeft: Radius.circular(10),
+                                        ),
                                       ),
-                                    ),
-                                    child: Center(
-                                      child: Text(
-                                        '-',
-                                        style: GoogleFonts.ebGaramond(
-                                          color: Colors.white,
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w600,
+                                      child: Center(
+                                        child: Text(
+                                          '-',
+                                          style: GoogleFonts.ebGaramond(
+                                            color: Colors.white,
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w600,
+                                          ),
                                         ),
                                       ),
                                     ),
@@ -344,7 +355,7 @@ class ProductDetailState extends State<ProductDetailPage>
                                     height: double.infinity,
                                     child: Center(
                                       child: Text(
-                                        '1',
+                                        quantity.toString(),
                                         style: GoogleFonts.ebGaramond(
                                           color: Colors.black,
                                           fontSize: 16,
@@ -356,23 +367,30 @@ class ProductDetailState extends State<ProductDetailPage>
                                 ),
                                 Expanded(
                                   flex: 3,
-                                  child: Container(
-                                    width: 30,
-                                    height: double.infinity,
-                                    decoration: const BoxDecoration(
-                                      color: Colors.black,
-                                      borderRadius: BorderRadius.only(
-                                        topRight: Radius.circular(10),
-                                        bottomRight: Radius.circular(10),
+                                  child: InkWell(
+                                    onTap: () {
+                                      setState(() {
+                                        quantity += 1;
+                                      });
+                                    },
+                                    child: Container(
+                                      width: 30,
+                                      height: double.infinity,
+                                      decoration: const BoxDecoration(
+                                        color: Colors.black,
+                                        borderRadius: BorderRadius.only(
+                                          topRight: Radius.circular(10),
+                                          bottomRight: Radius.circular(10),
+                                        ),
                                       ),
-                                    ),
-                                    child: Center(
-                                      child: Text(
-                                        '+',
-                                        style: GoogleFonts.ebGaramond(
-                                          color: Colors.white,
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w600,
+                                      child: Center(
+                                        child: Text(
+                                          '+',
+                                          style: GoogleFonts.ebGaramond(
+                                            color: Colors.white,
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w600,
+                                          ),
                                         ),
                                       ),
                                     ),
@@ -448,9 +466,9 @@ class ProductDetailState extends State<ProductDetailPage>
                                 border:
                                     Border.all(color: Colors.black, width: 2),
                                 shape: BoxShape.circle,
-                                image: const DecorationImage(
-                                  image: AssetImage(
-                                    'assets/images/jordan.png',
+                                image: DecorationImage(
+                                  image: NetworkImage(
+                                    logoCompany,
                                   ),
                                   fit: BoxFit.contain,
                                 ),

@@ -19,7 +19,7 @@ class ProfileController extends GetxController {
   @override
   void onInit() async {
     super.onInit();
-    getProfile();
+    // getProfile();
   }
 
   removeToken() async {

@@ -37,7 +37,7 @@ class HomePageState extends State<HomePage> {
   void initState() {
     homeController.getNewProduct();
     homeController.getDiscountProduct();
-    homeController.getAllCompany();
+    // homeController.getAllCompany();
     homeController.getTrendingProduct();
     // blogController.getAllBlog();
 
@@ -500,12 +500,15 @@ class HomePageState extends State<HomePage> {
                                         height: 15,
                                       ),
                                       GestureDetector(
-                                        onTap: () => Get.to(
-                                            ProductDetailPage(
-                                              product: Product.fromJson({}),
-                                              id: AppConstant.HOME,
-                                            ),
-                                            id: AppConstant.HOME),
+                                        onTap: () {
+                                          Get.to(
+                                              ProductDetailPage(
+                                                product: controller
+                                                    .listDiscountProduct[index],
+                                                id: AppConstant.HOME,
+                                              ),
+                                              id: AppConstant.HOME);
+                                        },
                                         child: Container(
                                           width: double.infinity,
                                           height: 30,
