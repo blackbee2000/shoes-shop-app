@@ -3,6 +3,9 @@ part of 'blog.dart';
 Blog _$BlogFromJson(Map<String, dynamic> json) {
   return Blog(
     json['_id'] as String?,
+    json['titleVi'] as String?,
+    json['titleEn'] as String?,
+    json['link'] as String?,
     json['contentVi'] as String?,
     json['contentEn'] as String?,
     json['time'] as String?,
@@ -18,6 +21,9 @@ Blog _$BlogFromJson(Map<String, dynamic> json) {
 
 Map<String, dynamic> _$BlogToJson(Blog instance) => <String, dynamic>{
       '_id': instance.id,
+      'titleVi': instance.titleVi,
+      'titleEn': instance.titleEn,
+      'link': instance.link,
       'contentVi': instance.contentVi,
       'contentEn': instance.contentEn,
       'time': instance.time,

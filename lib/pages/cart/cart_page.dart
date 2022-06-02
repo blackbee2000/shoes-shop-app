@@ -15,7 +15,6 @@ class CartPage extends StatelessWidget {
   }) : super(key: key);
 
   final cartController = Get.put(CartController());
-  final addressController = Get.put(AddressController());
 
   @override
   Widget build(BuildContext context) {
@@ -152,7 +151,6 @@ class CartPage extends StatelessWidget {
                         ),
                         GestureDetector(
                           onTap: () {
-                            addressController.onInit();
                             Get.to(
                                 AddressPage(
                                   id: id,

@@ -15,6 +15,7 @@ class LoginController extends GetxController {
   TextEditingController numberPhone = TextEditingController();
   final storage = GetStorage();
   final otpResponse = Otp.fromJson({}).obs;
+  final phoneForOtp = ''.obs;
 
   setToken(token) async {
     await storage.write('token', token);

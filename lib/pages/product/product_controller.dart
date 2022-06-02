@@ -45,10 +45,10 @@ class ProductController extends GetxController {
       beforeSend: () {},
       onSuccess: (res) {
         listProduct = res.data ?? [];
-        for (int i = 0; i < listProduct.length; i++) {
-          listProduct[i].isLike = false;
-        }
-        print('GET PRODUCT SUCESSSSSS =>>>>>>> ${listProduct.first.isLike}');
+        // for (int i = 0; i < listProduct.length; i++) {
+        //   listProduct[i].isLike = false;
+        // }
+        // print('GET PRODUCT SUCESSSSSS =>>>>>>> ${listProduct.first.isLike}');
         update();
       },
       onError: (e) {

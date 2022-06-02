@@ -184,9 +184,13 @@ class BlogPage extends StatelessWidget {
                                           bottom: 15,
                                         ),
                                         child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
                                           children: [
                                             Text(
-                                              'Jordan chất điên, cháy cả cộng đồng mạng',
+                                              '${AppTranslation.instance.language == AppTranslation.english ? (controller.listBlog[index].titleEn != null && controller.listBlog[index].titleEn!.isNotEmpty ? controller.listBlog[index].titleEn : '--') : (controller.listBlog[index].titleVi != null && controller.listBlog[index].titleVi!.isNotEmpty ? controller.listBlog[index].titleVi : '--')}',
                                               style: GoogleFonts.ebGaramond(
                                                 color: Colors.black,
                                                 fontSize: 16,

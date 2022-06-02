@@ -88,6 +88,9 @@ class LocaleString extends Translations {
           "confirm_change": "Confirm change",
           "confirm_password": "Enter confirm password",
           "product_detail_size_choose": "Choose size shoes",
+          "login_popup": "You need to login, do you want?",
+          "notification": "Notification",
+          "add_to_cart": "Do you add this shoes to cart?",
         },
         "vi_VN": {
           "product_title": "Sản phẩm",
@@ -175,6 +178,9 @@ class LocaleString extends Translations {
           "cofirm_change": "Xác nhận thay đổi",
           "confirm_password": "Nhập xác nhận mật khẩu",
           "product_detail_size_choose": "Chọn kích thước",
+          "login_popup": "Bạn cần phải đăng nhập, bạn có muốn thực hiện?",
+          "notification": "Thông báo",
+          "add_to_cart": "Bạn muốn thêm sản phẩm vào giỏ hàng?",
         }
       };
 }

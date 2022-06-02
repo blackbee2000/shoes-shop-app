@@ -196,7 +196,8 @@ class AddressPage extends StatelessWidget {
     );
   }
 
-  Widget editAddress(BuildContext context) {
+  Widget editAddress(BuildContext context, String name) {
+    addressController.customerNameEdit.text = name;
     return Padding(
       padding: EdgeInsets.only(
         bottom: MediaQuery.of(context).viewInsets.bottom,
@@ -242,7 +243,7 @@ class AddressPage extends StatelessWidget {
                   ],
                 ),
                 GestureDetector(
-                  onTap: () => Navigator.pop(context),
+                  onTap: () => Get.back(),
                   child: const Icon(
                     Icons.close,
                     size: 20,
@@ -360,7 +361,7 @@ class AddressPage extends StatelessWidget {
                 children: [
                   Expanded(
                     child: GestureDetector(
-                      onTap: () => Navigator.pop(context),
+                      onTap: () => Get.back(),
                       child: Container(
                         width: double.infinity,
                         height: double.infinity,
@@ -414,7 +415,7 @@ class AddressPage extends StatelessWidget {
     );
   }
 
-  Widget deleteAddress(BuildContext context) {
+  Widget deleteAddress(BuildContext context, String id) {
     return Padding(
       padding: EdgeInsets.only(
         bottom: MediaQuery.of(context).viewInsets.bottom,
@@ -459,7 +460,7 @@ class AddressPage extends StatelessWidget {
                   ],
                 ),
                 GestureDetector(
-                  onTap: () => Navigator.pop(context),
+                  onTap: () => Get.back(),
                   child: const Icon(
                     Icons.close,
                     size: 20,
@@ -492,7 +493,7 @@ class AddressPage extends StatelessWidget {
                 children: [
                   Expanded(
                     child: GestureDetector(
-                      onTap: () => Navigator.pop(context),
+                      onTap: () => Get.back(),
                       child: Container(
                         width: double.infinity,
                         height: double.infinity,
@@ -518,20 +519,28 @@ class AddressPage extends StatelessWidget {
                   const SizedBox(
                     width: 15,
                   ),
-                  Expanded(
-                    child: Container(
-                      width: double.infinity,
-                      height: double.infinity,
-                      decoration: const BoxDecoration(
-                        color: Colors.black,
-                      ),
-                      child: Center(
-                        child: Text(
-                          'address_confirm'.tr,
-                          style: GoogleFonts.ebGaramond(
-                            color: Colors.white,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w600,
+                  GetBuilder<AddressController>(
+                    init: addressController,
+                    builder: (controller) => Expanded(
+                      child: GestureDetector(
+                        onTap: () {
+                          controller.deleteAddress(id);
+                        },
+                        child: Container(
+                          width: double.infinity,
+                          height: double.infinity,
+                          decoration: const BoxDecoration(
+                            color: Colors.black,
+                          ),
+                          child: Center(
+                            child: Text(
+                              'address_confirm'.tr,
+                              style: GoogleFonts.ebGaramond(
+                                color: Colors.white,
+                                fontSize: 14,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
                           ),
                         ),
                       ),
@@ -647,7 +656,7 @@ class AddressPage extends StatelessWidget {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Text(
-                                    'Trần Thái Tuấn',
+                                    '${controller.listAddressDefault.value.nameReciever != null && controller.listAddressDefault.value.nameReciever!.isNotEmpty ? controller.listAddressDefault.value.nameReciever : '--'}',
                                     style: GoogleFonts.ebGaramond(
                                       color: Colors.black,
                                       fontSize: 14,
@@ -658,7 +667,11 @@ class AddressPage extends StatelessWidget {
                                     height: 3,
                                   ),
                                   Text(
-                                    '180 Sao Hoả, Hệ Mặt Trời',
+                                    '${controller.listAddressDefault.value.street != null && controller.listAddressDefault.value.street!.isNotEmpty ? controller.listAddressDefault.value.street : '--'}' +
+                                        ', ' +
+                                        '${controller.listAddressDefault.value.ward != null && controller.listAddressDefault.value.ward!.isNotEmpty ? controller.listAddressDefault.value.ward : '--'}' +
+                                        ', ' +
+                                        '${controller.listAddressDefault.value.district != null && controller.listAddressDefault.value.district!.isNotEmpty ? controller.listAddressDefault.value.district : '--'}',
                                     style: GoogleFonts.ebGaramond(
                                       color: Colors.black,
                                       fontSize: 14,
@@ -681,7 +694,10 @@ class AddressPage extends StatelessWidget {
                                 GestureDetector(
                                   onTap: () {
                                     Get.bottomSheet(
-                                      editAddress(context),
+                                      editAddress(
+                                          context,
+                                          controller.listAddressDefault.value
+                                              .nameReciever!),
                                       isScrollControlled: true,
                                     );
                                   },
@@ -698,7 +714,10 @@ class AddressPage extends StatelessWidget {
                                 GestureDetector(
                                   onTap: () {
                                     Get.bottomSheet(
-                                      deleteAddress(context),
+                                      deleteAddress(
+                                          context,
+                                          controller
+                                              .listAddressDefault.value.id!),
                                       isScrollControlled: true,
                                     );
                                   },
@@ -789,7 +808,11 @@ class AddressPage extends StatelessWidget {
                                         height: 3,
                                       ),
                                       Text(
-                                        '180 Sao Hoả, Hệ Mặt Trời',
+                                        '${controller.listAddress[index].street != null && controller.listAddress[index].street!.isNotEmpty ? controller.listAddress[index].street : '--'}' +
+                                            ', ' +
+                                            '${controller.listAddress[index].ward != null && controller.listAddress[index].ward!.isNotEmpty ? controller.listAddress[index].ward : '--'}' +
+                                            ', ' +
+                                            '${controller.listAddress[index].district != null && controller.listAddress[index].district!.isNotEmpty ? controller.listAddress[index].district : '--'}',
                                         style: GoogleFonts.ebGaramond(
                                           color: Colors.black,
                                           fontSize: 14,
@@ -812,7 +835,10 @@ class AddressPage extends StatelessWidget {
                                     GestureDetector(
                                       onTap: () {
                                         Get.bottomSheet(
-                                          editAddress(context),
+                                          editAddress(
+                                              context,
+                                              controller.listAddress[index]
+                                                  .nameReciever!),
                                           isScrollControlled: true,
                                         );
                                       },
@@ -829,7 +855,10 @@ class AddressPage extends StatelessWidget {
                                     GestureDetector(
                                       onTap: () {
                                         Get.bottomSheet(
-                                          deleteAddress(context),
+                                          deleteAddress(
+                                              context,
+                                              controller
+                                                  .listAddress[index].id!),
                                           isScrollControlled: true,
                                         );
                                       },

@@ -17,7 +17,6 @@ class LoginPage extends StatefulWidget {
 
 class LoginState extends State<LoginPage> {
   final loginController = Get.put(LoginController());
-  final otpController = Get.put(OtpControler());
 
   Widget enterNumberPhone(BuildContext context) {
     return Padding(
@@ -159,7 +158,8 @@ class LoginState extends State<LoginPage> {
                           );
                           return;
                         }
-
+                        loginController.phoneForOtp.value =
+                            loginController.numberPhone.text;
                         loginController
                             .sendOtp(loginController.numberPhone.text);
                       },
