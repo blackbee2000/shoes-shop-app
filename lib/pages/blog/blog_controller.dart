@@ -14,7 +14,12 @@ class BlogController extends GetxController {
 
   getAllBlog() {
     BlogProvider().getAllBlog(
-      option: Options(),
+      params: {"limit": 5, "skip": 1},
+      option: Options(
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+      ),
       beforeSend: () {},
       onSuccess: (res) {
         print('GET DATA BLOG SUCESSS =>>>>>> ${res.toString()}');

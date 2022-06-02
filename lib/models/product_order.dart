@@ -4,7 +4,7 @@ part 'product_order.g.dart';
 
 @JsonSerializable()
 class ProductOrder {
-  String? _id;
+  String? id;
   String? nameProductVi;
   String? nameProductEn;
   String? imageProduct;
@@ -17,7 +17,7 @@ class ProductOrder {
   String? productCode;
 
   ProductOrder(
-    this._id,
+    this.id,
     this.nameProductVi,
     this.nameProductEn,
     this.imageProduct,

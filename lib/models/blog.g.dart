@@ -17,7 +17,7 @@ Blog _$BlogFromJson(Map<String, dynamic> json) {
 }
 
 Map<String, dynamic> _$BlogToJson(Blog instance) => <String, dynamic>{
-      '_id': instance._id,
+      '_id': instance.id,
       'contentVi': instance.contentVi,
       'contentEn': instance.contentEn,
       'time': instance.time,

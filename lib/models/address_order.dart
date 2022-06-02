@@ -3,7 +3,7 @@ part 'address_order.g.dart';
 
 @JsonSerializable()
 class AddressOrder {
-  String? _id;
+  String? id;
   String? district;
   String? ward;
   String? street;
@@ -12,7 +12,7 @@ class AddressOrder {
   String? phoneReciever;
 
   AddressOrder(
-    this._id,
+    this.id,
     this.district,
     this.ward,
     this.street,

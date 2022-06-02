@@ -24,19 +24,19 @@ class HomePageState extends State<HomePage> {
   final homeController = Get.put(HomeController());
   final dashboardController = Get.put(DashboardController());
 
-  @override
-  void initState() {
-    homeController.getNewProduct();
-    homeController.getDiscountProduct();
-    homeController.getAllCompany();
-    homeController.getTrendingProduct();
-    super.initState();
-  }
+  // @override
+  // void initState() {
+  //   homeController.getNewProduct();
+  //   homeController.getDiscountProduct();
+  //   homeController.getAllCompany();
+  //   homeController.getTrendingProduct();
+  //   super.initState();
+  // }
 
-  @override
-  void dispose() {
-    super.dispose();
-  }
+  // @override
+  // void dispose() {
+  //   super.dispose();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -428,6 +428,8 @@ class HomePageState extends State<HomePage> {
                                           fontSize: 14,
                                           fontWeight: FontWeight.w600,
                                         ),
+                                        maxLines: 1,
+                                        overflow: TextOverflow.ellipsis,
                                       ),
                                       const SizedBox(
                                         height: 15,

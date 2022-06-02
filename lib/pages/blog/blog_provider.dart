@@ -5,6 +5,7 @@ import 'package:shoes_shop_app/utils/api_constant.dart';
 
 abstract class BlogAPIProtocol {
   getAllBlog({
+    required Map<String, dynamic> params,
     required Options option,
     required Function() beforeSend,
     required Function(BlogResponse data) onSuccess,
@@ -15,14 +16,16 @@ abstract class BlogAPIProtocol {
 class BlogProvider extends BlogAPIProtocol {
   @override
   getAllBlog(
-      {required Options option,
+      {required Map<String, dynamic> params,
+      required Options option,
       required Function() beforeSend,
       required Function(BlogResponse data) onSuccess,
       required Function(dynamic error) onError}) {
     ApiService(
       path: ApiConstant.BLOG,
+      params: params,
       option: option,
-    ).getAll(
+    ).post(
       beforeSend: () => {beforeSend()},
       onSuccess: (data) {
         onSuccess(BlogResponse.fromJson(data));

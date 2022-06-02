@@ -6,10 +6,12 @@ part 'product_response.g.dart';
 class ProductResponse {
   String? message;
   List<Product>? data;
+  int? totalProdcut;
 
   ProductResponse(
     this.message,
     this.data,
+    this.totalProdcut,
   );
 
   factory ProductResponse.fromJson(Map<String, dynamic> json) =>

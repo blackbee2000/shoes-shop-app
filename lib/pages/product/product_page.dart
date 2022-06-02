@@ -123,65 +123,74 @@ class ProductPage extends StatelessWidget {
                                   itemBuilder: (context, index) => SizedBox(
                                     width: 60,
                                     height: double.infinity,
-                                    child: Center(
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          ClipOval(
-                                            child: Container(
-                                              width: 40,
-                                              height: 40,
-                                              color: Colors.black,
-                                              child: CachedNetworkImage(
-                                                width: double.infinity,
-                                                height: double.infinity,
-                                                fit: BoxFit.cover,
-                                                imageUrl: controller
-                                                        .listCompany[index]
-                                                        .logoCompany ??
-                                                    '',
-                                                useOldImageOnUrlChange: false,
-                                                progressIndicatorBuilder:
-                                                    (context, url,
-                                                            downloadProgress) =>
-                                                        SizedBox(
-                                                  height: 15,
-                                                  width: 15,
-                                                  child: Center(
-                                                    child:
-                                                        CircularProgressIndicator(
-                                                      value: downloadProgress
-                                                          .progress,
-                                                      valueColor:
-                                                          const AlwaysStoppedAnimation(
-                                                              Colors.white),
-                                                      strokeWidth: 2,
+                                    child: GestureDetector(
+                                      onTap: () {
+                                        controller.nameBrand.value = controller
+                                            .listCompany[index].nameCompany!;
+                                        controller.getAllProduct(
+                                            controller.listCompany[index].id!);
+                                        controller.update();
+                                      },
+                                      child: Center(
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            ClipOval(
+                                              child: Container(
+                                                width: 40,
+                                                height: 40,
+                                                color: Colors.black,
+                                                child: CachedNetworkImage(
+                                                  width: double.infinity,
+                                                  height: double.infinity,
+                                                  fit: BoxFit.cover,
+                                                  imageUrl: controller
+                                                          .listCompany[index]
+                                                          .logoCompany ??
+                                                      '',
+                                                  useOldImageOnUrlChange: false,
+                                                  progressIndicatorBuilder:
+                                                      (context, url,
+                                                              downloadProgress) =>
+                                                          SizedBox(
+                                                    height: 15,
+                                                    width: 15,
+                                                    child: Center(
+                                                      child:
+                                                          CircularProgressIndicator(
+                                                        value: downloadProgress
+                                                            .progress,
+                                                        valueColor:
+                                                            const AlwaysStoppedAnimation(
+                                                                Colors.white),
+                                                        strokeWidth: 2,
+                                                      ),
                                                     ),
                                                   ),
-                                                ),
-                                                errorWidget:
-                                                    (context, url, error) =>
-                                                        ClipOval(
-                                                  child: Container(),
+                                                  errorWidget:
+                                                      (context, url, error) =>
+                                                          ClipOval(
+                                                    child: Container(),
+                                                  ),
                                                 ),
                                               ),
                                             ),
-                                          ),
-                                          const SizedBox(
-                                            height: 5,
-                                          ),
-                                          Text(
-                                            '${controller.listCompany[index].nameCompany != null && controller.listCompany[index].nameCompany!.isNotEmpty ? controller.listCompany[index].nameCompany : '--'}',
-                                            style: GoogleFonts.ebGaramond(
-                                              color: Colors.black,
-                                              fontSize: 13,
-                                              fontWeight: FontWeight.w400,
+                                            const SizedBox(
+                                              height: 5,
                                             ),
-                                          ),
-                                        ],
+                                            Text(
+                                              '${controller.listCompany[index].nameCompany != null && controller.listCompany[index].nameCompany!.isNotEmpty ? controller.listCompany[index].nameCompany : '--'}',
+                                              style: GoogleFonts.ebGaramond(
+                                                color: Colors.black,
+                                                fontSize: 13,
+                                                fontWeight: FontWeight.w400,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                     ),
                                   ),
@@ -190,25 +199,28 @@ class ProductPage extends StatelessWidget {
                               const SizedBox(
                                 height: 20,
                               ),
-                              Container(
-                                width: double.infinity,
-                                alignment: Alignment.centerLeft,
-                                child: Text(
-                                  '${controller.nameBrand}',
-                                  style: GoogleFonts.ebGaramond(
-                                    color: theme.theme == ThemeMode.light
-                                        ? Colors.black
-                                        : Colors.white,
-                                    fontSize: 25,
-                                    fontWeight: FontWeight.w600,
+                              Obx(
+                                () => Container(
+                                  width: double.infinity,
+                                  alignment: Alignment.centerLeft,
+                                  child: Text(
+                                    '${controller.nameBrand}',
+                                    style: GoogleFonts.ebGaramond(
+                                      color: theme.theme == ThemeMode.light
+                                          ? Colors.black
+                                          : Colors.white,
+                                      fontSize: 25,
+                                      fontWeight: FontWeight.w600,
+                                    ),
                                   ),
                                 ),
                               ),
                               const SizedBox(
                                 height: 20,
                               ),
-                              Obx(
-                                () => Expanded(
+                              GetBuilder<ProductController>(
+                                init: productController,
+                                builder: (controller) => Expanded(
                                   child: GridView.builder(
                                     gridDelegate:
                                         const SliverGridDelegateWithFixedCrossAxisCount(
@@ -224,8 +236,8 @@ class ProductPage extends StatelessWidget {
                                       onTap: () {
                                         Get.to(
                                             ProductDetailPage(
-                                              product: productController
-                                                  .listProduct[index],
+                                              product:
+                                                  controller.listProduct[index],
                                               id: AppConstant.PRODUCT,
                                             ),
                                             id: AppConstant.PRODUCT);
@@ -275,7 +287,7 @@ class ProductPage extends StatelessWidget {
                                                       ),
                                                       child: GestureDetector(
                                                         onTap: () {
-                                                          productController
+                                                          controller
                                                                   .listProduct[
                                                                       index]
                                                                   .isLike =
@@ -361,7 +373,7 @@ class ProductPage extends StatelessWidget {
                                               height: 15,
                                             ),
                                             Text(
-                                              '${AppTranslation.instance.language == AppTranslation.english ? (productController.listProduct[index].nameProductEn != null && productController.listProduct[index].nameProductEn!.isNotEmpty ? productController.listProduct[index].nameProductEn : '--') : (productController.listProduct[index].nameProductVi != null && productController.listProduct[index].nameProductVi!.isNotEmpty ? productController.listProduct[index].nameProductVi : '--')}',
+                                              '${AppTranslation.instance.language == AppTranslation.english ? (controller.listProduct[index].nameProductEn != null && controller.listProduct[index].nameProductEn!.isNotEmpty ? controller.listProduct[index].nameProductEn : '--') : (controller.listProduct[index].nameProductVi != null && controller.listProduct[index].nameProductVi!.isNotEmpty ? controller.listProduct[index].nameProductVi : '--')}',
                                               style: GoogleFonts.ebGaramond(
                                                 color: theme.theme ==
                                                         ThemeMode.light
@@ -382,7 +394,7 @@ class ProductPage extends StatelessWidget {
                                                 textAlign: TextAlign.start,
                                                 text: TextSpan(
                                                   text:
-                                                      '${productController.listProduct[index].price ?? '--'}',
+                                                      '${controller.listProduct[index].price ?? '--'}',
                                                   style: GoogleFonts.ebGaramond(
                                                     color: theme.theme ==
                                                             ThemeMode.light

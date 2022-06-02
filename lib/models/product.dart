@@ -4,7 +4,7 @@ part 'product.g.dart';
 
 @JsonSerializable()
 class Product {
-  String? _id;
+  String? id;
   String? nameProductVi;
   String? nameProductEn;
   List<String>? imageProduct;
@@ -24,7 +24,7 @@ class Product {
   bool? isLike;
 
   Product(
-    this._id,
+    this.id,
     this.nameProductVi,
     this.nameProductEn,
     this.imageProduct,

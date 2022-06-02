@@ -8,12 +8,12 @@ class AppPages {
   static var list = [
     GetPage(
       name: AppRoutes.SPLASH,
-      page: () => SpalshPage(),
+      page: () => const SpalshPage(),
       binding: DashboardBinding(),
     ),
     GetPage(
       name: AppRoutes.DASHBORAD,
-      page: () => DashboardPage(),
+      page: () => const DashboardPage(),
     ),
   ];
 }

@@ -11,19 +11,19 @@ class HomeController extends GetxController {
   List<Product> listDiscountProduct = <Product>[].obs;
   List<Product> listTrendingProduct = <Product>[].obs;
 
-  // @override
-  // void onInit() {
-  //   super.onInit();
-  //   getAllCompany();
-  //   getNewProduct();
-  //   getDiscountProduct();
-  //   getTrendingProduct();
-  // }
+  @override
+  void onInit() {
+    super.onInit();
+    getAllCompany();
+    getNewProduct();
+    getDiscountProduct();
+    getTrendingProduct();
+  }
 
-  // @override
-  // void dispose() {
-  //   super.dispose();
-  // }
+  @override
+  void dispose() {
+    super.dispose();
+  }
 
   getAllCompany() {
     HomeProvider().getAllCompany(
@@ -32,9 +32,11 @@ class HomeController extends GetxController {
       onSuccess: (res) {
         print('GET ALL COMPANY SUCCESS =>>>>>>> ${res.toString()}');
         listCompany = res.data ?? [];
+        update();
       },
       onError: (e) {
         print('GET ALL COMPANY FAIL =>>>>>>> ${e.toString()}');
+        update();
       },
     );
   }
@@ -46,9 +48,11 @@ class HomeController extends GetxController {
       onSuccess: (res) {
         print('GET NEW PRODUCT SUCCESS =>>>>>>> ${res.toString()}');
         listNewProduct = res.data ?? [];
+        update();
       },
       onError: (e) {
         print('GET NEW PRODUCT FAIL =>>>>>>> ${e.toString()}');
+        update();
       },
     );
   }
@@ -60,9 +64,11 @@ class HomeController extends GetxController {
       onSuccess: (res) {
         print('GET DISCOUNT PRODUCT SUCCESS =>>>>>>> ${res.toString()}');
         listDiscountProduct = res.data ?? [];
+        update();
       },
       onError: (e) {
         print('GET DISCOUNT PRODUCT FAIL =>>>>>>> ${e.toString()}');
+        update();
       },
     );
   }
@@ -74,9 +80,11 @@ class HomeController extends GetxController {
       onSuccess: (res) {
         print('GET TRENDING PRODUCT SUCCESS =>>>>>>> ${res.toString()}');
         listTrendingProduct = res.data ?? [];
+        update();
       },
       onError: (e) {
         print('GET TRENDING PRODUCT FAIL =>>>>>>> ${e.toString()}');
+        update();
       },
     );
   }

@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:shoes_shop_app/pages/auth/register/register_controller.dart';
+import 'package:shoes_shop_app/pages/change-password/change_password_controller.dart';
+import 'package:shoes_shop_app/pages/profile/profile_controller.dart';
+import 'package:shoes_shop_app/utils/app_constant.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class RegisterPage extends StatelessWidget {
-  final registerController = Get.put(RegisterController());
-  RegisterPage({Key? key}) : super(key: key);
+class ChangePasswordPage extends StatelessWidget {
+  ChangePasswordPage({
+    Key? key,
+  }) : super(key: key);
+
+  final changePasswordController = Get.put(ChangePasswordController());
+  final profileController = Get.put(ProfileController());
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -21,6 +27,28 @@ class RegisterPage extends StatelessWidget {
               fit: BoxFit.cover,
             ),
             Scaffold(
+              appBar: AppBar(
+                backgroundColor: Colors.transparent,
+                leading: IconButton(
+                  onPressed: () {
+                    Get.back(id: AppConstant.PROFILE);
+                  },
+                  icon: const Icon(
+                    Icons.arrow_back_ios,
+                    size: 20,
+                    color: Colors.white,
+                  ),
+                ),
+                title: Text(
+                  'change_password'.tr,
+                  style: GoogleFonts.ebGaramond(
+                    color: Colors.white,
+                    fontSize: 20,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                centerTitle: true,
+              ),
               backgroundColor: Colors.transparent,
               body: SizedBox(
                 width: double.infinity,
@@ -29,78 +57,10 @@ class RegisterPage extends StatelessWidget {
                   child: Column(
                     children: [
                       const SizedBox(
-                        height: 90,
-                      ),
-                      Text(
-                        'Register',
-                        style: GoogleFonts.ebGaramond(
-                          color: Colors.white,
-                          fontSize: 50,
-                          fontWeight: FontWeight.w700,
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                      const SizedBox(
-                        height: 40,
-                      ),
-                      GetBuilder<RegisterController>(
-                        init: registerController,
-                        builder: (controller) => Container(
-                          width: double.infinity,
-                          height: 50,
-                          padding: const EdgeInsets.symmetric(horizontal: 15),
-                          margin: const EdgeInsets.symmetric(horizontal: 30),
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(10),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black.withOpacity(0.25),
-                                spreadRadius: 0,
-                                blurRadius: 4,
-                                offset: const Offset(
-                                    0, 4), // changes position of shadow
-                              ),
-                            ],
-                          ),
-                          child: Stack(
-                            alignment: AlignmentDirectional.centerStart,
-                            children: [
-                              Image.asset(
-                                'assets/icons/icon-phone.png',
-                                width: 20,
-                                height: 20,
-                                fit: BoxFit.contain,
-                              ),
-                              TextField(
-                                controller: controller.phone,
-                                style: GoogleFonts.ebGaramond(
-                                  color: Colors.black,
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w400,
-                                ),
-                                decoration: InputDecoration(
-                                  contentPadding:
-                                      const EdgeInsets.only(left: 35),
-                                  border: InputBorder.none,
-                                  hintText: 'login_your_phone'.tr,
-                                  hintStyle: GoogleFonts.ebGaramond(
-                                    color: const Color(0xffD0D0D0),
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w400,
-                                  ),
-                                ),
-                                cursorColor: Colors.black,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      const SizedBox(
                         height: 30,
                       ),
-                      GetBuilder<RegisterController>(
-                        init: registerController,
+                      GetBuilder<ChangePasswordController>(
+                        init: changePasswordController,
                         builder: (controller) => Container(
                           width: double.infinity,
                           height: 50,
@@ -129,7 +89,7 @@ class RegisterPage extends StatelessWidget {
                                 fit: BoxFit.contain,
                               ),
                               TextField(
-                                controller: controller.password,
+                                controller: controller.oldPassword,
                                 obscureText: true,
                                 style: GoogleFonts.ebGaramond(
                                   color: Colors.black,
@@ -140,7 +100,7 @@ class RegisterPage extends StatelessWidget {
                                   contentPadding:
                                       const EdgeInsets.only(left: 35),
                                   border: InputBorder.none,
-                                  hintText: 'login_your_password'.tr,
+                                  hintText: 'user_old_password'.tr,
                                   hintStyle: GoogleFonts.ebGaramond(
                                     color: const Color(0xffD0D0D0),
                                     fontSize: 14,
@@ -154,10 +114,10 @@ class RegisterPage extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(
-                        height: 30,
+                        height: 20,
                       ),
-                      GetBuilder<RegisterController>(
-                        init: registerController,
+                      GetBuilder<ChangePasswordController>(
+                        init: changePasswordController,
                         builder: (controller) => Container(
                           width: double.infinity,
                           height: 50,
@@ -180,13 +140,14 @@ class RegisterPage extends StatelessWidget {
                             alignment: AlignmentDirectional.centerStart,
                             children: [
                               Image.asset(
-                                'assets/icons/icon-email.png',
+                                'assets/icons/icon-lock.png',
                                 width: 20,
                                 height: 20,
                                 fit: BoxFit.contain,
                               ),
                               TextField(
-                                controller: controller.email,
+                                controller: controller.newPassword,
+                                obscureText: true,
                                 style: GoogleFonts.ebGaramond(
                                   color: Colors.black,
                                   fontSize: 14,
@@ -196,7 +157,7 @@ class RegisterPage extends StatelessWidget {
                                   contentPadding:
                                       const EdgeInsets.only(left: 35),
                                   border: InputBorder.none,
-                                  hintText: 'register_your_email'.tr,
+                                  hintText: 'user_new_password'.tr,
                                   hintStyle: GoogleFonts.ebGaramond(
                                     color: const Color(0xffD0D0D0),
                                     fontSize: 14,
@@ -210,18 +171,85 @@ class RegisterPage extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(
-                        height: 60,
+                        height: 20,
                       ),
-                      GetBuilder<RegisterController>(
-                        init: registerController,
+                      GetBuilder<ChangePasswordController>(
+                        init: changePasswordController,
+                        builder: (controller) => Container(
+                          width: double.infinity,
+                          height: 50,
+                          padding: const EdgeInsets.symmetric(horizontal: 15),
+                          margin: const EdgeInsets.symmetric(horizontal: 30),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(10),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black.withOpacity(0.25),
+                                spreadRadius: 0,
+                                blurRadius: 4,
+                                offset: const Offset(
+                                    0, 4), // changes position of shadow
+                              ),
+                            ],
+                          ),
+                          child: Stack(
+                            alignment: AlignmentDirectional.centerStart,
+                            children: [
+                              Image.asset(
+                                'assets/icons/icon-lock.png',
+                                width: 20,
+                                height: 20,
+                                fit: BoxFit.contain,
+                              ),
+                              TextField(
+                                controller: controller.confirmPassword,
+                                obscureText: true,
+                                style: GoogleFonts.ebGaramond(
+                                  color: Colors.black,
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                                decoration: InputDecoration(
+                                  contentPadding:
+                                      const EdgeInsets.only(left: 35),
+                                  border: InputBorder.none,
+                                  hintText: 'confirm_password'.tr,
+                                  hintStyle: GoogleFonts.ebGaramond(
+                                    color: const Color(0xffD0D0D0),
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                ),
+                                cursorColor: Colors.black,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 40,
+                      ),
+                      GetBuilder<ChangePasswordController>(
+                        init: changePasswordController,
                         builder: (controller) => SizedBox(
                           width: double.infinity,
                           child: GestureDetector(
                             onTap: () {
-                              controller.register(
-                                  controller.phone.text,
-                                  controller.password.text,
-                                  controller.email.text);
+                              if (controller.newPassword.text !=
+                                  controller.confirmPassword.text) {
+                                Get.snackbar(
+                                  'Validation',
+                                  'Mật khẩu mới và xác nhận mật khẩu không trùng khớp',
+                                  colorText: Colors.black,
+                                  backgroundColor: Colors.white,
+                                );
+                                return;
+                              }
+                              controller.changePassword(
+                                  controller.oldPassword.text,
+                                  controller.newPassword.text,
+                                  controller.confirmPassword.text);
                             },
                             child: Stack(
                               alignment: AlignmentDirectional.center,
@@ -248,24 +276,7 @@ class RegisterPage extends StatelessWidget {
                   ),
                 ),
               ),
-            ),
-            Positioned(
-              bottom: 20,
-              left: 20,
-              child: RotatedBox(
-                quarterTurns: 2,
-                child: GestureDetector(
-                  onTap: () => Get.back(),
-                  child: Image.asset(
-                    'assets/icons/icon-right-button.png',
-                    width: 25,
-                    height: 25,
-                    color: Colors.black,
-                    fit: BoxFit.contain,
-                  ),
-                ),
-              ),
-            ),
+            )
           ],
         ),
       ),

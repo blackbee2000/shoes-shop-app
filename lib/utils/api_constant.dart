@@ -5,9 +5,14 @@ final String url = FlavorConfig.instance.values.baseUrl;
 class ApiConstant {
   static final String LOGIN = '${url.toString()}/account/login';
   static final String REGISTER = '${url.toString()}/account/register';
+  static final String CHANGEPASSWORD =
+      '${url.toString()}/account/change_password';
+  static final String SENDOTP = '${url.toString()}/account/sendOtp';
   static final String UPDATE = '${url.toString()}/account/update';
   static final String BLOG = '${url.toString()}/blog/all';
   static final String PRODUCT = '${url.toString()}/product/all';
+  static final String PRODUCTBYCOMPANY =
+      '${url.toString()}/product/GetProductByCompany';
   static final String NEWPRODUCT = '${url.toString()}/product/getNewProduct';
   static final String DISCOUNTPRODUCT =
       '${url.toString()}/product/getDiscountProduct';
