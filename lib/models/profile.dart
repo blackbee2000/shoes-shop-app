@@ -4,6 +4,7 @@ part 'profile.g.dart';
 @JsonSerializable()
 class Profile {
   String? id;
+  String? avatar;
   String? fullName;
   String? phoneNumber;
   String? email;
@@ -19,6 +20,7 @@ class Profile {
   Profile(
     this.id,
     this.fullName,
+    this.avatar,
     this.phoneNumber,
     this.email,
     this.password,

@@ -20,10 +20,6 @@ class HomeController extends GetxController {
     getTrendingProduct();
   }
 
-  @override
-  void dispose() {
-    super.dispose();
-  }
 
   getAllCompany() {
     HomeProvider().getAllCompany(

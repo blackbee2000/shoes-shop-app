@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shoes_shop_app/pages/address/address_page.dart';
@@ -6,13 +7,24 @@ import 'package:shoes_shop_app/pages/user/user_controller.dart';
 import 'package:shoes_shop_app/utils/app_constant.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class UserPage extends StatelessWidget {
+import '../profile/profile_controller.dart';
+
+class UserPage extends StatefulWidget {
   final int id;
-  UserPage({
+  final String idProfile;
+  const UserPage({
     Key? key,
+    required this.idProfile,
     required this.id,
   }) : super(key: key);
+
+  @override
+  State<UserPage> createState() => _UserPageState();
+}
+
+class _UserPageState extends State<UserPage> {
   final userController = Get.put(UserController());
+  final profileController = Get.put(ProfileController());
 
   Widget selectedProvide() {
     return Container(
@@ -32,7 +44,7 @@ class UserPage extends StatelessWidget {
         children: [
           GestureDetector(
             onTap: () {
-              userController.getImage();
+              userController.getImage(widget.idProfile);
               Get.back();
             },
             child: Padding(
@@ -54,7 +66,7 @@ class UserPage extends StatelessWidget {
           ),
           GestureDetector(
             onTap: () {
-              userController.getPhoto();
+              userController.getPhoto(widget.idProfile);
               Get.back();
             },
             child: Padding(
@@ -91,7 +103,7 @@ class UserPage extends StatelessWidget {
             Scaffold(
               appBar: AppBar(
                 backgroundColor: Colors.transparent,
-                leading: id == AppConstant.PROFILE
+                leading: widget.id == AppConstant.PROFILE
                     ? IconButton(
                         onPressed: () {
                           Get.back(id: AppConstant.PROFILE);
@@ -129,31 +141,73 @@ class UserPage extends StatelessWidget {
                             init: userController,
                             builder: (controller) => userController.imageUser ==
                                     null
-                                ? ClipOval(
-                                    child: Container(
-                                      width: 115,
-                                      height: 115,
-                                      decoration: BoxDecoration(
-                                        color: Colors.black,
-                                        border: Border.all(color: Colors.white),
-                                        shape: BoxShape.circle,
-                                      ),
-                                      child: Center(
-                                        child: ClipOval(
-                                          child: Container(
-                                            width: 100,
-                                            height: 100,
-                                            decoration: BoxDecoration(
-                                              color: Colors.black,
-                                              border: Border.all(
-                                                  color: Colors.white),
-                                              shape: BoxShape.circle,
+                                ? profileController.profile.value.avatar != null
+                                    ? ClipOval(
+                                        child: Container(
+                                          width: 115,
+                                          height: 115,
+                                          decoration: BoxDecoration(
+                                            color: Colors.black,
+                                            border:
+                                                Border.all(color: Colors.white),
+                                            shape: BoxShape.circle,
+                                          ),
+                                          child: Center(
+                                            child: ClipOval(
+                                              child: Container(
+                                                width: 100,
+                                                height: 100,
+                                                decoration: const BoxDecoration(
+                                                  shape: BoxShape.circle,
+                                                ),
+                                                child: CachedNetworkImage(
+                                                  fit: BoxFit.cover,
+                                                  imageUrl: profileController
+                                                      .profile.value.avatar!,
+                                                  progressIndicatorBuilder: (context,
+                                                          url,
+                                                          downloadProgress) =>
+                                                      CircularProgressIndicator(
+                                                    value: downloadProgress
+                                                        .progress,
+                                                    color: Colors.white,
+                                                    strokeWidth: 0.5,
+                                                  ),
+                                                  errorWidget: (context, url,
+                                                          error) =>
+                                                      const Icon(Icons.error),
+                                                ),
+                                              ),
                                             ),
                                           ),
                                         ),
-                                      ),
-                                    ),
-                                  )
+                                      )
+                                    : ClipOval(
+                                        child: Container(
+                                          width: 115,
+                                          height: 115,
+                                          decoration: BoxDecoration(
+                                            color: Colors.black,
+                                            border:
+                                                Border.all(color: Colors.white),
+                                            shape: BoxShape.circle,
+                                          ),
+                                          child: Center(
+                                            child: ClipOval(
+                                              child: Container(
+                                                width: 100,
+                                                height: 100,
+                                                decoration: BoxDecoration(
+                                                  color: Colors.black,
+                                                  border: Border.all(
+                                                      color: Colors.white),
+                                                  shape: BoxShape.circle,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      )
                                 : ClipOval(
                                     child: Container(
                                       width: 115,
@@ -165,22 +219,38 @@ class UserPage extends StatelessWidget {
                                       ),
                                       child: Center(
                                         child: ClipOval(
-                                          child: Container(
-                                            width: 100,
-                                            height: 100,
-                                            decoration: BoxDecoration(
-                                              border: Border.all(
-                                                  color: Colors.white),
-                                              shape: BoxShape.circle,
-                                              // F
-                                            ),
-                                            child: Image.file(
-                                              userController.imageUser!,
-                                              width: double.infinity,
-                                              height: double.infinity,
-                                              fit: BoxFit.cover,
-                                            ),
-                                          ),
+                                          child: controller.isLoading
+                                              ? const Center(
+                                                  child:
+                                                      CircularProgressIndicator(
+                                                  color: Colors.white,
+                                                  strokeWidth: 0.5,
+                                                ))
+                                              : Container(
+                                                  width: 100,
+                                                  height: 100,
+                                                  decoration:
+                                                      const BoxDecoration(
+                                                    shape: BoxShape.circle,
+                                                  ),
+                                                  child: CachedNetworkImage(
+                                                    fit: BoxFit.cover,
+                                                    imageUrl:
+                                                        controller.imageUser!,
+                                                    progressIndicatorBuilder: (context,
+                                                            url,
+                                                            downloadProgress) =>
+                                                        CircularProgressIndicator(
+                                                      value: downloadProgress
+                                                          .progress,
+                                                      color: Colors.white,
+                                                      strokeWidth: 0.5,
+                                                    ),
+                                                    errorWidget: (context, url,
+                                                            error) =>
+                                                        const Icon(Icons.error),
+                                                  ),
+                                                ),
                                         ),
                                       ),
                                     ),
@@ -395,9 +465,9 @@ class UserPage extends StatelessWidget {
                               onTap: () {
                                 Get.to(
                                     AddressPage(
-                                      id: id,
+                                      id: widget.id,
                                     ),
-                                    id: id);
+                                    id: widget.id);
                               },
                               child: Row(
                                 children: [
@@ -423,7 +493,7 @@ class UserPage extends StatelessWidget {
                             ),
                             TextButton(
                               onPressed: () {
-                                Get.offAll(DashboardPage());
+                                Get.offAll(const DashboardPage());
                               },
                               child: Text(
                                 'user_skip'.tr,
@@ -447,8 +517,11 @@ class UserPage extends StatelessWidget {
                           child: GestureDetector(
                             onTap: () {
                               // Get.offAll(DashboardPage());
-                              controller.updateProfile(controller.name.text,
-                                  controller.phone.text, controller.email.text);
+                              controller.updateProfile(
+                                  controller.name.text,
+                                  controller.phone.text,
+                                  controller.email.text,
+                                  controller.imageUser!);
                             },
                             child: Stack(
                               alignment: AlignmentDirectional.center,

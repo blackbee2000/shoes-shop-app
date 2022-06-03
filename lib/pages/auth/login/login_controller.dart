@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -50,9 +52,12 @@ class LoginController extends GetxController {
         if (type == 'login') {
           Get.offAll(const DashboardPage());
         } else if (type == 'register') {
+          var rng = Random();
+          rng.nextInt(99999999) + 10000000;
           Get.to(
             UserPage(
               id: 1,
+              idProfile: rng.toString(),
             ),
           );
         }

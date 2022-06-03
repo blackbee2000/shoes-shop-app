@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -13,12 +14,14 @@ import 'routes/app_routes.dart';
 void main() async {
   FlavorConfig(
     values: FlavorValues(
-      baseUrl: 'http://192.168.1.8:3000/api',
+      baseUrl: 'http://192.168.1.134:3000/api',
     ),
   );
   WidgetsFlutterBinding.ensureInitialized();
   await GetStorage.init();
-  runZoned<Future<Null>>(() async {
+  await Firebase.initializeApp();
+
+  runZoned<Future<void>>(() async {
     runApp(MyApp());
   });
 }

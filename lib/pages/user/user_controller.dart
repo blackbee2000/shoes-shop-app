@@ -1,20 +1,23 @@
 import 'dart:io';
 // import 'package:dio/dio.dart' as dio;
 import 'package:dio/dio.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:shoes_shop_app/pages/dashboard/dashboard_page.dart';
 import 'package:shoes_shop_app/pages/profile/profile_controller.dart';
 import 'package:shoes_shop_app/pages/user/user_provider.dart';
 import 'package:shoes_shop_app/services/api_token.dart';
 
-class UserController extends GetxController {
+class UserController extends GetxController with StateMixin {
   TextEditingController name = TextEditingController();
   TextEditingController phone = TextEditingController();
   TextEditingController email = TextEditingController();
-  File? imageUser;
+  String? imageUser;
   final profileController = Get.put(ProfileController());
+  bool isLoading = false;
 
   @override
   void onInit() async {
@@ -24,40 +27,78 @@ class UserController extends GetxController {
     email.text = profileController.profile.value.email ?? "";
   }
 
-  Future getImage() async {
-    final image = await ImagePicker().pickImage(source: ImageSource.camera);
-    if (image == null) return;
-    final imageCamera = File(image.path);
-    imageUser = imageCamera;
-    print('IMAGEGGGGGGGGGG ${imageUser}');
-    // String fileName = imageCamera.path.split('/').last;
-    // dio.FormData formData = dio.FormData.fromMap({
-    //   "file": await dio.MultipartFile.fromFile(imageCamera.path,
-    //       filename: fileName),
-    // });
+  Future getImage(String id) async {
+    isLoading = true;
+    update();
+    final fireStorage = FirebaseStorage.instance;
+    final _picker = ImagePicker();
+    String imagefilename =
+        profileController.profile.value.id! + DateTime.now().toString();
+    XFile? image;
+    //Check permission
+    var permissionStatus = await Permission.photos.status;
+
+    if (permissionStatus.isGranted) {
+      //Select Image
+      // ignore: deprecated_member_use
+      image = await _picker.pickImage(source: ImageSource.camera);
+      if (image == null) {
+        return;
+      }
+      var file = File(image.path);
+      //Upload to Firebase
+      var snapshot = await fireStorage.ref().child(imagefilename).putFile(file);
+      var download = await snapshot.ref.getDownloadURL();
+      print(download);
+
+      imageUser = download;
+      isLoading = false;
+      update();
+    } else {
+      print('Grant Permission and try again');
+    }
+  }
+
+  Future getPhoto(String id) async {
+    isLoading = true;
+    update();
+    final fireStorage = FirebaseStorage.instance;
+    final _picker = ImagePicker();
+    String imagefilename =
+        profileController.profile.value.id! + DateTime.now().toString();
+    XFile? image;
+    //Check permission
+    var permissionStatus = await Permission.photos.status;
+
+    if (permissionStatus.isGranted) {
+      //Select Image
+      // ignore: deprecated_member_use
+      image = await _picker.pickImage(source: ImageSource.gallery);
+      if (image == null) {
+        return;
+      }
+      var file = File(image.path);
+      //Upload to Firebase
+      var snapshot = await fireStorage.ref().child(imagefilename).putFile(file);
+      var download = await snapshot.ref.getDownloadURL();
+      print(download);
+
+      imageUser = download;
+      isLoading = false;
+      update();
+    } else {
+      print('Grant Permission and try again');
+    }
     update();
   }
 
-  Future getPhoto() async {
-    final ImagePicker _picker = ImagePicker();
-    final image = await _picker.pickImage(source: ImageSource.gallery);
-    if (image == null) return;
-    final imageCamera = File(image.path);
-    imageUser = imageCamera;
-    // String fileName = imageCamera.path.split('/').last;
-    // dio.FormData formData = dio.FormData.fromMap({
-    //   "file": await dio.MultipartFile.fromFile(imageCamera.path,
-    //       filename: fileName),
-    // });
-    update();
-  }
-
-  updateProfile(String name, String phone, String email) {
+  updateProfile(String name, String phone, String email, String image) {
     print('PROFILE =>>>>>>> ${DateTime.now().toUtc().toString()}');
     UserProvider().updateProfile(
       params: {
         "fullName": name,
         "phoneNumber": phone,
+        "avatar": image,
         "email": email,
         "password": profileController.profile.value.password,
         "role": profileController.profile.value.role,
