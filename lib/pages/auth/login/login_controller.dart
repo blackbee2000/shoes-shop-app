@@ -11,10 +11,13 @@ import 'package:shoes_shop_app/pages/dashboard/dashboard_page.dart';
 import 'package:shoes_shop_app/pages/user/user_page.dart';
 import 'package:shoes_shop_app/services/api_token.dart';
 
+import '../../profile/profile_controller.dart';
+
 class LoginController extends GetxController {
   TextEditingController phone = TextEditingController();
   TextEditingController password = TextEditingController();
   TextEditingController numberPhone = TextEditingController();
+  final profileController = Get.put(ProfileController());
   final storage = GetStorage();
   final otpResponse = Otp.fromJson({}).obs;
 
@@ -52,12 +55,13 @@ class LoginController extends GetxController {
         if (type == 'login') {
           Get.offAll(const DashboardPage());
         } else if (type == 'register') {
+          profileController.getProfile();
           var rng = Random();
           rng.nextInt(99999999) + 10000000;
           Get.to(
             UserPage(
               id: 1,
-              idProfile: rng.toString(),
+              idProfile: profileController.profile.value.id!,
             ),
           );
         }

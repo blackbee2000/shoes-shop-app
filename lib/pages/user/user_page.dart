@@ -521,7 +521,7 @@ class _UserPageState extends State<UserPage> {
                                   controller.name.text,
                                   controller.phone.text,
                                   controller.email.text,
-                                  controller.imageUser!);
+                                  controller.imageUser ?? "");
                             },
                             child: Stack(
                               alignment: AlignmentDirectional.center,
