@@ -119,9 +119,9 @@ class OtpPage extends GetView<OtpController> {
                     width: 5.0,
                   ),
                   TweenAnimationBuilder<Duration>(
-                    duration: const Duration(minutes: 3),
+                    duration: const Duration(minutes: 2),
                     tween: Tween(
-                        begin: const Duration(minutes: 3), end: Duration.zero),
+                        begin: const Duration(minutes: 2), end: Duration.zero),
                     onEnd: () {
                       print('Timer ended');
                     },
@@ -136,48 +136,49 @@ class OtpPage extends GetView<OtpController> {
                           textAlign: TextAlign.center,
                           style: GoogleFonts.ebGaramond(
                             color: Colors.black,
-                            fontSize: 14,
+                            fontSize: 16,
                             fontWeight: FontWeight.w600,
                           ),
                         ),
                       );
                     },
                   ),
-                  // Text(
-                  //   '01:00',
-                  //   style: GoogleFonts.ebGaramond(
-                  //     color: Colors.black,
-                  //     fontSize: 14,
-                  //     fontWeight: FontWeight.w600,
-                  //   ),
-                  // ),
                 ],
               ),
             ),
-            Container(
-              margin: const EdgeInsets.symmetric(horizontal: 110),
-              child: Container(
-                width: double.infinity,
-                padding: const EdgeInsets.symmetric(vertical: 15),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(right: 10),
-                      child: Icon(
-                        Icons.refresh,
-                        size: 20,
-                        color: Colors.black.withOpacity(0.5),
-                      ),
+            GetBuilder<OtpController>(
+              init: otpController,
+              builder: (controller) => GestureDetector(
+                onTap: () {
+                  otpController.sendOtp(
+                      loginController.phoneForOtp.value, 'otp');
+                },
+                child: Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 110),
+                  child: Container(
+                    width: double.infinity,
+                    padding: const EdgeInsets.symmetric(vertical: 15),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(right: 10),
+                          child: Icon(
+                            Icons.refresh,
+                            size: 20,
+                            color: Colors.black.withOpacity(0.5),
+                          ),
+                        ),
+                        Text(
+                          'otp_resend'.tr,
+                          style: TextStyle(
+                            color: Colors.black.withOpacity(0.5),
+                            fontSize: 14,
+                          ),
+                        ),
+                      ],
                     ),
-                    Text(
-                      'otp_resend'.tr,
-                      style: TextStyle(
-                        color: Colors.black.withOpacity(0.5),
-                        fontSize: 14,
-                      ),
-                    ),
-                  ],
+                  ),
                 ),
               ),
             ),

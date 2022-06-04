@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:shoes_shop_app/pages/auth/login/login_controller.dart';
 import 'package:shoes_shop_app/pages/auth/otp/otp_controller.dart';
-import 'package:shoes_shop_app/pages/auth/otp/otp_page.dart';
 import 'package:shoes_shop_app/pages/auth/register/register_page.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shoes_shop_app/pages/dashboard/dashboard_page.dart';
@@ -17,6 +16,7 @@ class LoginPage extends StatefulWidget {
 
 class LoginState extends State<LoginPage> {
   final loginController = Get.put(LoginController());
+  final otpController = Get.put(OtpController());
 
   Widget enterNumberPhone(BuildContext context) {
     return Padding(
@@ -160,8 +160,8 @@ class LoginState extends State<LoginPage> {
                         }
                         loginController.phoneForOtp.value =
                             loginController.numberPhone.text;
-                        loginController
-                            .sendOtp(loginController.numberPhone.text);
+                        otpController.sendOtp(
+                            loginController.numberPhone.text, 'login');
                       },
                       child: Container(
                         width: double.infinity,
@@ -214,7 +214,7 @@ class LoginState extends State<LoginPage> {
                   child: Column(
                     children: [
                       const SizedBox(
-                        height: 120,
+                        height: 140,
                       ),
                       Text(
                         'sign_in'.tr,

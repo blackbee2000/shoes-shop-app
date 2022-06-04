@@ -13,6 +13,7 @@ Cart _$CartFromJson(Map<String, dynamic> json) {
     json['createdAt'] as String?,
     json['updatedAt'] as String?,
     json['__v'] as int?,
+    json['isChecked'] as bool?,
   );
 }
 
@@ -26,4 +27,5 @@ Map<String, dynamic> _$CartToJson(Cart instance) => <String, dynamic>{
       'createdAt': instance.createdAt,
       'updatedAt': instance.updatedAt,
       '__v': instance.__v,
+      'isChecked': instance.isChecked,
     };

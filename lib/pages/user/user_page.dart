@@ -423,7 +423,7 @@ class UserPage extends StatelessWidget {
                             ),
                             TextButton(
                               onPressed: () {
-                                Get.offAll(DashboardPage());
+                                Get.offAll(const DashboardPage());
                               },
                               child: Text(
                                 'user_skip'.tr,
@@ -446,7 +446,6 @@ class UserPage extends StatelessWidget {
                           width: double.infinity,
                           child: GestureDetector(
                             onTap: () {
-                              // Get.offAll(DashboardPage());
                               controller.updateProfile(controller.name.text,
                                   controller.phone.text, controller.email.text);
                             },

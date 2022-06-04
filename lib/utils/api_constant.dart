@@ -25,4 +25,6 @@ class ApiConstant {
   static final String COMPANY = '${url.toString()}/company/all';
   static final String ADDRESS = '${url.toString()}/address/all';
   static final String DELETEADDRESS = '${url.toString()}/address/delete?getId=';
+  static final String ADDTOCART = '${url.toString()}/cart/create';
+  static final String CART = '${url.toString()}/cart/all';
 }

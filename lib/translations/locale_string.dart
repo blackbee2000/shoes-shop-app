@@ -91,6 +91,8 @@ class LocaleString extends Translations {
           "login_popup": "You need to login, do you want?",
           "notification": "Notification",
           "add_to_cart": "Do you add this shoes to cart?",
+          "price": "Price: ",
+          "total": "Total: ",
         },
         "vi_VN": {
           "product_title": "Sản phẩm",
@@ -181,6 +183,8 @@ class LocaleString extends Translations {
           "login_popup": "Bạn cần phải đăng nhập, bạn có muốn thực hiện?",
           "notification": "Thông báo",
           "add_to_cart": "Bạn muốn thêm sản phẩm vào giỏ hàng?",
+          "price": "Giá: ",
+          "total": "Tổng: ",
         }
       };
 }

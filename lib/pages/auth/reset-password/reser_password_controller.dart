@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shoes_shop_app/pages/auth/auth_provider.dart';
-import 'package:shoes_shop_app/pages/dashboard/dashboard_page.dart';
+import 'package:shoes_shop_app/pages/auth/login/login_page.dart';
 
 class ResetPasswordController extends GetxController {
   TextEditingController password = TextEditingController();
@@ -30,7 +30,7 @@ class ResetPasswordController extends GetxController {
         );
       },
       onSuccess: (res) {
-        Get.offAll(const DashboardPage());
+        Get.to(const LoginPage());
       },
       onError: (e) {
         print('ĐÂY LÀ LỖI NÈ :)))) ${e.toString()}');

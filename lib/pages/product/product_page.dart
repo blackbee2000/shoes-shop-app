@@ -318,10 +318,40 @@ class ProductPage extends StatelessWidget {
                                                     height: 15,
                                                   ),
                                                   Center(
-                                                    child: Image.asset(
-                                                      "assets/images/product_home.png",
+                                                    child: CachedNetworkImage(
                                                       width: 80,
                                                       fit: BoxFit.contain,
+                                                      imageUrl: controller
+                                                          .listProduct[index]
+                                                          .imageProduct!
+                                                          .first,
+                                                      useOldImageOnUrlChange:
+                                                          false,
+                                                      progressIndicatorBuilder:
+                                                          (context, url,
+                                                                  downloadProgress) =>
+                                                              SizedBox(
+                                                        height: 15,
+                                                        width: 15,
+                                                        child: Center(
+                                                          child:
+                                                              CircularProgressIndicator(
+                                                            value:
+                                                                downloadProgress
+                                                                    .progress,
+                                                            valueColor:
+                                                                const AlwaysStoppedAnimation(
+                                                                    Colors
+                                                                        .white),
+                                                            strokeWidth: 2,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      errorWidget: (context,
+                                                              url, error) =>
+                                                          ClipOval(
+                                                        child: Container(),
+                                                      ),
                                                     ),
                                                   ),
                                                   const SizedBox(
@@ -412,7 +442,10 @@ class ProductPage extends StatelessWidget {
                                             Container(
                                               alignment: Alignment.topLeft,
                                               child: RatingBarIndicator(
-                                                rating: 5,
+                                                rating: controller
+                                                        .listProduct[index]
+                                                        .rating ??
+                                                    0,
                                                 itemBuilder: (context, index) =>
                                                     const Icon(
                                                   Icons.star,

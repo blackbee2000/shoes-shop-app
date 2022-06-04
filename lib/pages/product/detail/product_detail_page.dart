@@ -31,9 +31,7 @@ class ProductDetailState extends State<ProductDetailPage>
     with TickerProviderStateMixin {
   final productDetailController = Get.put(ProductDetailController());
   late TabController tabController;
-  var listSize = <String>[];
   final productController = Get.put(ProductController());
-  var companyData = Company.fromJson({});
 
   @override
   void initState() {
@@ -42,17 +40,24 @@ class ProductDetailState extends State<ProductDetailPage>
       productDetailController.sizeShoes.value =
           widget.product.type!.first.size!;
       widget.product.type?.forEach((e) {
-        listSize.add(e.size!.toString());
+        productDetailController.listSize.add(e.size!.toString());
       });
     } else {
-      listSize = [];
+      productDetailController.listSize.value = [];
     }
 
     for (var e in productController.listCompany) {
       if (e.id == widget.product.idCompany) {
-        companyData = e;
+        productDetailController.companyData.value = e;
       }
     }
+
+    productDetailController.listProductRelated.value =
+        productController.listProduct;
+
+    // for (var e in productController.listProduct) {
+    //   if (e.id == widget.id) {}
+    // }
 
     tabController = TabController(length: 2, vsync: this);
   }
@@ -194,7 +199,13 @@ class ProductDetailState extends State<ProductDetailPage>
     );
   }
 
-  Widget addToCart(BuildContext context) {
+  Widget addToCart(
+    BuildContext context,
+    Product product,
+    String size,
+    String color,
+    int amount,
+  ) {
     return Padding(
       padding: EdgeInsets.only(
         bottom: MediaQuery.of(context).viewInsets.bottom,
@@ -298,27 +309,30 @@ class ProductDetailState extends State<ProductDetailPage>
                   const SizedBox(
                     width: 15,
                   ),
-                  Expanded(
-                    child: GestureDetector(
-                      onTap: () {
-                        Get.to(
-                          CartPage(id: AppConstant.PRODUCT),
-                          id: AppConstant.PRODUCT,
-                        );
-                      },
-                      child: Container(
-                        width: double.infinity,
-                        height: double.infinity,
-                        decoration: const BoxDecoration(
-                          color: Colors.black,
-                        ),
-                        child: Center(
-                          child: Text(
-                            'address_confirm'.tr,
-                            style: GoogleFonts.ebGaramond(
-                              color: Colors.white,
-                              fontSize: 14,
-                              fontWeight: FontWeight.w600,
+                  GetBuilder<ProductDetailController>(
+                    init: productDetailController,
+                    builder: (controller) => Expanded(
+                      child: GestureDetector(
+                        onTap: () {
+                          // Navigator.of(context);
+                          Get.back();
+                          controller.addToCart(product, size, color, amount,
+                              AppConstant.PRODUCT);
+                        },
+                        child: Container(
+                          width: double.infinity,
+                          height: double.infinity,
+                          decoration: const BoxDecoration(
+                            color: Colors.black,
+                          ),
+                          child: Center(
+                            child: Text(
+                              'address_confirm'.tr,
+                              style: GoogleFonts.ebGaramond(
+                                color: Colors.white,
+                                fontSize: 14,
+                                fontWeight: FontWeight.w600,
+                              ),
                             ),
                           ),
                         ),
@@ -399,26 +413,29 @@ class ProductDetailState extends State<ProductDetailPage>
             const SizedBox(
               height: 15,
             ),
-            Column(
-              children: listSize
-                  .map(
-                    (e) => GestureDetector(
-                      onTap: () {
-                        productDetailController.sizeShoes.value = e;
-                        Get.back();
-                      },
-                      child: Text(
-                        e.toString(),
-                        style: GoogleFonts.ebGaramond(
-                          color: Colors.black,
-                          fontSize: 20,
-                          fontWeight: FontWeight.w500,
+            GetBuilder<ProductDetailController>(
+              init: productDetailController,
+              builder: (controller) => Column(
+                children: controller.listSize
+                    .map(
+                      (e) => GestureDetector(
+                        onTap: () {
+                          productDetailController.sizeShoes.value = e;
+                          Get.back();
+                        },
+                        child: Text(
+                          e.toString(),
+                          style: GoogleFonts.ebGaramond(
+                            color: Colors.black,
+                            fontSize: 20,
+                            fontWeight: FontWeight.w500,
+                          ),
                         ),
                       ),
-                    ),
-                  )
-                  .toList()
-                  .cast(),
+                    )
+                    .toList()
+                    .cast(),
+              ),
             ),
           ],
         ),
@@ -538,10 +555,30 @@ class ProductDetailState extends State<ProductDetailPage>
                                 const SizedBox(
                                   height: 5,
                                 ),
-                                Image.asset(
-                                  "assets/images/product_home.png",
+                                CachedNetworkImage(
                                   width: 100,
                                   fit: BoxFit.contain,
+                                  imageUrl: widget.product.imageProduct!.first,
+                                  useOldImageOnUrlChange: false,
+                                  progressIndicatorBuilder:
+                                      (context, url, downloadProgress) =>
+                                          SizedBox(
+                                    height: 15,
+                                    width: 15,
+                                    child: Center(
+                                      child: CircularProgressIndicator(
+                                        value: downloadProgress.progress,
+                                        valueColor:
+                                            const AlwaysStoppedAnimation(
+                                                Colors.white),
+                                        strokeWidth: 2,
+                                      ),
+                                    ),
+                                  ),
+                                  errorWidget: (context, url, error) =>
+                                      ClipOval(
+                                    child: Container(),
+                                  ),
                                 ),
                               ],
                             ),
@@ -605,7 +642,7 @@ class ProductDetailState extends State<ProductDetailPage>
                               Container(
                                 alignment: Alignment.topLeft,
                                 child: RatingBarIndicator(
-                                  rating: 5,
+                                  rating: widget.product.rating ?? 0,
                                   itemBuilder: (context, index) => const Icon(
                                     Icons.star,
                                     color: Colors.amber,
@@ -775,7 +812,13 @@ class ProductDetailState extends State<ProductDetailPage>
                             child: GestureDetector(
                               onTap: () {
                                 ApiToken().isTokenExisted
-                                    ? Get.bottomSheet(addToCart(context))
+                                    ? Get.bottomSheet(addToCart(
+                                        context,
+                                        widget.product,
+                                        controller.sizeShoes.value,
+                                        'black',
+                                        controller.amount.value,
+                                      ))
                                     : Get.bottomSheet(loginPopup(context));
                               },
                               child: Container(
@@ -820,50 +863,57 @@ class ProductDetailState extends State<ProductDetailPage>
                   const SizedBox(
                     height: 30,
                   ),
-                  Align(
-                    alignment: Alignment.center,
-                    child: ClipOval(
-                      child: Container(
-                        width: 150,
-                        height: 150,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          border: Border.all(color: Colors.black, width: 2),
-                          shape: BoxShape.circle,
-                        ),
-                        child: Center(
-                          child: ClipOval(
-                            child: Container(
-                              width: 135,
-                              height: 135,
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                border:
-                                    Border.all(color: Colors.black, width: 2),
-                                shape: BoxShape.circle,
-                              ),
-                              child: CachedNetworkImage(
-                                width: double.infinity,
-                                height: double.infinity,
-                                fit: BoxFit.cover,
-                                imageUrl: companyData.logoCompany ?? '',
-                                useOldImageOnUrlChange: false,
-                                progressIndicatorBuilder:
-                                    (context, url, downloadProgress) =>
-                                        SizedBox(
-                                  height: 15,
-                                  width: 15,
-                                  child: Center(
-                                    child: CircularProgressIndicator(
-                                      value: downloadProgress.progress,
-                                      valueColor: const AlwaysStoppedAnimation(
-                                          Colors.white),
-                                      strokeWidth: 2,
+                  GetBuilder<ProductDetailController>(
+                    init: productDetailController,
+                    builder: (controller) => Align(
+                      alignment: Alignment.center,
+                      child: ClipOval(
+                        child: Container(
+                          width: 150,
+                          height: 150,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            border: Border.all(color: Colors.black, width: 2),
+                            shape: BoxShape.circle,
+                          ),
+                          child: Center(
+                            child: ClipOval(
+                              child: Container(
+                                width: 135,
+                                height: 135,
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  border:
+                                      Border.all(color: Colors.black, width: 2),
+                                  shape: BoxShape.circle,
+                                ),
+                                child: CachedNetworkImage(
+                                  width: double.infinity,
+                                  height: double.infinity,
+                                  fit: BoxFit.cover,
+                                  imageUrl: controller
+                                          .companyData.value.logoCompany ??
+                                      '',
+                                  useOldImageOnUrlChange: false,
+                                  progressIndicatorBuilder:
+                                      (context, url, downloadProgress) =>
+                                          SizedBox(
+                                    height: 15,
+                                    width: 15,
+                                    child: Center(
+                                      child: CircularProgressIndicator(
+                                        value: downloadProgress.progress,
+                                        valueColor:
+                                            const AlwaysStoppedAnimation(
+                                                Colors.white),
+                                        strokeWidth: 2,
+                                      ),
                                     ),
                                   ),
-                                ),
-                                errorWidget: (context, url, error) => ClipOval(
-                                  child: Container(),
+                                  errorWidget: (context, url, error) =>
+                                      ClipOval(
+                                    child: Container(),
+                                  ),
                                 ),
                               ),
                             ),
@@ -989,49 +1039,73 @@ class ProductDetailState extends State<ProductDetailPage>
                   const SizedBox(
                     height: 30,
                   ),
-                  CarouselSlider(
-                    options: CarouselOptions(
-                      onPageChanged: (index, reason) {},
-                      height: 290,
-                      viewportFraction: 0.5,
-                      enableInfiniteScroll: true,
-                      enlargeCenterPage: true,
-                    ),
-                    items: [1, 2, 3, 4, 5, 6]
-                        .map(
-                          (e) => Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 20),
-                            decoration: BoxDecoration(
-                              color: Colors.black,
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            width: double.infinity,
-                            height: double.infinity,
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Image.asset(
-                                  "assets/images/product_home.png",
-                                  width: 120,
-                                  fit: BoxFit.contain,
-                                ),
-                                const SizedBox(
-                                  height: 20,
-                                ),
-                                Text(
-                                  'Jordan Off White',
-                                  style: GoogleFonts.ebGaramond(
-                                    color: Colors.white,
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w400,
+                  GetBuilder<ProductDetailController>(
+                    init: productDetailController,
+                    builder: (controller) => CarouselSlider(
+                      options: CarouselOptions(
+                        onPageChanged: (index, reason) {},
+                        height: 290,
+                        viewportFraction: 0.5,
+                        enableInfiniteScroll: false,
+                        enlargeCenterPage: true,
+                      ),
+                      items: controller.listProductRelated
+                          .map(
+                            (e) => Container(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 20),
+                              decoration: BoxDecoration(
+                                color: Colors.black,
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              width: double.infinity,
+                              height: double.infinity,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  CachedNetworkImage(
+                                    width: 120,
+                                    fit: BoxFit.contain,
+                                    imageUrl: e.imageProduct!.first,
+                                    useOldImageOnUrlChange: false,
+                                    progressIndicatorBuilder:
+                                        (context, url, downloadProgress) =>
+                                            SizedBox(
+                                      height: 15,
+                                      width: 15,
+                                      child: Center(
+                                        child: CircularProgressIndicator(
+                                          value: downloadProgress.progress,
+                                          valueColor:
+                                              const AlwaysStoppedAnimation(
+                                                  Colors.white),
+                                          strokeWidth: 2,
+                                        ),
+                                      ),
+                                    ),
+                                    errorWidget: (context, url, error) =>
+                                        ClipOval(
+                                      child: Container(),
+                                    ),
                                   ),
-                                ),
-                              ],
+                                  const SizedBox(
+                                    height: 20,
+                                  ),
+                                  Text(
+                                    '${e.nameProductEn != null && e.nameProductEn!.isNotEmpty ? e.nameProductEn : '--'}',
+                                    style: GoogleFonts.ebGaramond(
+                                      color: Colors.white,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w400,
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
-                          ),
-                        )
-                        .toList(),
+                          )
+                          .toList(),
+                    ),
                   ),
                   const SizedBox(
                     height: 30,

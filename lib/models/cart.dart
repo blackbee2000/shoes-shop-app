@@ -13,6 +13,7 @@ class Cart {
   String? createdAt;
   String? updatedAt;
   int? __v;
+  bool? isChecked;
 
   Cart(
     this.id,
@@ -24,6 +25,7 @@ class Cart {
     this.createdAt,
     this.updatedAt,
     this.__v,
+    this.isChecked,
   );
 
   factory Cart.fromJson(Map<String, dynamic> json) => _$CartFromJson(json);
