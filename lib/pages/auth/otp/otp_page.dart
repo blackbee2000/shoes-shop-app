@@ -102,29 +102,57 @@ class OtpPage extends GetView<OtpController> {
             const SizedBox(
               height: 50.0,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  'otp_expires'.tr,
-                  style: GoogleFonts.ebGaramond(
-                    color: Colors.black,
-                    fontSize: 14,
-                    fontWeight: FontWeight.w600,
+            GetBuilder<OtpController>(
+              init: otpController,
+              builder: (controller) => Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'otp_expires'.tr,
+                    style: GoogleFonts.ebGaramond(
+                      color: Colors.black,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
-                ),
-                const SizedBox(
-                  width: 5.0,
-                ),
-                Text(
-                  '01:00',
-                  style: GoogleFonts.ebGaramond(
-                    color: Colors.black,
-                    fontSize: 14,
-                    fontWeight: FontWeight.w600,
+                  const SizedBox(
+                    width: 5.0,
                   ),
-                ),
-              ],
+                  TweenAnimationBuilder<Duration>(
+                    duration: const Duration(minutes: 3),
+                    tween: Tween(
+                        begin: const Duration(minutes: 3), end: Duration.zero),
+                    onEnd: () {
+                      print('Timer ended');
+                    },
+                    builder:
+                        (BuildContext context, Duration value, Widget? child) {
+                      final minutes = value.inMinutes;
+                      final seconds = value.inSeconds % 60;
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 5),
+                        child: Text(
+                          '$minutes:$seconds',
+                          textAlign: TextAlign.center,
+                          style: GoogleFonts.ebGaramond(
+                            color: Colors.black,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                  // Text(
+                  //   '01:00',
+                  //   style: GoogleFonts.ebGaramond(
+                  //     color: Colors.black,
+                  //     fontSize: 14,
+                  //     fontWeight: FontWeight.w600,
+                  //   ),
+                  // ),
+                ],
+              ),
             ),
             Container(
               margin: const EdgeInsets.symmetric(horizontal: 110),
