@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:get/get.dart';
@@ -191,13 +192,36 @@ class ProfilePage extends GetView<ProfileController> {
                                                         : Colors.white,
                                                     width: 2),
                                                 shape: BoxShape.circle,
-                                                image: const DecorationImage(
-                                                  image: AssetImage(
-                                                    'assets/images/avatar.jpg',
-                                                  ),
-                                                  fit: BoxFit.cover,
-                                                ),
                                               ),
+                                              child: controller.profile.value
+                                                          .avatar !=
+                                                      null
+                                                  ? CachedNetworkImage(
+                                                      imageUrl: controller
+                                                          .profile
+                                                          .value
+                                                          .avatar!,
+                                                      progressIndicatorBuilder:
+                                                          (context, url,
+                                                                  downloadProgress) =>
+                                                              CircularProgressIndicator(
+                                                        value: downloadProgress
+                                                            .progress,
+                                                        color: Colors.white,
+                                                        strokeWidth: 0.5,
+                                                      ),
+                                                      errorWidget: (context,
+                                                              url, error) =>
+                                                          const Icon(
+                                                              Icons.error),
+                                                      fit: BoxFit.cover,
+                                                    )
+                                                  : const Image(
+                                                      image: AssetImage(
+                                                        'assets/images/avatar.jpg',
+                                                      ),
+                                                      fit: BoxFit.cover,
+                                                    ),
                                             ),
                                           ),
                                         ),
@@ -247,8 +271,10 @@ class ProfilePage extends GetView<ProfileController> {
                                                 onTap: () {
                                                   Get.to(
                                                     UserPage(
-                                                        id: AppConstant
-                                                            .PROFILE),
+                                                      id: AppConstant.PROFILE,
+                                                      idProfile: controller
+                                                          .profile.value.id!,
+                                                    ),
                                                     id: AppConstant.PROFILE,
                                                   );
                                                 },

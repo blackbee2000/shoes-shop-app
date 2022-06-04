@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -9,13 +11,15 @@ import 'package:shoes_shop_app/pages/user/user_controller.dart';
 import 'package:shoes_shop_app/pages/user/user_page.dart';
 import 'package:shoes_shop_app/services/api_token.dart';
 
+import '../../profile/profile_controller.dart';
+
 class LoginController extends GetxController {
   TextEditingController phone = TextEditingController();
   TextEditingController password = TextEditingController();
   TextEditingController numberPhone = TextEditingController();
+  final profileController = Get.put(ProfileController());
   final storage = GetStorage();
   final phoneForOtp = ''.obs;
-  final profileController = Get.put(ProfileController());
   final userController = Get.put(UserController());
 
   setToken(token) async {
@@ -53,10 +57,13 @@ class LoginController extends GetxController {
         if (type == 'login') {
           Get.offAll(const DashboardPage());
         } else if (type == 'register') {
-          userController.onInit();
+          profileController.getProfile();
+          var rng = Random();
+          rng.nextInt(99999999) + 10000000;
           Get.to(
             UserPage(
               id: 1,
+              idProfile: profileController.profile.value.id!,
             ),
           );
         }
