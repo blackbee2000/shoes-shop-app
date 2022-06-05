@@ -27,4 +27,10 @@ class ApiConstant {
   static final String DELETEADDRESS = '${url.toString()}/address/delete?getId=';
   static final String ADDTOCART = '${url.toString()}/cart/create';
   static final String CART = '${url.toString()}/cart/all';
+  static final String PRODUCTRELATED =
+      '${url.toString()}/product/getRelatedProducts';
+  static final String SEARCHPRODUCT = '${url.toString()}/product/search';
+  static final String LIKEPRODUCT = '${url.toString()}/account/submitFavorite';
+  static final String PRODUCTFAVORITE =
+      '${url.toString()}/account/getFavoriteAccount';
 }

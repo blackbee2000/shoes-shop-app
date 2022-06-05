@@ -188,7 +188,7 @@ class HomePageState extends State<HomePage> {
                                                             .start,
                                                     children: [
                                                       Text(
-                                                        '${AppTranslation.instance.language == AppTranslation.english ? (e.nameProductEn != null && e.nameProductEn!.isNotEmpty ? e.nameProductEn : '--') : (e.nameProductVi != null && e.nameProductVi!.isNotEmpty ? e.nameProductVi : '--')}',
+                                                        '${AppTranslation.instance.language == AppTranslation.english ? (e.product!.nameProductEn != null && e.product!.nameProductEn!.isNotEmpty ? e.product!.nameProductEn : '--') : (e.product!.nameProductVi != null && e.product!.nameProductVi!.isNotEmpty ? e.product!.nameProductVi : '--')}',
                                                         style: GoogleFonts
                                                             .ebGaramond(
                                                           color: theme.theme ==
@@ -205,7 +205,7 @@ class HomePageState extends State<HomePage> {
                                                         height: 5,
                                                       ),
                                                       Text(
-                                                        'Jordan',
+                                                        '${e.companyName != null && e.companyName!.isNotEmpty ? e.companyName : '--'}',
                                                         style: GoogleFonts
                                                             .ebGaramond(
                                                           color: theme.theme ==
@@ -299,7 +299,8 @@ class HomePageState extends State<HomePage> {
                                               child: CachedNetworkImage(
                                                 width: 300,
                                                 fit: BoxFit.contain,
-                                                imageUrl: e.imageProduct!.first,
+                                                imageUrl: e.product!
+                                                    .imageProduct!.first,
                                                 useOldImageOnUrlChange: false,
                                                 progressIndicatorBuilder:
                                                     (context, url,

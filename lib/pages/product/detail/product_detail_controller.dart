@@ -15,7 +15,7 @@ class ProductDetailController extends GetxController
   final amount = 1.obs;
   final listSize = <String>[].obs;
   final companyData = Company.fromJson({}).obs;
-  final listProductRelated = <Product>[].obs;
+  List<Product> listProductRelated = <Product>[].obs;
   final profileController = Get.put(ProfileController());
 
   plusAmount() {
@@ -33,6 +33,24 @@ class ProductDetailController extends GetxController
       return;
     }
     amount.value = amount.value - 1;
+  }
+
+  getProductRelated(String id) {
+    ProductProvider().getProductRelated(
+      params: {'getId': id},
+      option: Options(),
+      beforeSend: () {},
+      onSuccess: (res) {
+        listProductRelated = res.data ?? [];
+        print(
+            'GET RELATED PRODUCT SUCESS ====> ${listProductRelated.toString()}');
+        update();
+      },
+      onError: (e) {
+        print('GET RELATED PRODUCT FAIL ====> ${e.toString()}');
+        update();
+      },
+    );
   }
 
   addToCart(Product product, String size, String color, int amount, idWidget) {

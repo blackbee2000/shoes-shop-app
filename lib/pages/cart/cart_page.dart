@@ -200,75 +200,69 @@ class CartState extends State<CartPage> {
                       const SizedBox(
                         height: 20,
                       ),
-                      GetBuilder<CartController>(
-                        init: cartController,
-                        builder: (controller) => Expanded(
-                          child: SingleChildScrollView(
-                            child: Column(
-                                children: controller.listCart
-                                    .asMap()
-                                    .entries
-                                    .map(
-                                      (e) => Row(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        children: [
-                                          Expanded(
-                                            flex: 2,
-                                            child: GestureDetector(
-                                              onTap: () {
-                                                e.value.isChecked =
-                                                    !e.value.isChecked!;
-                                                controller.update();
-                                              },
-                                              child: ClipOval(
-                                                child: Container(
-                                                  width: 20,
-                                                  height: 20,
-                                                  decoration: BoxDecoration(
+                      Expanded(
+                        child: SingleChildScrollView(
+                          child: Column(
+                              children: controller.listCart
+                                  .asMap()
+                                  .entries
+                                  .map(
+                                    (e) => Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        Expanded(
+                                          flex: 2,
+                                          child: GestureDetector(
+                                            onTap: () {
+                                              e.value.isChecked =
+                                                  !e.value.isChecked!;
+                                              controller.update();
+                                            },
+                                            child: ClipOval(
+                                              child: Container(
+                                                width: 20,
+                                                height: 20,
+                                                decoration: BoxDecoration(
+                                                  color: theme.theme ==
+                                                          ThemeMode.light
+                                                      ? Colors.white
+                                                      : Colors.black,
+                                                  border: Border.all(
                                                     color: theme.theme ==
                                                             ThemeMode.light
-                                                        ? Colors.white
-                                                        : Colors.black,
-                                                    border: Border.all(
-                                                      color: theme.theme ==
-                                                              ThemeMode.light
-                                                          ? Colors.black
-                                                          : Colors.white,
-                                                    ),
-                                                    shape: BoxShape.circle,
+                                                        ? Colors.black
+                                                        : Colors.white,
                                                   ),
-                                                  child: Center(
-                                                    child: ClipOval(
-                                                      child: Container(
-                                                        width: 15,
-                                                        height: 15,
-                                                        decoration:
-                                                            BoxDecoration(
-                                                          color: e.value
-                                                                      .isChecked ==
-                                                                  true
-                                                              ? theme.theme ==
-                                                                      ThemeMode
-                                                                          .light
-                                                                  ? Colors.black
-                                                                  : Colors.white
-                                                              : theme.theme ==
-                                                                      ThemeMode
-                                                                          .light
-                                                                  ? Colors.white
-                                                                  : Colors
-                                                                      .black,
-                                                          border: Border.all(
-                                                            color: theme.theme ==
+                                                  shape: BoxShape.circle,
+                                                ),
+                                                child: Center(
+                                                  child: ClipOval(
+                                                    child: Container(
+                                                      width: 15,
+                                                      height: 15,
+                                                      decoration: BoxDecoration(
+                                                        color: e.value
+                                                                    .isChecked ==
+                                                                true
+                                                            ? theme.theme ==
                                                                     ThemeMode
                                                                         .light
                                                                 ? Colors.black
-                                                                : Colors.white,
-                                                          ),
-                                                          shape:
-                                                              BoxShape.circle,
+                                                                : Colors.white
+                                                            : theme.theme ==
+                                                                    ThemeMode
+                                                                        .light
+                                                                ? Colors.white
+                                                                : Colors.black,
+                                                        border: Border.all(
+                                                          color: theme.theme ==
+                                                                  ThemeMode
+                                                                      .light
+                                                              ? Colors.black
+                                                              : Colors.white,
                                                         ),
+                                                        shape: BoxShape.circle,
                                                       ),
                                                     ),
                                                   ),
@@ -276,318 +270,308 @@ class CartState extends State<CartPage> {
                                               ),
                                             ),
                                           ),
-                                          Expanded(
-                                            flex: 10,
-                                            child: Container(
-                                              width: double.infinity,
-                                              padding: const EdgeInsets.only(
-                                                left: 15,
-                                                right: 20,
-                                              ),
-                                              margin: const EdgeInsets.only(
-                                                bottom: 20,
-                                                left: 20,
-                                                right: 20,
-                                              ),
-                                              height: 150,
-                                              decoration: BoxDecoration(
-                                                color: Colors.white,
-                                                borderRadius:
-                                                    BorderRadius.circular(10),
-                                                boxShadow: [
-                                                  BoxShadow(
-                                                    color: Colors.black
-                                                        .withOpacity(0.25),
-                                                    spreadRadius: 0,
-                                                    blurRadius: 4,
-                                                    offset: const Offset(0,
-                                                        4), // changes position of shadow
-                                                  ),
-                                                ],
-                                              ),
-                                              child: Row(
-                                                children: [
-                                                  Container(
-                                                    width: 100,
-                                                    height: double.infinity,
-                                                    color: Colors.black,
-                                                    child: Center(
-                                                      child: CachedNetworkImage(
-                                                        width: 70,
-                                                        fit: BoxFit.contain,
-                                                        imageUrl: e
-                                                                .value
-                                                                .lstProduct!
-                                                                .imageProduct ??
-                                                            '',
-                                                        useOldImageOnUrlChange:
-                                                            false,
-                                                        progressIndicatorBuilder:
-                                                            (context, url,
-                                                                    downloadProgress) =>
-                                                                SizedBox(
-                                                          height: 15,
-                                                          width: 15,
-                                                          child: Center(
-                                                            child:
-                                                                CircularProgressIndicator(
-                                                              value:
-                                                                  downloadProgress
-                                                                      .progress,
-                                                              valueColor:
-                                                                  const AlwaysStoppedAnimation(
-                                                                      Colors
-                                                                          .white),
-                                                              strokeWidth: 2,
-                                                            ),
+                                        ),
+                                        Expanded(
+                                          flex: 10,
+                                          child: Container(
+                                            width: double.infinity,
+                                            padding: const EdgeInsets.only(
+                                              left: 15,
+                                              right: 20,
+                                            ),
+                                            margin: const EdgeInsets.only(
+                                              bottom: 20,
+                                              left: 20,
+                                              right: 20,
+                                            ),
+                                            height: 150,
+                                            decoration: BoxDecoration(
+                                              color: Colors.white,
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: Colors.black
+                                                      .withOpacity(0.25),
+                                                  spreadRadius: 0,
+                                                  blurRadius: 4,
+                                                  offset: const Offset(0,
+                                                      4), // changes position of shadow
+                                                ),
+                                              ],
+                                            ),
+                                            child: Row(
+                                              children: [
+                                                Container(
+                                                  width: 100,
+                                                  height: double.infinity,
+                                                  color: Colors.black,
+                                                  child: Center(
+                                                    child: CachedNetworkImage(
+                                                      width: 70,
+                                                      fit: BoxFit.contain,
+                                                      imageUrl: e
+                                                              .value
+                                                              .lstProduct!
+                                                              .imageProduct ??
+                                                          '',
+                                                      useOldImageOnUrlChange:
+                                                          false,
+                                                      progressIndicatorBuilder:
+                                                          (context, url,
+                                                                  downloadProgress) =>
+                                                              SizedBox(
+                                                        height: 15,
+                                                        width: 15,
+                                                        child: Center(
+                                                          child:
+                                                              CircularProgressIndicator(
+                                                            value:
+                                                                downloadProgress
+                                                                    .progress,
+                                                            valueColor:
+                                                                const AlwaysStoppedAnimation(
+                                                                    Colors
+                                                                        .white),
+                                                            strokeWidth: 2,
                                                           ),
                                                         ),
-                                                        errorWidget: (context,
-                                                                url, error) =>
+                                                      ),
+                                                      errorWidget: (context,
+                                                              url, error) =>
+                                                          ClipOval(
+                                                        child: Container(),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                                Container(
+                                                  width: 10,
+                                                  height: double.infinity,
+                                                  color:
+                                                      const Color(0xffFFD9D9),
+                                                ),
+                                                const SizedBox(
+                                                  width: 15,
+                                                ),
+                                                Expanded(
+                                                  child: Container(
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                      top: 15,
+                                                      bottom: 15,
+                                                    ),
+                                                    child: Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Text(
+                                                          '${e.value.lstProduct!.nameProductEn != null && e.value.lstProduct!.nameProductEn!.isNotEmpty ? e.value.lstProduct!.nameProductEn : '--'}',
+                                                          style: GoogleFonts
+                                                              .ebGaramond(
+                                                            color: Colors.black,
+                                                            fontSize: 16,
+                                                            fontWeight:
+                                                                FontWeight.w600,
+                                                          ),
+                                                          maxLines: 2,
+                                                          overflow: TextOverflow
+                                                              .ellipsis,
+                                                        ),
+                                                        const SizedBox(
+                                                          height: 5,
+                                                        ),
+                                                        Text(
+                                                          'price'.tr +
+                                                              '${e.value.lstProduct!.price ?? '--'}',
+                                                          style: GoogleFonts
+                                                              .ebGaramond(
+                                                            color: Colors.black,
+                                                            fontSize: 14,
+                                                            fontWeight:
+                                                                FontWeight.w400,
+                                                          ),
+                                                        ),
+                                                        const SizedBox(
+                                                          height: 5,
+                                                        ),
+                                                        Text(
+                                                          'total'.tr +
+                                                              '${e.value.totalPrice ?? '--'}',
+                                                          style: GoogleFonts
+                                                              .ebGaramond(
+                                                            color: Colors.black,
+                                                            fontSize: 14,
+                                                            fontWeight:
+                                                                FontWeight.w400,
+                                                          ),
+                                                        ),
+                                                        const SizedBox(
+                                                          height: 5,
+                                                        ),
+                                                        Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .start,
+                                                          children: [
                                                             ClipOval(
-                                                          child: Container(),
+                                                              child: Container(
+                                                                width: 25,
+                                                                height: 25,
+                                                                color: Colors
+                                                                    .black,
+                                                                child: Center(
+                                                                  child: Text(
+                                                                    '-',
+                                                                    style: GoogleFonts
+                                                                        .ebGaramond(
+                                                                      color: Colors
+                                                                          .white,
+                                                                      fontSize:
+                                                                          14,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w400,
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                            const SizedBox(
+                                                              width: 15,
+                                                            ),
+                                                            Text(
+                                                              '1',
+                                                              style: GoogleFonts
+                                                                  .ebGaramond(
+                                                                color: Colors
+                                                                    .black,
+                                                                fontSize: 14,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w400,
+                                                              ),
+                                                            ),
+                                                            const SizedBox(
+                                                              width: 15,
+                                                            ),
+                                                            ClipOval(
+                                                              child: Container(
+                                                                width: 25,
+                                                                height: 25,
+                                                                color: Colors
+                                                                    .black,
+                                                                child: Center(
+                                                                  child: Text(
+                                                                    '+',
+                                                                    style: GoogleFonts
+                                                                        .ebGaramond(
+                                                                      color: Colors
+                                                                          .white,
+                                                                      fontSize:
+                                                                          14,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w400,
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ],
                                                         ),
-                                                      ),
+                                                      ],
                                                     ),
                                                   ),
-                                                  Container(
-                                                    width: 10,
-                                                    height: double.infinity,
-                                                    color:
-                                                        const Color(0xffFFD9D9),
-                                                  ),
-                                                  const SizedBox(
-                                                    width: 15,
-                                                  ),
-                                                  Expanded(
-                                                    child: Container(
-                                                      padding:
-                                                          const EdgeInsets.only(
-                                                        top: 15,
-                                                        bottom: 15,
-                                                      ),
-                                                      child: Column(
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
-                                                        children: [
-                                                          Text(
-                                                            '${e.value.lstProduct!.nameProductEn != null && e.value.lstProduct!.nameProductEn!.isNotEmpty ? e.value.lstProduct!.nameProductEn : '--'}',
-                                                            style: GoogleFonts
-                                                                .ebGaramond(
-                                                              color:
-                                                                  Colors.black,
-                                                              fontSize: 16,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w600,
-                                                            ),
-                                                            maxLines: 2,
-                                                            overflow:
-                                                                TextOverflow
-                                                                    .ellipsis,
-                                                          ),
-                                                          const SizedBox(
-                                                            height: 5,
-                                                          ),
-                                                          Text(
-                                                            'price'.tr +
-                                                                '${e.value.lstProduct!.price ?? '--'}',
-                                                            style: GoogleFonts
-                                                                .ebGaramond(
-                                                              color:
-                                                                  Colors.black,
-                                                              fontSize: 14,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w400,
-                                                            ),
-                                                          ),
-                                                          const SizedBox(
-                                                            height: 5,
-                                                          ),
-                                                          Text(
-                                                            'total'.tr +
-                                                                '${e.value.totalPrice ?? '--'}',
-                                                            style: GoogleFonts
-                                                                .ebGaramond(
-                                                              color:
-                                                                  Colors.black,
-                                                              fontSize: 14,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w400,
-                                                            ),
-                                                          ),
-                                                          const SizedBox(
-                                                            height: 5,
-                                                          ),
-                                                          Row(
-                                                            mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .start,
-                                                            children: [
-                                                              ClipOval(
-                                                                child:
-                                                                    Container(
-                                                                  width: 25,
-                                                                  height: 25,
-                                                                  color: Colors
-                                                                      .black,
-                                                                  child: Center(
-                                                                    child: Text(
-                                                                      '-',
-                                                                      style: GoogleFonts
-                                                                          .ebGaramond(
-                                                                        color: Colors
-                                                                            .white,
-                                                                        fontSize:
-                                                                            14,
-                                                                        fontWeight:
-                                                                            FontWeight.w400,
-                                                                      ),
-                                                                    ),
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                              const SizedBox(
-                                                                width: 15,
-                                                              ),
-                                                              Text(
-                                                                '1',
-                                                                style: GoogleFonts
-                                                                    .ebGaramond(
-                                                                  color: Colors
-                                                                      .black,
-                                                                  fontSize: 14,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w400,
-                                                                ),
-                                                              ),
-                                                              const SizedBox(
-                                                                width: 15,
-                                                              ),
-                                                              ClipOval(
-                                                                child:
-                                                                    Container(
-                                                                  width: 25,
-                                                                  height: 25,
-                                                                  color: Colors
-                                                                      .black,
-                                                                  child: Center(
-                                                                    child: Text(
-                                                                      '+',
-                                                                      style: GoogleFonts
-                                                                          .ebGaramond(
-                                                                        color: Colors
-                                                                            .white,
-                                                                        fontSize:
-                                                                            14,
-                                                                        fontWeight:
-                                                                            FontWeight.w400,
-                                                                      ),
-                                                                    ),
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                            ],
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
+                                                ),
+                                              ],
                                             ),
                                           ),
-                                        ],
-                                      ),
-                                    )
-                                    .toList()),
-                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  )
+                                  .toList()),
                         ),
                       ),
                       const SizedBox(
                         height: 20,
                       ),
-                      GetBuilder<CartController>(
-                        init: cartController,
-                        builder: (controller) => Align(
-                          alignment: Alignment.center,
-                          child: Container(
-                            width: 300,
-                            height: 60,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              border: Border.all(
-                                color: const Color(0xffD9D9D9),
-                              ),
-                              borderRadius: const BorderRadius.only(
-                                topLeft: Radius.circular(30),
-                                topRight: Radius.circular(30),
-                              ),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.black.withOpacity(0.25),
-                                  spreadRadius: 0,
-                                  blurRadius: 4,
-                                  offset: const Offset(
-                                      0, 4), // changes position of shadow
-                                ),
-                              ],
+                      Align(
+                        alignment: Alignment.center,
+                        child: Container(
+                          width: 300,
+                          height: 60,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            border: Border.all(
+                              color: const Color(0xffD9D9D9),
                             ),
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  'cart_select_all'.tr,
-                                  style: GoogleFonts.ebGaramond(
+                            borderRadius: const BorderRadius.only(
+                              topLeft: Radius.circular(30),
+                              topRight: Radius.circular(30),
+                            ),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black.withOpacity(0.25),
+                                spreadRadius: 0,
+                                blurRadius: 4,
+                                offset: const Offset(
+                                    0, 4), // changes position of shadow
+                              ),
+                            ],
+                          ),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                'cart_select_all'.tr,
+                                style: GoogleFonts.ebGaramond(
+                                  color: Colors.black,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              ),
+                              const SizedBox(
+                                width: 15,
+                              ),
+                              GestureDetector(
+                                onTap: () {
+                                  controller.getListCartSelected(widget.id);
+                                },
+                                child: Container(
+                                  width: 120,
+                                  height: 30,
+                                  decoration: BoxDecoration(
                                     color: Colors.black,
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w400,
+                                    borderRadius: BorderRadius.circular(10),
                                   ),
-                                ),
-                                const SizedBox(
-                                  width: 15,
-                                ),
-                                GestureDetector(
-                                  onTap: () {
-                                    controller.getListCartSelected(widget.id);
-                                  },
-                                  child: Container(
-                                    width: 120,
-                                    height: 30,
-                                    decoration: BoxDecoration(
-                                      color: Colors.black,
-                                      borderRadius: BorderRadius.circular(10),
-                                    ),
-                                    child: Center(
-                                      child: Text(
-                                        'cart_payment'.tr,
-                                        style: GoogleFonts.ebGaramond(
-                                          color: Colors.white,
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w400,
-                                        ),
+                                  child: Center(
+                                    child: Text(
+                                      'cart_payment'.tr,
+                                      style: GoogleFonts.ebGaramond(
+                                        color: Colors.white,
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w400,
                                       ),
                                     ),
                                   ),
                                 ),
-                                const SizedBox(
-                                  width: 15,
+                              ),
+                              const SizedBox(
+                                width: 15,
+                              ),
+                              Text(
+                                'cart_delete'.tr,
+                                style: GoogleFonts.ebGaramond(
+                                  color: Colors.black,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w400,
                                 ),
-                                Text(
-                                  'cart_delete'.tr,
-                                  style: GoogleFonts.ebGaramond(
-                                    color: Colors.black,
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w400,
-                                  ),
-                                ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
                         ),
                       ),

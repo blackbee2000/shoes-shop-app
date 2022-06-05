@@ -3,7 +3,6 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
-import 'package:shoes_shop_app/models/company.dart';
 import 'package:shoes_shop_app/models/product.dart';
 import 'package:shoes_shop_app/pages/auth/login/login_page.dart';
 import 'package:shoes_shop_app/pages/cart/cart_page.dart';
@@ -52,12 +51,7 @@ class ProductDetailState extends State<ProductDetailPage>
       }
     }
 
-    productDetailController.listProductRelated.value =
-        productController.listProduct;
-
-    // for (var e in productController.listProduct) {
-    //   if (e.id == widget.id) {}
-    // }
+    productDetailController.getProductRelated(widget.product.id!);
 
     tabController = TabController(length: 2, vsync: this);
   }
@@ -543,12 +537,17 @@ class ProductDetailState extends State<ProductDetailPage>
                                       ),
                                     ),
                                     child: Center(
-                                      child: Image.asset(
-                                        "assets/icons/icon-like.png",
-                                        width: 20,
-                                        height: 20,
-                                        fit: BoxFit.contain,
-                                      ),
+                                      child: widget.product.isLike == true
+                                          ? const Icon(
+                                              Icons.favorite,
+                                              color: Colors.black,
+                                              size: 20,
+                                            )
+                                          : const Icon(
+                                              Icons.favorite_border,
+                                              color: Colors.black,
+                                              size: 20,
+                                            ),
                                     ),
                                   ),
                                 ),
@@ -599,10 +598,10 @@ class ProductDetailState extends State<ProductDetailPage>
                                   '${AppTranslation.instance.language == AppTranslation.english ? (widget.product.nameProductEn != null && widget.product.nameProductEn!.isNotEmpty ? widget.product.nameProductEn : '--') : (widget.product.nameProductVi != null && widget.product.nameProductVi!.isNotEmpty ? widget.product.nameProductVi : '--')}',
                                   style: GoogleFonts.ebGaramond(
                                     color: Colors.black,
-                                    fontSize: 20,
+                                    fontSize: 22,
                                     fontWeight: FontWeight.w600,
                                   ),
-                                  maxLines: 1,
+                                  maxLines: 2,
                                   overflow: TextOverflow.ellipsis,
                                 ),
                               ),
@@ -614,27 +613,10 @@ class ProductDetailState extends State<ProductDetailPage>
                                   text: '${widget.product.price ?? '--'}',
                                   style: GoogleFonts.ebGaramond(
                                     color: Colors.black,
-                                    fontSize: 25,
+                                    fontSize: 30,
                                     fontWeight: FontWeight.w600,
                                   ),
                                 ),
-                              ),
-                              Wrap(
-                                children: widget.product.type!
-                                    .asMap()
-                                    .entries
-                                    .map(
-                                      (e) => Container(
-                                        margin: const EdgeInsets.only(
-                                          right: 15,
-                                          top: 10,
-                                        ),
-                                        width: 28,
-                                        height: 28,
-                                        color: Colors.black,
-                                      ),
-                                    )
-                                    .toList(),
                               ),
                               const SizedBox(
                                 height: 10,
@@ -651,6 +633,9 @@ class ProductDetailState extends State<ProductDetailPage>
                                   itemSize: 30,
                                   direction: Axis.horizontal,
                                 ),
+                              ),
+                              const SizedBox(
+                                height: 10,
                               ),
                               GestureDetector(
                                 onTap: () {
@@ -1046,7 +1031,7 @@ class ProductDetailState extends State<ProductDetailPage>
                         onPageChanged: (index, reason) {},
                         height: 290,
                         viewportFraction: 0.5,
-                        enableInfiniteScroll: false,
+                        enableInfiniteScroll: true,
                         enlargeCenterPage: true,
                       ),
                       items: controller.listProductRelated

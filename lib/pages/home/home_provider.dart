@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:shoes_shop_app/models/company_response.dart';
+import 'package:shoes_shop_app/models/product_new_response.dart';
 import 'package:shoes_shop_app/models/product_response.dart';
 import 'package:shoes_shop_app/services/api_service.dart';
 import 'package:shoes_shop_app/utils/api_constant.dart';
@@ -14,7 +15,7 @@ abstract class HomeAPIProtocol {
   getNewProduct({
     required Options option,
     required Function() beforeSend,
-    required Function(ProductResponse data) onSuccess,
+    required Function(ProductNewResponse data) onSuccess,
     required Function(dynamic error) onError,
   });
   getDiscountProduct({
@@ -54,7 +55,7 @@ class HomeProvider extends HomeAPIProtocol {
   getNewProduct(
       {required Options option,
       required Function() beforeSend,
-      required Function(ProductResponse data) onSuccess,
+      required Function(ProductNewResponse data) onSuccess,
       required Function(dynamic error) onError}) {
     ApiService(
       path: ApiConstant.NEWPRODUCT,
@@ -62,7 +63,7 @@ class HomeProvider extends HomeAPIProtocol {
     ).getAll(
       beforeSend: () => {beforeSend()},
       onSuccess: (data) {
-        onSuccess(ProductResponse.fromJson(data));
+        onSuccess(ProductNewResponse.fromJson(data));
       },
       onError: (error) => {onError(error)},
     );

@@ -93,6 +93,7 @@ class LocaleString extends Translations {
           "add_to_cart": "Do you add this shoes to cart?",
           "price": "Price: ",
           "total": "Total: ",
+          "product_favorite_title": "Product Favorite"
         },
         "vi_VN": {
           "product_title": "Sản phẩm",
@@ -185,6 +186,7 @@ class LocaleString extends Translations {
           "add_to_cart": "Bạn muốn thêm sản phẩm vào giỏ hàng?",
           "price": "Giá: ",
           "total": "Tổng: ",
+          "product_favorite_title": "Sản phẩm yêu thích",
         }
       };
 }

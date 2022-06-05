@@ -50,6 +50,7 @@ class PaymentState extends State<PaymentPage> {
               leading: IconButton(
                 onPressed: () {
                   Get.back(id: widget.id);
+                  cartController.listCartSelected.clear();
                 },
                 icon: Icon(
                   Icons.arrow_back_ios,

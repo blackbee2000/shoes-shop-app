@@ -2,7 +2,6 @@ import 'package:dio/dio.dart';
 import 'package:shoes_shop_app/models/auth.dart';
 import 'package:shoes_shop_app/models/otp_response.dart';
 import 'package:shoes_shop_app/models/otp_submit.dart';
-import 'package:shoes_shop_app/models/profile_response.dart';
 import 'package:shoes_shop_app/models/register_response.dart';
 import 'package:shoes_shop_app/services/api_service.dart';
 import 'package:shoes_shop_app/utils/api_constant.dart';

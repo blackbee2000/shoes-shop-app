@@ -53,19 +53,20 @@ class LoginController extends GetxController {
         print('LOGIN SUCESSS =>>>>>> ${res.toString()}');
         setToken(res.data?.token);
         print('TOKEN NEFFFFFFF =>>>>>> ${ApiToken.to.appToken}');
-        profileController.onInit();
         if (type == 'login') {
           Get.offAll(const DashboardPage());
         } else if (type == 'register') {
-          profileController.getProfile();
-          var rng = Random();
-          rng.nextInt(99999999) + 10000000;
-          Get.to(
-            UserPage(
-              id: 1,
-              idProfile: profileController.profile.value.id!,
-            ),
-          );
+          profileController.onInit();
+          Future.delayed(const Duration(milliseconds: 500)).then((_) {
+            print(
+                'LAY ID NE HAAAAAAAAA ==>>>>>>> ${profileController.profile.value.fullName}');
+            Get.to(
+              UserPage(
+                id: 1,
+                idProfile: profileController.profile.value.id ?? '',
+              ),
+            );
+          });
         }
         update();
       },

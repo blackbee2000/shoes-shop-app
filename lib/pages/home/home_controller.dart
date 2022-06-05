@@ -2,12 +2,13 @@ import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 import 'package:shoes_shop_app/models/company.dart';
 import 'package:shoes_shop_app/models/product.dart';
+import 'package:shoes_shop_app/models/product_new.dart';
 import 'package:shoes_shop_app/pages/home/home_provider.dart';
 
 class HomeController extends GetxController {
   final indexSelected = 0.obs;
   List<Company> listCompany = <Company>[].obs;
-  List<Product> listNewProduct = <Product>[].obs;
+  List<ProductNew> listNewProduct = <ProductNew>[].obs;
   List<Product> listDiscountProduct = <Product>[].obs;
   List<Product> listTrendingProduct = <Product>[].obs;
 
@@ -19,7 +20,6 @@ class HomeController extends GetxController {
     getDiscountProduct();
     getTrendingProduct();
   }
-
 
   getAllCompany() {
     HomeProvider().getAllCompany(
