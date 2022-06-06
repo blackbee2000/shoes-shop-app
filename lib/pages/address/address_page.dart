@@ -621,7 +621,7 @@ class AddressPage extends StatelessWidget {
                       ),
                       Container(
                         width: double.infinity,
-                        height: 75,
+                        height: 120,
                         decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(10),
@@ -640,14 +640,16 @@ class AddressPage extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Container(
-                              padding: const EdgeInsets.all(15),
+                              width: MediaQuery.of(context).size.width * 0.6,
+                              padding: const EdgeInsets.all(8),
                               height: double.infinity,
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Text(
-                                    'Trần Thái Tuấn',
+                                    controller
+                                        .addressDefault.value.nameReciever!,
                                     style: GoogleFonts.ebGaramond(
                                       color: Colors.black,
                                       fontSize: 14,
@@ -658,7 +660,29 @@ class AddressPage extends StatelessWidget {
                                     height: 3,
                                   ),
                                   Text(
-                                    '180 Sao Hoả, Hệ Mặt Trời',
+                                    controller
+                                        .addressDefault.value.phoneReciever!,
+                                    style: GoogleFonts.ebGaramond(
+                                      color: Colors.black,
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w400,
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    height: 3,
+                                  ),
+                                  Text(
+                                    controller.addressDefault.value.street! +
+                                        ', ' +
+                                        controller.addressDefault.value.ward! +
+                                        ', ' +
+                                        controller
+                                            .addressDefault.value.district! +
+                                        ', ' +
+                                        controller
+                                            .addressDefault.value.province!,
+                                    maxLines: 2,
+                                    overflow: TextOverflow.ellipsis,
                                     style: GoogleFonts.ebGaramond(
                                       color: Colors.black,
                                       fontSize: 14,

@@ -10,6 +10,11 @@ abstract class AddressAPIProtocol {
     required Function(AddressResponse data) onSuccess,
     required Function(dynamic error) onError,
   });
+  getDefaultAddress(
+      {required Options option,
+      required Function() beforeSend,
+      required Function(AddressResponse data) onSuccess,
+      required Function(dynamic error) onError});
 }
 
 class AddressProvider extends AddressAPIProtocol {
@@ -23,6 +28,24 @@ class AddressProvider extends AddressAPIProtocol {
       path: ApiConstant.ADDRESS,
       option: option,
     ).getAll(
+      beforeSend: () => {beforeSend()},
+      onSuccess: (data) {
+        onSuccess(AddressResponse.fromJson(data));
+      },
+      onError: (error) => {onError(error)},
+    );
+  }
+
+  @override
+  getDefaultAddress(
+      {required Options option,
+      required Function() beforeSend,
+      required Function(AddressResponse data) onSuccess,
+      required Function(dynamic error) onError}) {
+    ApiService(
+      path: ApiConstant.ADDRESSDEFAULT,
+      option: option,
+    ).get(
       beforeSend: () => {beforeSend()},
       onSuccess: (data) {
         onSuccess(AddressResponse.fromJson(data));

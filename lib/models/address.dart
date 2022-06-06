@@ -1,15 +1,15 @@
 import 'package:json_annotation/json_annotation.dart';
 part 'address.g.dart';
-
 @JsonSerializable()
 class Address {
   String? id;
+  String? province;
   String? district;
   String? ward;
   String? street;
   bool? status;
   String? nameReciever;
-  // String? phoneReciever;
+  String? phoneReciever;
   bool? isDeleted;
   String? createdAt;
   String? updatedAt;
@@ -18,12 +18,13 @@ class Address {
 
   Address(
     this.id,
+    this.province,
     this.district,
     this.ward,
     this.street,
     this.status,
     this.nameReciever,
-    // this.phoneReciever,
+    this.phoneReciever,
     this.isDeleted,
     this.createdAt,
     this.updatedAt,
