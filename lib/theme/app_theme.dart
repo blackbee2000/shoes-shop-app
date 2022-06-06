@@ -21,7 +21,7 @@ class AppTheme {
   final _box = GetStorage();
   final _key = 'isDarkMode';
 
-  var brightness = SchedulerBinding.instance.window.platformBrightness;
+  var brightness = SchedulerBinding.instance!.window.platformBrightness;
 
   final controller = Get.put(ThemeController());
 

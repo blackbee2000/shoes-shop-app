@@ -19,12 +19,12 @@ class BlogDetailPage extends StatelessWidget {
 
   BlogDetailPage({Key? key, required this.blog}) : super(key: key);
 
-  Future<void> share() async {
+  Future<void> share(title, description, link) async {
     await FlutterShare.share(
-        title: 'Example share',
-        text: 'Example share text',
-        linkUrl: 'https://flutter.dev/',
-        chooserTitle: 'Example Chooser Title');
+      title: title,
+      text: description,
+      linkUrl: link,
+    );
   }
 
   @override
@@ -141,7 +141,7 @@ class BlogDetailPage extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
                                 Text(
-                                  "Jordan chất điên, cháy cả cộng đồng mạng",
+                                  '${AppTranslation.instance.language == AppTranslation.english ? (blog.titleEn != null && blog.titleEn!.isNotEmpty ? blog.titleEn : '--') : (blog.titleVi != null && blog.titleVi!.isNotEmpty ? blog.titleVi : '--')}',
                                   style: GoogleFonts.ebGaramond(
                                     color: Colors.white,
                                     fontSize: 22,
@@ -190,7 +190,14 @@ class BlogDetailPage extends StatelessWidget {
                             child: Container(
                               alignment: Alignment.centerRight,
                               child: GestureDetector(
-                                onTap: share,
+                                onTap: () {
+                                  AppTranslation.instance.language ==
+                                          AppTranslation.english
+                                      ? share(blog.titleEn,
+                                          blog.descriptionShortEn, blog.link)
+                                      : share(blog.titleEn,
+                                          blog.descriptionShortEn, blog.link);
+                                },
                                 child: Container(
                                   width: 50,
                                   height: 50,

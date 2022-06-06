@@ -19,16 +19,13 @@ class AddressController extends GetxController {
   List<Province> lstProvince = <Province>[].obs;
   List<District> lstDistrict = <District>[].obs;
   List<Ward> lstWard = <Ward>[].obs;
-  final addressDefault =
-      Address(null, null, null, null, null, null, null, null, null, null, null,null,null)
-          .obs;
+  final addressDefault = Address.fromJson({}).obs;
 
   @override
   void onInit() {
     super.onInit();
     getProvince();
     getAllAddress();
-    getDefaultAddress();
     customerNameEdit.text = 'Phạm Thành Trung';
     customerAddressEdit.text = '180 Sao Hoả, Hệ Mặt Trời';
   }
@@ -84,32 +81,76 @@ class AddressController extends GetxController {
       onSuccess: (res) {
         print('GET ALL ADDRESS SUCCESS =>>>>> ${res.data.toString()}');
         listAddress = res.data ?? [];
+        for (var e in listAddress) {
+          if (e.status == true) {
+            addressDefault.value = e;
+            return;
+          }
+        }
         print('LIST ADDRESSSSSS =>>>>> ${listAddress.toString()}');
         update();
       },
       onError: (e) {
         print('GET ALL ADDRESS FAIL =>>>>> ${e.toString()}');
+        update();
       },
     );
   }
 
-  getDefaultAddress() {
-    AddressProvider().getDefaultAddress(
+  deleteAddress(String id) {
+    AddressProvider().deleteAddress(
+      id: id,
+      params: {},
       option: Options(
         headers: {
           'Authorization': 'Bearer ${ApiToken.to.appToken}',
         },
       ),
-      beforeSend: () {},
+      beforeSend: () {
+        Get.dialog(
+          const SizedBox(
+            height: 15,
+            width: 15,
+            child: Center(
+              child: CircularProgressIndicator(
+                valueColor: AlwaysStoppedAnimation(Colors.white),
+                strokeWidth: 2,
+              ),
+            ),
+          ),
+          barrierDismissible: false,
+        );
+      },
       onSuccess: (res) {
-        print('GET ADDRESS DEFAULT SUCCESS =>>>>> ${res.data.toString()}');
-        addressDefault.value = res.data![0];
-        print('ADDRESS DEFAULT  =>>>>> ${addressDefault.toString()}');
+        Get.back();
+        print('DELETE ADDRES SUCESS ${res.data.toString()}');
         update();
       },
       onError: (e) {
-        print('GET ADDRESS DEFAULT FAIL =>>>>> ${e.toString()}');
+        Get.back();
+        print('DELETE ADDRES FAIL ${e.toString()}');
+        update();
       },
     );
   }
+
+  // getDefaultAddress() {
+  //   AddressProvider().getDefaultAddress(
+  //     option: Options(
+  //       headers: {
+  //         'Authorization': 'Bearer ${ApiToken.to.appToken}',
+  //       },
+  //     ),
+  //     beforeSend: () {},
+  //     onSuccess: (res) {
+  //       print('GET ADDRESS DEFAULT SUCCESS =>>>>> ${res.data.toString()}');
+  //       addressDefault.value = res.data![0];
+  //       print('ADDRESS DEFAULT  =>>>>> ${addressDefault.toString()}');
+  //       update();
+  //     },
+  //     onError: (e) {
+  //       print('GET ADDRESS DEFAULT FAIL =>>>>> ${e.toString()}');
+  //     },
+  //   );
+  // }
 }

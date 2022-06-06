@@ -1,7 +1,7 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:get/get.dart';
-import 'package:shoes_shop_app/models/product.dart';
 import 'package:shoes_shop_app/pages/cart/cart_page.dart';
 import 'package:shoes_shop_app/pages/dashboard/dashboard_controller.dart';
 import 'package:shoes_shop_app/pages/home/home_controller.dart';
@@ -188,7 +188,7 @@ class HomePageState extends State<HomePage> {
                                                             .start,
                                                     children: [
                                                       Text(
-                                                        '${AppTranslation.instance.language == AppTranslation.english ? (e.nameProductEn != null && e.nameProductEn!.isNotEmpty ? e.nameProductEn : '--') : (e.nameProductVi != null && e.nameProductVi!.isNotEmpty ? e.nameProductVi : '--')}',
+                                                        '${AppTranslation.instance.language == AppTranslation.english ? (e.product!.nameProductEn != null && e.product!.nameProductEn!.isNotEmpty ? e.product!.nameProductEn : '--') : (e.product!.nameProductVi != null && e.product!.nameProductVi!.isNotEmpty ? e.product!.nameProductVi : '--')}',
                                                         style: GoogleFonts
                                                             .ebGaramond(
                                                           color: theme.theme ==
@@ -205,7 +205,7 @@ class HomePageState extends State<HomePage> {
                                                         height: 5,
                                                       ),
                                                       Text(
-                                                        'Jordan',
+                                                        '${e.companyName != null && e.companyName!.isNotEmpty ? e.companyName : '--'}',
                                                         style: GoogleFonts
                                                             .ebGaramond(
                                                           color: theme.theme ==
@@ -296,11 +296,35 @@ class HomePageState extends State<HomePage> {
                                             Positioned(
                                               top: 20,
                                               right: -78,
-                                              child: Image.asset(
-                                                "assets/images/product_home.png",
+                                              child: CachedNetworkImage(
                                                 width: 300,
-                                                height: 185,
                                                 fit: BoxFit.contain,
+                                                imageUrl: e.product!
+                                                    .imageProduct!.first,
+                                                useOldImageOnUrlChange: false,
+                                                progressIndicatorBuilder:
+                                                    (context, url,
+                                                            downloadProgress) =>
+                                                        SizedBox(
+                                                  height: 15,
+                                                  width: 15,
+                                                  child: Center(
+                                                    child:
+                                                        CircularProgressIndicator(
+                                                      value: downloadProgress
+                                                          .progress,
+                                                      valueColor:
+                                                          const AlwaysStoppedAnimation(
+                                                              Colors.white),
+                                                      strokeWidth: 2,
+                                                    ),
+                                                  ),
+                                                ),
+                                                errorWidget:
+                                                    (context, url, error) =>
+                                                        ClipOval(
+                                                  child: Container(),
+                                                ),
                                               ),
                                             ),
                                           ],
@@ -434,10 +458,33 @@ class HomePageState extends State<HomePage> {
                                       const SizedBox(
                                         height: 15,
                                       ),
-                                      Image.asset(
-                                        "assets/images/product_home.png",
+                                      CachedNetworkImage(
                                         width: 80,
                                         fit: BoxFit.contain,
+                                        imageUrl: controller
+                                            .listDiscountProduct[index]
+                                            .imageProduct!
+                                            .first,
+                                        useOldImageOnUrlChange: false,
+                                        progressIndicatorBuilder:
+                                            (context, url, downloadProgress) =>
+                                                SizedBox(
+                                          height: 15,
+                                          width: 15,
+                                          child: Center(
+                                            child: CircularProgressIndicator(
+                                              value: downloadProgress.progress,
+                                              valueColor:
+                                                  const AlwaysStoppedAnimation(
+                                                      Colors.white),
+                                              strokeWidth: 2,
+                                            ),
+                                          ),
+                                        ),
+                                        errorWidget: (context, url, error) =>
+                                            ClipOval(
+                                          child: Container(),
+                                        ),
                                       ),
                                       const SizedBox(
                                         height: 15,
@@ -461,7 +508,10 @@ class HomePageState extends State<HomePage> {
                                       Container(
                                         alignment: Alignment.topLeft,
                                         child: RatingBarIndicator(
-                                          rating: 5,
+                                          rating: controller
+                                                  .listDiscountProduct[index]
+                                                  .rating ??
+                                              0,
                                           itemBuilder: (context, index) =>
                                               const Icon(
                                             Icons.star,
@@ -478,7 +528,8 @@ class HomePageState extends State<HomePage> {
                                       GestureDetector(
                                         onTap: () => Get.to(
                                             ProductDetailPage(
-                                              product: Product.fromJson({}),
+                                              product: controller
+                                                  .listDiscountProduct[index],
                                               id: AppConstant.HOME,
                                             ),
                                             id: AppConstant.HOME),
@@ -574,10 +625,32 @@ class HomePageState extends State<HomePage> {
                                     ],
                                   ),
                                   child: Center(
-                                    child: Image.asset(
-                                      "assets/images/jordan.png",
+                                    child: CachedNetworkImage(
                                       width: 80,
                                       fit: BoxFit.contain,
+                                      imageUrl: controller
+                                              .listCompany[index].logoCompany ??
+                                          '',
+                                      useOldImageOnUrlChange: false,
+                                      progressIndicatorBuilder:
+                                          (context, url, downloadProgress) =>
+                                              SizedBox(
+                                        height: 15,
+                                        width: 15,
+                                        child: Center(
+                                          child: CircularProgressIndicator(
+                                            value: downloadProgress.progress,
+                                            valueColor:
+                                                const AlwaysStoppedAnimation(
+                                                    Colors.white),
+                                            strokeWidth: 2,
+                                          ),
+                                        ),
+                                      ),
+                                      errorWidget: (context, url, error) =>
+                                          ClipOval(
+                                        child: Container(),
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -681,10 +754,33 @@ class HomePageState extends State<HomePage> {
                                       const SizedBox(
                                         height: 15,
                                       ),
-                                      Image.asset(
-                                        "assets/images/product_home.png",
+                                      CachedNetworkImage(
                                         width: 80,
                                         fit: BoxFit.contain,
+                                        imageUrl: controller
+                                            .listTrendingProduct[index]
+                                            .imageProduct!
+                                            .first,
+                                        useOldImageOnUrlChange: false,
+                                        progressIndicatorBuilder:
+                                            (context, url, downloadProgress) =>
+                                                SizedBox(
+                                          height: 15,
+                                          width: 15,
+                                          child: Center(
+                                            child: CircularProgressIndicator(
+                                              value: downloadProgress.progress,
+                                              valueColor:
+                                                  const AlwaysStoppedAnimation(
+                                                      Colors.white),
+                                              strokeWidth: 2,
+                                            ),
+                                          ),
+                                        ),
+                                        errorWidget: (context, url, error) =>
+                                            ClipOval(
+                                          child: Container(),
+                                        ),
                                       ),
                                       const SizedBox(
                                         height: 15,
@@ -711,7 +807,10 @@ class HomePageState extends State<HomePage> {
                                       Container(
                                         alignment: Alignment.topLeft,
                                         child: RatingBarIndicator(
-                                          rating: 5,
+                                          rating: controller
+                                                  .listTrendingProduct[index]
+                                                  .rating ??
+                                              0,
                                           itemBuilder: (context, index) =>
                                               const Icon(
                                             Icons.star,
@@ -728,7 +827,8 @@ class HomePageState extends State<HomePage> {
                                       GestureDetector(
                                         onTap: () => Get.to(
                                             ProductDetailPage(
-                                              product: Product.fromJson({}),
+                                              product: controller
+                                                  .listTrendingProduct[index],
                                               id: AppConstant.PRODUCT,
                                             ),
                                             id: AppConstant.HOME),

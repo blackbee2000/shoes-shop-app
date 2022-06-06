@@ -4,6 +4,7 @@ import 'package:flutter_switch/flutter_switch.dart';
 import 'package:get/get.dart';
 import 'package:shoes_shop_app/pages/cart/cart_page.dart';
 import 'package:shoes_shop_app/pages/change-password/change_password_page.dart';
+import 'package:shoes_shop_app/pages/profile/product_favorite/product_favorite_page.dart';
 import 'package:shoes_shop_app/pages/profile/profile_controller.dart';
 import 'package:shoes_shop_app/pages/user/user_page.dart';
 import 'package:shoes_shop_app/pages/your-order/your_order_page.dart';
@@ -578,7 +579,8 @@ class ProfilePage extends GetView<ProfileController> {
                                           Expanded(
                                             child: GestureDetector(
                                               onTap: () {
-                                                // Get.to(const LoginPage());
+                                                Get.to(ProductFavoritePage(),
+                                                    id: AppConstant.PROFILE);
                                               },
                                               child: Container(
                                                 width: double.infinity,

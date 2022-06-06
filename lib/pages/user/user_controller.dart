@@ -22,9 +22,6 @@ class UserController extends GetxController with StateMixin {
   @override
   void onInit() async {
     super.onInit();
-    name.text = profileController.profile.value.fullName ?? "";
-    phone.text = profileController.profile.value.phoneNumber ?? "";
-    email.text = profileController.profile.value.email ?? "";
   }
 
   Future getImage(String id) async {

@@ -4,10 +4,10 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:shoes_shop_app/models/otp.dart';
 import 'package:shoes_shop_app/pages/auth/auth_provider.dart';
-import 'package:shoes_shop_app/pages/auth/otp/otp_page.dart';
 import 'package:shoes_shop_app/pages/dashboard/dashboard_page.dart';
+import 'package:shoes_shop_app/pages/profile/profile_controller.dart';
+import 'package:shoes_shop_app/pages/user/user_controller.dart';
 import 'package:shoes_shop_app/pages/user/user_page.dart';
 import 'package:shoes_shop_app/services/api_token.dart';
 
@@ -19,7 +19,8 @@ class LoginController extends GetxController {
   TextEditingController numberPhone = TextEditingController();
   final profileController = Get.put(ProfileController());
   final storage = GetStorage();
-  final otpResponse = Otp.fromJson({}).obs;
+  final phoneForOtp = ''.obs;
+  final userController = Get.put(UserController());
 
   setToken(token) async {
     await storage.write('token', token);
@@ -55,15 +56,17 @@ class LoginController extends GetxController {
         if (type == 'login') {
           Get.offAll(const DashboardPage());
         } else if (type == 'register') {
-          profileController.getProfile();
-          var rng = Random();
-          rng.nextInt(99999999) + 10000000;
-          Get.to(
-            UserPage(
-              id: 1,
-              idProfile: profileController.profile.value.id!,
-            ),
-          );
+          profileController.onInit();
+          Future.delayed(const Duration(milliseconds: 500)).then((_) {
+            print(
+                'LAY ID NE HAAAAAAAAA ==>>>>>>> ${profileController.profile.value.fullName}');
+            Get.to(
+              UserPage(
+                id: 1,
+                idProfile: profileController.profile.value.id ?? '',
+              ),
+            );
+          });
         }
         update();
       },
@@ -76,43 +79,6 @@ class LoginController extends GetxController {
         );
         // Get.back();
         print('LOGIN FAIL =>>> ${e.toString()}');
-        update();
-      },
-    );
-  }
-
-  sendOtp(String phoneNumber) {
-    AuthProvider().sendOtp(
-      params: {"phoneNumber": phoneNumber},
-      option: Options(
-        headers: {
-          'Content-Type': 'application/json; charset=UTF-8',
-        },
-      ),
-      beforeSend: () {
-        Get.dialog(
-          const SizedBox(
-            height: 15,
-            width: 15,
-            child: Center(
-              child: CircularProgressIndicator(
-                valueColor: AlwaysStoppedAnimation(Colors.white),
-                strokeWidth: 2,
-              ),
-            ),
-          ),
-          barrierDismissible: false,
-        );
-      },
-      onSuccess: (res) {
-        print('SEND OTP SUCESSS =>>>>>> ${res.toString()}');
-        otpResponse.value = res.body!;
-        Get.to(OtpPage());
-        update();
-      },
-      onError: (e) {
-        print('SEND OTP FAIL =>>>>>> ${e.toString()}');
-        Get.back();
         update();
       },
     );

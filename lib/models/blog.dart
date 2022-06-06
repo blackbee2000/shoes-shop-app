@@ -4,6 +4,9 @@ part 'blog.g.dart';
 @JsonSerializable()
 class Blog {
   String? id;
+  String? titleVi;
+  String? titleEn;
+  String? link;
   String? contentVi;
   String? contentEn;
   String? time;
@@ -17,6 +20,9 @@ class Blog {
 
   Blog(
     this.id,
+    this.titleVi,
+    this.titleEn,
+    this.link,
     this.contentVi,
     this.contentEn,
     this.time,

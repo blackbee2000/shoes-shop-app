@@ -26,6 +26,20 @@ class _UserPageState extends State<UserPage> {
   final userController = Get.put(UserController());
   final profileController = Get.put(ProfileController());
 
+  @override
+  void initState() {
+    userController.name.text = profileController.profile.value.fullName ?? "";
+    userController.phone.text =
+        profileController.profile.value.phoneNumber ?? "";
+    userController.email.text = profileController.profile.value.email ?? "";
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
   Widget selectedProvide() {
     return Container(
       decoration: const BoxDecoration(
@@ -518,10 +532,11 @@ class _UserPageState extends State<UserPage> {
                             onTap: () {
                               // Get.offAll(DashboardPage());
                               controller.updateProfile(
-                                  controller.name.text,
-                                  controller.phone.text,
-                                  controller.email.text,
-                                  controller.imageUser ?? "");
+                                controller.name.text,
+                                controller.phone.text,
+                                controller.email.text,
+                                controller.imageUser ?? "",
+                              );
                             },
                             child: Stack(
                               alignment: AlignmentDirectional.center,
