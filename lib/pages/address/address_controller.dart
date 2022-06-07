@@ -55,8 +55,9 @@ class AddressController extends GetxController {
 
   deleteAddress(String id) {
     AddressProvider().deleteAddress(
-      id: id,
-      params: {},
+      params: {
+        'getId': id,
+      },
       option: Options(
         headers: {
           'Authorization': 'Bearer ${ApiToken.to.appToken}',
@@ -85,6 +86,153 @@ class AddressController extends GetxController {
       onError: (e) {
         Get.back();
         print('DELETE ADDRES FAIL ${e.toString()}');
+        update();
+      },
+    );
+  }
+
+  createAddress(
+    String province,
+    String district,
+    String ward,
+    String street,
+    String nameReceiever,
+    String phoneReciever,
+  ) {
+    AddressProvider().createAddress(
+      params: {
+        "province": province,
+        "district": district,
+        "ward": ward,
+        "street": street,
+        "status": false,
+        "nameReciever": nameReceiever,
+        "phoneReciever": phoneReciever
+      },
+      option: Options(
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': 'Bearer ${ApiToken.to.appToken}',
+        },
+      ),
+      beforeSend: () {
+        Get.dialog(
+          const SizedBox(
+            height: 15,
+            width: 15,
+            child: Center(
+              child: CircularProgressIndicator(
+                valueColor: AlwaysStoppedAnimation(Colors.white),
+                strokeWidth: 2,
+              ),
+            ),
+          ),
+          barrierDismissible: false,
+        );
+      },
+      onSuccess: (res) {
+        Get.back();
+        print('CREATE ADDRES SUCESS ${res.data.toString()}');
+        update();
+      },
+      onError: (e) {
+        Get.back();
+        print('CREATE ADDRES FAIL ${e.toString()}');
+        update();
+      },
+    );
+  }
+
+  updateAddress(
+    String id,
+    String province,
+    String district,
+    String ward,
+    String street,
+    String status,
+    String nameReceiever,
+    String phoneReciever,
+  ) {
+    AddressProvider().updateAddress(
+      params: {
+        "_id": id,
+        "province": province,
+        "district": district,
+        "ward": ward,
+        "street": street,
+        "status": status,
+        "nameReciever": nameReceiever,
+        "phoneReciever": phoneReciever
+      },
+      option: Options(
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': 'Bearer ${ApiToken.to.appToken}',
+        },
+      ),
+      beforeSend: () {
+        Get.dialog(
+          const SizedBox(
+            height: 15,
+            width: 15,
+            child: Center(
+              child: CircularProgressIndicator(
+                valueColor: AlwaysStoppedAnimation(Colors.white),
+                strokeWidth: 2,
+              ),
+            ),
+          ),
+          barrierDismissible: false,
+        );
+      },
+      onSuccess: (res) {
+        Get.back();
+        print('UPDATE ADDRES SUCESS ${res.data.toString()}');
+        update();
+      },
+      onError: (e) {
+        Get.back();
+        print('UPDATE ADDRES FAIL ${e.toString()}');
+        update();
+      },
+    );
+  }
+
+  updateDefaultAddress(
+    String id,
+  ) {
+    AddressProvider().updateDefaultAddress(
+      params: {
+        'getId': id,
+      },
+      option: Options(
+        headers: {
+          'Authorization': 'Bearer ${ApiToken.to.appToken}',
+        },
+      ),
+      beforeSend: () {
+        Get.dialog(
+          const SizedBox(
+            height: 15,
+            width: 15,
+            child: Center(
+              child: CircularProgressIndicator(
+                valueColor: AlwaysStoppedAnimation(Colors.white),
+                strokeWidth: 2,
+              ),
+            ),
+          ),
+          barrierDismissible: false,
+        );
+      },
+      onSuccess: (res) {
+        Get.back();
+        print('UPDATE DEFAULT ADDRES SUCESS ${res.data.toString()}');
+        update();
+      },
+      onError: (e) {
+        Get.back();
+        print('UPDATE DEFAULT ADDRES FAIL ${e.toString()}');
         update();
       },
     );
