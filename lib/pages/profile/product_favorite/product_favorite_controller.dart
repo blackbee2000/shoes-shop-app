@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shoes_shop_app/models/product.dart';
+import 'package:shoes_shop_app/pages/product/product_controller.dart';
 import 'package:shoes_shop_app/pages/product/product_provider.dart';
 import 'package:shoes_shop_app/pages/profile/profile_provider.dart';
 import 'package:shoes_shop_app/services/api_token.dart';
@@ -10,6 +11,7 @@ class ProductFavoriteController extends GetxController {
   List<String> listProductFavorite = <String>[].obs;
   List<Product> listProductAll = <Product>[].obs;
   List<Product> listProductFavoriteFinal = <Product>[].obs;
+  final productController = Get.put(ProductController());
   @override
   void onInit() async {
     super.onInit();
@@ -94,7 +96,7 @@ class ProductFavoriteController extends GetxController {
             listProductFavoriteFinal.remove(e);
           }
         }
-
+        productController.update();
         update();
       },
       onError: (e) {

@@ -34,4 +34,5 @@ class ApiConstant {
   static final String PRODUCTFAVORITE =
       '${url.toString()}/account/getFavoriteAccount';
   static final String VOUCHER = '${url.toString()}/voucher/all';
+  static final String ORDER = '${url.toString()}/order/create';
 }

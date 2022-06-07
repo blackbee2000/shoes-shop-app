@@ -1,6 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
+import 'package:shoes_shop_app/models/voucher.dart';
 import 'package:shoes_shop_app/pages/address/address_page.dart';
 import 'package:shoes_shop_app/pages/cart/cart_controller.dart';
 import 'package:shoes_shop_app/pages/payment/payment_controller.dart';
@@ -514,7 +516,7 @@ class PaymentState extends State<PaymentPage> {
                           ),
                           GestureDetector(
                             onTap: () {
-                              Get.to(VoucherPage(id: widget.id));
+                              Get.to(VoucherPage(id: widget.id), id: widget.id);
                             },
                             child: Row(
                               children: [
@@ -549,84 +551,123 @@ class PaymentState extends State<PaymentPage> {
                     const SizedBox(
                       height: 20,
                     ),
-                    Container(
-                      width: double.infinity,
-                      margin: const EdgeInsets.symmetric(horizontal: 20),
-                      padding: const EdgeInsets.all(20),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(10),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withOpacity(0.25),
-                            spreadRadius: 0,
-                            blurRadius: 4,
-                            offset: const Offset(
-                                0, 4), // changes position of shadow
-                          ),
-                        ],
-                      ),
-                      child: Row(
-                        children: [
-                          ClipOval(
-                            child: Container(
-                              width: 60,
-                              height: 60,
-                              color: Colors.black,
-                            ),
-                          ),
-                          const SizedBox(
-                            width: 20,
-                          ),
-                          Expanded(
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Sale sóc cuối tuần',
-                                  style: GoogleFonts.ebGaramond(
+                    GetBuilder<PaymentController>(
+                      init: paymentController,
+                      builder: (controller) => controller.voucher.value !=
+                              Voucher.fromJson({})
+                          ? Container(
+                              width: double.infinity,
+                              margin:
+                                  const EdgeInsets.symmetric(horizontal: 20),
+                              padding: const EdgeInsets.all(20),
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(10),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withOpacity(0.25),
+                                    spreadRadius: 0,
+                                    blurRadius: 4,
+                                    offset: const Offset(
+                                        0, 4), // changes position of shadow
+                                  ),
+                                ],
+                              ),
+                              child: Row(
+                                children: [
+                                  ClipOval(
+                                    child: Container(
+                                      width: 60,
+                                      height: 60,
+                                      color: Colors.black,
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    width: 20,
+                                  ),
+                                  Expanded(
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          '${controller.voucher.value.title != null && controller.voucher.value.title!.isNotEmpty ? controller.voucher.value.title : 'no_information'.tr}',
+                                          style: GoogleFonts.ebGaramond(
+                                            color:
+                                                theme.theme == ThemeMode.light
+                                                    ? Colors.black
+                                                    : Colors.white,
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w600,
+                                          ),
+                                        ),
+                                        const SizedBox(
+                                          height: 10,
+                                        ),
+                                        Text(
+                                          'Giảm giá: ${controller.voucher.value.discount ?? '--'}',
+                                          style: GoogleFonts.ebGaramond(
+                                            color:
+                                                theme.theme == ThemeMode.light
+                                                    ? Colors.black
+                                                    : Colors.white,
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w600,
+                                          ),
+                                        ),
+                                        const SizedBox(
+                                          height: 10,
+                                        ),
+                                        Align(
+                                          alignment: Alignment.centerRight,
+                                          child: Text(
+                                            'Thời hạn: '
+                                            '${controller.voucher.value.expiry != null && controller.voucher.value.expiry!.isNotEmpty ? DateFormat('HH:mm - dd/MM/yyyy').format(DateTime.parse(controller.voucher.value.expiry ?? '').toLocal()) : '--'}',
+                                            style: GoogleFonts.ebGaramond(
+                                              color:
+                                                  theme.theme == ThemeMode.light
+                                                      ? Colors.black
+                                                      : Colors.white,
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w600,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            )
+                          : Container(
+                              alignment: Alignment.center,
+                              child: Column(
+                                children: [
+                                  Image.asset(
+                                    'assets/icons/icon-box.png',
+                                    width: 45,
                                     color: theme.theme == ThemeMode.light
                                         ? Colors.black
                                         : Colors.white,
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w600,
                                   ),
-                                ),
-                                const SizedBox(
-                                  height: 10,
-                                ),
-                                Text(
-                                  'Giảm giá: 50%',
-                                  style: GoogleFonts.ebGaramond(
-                                    color: theme.theme == ThemeMode.light
-                                        ? Colors.black
-                                        : Colors.white,
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w600,
+                                  const SizedBox(
+                                    height: 10,
                                   ),
-                                ),
-                                const SizedBox(
-                                  height: 10,
-                                ),
-                                Align(
-                                  alignment: Alignment.centerRight,
-                                  child: Text(
-                                    'Thời hạn: 30/02/2022',
+                                  Text(
+                                    'voucher_select'.tr,
                                     style: GoogleFonts.ebGaramond(
                                       color: theme.theme == ThemeMode.light
                                           ? Colors.black
                                           : Colors.white,
-                                      fontSize: 16,
+                                      fontSize: 18,
                                       fontWeight: FontWeight.w600,
                                     ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
-                          ),
-                        ],
-                      ),
                     ),
                     const SizedBox(
                       height: 30,
@@ -896,25 +937,37 @@ class PaymentState extends State<PaymentPage> {
                     const SizedBox(
                       height: 20,
                     ),
-                    Container(
-                      width: double.infinity,
-                      height: 50,
-                      margin: const EdgeInsets.symmetric(horizontal: 20),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: theme.theme == ThemeMode.light
-                            ? Colors.black
-                            : Colors.white,
-                      ),
-                      child: Center(
-                        child: Text(
-                          'cart_payment'.tr.toUpperCase(),
-                          style: GoogleFonts.ebGaramond(
+                    GetBuilder<PaymentController>(
+                      init: paymentController,
+                      builder: (controller) => GestureDetector(
+                        onTap: () {
+                          cartController.listCartSelected.clear();
+                          controller.payment(
+                              controller.voucher.value.voucherCode ?? '',
+                              total);
+                          controller.update();
+                        },
+                        child: Container(
+                          width: double.infinity,
+                          height: 50,
+                          margin: const EdgeInsets.symmetric(horizontal: 20),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
                             color: theme.theme == ThemeMode.light
-                                ? Colors.white
-                                : Colors.black,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
+                                ? Colors.black
+                                : Colors.white,
+                          ),
+                          child: Center(
+                            child: Text(
+                              'cart_payment'.tr.toUpperCase(),
+                              style: GoogleFonts.ebGaramond(
+                                color: theme.theme == ThemeMode.light
+                                    ? Colors.white
+                                    : Colors.black,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
                           ),
                         ),
                       ),

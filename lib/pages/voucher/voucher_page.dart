@@ -115,7 +115,7 @@ class VoucherPage extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    'Sale sóc cuối tuần',
+                                    '${controller.listVoucher[index].title != null && controller.listVoucher[index].title!.isNotEmpty ? controller.listVoucher[index].title : 'no_information'.tr}',
                                     style: GoogleFonts.ebGaramond(
                                       color: Colors.black,
                                       fontSize: 16,
@@ -152,7 +152,8 @@ class VoucherPage extends StatelessWidget {
                               alignment: Alignment.centerRight,
                               child: GestureDetector(
                                 onTap: () {
-                                  Get.back(id: id);
+                                  controller.selectVoucher(
+                                      controller.listVoucher[index], id);
                                 },
                                 child: Container(
                                   width: 40,

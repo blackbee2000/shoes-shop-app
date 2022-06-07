@@ -12,6 +12,7 @@ class Order {
   int? totalPrice;
   bool? statusPayment;
   List<AddressOrder>? address;
+  String? voucher;
   bool? isDeleted;
   String? createdAt;
   String? updatedAt;
@@ -25,6 +26,7 @@ class Order {
     this.totalPrice,
     this.statusPayment,
     this.address,
+    this.voucher,
     this.isDeleted,
     this.createdAt,
     this.updatedAt,
