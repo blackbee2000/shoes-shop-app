@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:shoes_shop_app/models/blog.dart';
+import 'package:shoes_shop_app/pages/blog/blog_controller.dart';
 import 'package:shoes_shop_app/pages/blog/detail/blog_detail_controller.dart';
 import 'package:shoes_shop_app/pages/cart/cart_page.dart';
 import 'package:shoes_shop_app/translations/app_translation.dart';
@@ -15,7 +16,9 @@ import 'package:html/parser.dart' show parse;
 
 class BlogDetailPage extends StatelessWidget {
   final Blog blog;
+  List<Blog> listBlogRelated = <Blog>[].obs;
   final blogDetailController = Get.put(BlogDetailController());
+  final blogController = Get.put(BlogController());
 
   BlogDetailPage({Key? key, required this.blog}) : super(key: key);
 
@@ -29,6 +32,12 @@ class BlogDetailPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    listBlogRelated = blogController.listBlog;
+    // for (var e in listBlogRelated) {
+    //   if (e.id == blog.id) {
+    //     listBlogRelated.remove(e);
+    //   }
+    // }
     return SafeArea(
       child: Container(
         width: double.infinity,
@@ -325,151 +334,166 @@ class BlogDetailPage extends StatelessWidget {
                       height: 20,
                     ),
                     Column(
-                      children: [1, 2, 3, 4, 5]
-                          .map(
-                            (e) => GestureDetector(
-                              // onTap: () {
-                              //   Get.to(BlogDetailPage());
-                              // },
-                              child: Container(
-                                width: double.infinity,
-                                margin: const EdgeInsets.only(
-                                  bottom: 20,
-                                  left: 20,
-                                  right: 20,
-                                ),
-                                height: 130,
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(10),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.black.withOpacity(0.25),
-                                      spreadRadius: 0,
-                                      blurRadius: 4,
-                                      offset: const Offset(
-                                          0, 4), // changes position of shadow
+                      children: listBlogRelated.isNotEmpty
+                          ? listBlogRelated
+                              .map(
+                                (e) => GestureDetector(
+                                  child: Container(
+                                    width: double.infinity,
+                                    margin: const EdgeInsets.only(
+                                      bottom: 20,
+                                      left: 20,
+                                      right: 20,
                                     ),
-                                  ],
-                                ),
-                                padding: const EdgeInsets.only(
-                                  left: 15,
-                                  right: 20,
-                                ),
-                                child: Row(
-                                  children: [
-                                    Container(
-                                      width: 110,
-                                      height: double.infinity,
-                                      decoration: const BoxDecoration(
-                                        borderRadius: BorderRadius.only(
-                                          topLeft: Radius.circular(10),
-                                          bottomLeft: Radius.circular(10),
+                                    height: 130,
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(10),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.black.withOpacity(0.25),
+                                          spreadRadius: 0,
+                                          blurRadius: 4,
+                                          offset: const Offset(0,
+                                              4), // changes position of shadow
                                         ),
-                                      ),
-                                      child: CachedNetworkImage(
-                                        fit: BoxFit.cover,
-                                        imageUrl: '',
-                                        useOldImageOnUrlChange: false,
-                                        progressIndicatorBuilder:
-                                            (context, url, downloadProgress) =>
+                                      ],
+                                    ),
+                                    padding: const EdgeInsets.only(
+                                      left: 15,
+                                      right: 20,
+                                    ),
+                                    child: Row(
+                                      children: [
+                                        Container(
+                                          width: 110,
+                                          height: double.infinity,
+                                          decoration: const BoxDecoration(
+                                            borderRadius: BorderRadius.only(
+                                              topLeft: Radius.circular(10),
+                                              bottomLeft: Radius.circular(10),
+                                            ),
+                                          ),
+                                          child: CachedNetworkImage(
+                                            fit: BoxFit.cover,
+                                            imageUrl: '',
+                                            useOldImageOnUrlChange: false,
+                                            progressIndicatorBuilder: (context,
+                                                    url, downloadProgress) =>
                                                 SizedBox(
-                                          height: 15,
-                                          width: 15,
-                                          child: Center(
-                                            child: CircularProgressIndicator(
-                                              value: downloadProgress.progress,
-                                              valueColor:
-                                                  const AlwaysStoppedAnimation(
-                                                      Colors.white),
-                                              strokeWidth: 2,
+                                              height: 15,
+                                              width: 15,
+                                              child: Center(
+                                                child:
+                                                    CircularProgressIndicator(
+                                                  value:
+                                                      downloadProgress.progress,
+                                                  valueColor:
+                                                      const AlwaysStoppedAnimation(
+                                                          Colors.white),
+                                                  strokeWidth: 2,
+                                                ),
+                                              ),
+                                            ),
+                                            errorWidget:
+                                                (context, url, error) =>
+                                                    ClipOval(
+                                              child: Container(),
                                             ),
                                           ),
                                         ),
-                                        errorWidget: (context, url, error) =>
-                                            ClipOval(
-                                          child: Container(),
+                                        Container(
+                                          width: 5,
+                                          height: double.infinity,
+                                          color: const Color(0xffFFD9D9),
                                         ),
-                                      ),
-                                    ),
-                                    Container(
-                                      width: 5,
-                                      height: double.infinity,
-                                      color: const Color(0xffFFD9D9),
-                                    ),
-                                    const SizedBox(
-                                      width: 15,
-                                    ),
-                                    Expanded(
-                                      child: Container(
-                                        padding: const EdgeInsets.only(
-                                          top: 15,
-                                          bottom: 15,
+                                        const SizedBox(
+                                          width: 15,
                                         ),
-                                        child: Column(
-                                          children: [
-                                            Text(
-                                              'Jordan chất điên, cháy cả cộng đồng mạng',
-                                              style: GoogleFonts.ebGaramond(
-                                                color: Colors.black,
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.w600,
-                                              ),
-                                              maxLines: 1,
-                                              overflow: TextOverflow.ellipsis,
-                                              textAlign: TextAlign.left,
+                                        Expanded(
+                                          child: Container(
+                                            padding: const EdgeInsets.only(
+                                              top: 15,
+                                              bottom: 15,
                                             ),
-                                            const SizedBox(
-                                              height: 5,
-                                            ),
-                                            Text(
-                                              'This is my shoes, say la la laa',
-                                              style: GoogleFonts.ebGaramond(
-                                                color: Colors.black,
-                                                fontSize: 13,
-                                                fontWeight: FontWeight.w400,
-                                              ),
-                                              maxLines: 3,
-                                              overflow: TextOverflow.ellipsis,
-                                              textAlign: TextAlign.left,
-                                            ),
-                                            const SizedBox(
-                                              height: 5,
-                                            ),
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.end,
+                                            child: Column(
                                               children: [
-                                                Image.asset(
-                                                  "assets/icons/icon_calendar.png",
-                                                  width: 10,
-                                                  height: 10,
-                                                  fit: BoxFit.contain,
-                                                  color: Colors.black,
-                                                ),
-                                                const SizedBox(
-                                                  width: 10,
-                                                ),
                                                 Text(
-                                                  '00:00 20/09/2000',
+                                                  '${AppTranslation.instance.language == AppTranslation.english ? (e.titleEn != null && e.titleEn!.isNotEmpty ? e.titleEn : '--') : (e.titleVi != null && e.titleVi!.isNotEmpty ? e.titleVi : '--')}',
                                                   style: GoogleFonts.ebGaramond(
                                                     color: Colors.black,
-                                                    fontSize: 12,
+                                                    fontSize: 16,
+                                                    fontWeight: FontWeight.w600,
+                                                  ),
+                                                  maxLines: 1,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                  textAlign: TextAlign.left,
+                                                ),
+                                                const SizedBox(
+                                                  height: 5,
+                                                ),
+                                                Text(
+                                                  '${AppTranslation.instance.language == AppTranslation.english ? (e.descriptionShortEn != null && e.descriptionShortEn!.isNotEmpty ? e.descriptionShortEn : '--') : (e.descriptionShortVi != null && e.descriptionShortVi!.isNotEmpty ? e.descriptionShortVi : '--')}',
+                                                  style: GoogleFonts.ebGaramond(
+                                                    color: Colors.black,
+                                                    fontSize: 13,
                                                     fontWeight: FontWeight.w400,
                                                   ),
+                                                  maxLines: 3,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                  textAlign: TextAlign.left,
+                                                ),
+                                                const SizedBox(
+                                                  height: 5,
+                                                ),
+                                                Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.end,
+                                                  children: [
+                                                    Image.asset(
+                                                      "assets/icons/icon_calendar.png",
+                                                      width: 10,
+                                                      height: 10,
+                                                      fit: BoxFit.contain,
+                                                      color: Colors.black,
+                                                    ),
+                                                    const SizedBox(
+                                                      width: 10,
+                                                    ),
+                                                    Text(
+                                                      e.time != null &&
+                                                              e.time!.isNotEmpty
+                                                          ? DateFormat(
+                                                                  'HH:mm dd/MM/yyyy')
+                                                              .format(DateTime
+                                                                      .parse(
+                                                                          e.time ??
+                                                                              '')
+                                                                  .toLocal())
+                                                          : '--',
+                                                      style: GoogleFonts
+                                                          .ebGaramond(
+                                                        color: Colors.black,
+                                                        fontSize: 12,
+                                                        fontWeight:
+                                                            FontWeight.w400,
+                                                      ),
+                                                    ),
+                                                  ],
                                                 ),
                                               ],
                                             ),
-                                          ],
+                                          ),
                                         ),
-                                      ),
+                                      ],
                                     ),
-                                  ],
+                                  ),
                                 ),
-                              ),
-                            ),
-                          )
-                          .toList(),
+                              )
+                              .toList()
+                          : [],
                     )
                   ],
                 ),

@@ -47,4 +47,8 @@ class ApiConstant {
   //CART
   static final String ADDTOCART = '${url.toString()}/cart/create';
   static final String CART = '${url.toString()}/cart/all';
+  //Voucher
+  static final String VOUCHER = '${url.toString()}/voucher/all';
+  //Order
+  static final String ORDER = '${url.toString()}/order/create';
 }

@@ -522,32 +522,44 @@ class ProductDetailState extends State<ProductDetailPage>
                             ),
                             child: Column(
                               children: [
-                                Container(
-                                  width: double.infinity,
-                                  height: 36,
-                                  alignment: Alignment.topRight,
-                                  child: Container(
-                                    width: 41,
-                                    height: double.infinity,
-                                    decoration: const BoxDecoration(
-                                      color: Colors.white,
-                                      borderRadius: BorderRadius.only(
-                                        topRight: Radius.circular(10),
-                                        bottomLeft: Radius.circular(10),
+                                GetBuilder<ProductDetailController>(
+                                  init: productDetailController,
+                                  builder: (controller) => GestureDetector(
+                                    onTap: () {
+                                      productController.likeProduct(
+                                          widget.product.id ?? '',
+                                          widget.product.isLike!);
+                                      productController.update();
+                                      controller.update();
+                                    },
+                                    child: Container(
+                                      width: double.infinity,
+                                      height: 36,
+                                      alignment: Alignment.topRight,
+                                      child: Container(
+                                        width: 41,
+                                        height: double.infinity,
+                                        decoration: const BoxDecoration(
+                                          color: Colors.white,
+                                          borderRadius: BorderRadius.only(
+                                            topRight: Radius.circular(10),
+                                            bottomLeft: Radius.circular(10),
+                                          ),
+                                        ),
+                                        child: Center(
+                                          child: widget.product.isLike == true
+                                              ? const Icon(
+                                                  Icons.favorite,
+                                                  color: Colors.black,
+                                                  size: 20,
+                                                )
+                                              : const Icon(
+                                                  Icons.favorite_border,
+                                                  color: Colors.black,
+                                                  size: 20,
+                                                ),
+                                        ),
                                       ),
-                                    ),
-                                    child: Center(
-                                      child: widget.product.isLike == true
-                                          ? const Icon(
-                                              Icons.favorite,
-                                              color: Colors.black,
-                                              size: 20,
-                                            )
-                                          : const Icon(
-                                              Icons.favorite_border,
-                                              color: Colors.black,
-                                              size: 20,
-                                            ),
                                     ),
                                   ),
                                 ),

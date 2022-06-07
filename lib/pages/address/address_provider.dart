@@ -18,14 +18,6 @@ abstract class AddressAPIProtocol {
     required Function(AddressResponse data) onSuccess,
     required Function(dynamic error) onError,
   });
-  deleteAddress({
-    required String id,
-    required Map<String, dynamic> params,
-    required Options option,
-    required Function() beforeSend,
-    required Function(AddressDelete data) onSuccess,
-    required Function(dynamic error) onError,
-  });
   updateAddress({
     required String id,
     required Map<String, dynamic> params,
@@ -49,6 +41,13 @@ abstract class AddressAPIProtocol {
     required Function(dynamic data) onSuccess,
     required Function(dynamic error) onError,
   });
+  deleteAddress(
+      {required String id,
+      required Map<String, dynamic> params,
+      required Options option,
+      required Function() beforeSend,
+      required Function(AddressDelete data) onSuccess,
+      required Function(dynamic error) onError});
 }
 
 class AddressProvider extends AddressAPIProtocol {
