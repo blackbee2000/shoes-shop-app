@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_switch/flutter_switch.dart';
+import 'package:shoes_shop_app/models/address.dart';
 import 'address_controller.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -628,114 +629,142 @@ class AddressPage extends StatelessWidget {
                       const SizedBox(
                         height: 20,
                       ),
-                      Container(
-                        width: double.infinity,
-                        height: 75,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(10),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black.withOpacity(0.25),
-                              spreadRadius: 0,
-                              blurRadius: 4,
-                              offset: const Offset(
-                                  0, 4), // changes position of shadow
-                            ),
-                          ],
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Container(
-                              padding: const EdgeInsets.all(15),
-                              height: double.infinity,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.center,
+                      controller.listAddressDefault.value ==
+                              Address.fromJson({})
+                          ? Container(
+                              width: double.infinity,
+                              height: 75,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(10),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withOpacity(0.25),
+                                    spreadRadius: 0,
+                                    blurRadius: 4,
+                                    offset: const Offset(
+                                        0, 4), // changes position of shadow
+                                  ),
+                                ],
+                              ),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
-                                  Text(
-                                    '${controller.listAddressDefault.value.nameReciever != null && controller.listAddressDefault.value.nameReciever!.isNotEmpty ? controller.listAddressDefault.value.nameReciever : '--'}',
-                                    style: GoogleFonts.ebGaramond(
-                                      color: Colors.black,
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w600,
+                                  Container(
+                                    padding: const EdgeInsets.all(15),
+                                    height: double.infinity,
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          '${controller.listAddressDefault.value.nameReciever != null && controller.listAddressDefault.value.nameReciever!.isNotEmpty ? controller.listAddressDefault.value.nameReciever : '--'}',
+                                          style: GoogleFonts.ebGaramond(
+                                            color: Colors.black,
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.w600,
+                                          ),
+                                        ),
+                                        const SizedBox(
+                                          height: 3,
+                                        ),
+                                        Text(
+                                          '${controller.listAddressDefault.value.street != null && controller.listAddressDefault.value.street!.isNotEmpty ? controller.listAddressDefault.value.street : '--'}' +
+                                              ', ' +
+                                              '${controller.listAddressDefault.value.ward != null && controller.listAddressDefault.value.ward!.isNotEmpty ? controller.listAddressDefault.value.ward : '--'}' +
+                                              ', ' +
+                                              '${controller.listAddressDefault.value.district != null && controller.listAddressDefault.value.district!.isNotEmpty ? controller.listAddressDefault.value.district : '--'}',
+                                          style: GoogleFonts.ebGaramond(
+                                            color: Colors.black,
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.w400,
+                                          ),
+                                        ),
+                                      ],
                                     ),
                                   ),
+                                  Row(
+                                    children: [
+                                      Container(
+                                        width: 10,
+                                        height: double.infinity,
+                                        color: const Color(0xffFFD9D9),
+                                      ),
+                                      const SizedBox(
+                                        width: 15,
+                                      ),
+                                      GestureDetector(
+                                        onTap: () {
+                                          Get.bottomSheet(
+                                            editAddress(
+                                                context,
+                                                controller.listAddressDefault
+                                                    .value.nameReciever!),
+                                            isScrollControlled: true,
+                                          );
+                                        },
+                                        child: Image.asset(
+                                          'assets/icons/icon-edit.png',
+                                          width: 20,
+                                          height: 20,
+                                          fit: BoxFit.contain,
+                                        ),
+                                      ),
+                                      const SizedBox(
+                                        width: 10,
+                                      ),
+                                      GestureDetector(
+                                        onTap: () {
+                                          Get.bottomSheet(
+                                            deleteAddress(
+                                                context,
+                                                controller.listAddressDefault
+                                                    .value.id!),
+                                            isScrollControlled: true,
+                                          );
+                                        },
+                                        child: Image.asset(
+                                          'assets/icons/icon-trash.png',
+                                          width: 20,
+                                          height: 20,
+                                          fit: BoxFit.contain,
+                                        ),
+                                      ),
+                                      const SizedBox(
+                                        width: 15,
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            )
+                          : Container(
+                              alignment: Alignment.center,
+                              child: Column(
+                                children: [
+                                  Image.asset(
+                                    'assets/icons/icon-box.png',
+                                    width: 45,
+                                    color: Colors.black,
+                                  ),
                                   const SizedBox(
-                                    height: 3,
+                                    height: 10,
                                   ),
                                   Text(
-                                    '${controller.listAddressDefault.value.street != null && controller.listAddressDefault.value.street!.isNotEmpty ? controller.listAddressDefault.value.street : '--'}' +
-                                        ', ' +
-                                        '${controller.listAddressDefault.value.ward != null && controller.listAddressDefault.value.ward!.isNotEmpty ? controller.listAddressDefault.value.ward : '--'}' +
-                                        ', ' +
-                                        '${controller.listAddressDefault.value.district != null && controller.listAddressDefault.value.district!.isNotEmpty ? controller.listAddressDefault.value.district : '--'}',
+                                    'no_information'.tr,
                                     style: GoogleFonts.ebGaramond(
                                       color: Colors.black,
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w400,
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w600,
                                     ),
                                   ),
                                 ],
                               ),
                             ),
-                            Row(
-                              children: [
-                                Container(
-                                  width: 10,
-                                  height: double.infinity,
-                                  color: const Color(0xffFFD9D9),
-                                ),
-                                const SizedBox(
-                                  width: 15,
-                                ),
-                                GestureDetector(
-                                  onTap: () {
-                                    Get.bottomSheet(
-                                      editAddress(
-                                          context,
-                                          controller.listAddressDefault.value
-                                              .nameReciever!),
-                                      isScrollControlled: true,
-                                    );
-                                  },
-                                  child: Image.asset(
-                                    'assets/icons/icon-edit.png',
-                                    width: 20,
-                                    height: 20,
-                                    fit: BoxFit.contain,
-                                  ),
-                                ),
-                                const SizedBox(
-                                  width: 10,
-                                ),
-                                GestureDetector(
-                                  onTap: () {
-                                    Get.bottomSheet(
-                                      deleteAddress(
-                                          context,
-                                          controller
-                                              .listAddressDefault.value.id!),
-                                      isScrollControlled: true,
-                                    );
-                                  },
-                                  child: Image.asset(
-                                    'assets/icons/icon-trash.png',
-                                    width: 20,
-                                    height: 20,
-                                    fit: BoxFit.contain,
-                                  ),
-                                ),
-                                const SizedBox(
-                                  width: 15,
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
                       const SizedBox(
                         height: 30,
                       ),
