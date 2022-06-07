@@ -15,7 +15,7 @@ class ApiService {
     required Function(dynamic error) onError,
   }) {
     beforeSend();
-    dio.get(path, options: option).then((res) {
+    dio. get(path, options: option).then((res) {
       onSuccess(res.data);
     }).catchError((e) {
       onError(e);

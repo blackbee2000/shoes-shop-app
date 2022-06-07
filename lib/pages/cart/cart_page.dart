@@ -6,6 +6,8 @@ import 'package:shoes_shop_app/pages/cart/cart_controller.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shoes_shop_app/theme/theme_controller.dart';
 
+import '../address/address_controller.dart';
+
 class CartPage extends StatefulWidget {
   final int id;
   const CartPage({
@@ -18,6 +20,7 @@ class CartPage extends StatefulWidget {
 
 class CartState extends State<CartPage> {
   final cartController = Get.put(CartController());
+  final addressController = Get.put(AddressController());
 
   @override
   void initState() {
@@ -98,108 +101,125 @@ class CartState extends State<CartPage> {
                       const SizedBox(
                         height: 10,
                       ),
-                      Container(
-                        width: double.infinity,
-                        margin: const EdgeInsets.symmetric(horizontal: 20),
-                        padding: const EdgeInsets.all(20),
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(10),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black.withOpacity(0.25),
-                              spreadRadius: 0,
-                              blurRadius: 4,
-                              offset: const Offset(
-                                  0, 4), // changes position of shadow
-                            ),
-                          ],
-                        ),
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Row(
-                                  children: [
-                                    Text(
-                                      'cart_address'.tr,
-                                      style: GoogleFonts.ebGaramond(
-                                        color: Colors.black,
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w600,
-                                      ),
-                                    ),
-                                    const SizedBox(
-                                      width: 10,
-                                    ),
-                                    Image.asset(
-                                      'assets/icons/icon-address-payment.png',
-                                      width: 20,
-                                      height: 20,
-                                      fit: BoxFit.contain,
-                                    ),
-                                  ],
-                                ),
-                                const SizedBox(
-                                  height: 5,
-                                ),
-                                Text(
-                                  'Trần Thái Tuấn',
-                                  style: GoogleFonts.ebGaramond(
-                                    color: Colors.black,
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                ),
-                                const SizedBox(
-                                  height: 5,
-                                ),
-                                Text(
-                                  '108 Sao Hoả, Hệ Mặt Trời',
-                                  style: GoogleFonts.ebGaramond(
-                                    color: Colors.black,
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w400,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            GestureDetector(
-                              onTap: () {
-                                Get.to(
-                                    AddressPage(
-                                      id: widget.id,
-                                    ),
-                                    id: widget.id);
-                              },
-                              child: Container(
-                                width: 40,
-                                height: 40,
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  border: Border.all(color: Colors.black),
-                                  shape: BoxShape.circle,
-                                ),
-                                child: Center(
-                                  child: Image.asset(
-                                    'assets/icons/icon-right.png',
-                                    width: 20,
-                                    height: 20,
-                                    fit: BoxFit.contain,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
+                      // Container(
+                      //   width: double.infinity,
+                      //   margin: const EdgeInsets.symmetric(horizontal: 20),
+                      //   padding: const EdgeInsets.all(20),
+                      //   decoration: BoxDecoration(
+                      //     color: Colors.white,
+                      //     borderRadius: BorderRadius.circular(10),
+                      //     boxShadow: [
+                      //       BoxShadow(
+                      //         color: Colors.black.withOpacity(0.25),
+                      //         spreadRadius: 0,
+                      //         blurRadius: 4,
+                      //         offset: const Offset(
+                      //             0, 4), // changes position of shadow
+                      //       ),
+                      //     ],
+                      //   ),
+                      //   child: Row(
+                      //     crossAxisAlignment: CrossAxisAlignment.center,
+                      //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      //     children: [
+                      //       Column(
+                      //         crossAxisAlignment: CrossAxisAlignment.start,
+                      //         mainAxisAlignment: MainAxisAlignment.center,
+                      //         children: [
+                      //           Row(
+                      //             children: [
+                      //               Text(
+                      //                 'cart_address'.tr,
+                      //                 style: GoogleFonts.ebGaramond(
+                      //                   color: Colors.black,
+                      //                   fontSize: 16,
+                      //                   fontWeight: FontWeight.w600,
+                      //                 ),
+                      //               ),
+                      //               const SizedBox(
+                      //                 width: 10,
+                      //               ),
+                      //               Image.asset(
+                      //                 'assets/icons/icon-address-payment.png',
+                      //                 width: 20,
+                      //                 height: 20,
+                      //                 fit: BoxFit.contain,
+                      //               ),
+                      //             ],
+                      //           ),
+                      //           const SizedBox(
+                      //             height: 5,
+                      //           ),
+                      //           Text(
+                      //             '${addressController.addressDefault.value.nameReciever != null && addressController.addressDefault.value.nameReciever!.isNotEmpty ? addressController.addressDefault.value.nameReciever : '--'}',
+                      //             style: GoogleFonts.ebGaramond(
+                      //               color: Colors.black,
+                      //               fontSize: 14,
+                      //               fontWeight: FontWeight.w600,
+                      //             ),
+                      //           ),
+                      //           const SizedBox(
+                      //             height: 3,
+                      //           ),
+                      //           Text(
+                      //             '${addressController.addressDefault.value.phoneReciever != null && addressController.addressDefault.value.phoneReciever!.isNotEmpty ? addressController.addressDefault.value.phoneReciever : '--'}',
+                      //             style: GoogleFonts.ebGaramond(
+                      //               color: Colors.black,
+                      //               fontSize: 14,
+                      //               fontWeight: FontWeight.w400,
+                      //             ),
+                      //           ),
+                      //           const SizedBox(
+                      //             height: 3,
+                      //           ),
+                      //           Text(
+                      //             '${addressController.addressDefault.value.street != null && addressController.addressDefault.value.street!.isNotEmpty ? addressController.addressDefault.value.street : '--'}'
+                      //             ', '
+                      //             '${addressController.addressDefault.value.ward != null && addressController.addressDefault.value.ward!.isNotEmpty ? addressController.addressDefault.value.ward : '--'}'
+                      //             ', '
+                      //             '${addressController.addressDefault.value.district != null && addressController.addressDefault.value.district!.isNotEmpty ? addressController.addressDefault.value.district : '--'}'
+                      //             ', '
+                      //             '${addressController.addressDefault.value.province != null && addressController.addressDefault.value.province!.isNotEmpty ? addressController.addressDefault.value.province : '--'}',
+                      //             style: GoogleFonts.ebGaramond(
+                      //               color: Colors.black,
+                      //               fontSize: 14,
+                      //               fontWeight: FontWeight.w400,
+                      //             ),
+                      //           ),
+                      //         ],
+                      //       ),
+                      //       GestureDetector(
+                      //         onTap: () {
+                      //           Get.to(
+                      //               AddressPage(
+                      //                 id: widget.id,
+                      //               ),
+                      //               id: widget.id);
+                      //         },
+                      //         child: Container(
+                      //           width: 40,
+                      //           height: 40,
+                      //           decoration: BoxDecoration(
+                      //             color: Colors.white,
+                      //             border: Border.all(color: Colors.black),
+                      //             shape: BoxShape.circle,
+                      //           ),
+                      //           child: Center(
+                      //             child: Image.asset(
+                      //               'assets/icons/icon-right.png',
+                      //               width: 20,
+                      //               height: 20,
+                      //               fit: BoxFit.contain,
+                      //             ),
+                      //           ),
+                      //         ),
+                      //       ),
+                      //     ],
+                      //   ),
+                      // ),
+                      // const SizedBox(
+                      //   height: 20,
+                      // ),
                       Expanded(
                         child: SingleChildScrollView(
                           child: Column(

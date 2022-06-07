@@ -7,6 +7,8 @@ import 'package:shoes_shop_app/pages/payment/payment_controller.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shoes_shop_app/theme/theme_controller.dart';
 
+import '../address/address_controller.dart';
+
 class PaymentPage extends StatefulWidget {
   final int id;
   const PaymentPage({
@@ -20,6 +22,7 @@ class PaymentPage extends StatefulWidget {
 class PaymentState extends State<PaymentPage> {
   final paymentController = Get.put(PaymentController());
   final cartController = Get.put(CartController());
+  final addressController = Get.put(AddressController());
   int total = 0;
 
   @override
@@ -121,54 +124,76 @@ class PaymentState extends State<PaymentPage> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Row(
-                                children: [
-                                  Text(
-                                    'cart_address'.tr,
-                                    style: GoogleFonts.ebGaramond(
-                                      color: Colors.black,
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w600,
+                          Container(
+                            width: MediaQuery.of(context).size.width * 0.65,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Row(
+                                  children: [
+                                    Text(
+                                      'cart_address'.tr,
+                                      style: GoogleFonts.ebGaramond(
+                                        color: Colors.black,
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w600,
+                                      ),
                                     ),
-                                  ),
-                                  const SizedBox(
-                                    width: 10,
-                                  ),
-                                  Image.asset(
-                                    'assets/icons/icon-address-payment.png',
-                                    width: 20,
-                                    height: 20,
-                                    fit: BoxFit.contain,
-                                  ),
-                                ],
-                              ),
-                              const SizedBox(
-                                height: 5,
-                              ),
-                              Text(
-                                'Trần Thái Tuấn',
-                                style: GoogleFonts.ebGaramond(
-                                  color: Colors.black,
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w600,
+                                    const SizedBox(
+                                      width: 10,
+                                    ),
+                                    Image.asset(
+                                      'assets/icons/icon-address-payment.png',
+                                      width: 20,
+                                      height: 20,
+                                      fit: BoxFit.contain,
+                                    ),
+                                  ],
                                 ),
-                              ),
-                              const SizedBox(
-                                height: 5,
-                              ),
-                              Text(
-                                '108 Sao Hoả, Hệ Mặt Trời',
-                                style: GoogleFonts.ebGaramond(
-                                  color: Colors.black,
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w400,
+                                const SizedBox(
+                                  height: 5,
                                 ),
-                              ),
-                            ],
+                                Text(
+                                  '${addressController.addressDefault.value.nameReciever != null && addressController.addressDefault.value.nameReciever!.isNotEmpty ? addressController.addressDefault.value.nameReciever : '--'}',
+                                  style: GoogleFonts.ebGaramond(
+                                    color: Colors.black,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: 3,
+                                ),
+                                Text(
+                                  '${addressController.addressDefault.value.phoneReciever != null && addressController.addressDefault.value.phoneReciever!.isNotEmpty ? addressController.addressDefault.value.phoneReciever : '--'}',
+                                  maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: GoogleFonts.ebGaramond(
+                                    color: Colors.black,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: 3,
+                                ),
+                                Text(
+                                  '${addressController.addressDefault.value.street != null && addressController.addressDefault.value.street!.isNotEmpty ? addressController.addressDefault.value.street : '--'}'
+                                  ', '
+                                  '${addressController.addressDefault.value.ward != null && addressController.addressDefault.value.ward!.isNotEmpty ? addressController.addressDefault.value.ward : '--'}'
+                                  ', '
+                                  '${addressController.addressDefault.value.district != null && addressController.addressDefault.value.district!.isNotEmpty ? addressController.addressDefault.value.district : '--'}'
+                                  ', '
+                                  '${addressController.addressDefault.value.province != null && addressController.addressDefault.value.province!.isNotEmpty ? addressController.addressDefault.value.province : '--'}',
+                                  style: GoogleFonts.ebGaramond(
+                                    color: Colors.black,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                           GestureDetector(
                             onTap: () {

@@ -10,10 +10,6 @@ Address _$AddressFromJson(Map<String, dynamic> json) {
     json['status'] as bool?,
     json['nameReciever'] as String?,
     json['phoneReciever'] as String?,
-    json['isDeleted'] as bool?,
-    json['createdAt'] as String?,
-    json['updatedAt'] as String?,
-    json['__v'] as int?,
     json['idAccount'] as String?,
   );
 }
@@ -27,9 +23,15 @@ Map<String, dynamic> _$AddressToJson(Address instance) => <String, dynamic>{
       'status': instance.status,
       'nameReciever': instance.nameReciever,
       'phoneReciever': instance.phoneReciever,
-      'isDeleted': instance.isDeleted,
-      'createdAt': instance.createdAt,
-      'updatedAt': instance.updatedAt,
-      '__v': instance.__v,
       'idAccount': instance.idAccount,
+    };
+Map<String, dynamic> _$AddressRequestToJson(AddressRequest instance) =>
+    <String, dynamic>{
+      'province': instance.province,
+      'district': instance.district,
+      'ward': instance.ward,
+      'street': instance.street,
+      'status': instance.status,
+      'nameReciever': instance.nameReciever,
+      'phoneReciever': instance.phoneReciever
     };

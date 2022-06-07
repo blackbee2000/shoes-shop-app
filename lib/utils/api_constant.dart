@@ -5,7 +5,6 @@ import 'package:shoes_shop_app/config/flavor_config.dart';
 final String url = FlavorConfig.instance.values.baseUrl;
 
 class ApiConstant {
-  // ignore: non_constant_identifier_names
   //ACCOUNT
   static final String LOGIN = '${url.toString()}/account/login';
   static final String REGISTER = '${url.toString()}/account/register';
@@ -37,8 +36,14 @@ class ApiConstant {
   //COMPANY
   static final String COMPANY = '${url.toString()}/company/all';
   //ADDRESS
+  static final String CREATEADDRESS = '${url.toString()}/address/create';
+  static final String UPDATEADDRESS = '${url.toString()}/address/update';
   static final String ADDRESS = '${url.toString()}/address/all';
+  static final String ADDRESSDEFAULT =
+      '${url.toString()}/address/getAddressDefault';
   static final String DELETEADDRESS = '${url.toString()}/address/delete?getId=';
+  static final String STATUSDEFAULT =
+      '${url.toString()}/address/updateStatusDefault?getId=';
   //CART
   static final String ADDTOCART = '${url.toString()}/cart/create';
   static final String CART = '${url.toString()}/cart/all';

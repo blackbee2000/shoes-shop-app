@@ -17,3 +17,19 @@ class AddressResponse {
 
   Map<String, dynamic> toJson() => _$AddressResponseToJson(this);
 }
+
+@JsonSerializable()
+class OneAddressResponse {
+  String? message;
+  Address? data;
+
+  OneAddressResponse(
+    this.message,
+    this.data,
+  );
+
+  factory OneAddressResponse.fromJson(Map<String, dynamic> json) =>
+      _$OneAddressResponseFromJson(json);
+
+  Map<String, dynamic> toJson() => _$OneAddressResponseToJson(this);
+}

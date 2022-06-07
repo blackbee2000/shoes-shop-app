@@ -14,3 +14,17 @@ Map<String, dynamic> _$AddressResponseToJson(AddressResponse instance) =>
       'message': instance.message,
       'data': instance.data,
     };
+OneAddressResponse _$OneAddressResponseFromJson(Map<String, dynamic> json) {
+  return OneAddressResponse(
+    json['message'] as String?,
+    json['data'] == null
+        ? null
+        : Address.fromJson(json['data'] as Map<String, dynamic>),
+  );
+}
+
+Map<String, dynamic> _$OneAddressResponseToJson(OneAddressResponse instance) =>
+    <String, dynamic>{
+      'message': instance.message,
+      'data': instance.data,
+    };
