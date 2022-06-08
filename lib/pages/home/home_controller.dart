@@ -60,6 +60,7 @@ class HomeController extends GetxController {
       onSuccess: (res) {
         print('GET DISCOUNT PRODUCT SUCCESS =>>>>>>> ${res.toString()}');
         listDiscountProduct = res.data ?? [];
+        print(listDiscountProduct[0].rating);
         update();
       },
       onError: (e) {
@@ -76,6 +77,7 @@ class HomeController extends GetxController {
       onSuccess: (res) {
         print('GET TRENDING PRODUCT SUCCESS =>>>>>>> ${res.toString()}');
         listTrendingProduct = res.data ?? [];
+        print(listTrendingProduct[0].rating);
         update();
       },
       onError: (e) {

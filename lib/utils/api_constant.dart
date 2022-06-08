@@ -39,4 +39,9 @@ class ApiConstant {
       '${url.toString()}/account/getFavoriteAccount';
   static final String VOUCHER = '${url.toString()}/voucher/all';
   static final String ORDER = '${url.toString()}/order/create';
+
+  //Rate
+  static final String CREATERATING = '${url.toString()}/rate/create';
+  static final String GETRATEBYACCOUNT = '${url.toString()}/rate/getRateProductByAccount';
+  static final String UPDATERATEBYACCOUNT = '${url.toString()}/rate/updateRateByAccount';
 }

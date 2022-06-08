@@ -18,12 +18,17 @@ class ProductDetailController extends GetxController
   List<Product> listProductRelated = <Product>[].obs;
   final profileController = Get.put(ProfileController());
 
+  @override
+  void onInit() async {
+    super.onInit();
+  }
+
   plusAmount() {
     amount.value = amount.value + 1;
   }
 
   minusAmount() {
-    if (amount.value < 1) {
+    if (amount.value <= 1) {
       Get.snackbar(
         'Warning',
         'Vui lòng chọn đúng số lượng',

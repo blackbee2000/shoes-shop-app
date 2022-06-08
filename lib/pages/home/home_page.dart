@@ -508,10 +508,11 @@ class HomePageState extends State<HomePage> {
                                       Container(
                                         alignment: Alignment.topLeft,
                                         child: RatingBarIndicator(
-                                          rating: controller
+                                          rating: double.tryParse(controller
                                                   .listDiscountProduct[index]
-                                                  .rating ??
-                                              0,
+                                                  .rating
+                                                  .toString()) ??
+                                              0.0,
                                           itemBuilder: (context, index) =>
                                               const Icon(
                                             Icons.star,
@@ -807,10 +808,11 @@ class HomePageState extends State<HomePage> {
                                       Container(
                                         alignment: Alignment.topLeft,
                                         child: RatingBarIndicator(
-                                          rating: controller
+                                          rating: double.tryParse(controller
                                                   .listTrendingProduct[index]
-                                                  .rating ??
-                                              0,
+                                                  .rating
+                                                  .toString()) ??
+                                              0.0,
                                           itemBuilder: (context, index) =>
                                               const Icon(
                                             Icons.star,
@@ -829,7 +831,7 @@ class HomePageState extends State<HomePage> {
                                             ProductDetailPage(
                                               product: controller
                                                   .listTrendingProduct[index],
-                                              id: AppConstant.PRODUCT,
+                                              id: AppConstant.HOME,
                                             ),
                                             id: AppConstant.HOME),
                                         child: Container(

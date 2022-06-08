@@ -633,10 +633,10 @@ class ProductState extends State<ProductPage> {
                                           Container(
                                             alignment: Alignment.topLeft,
                                             child: RatingBarIndicator(
-                                              rating: controller
-                                                      .listProduct[index]
-                                                      .rating ??
-                                                  0,
+                                              rating: double.tryParse(controller
+                                                      .listProduct[index].rating
+                                                      .toString()) ??
+                                                  0.0,
                                               itemBuilder: (context, index) =>
                                                   const Icon(
                                                 Icons.star,

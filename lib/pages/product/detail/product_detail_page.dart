@@ -13,6 +13,8 @@ import 'package:shoes_shop_app/services/api_token.dart';
 import 'package:shoes_shop_app/translations/app_translation.dart';
 import 'package:shoes_shop_app/utils/app_constant.dart';
 
+import '../widgets/rating_dialog.dart';
+
 class ProductDetailPage extends StatefulWidget {
   final int id;
   final Product product;
@@ -633,17 +635,28 @@ class ProductDetailState extends State<ProductDetailPage>
                               const SizedBox(
                                 height: 10,
                               ),
-                              Container(
-                                alignment: Alignment.topLeft,
-                                child: RatingBarIndicator(
-                                  rating: widget.product.rating ?? 0,
-                                  itemBuilder: (context, index) => const Icon(
-                                    Icons.star,
-                                    color: Colors.amber,
+                              InkWell(
+                                onTap: () {
+                                  // productController
+                                  //     .getRatingByAccount(widget.product.id!);
+                                  // Get.bottomSheet(
+                                  //     ratingDialog(context, widget.product.id!),
+                                  //     isScrollControlled: true);
+                                },
+                                child: Container(
+                                  alignment: Alignment.topLeft,
+                                  child: RatingBarIndicator(
+                                    rating: double.tryParse(
+                                            widget.product.rating.toString()) ??
+                                        0.0,
+                                    itemBuilder: (context, index) => const Icon(
+                                      Icons.star,
+                                      color: Colors.amber,
+                                    ),
+                                    itemCount: 5,
+                                    itemSize: 30,
+                                    direction: Axis.horizontal,
                                   ),
-                                  itemCount: 5,
-                                  itemSize: 30,
-                                  direction: Axis.horizontal,
                                 ),
                               ),
                               const SizedBox(

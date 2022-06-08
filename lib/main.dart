@@ -14,7 +14,7 @@ import 'routes/app_routes.dart';
 void main() async {
   FlavorConfig(
     values: FlavorValues(
-      baseUrl: 'http://192.168.1.17:3000/api',
+      baseUrl: 'http://192.168.2.133:3000/api',
     ),
   );
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,11 +22,13 @@ void main() async {
   await Firebase.initializeApp();
 
   runZoned<Future<void>>(() async {
-    runApp(MyApp());
+    runApp(const MyApp());
   });
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
