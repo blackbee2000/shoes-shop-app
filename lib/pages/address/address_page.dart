@@ -1,12 +1,16 @@
+import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:shoes_shop_app/models/address.dart';
+import 'package:shoes_shop_app/models/district.dart';
+import 'package:shoes_shop_app/models/province.dart';
+import 'package:shoes_shop_app/models/ward.dart';
 import 'address_controller.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class AddressPage extends StatelessWidget {
-  final id;
+  final int id;
   AddressPage({Key? key, required this.id}) : super(key: key);
 
   final addressController = Get.put(AddressController());
@@ -26,179 +30,561 @@ class AddressPage extends StatelessWidget {
             topRight: Radius.circular(30),
           ),
         ),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Text(
-                      'address_add'.tr,
-                      style: GoogleFonts.ebGaramond(
-                        color: Colors.black,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600,
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Text(
+                        'address_add'.tr,
+                        style: GoogleFonts.ebGaramond(
+                          color: Colors.black,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
-                    ),
-                    const SizedBox(
-                      height: 5,
-                    ),
-                    Container(
-                      width: 30,
-                      height: 2,
+                      const SizedBox(
+                        height: 5,
+                      ),
+                      Container(
+                        width: 30,
+                        height: 2,
+                        color: Colors.black,
+                      ),
+                    ],
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      addressController.clear();
+                      Get.back();
+                    },
+                    child: const Icon(
+                      Icons.close,
+                      size: 20,
                       color: Colors.black,
                     ),
-                  ],
+                  ),
+                ],
+              ),
+              const SizedBox(
+                height: 15,
+              ),
+              Text(
+                'addresss_name'.tr,
+                style: GoogleFonts.ebGaramond(
+                  color: Colors.black,
+                  fontSize: 13,
+                  fontWeight: FontWeight.w400,
                 ),
-                GestureDetector(
-                  onTap: () => Get.back(),
-                  child: const Icon(
-                    Icons.close,
-                    size: 20,
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Container(
+                width: double.infinity,
+                height: 40,
+                decoration: BoxDecoration(
+                  color: const Color(0xffF0F0F0),
+                  borderRadius: BorderRadius.circular(5),
+                ),
+                child: TextField(
+                  controller: addressController.customerName,
+                  style: GoogleFonts.ebGaramond(
                     color: Colors.black,
+                    fontSize: 13,
+                    fontWeight: FontWeight.w400,
                   ),
+                  textAlign: TextAlign.left,
+                  decoration: InputDecoration(
+                    contentPadding: const EdgeInsets.only(
+                      bottom: 7,
+                      left: 15,
+                    ),
+                    hintText: 'address_enter_name'.tr,
+                    hintStyle: GoogleFonts.ebGaramond(
+                      color: const Color(0xffD0D0D0),
+                      fontSize: 13,
+                      fontWeight: FontWeight.w400,
+                    ),
+                    border: InputBorder.none,
+                  ),
+                  cursorColor: Colors.black,
                 ),
-              ],
-            ),
-            const SizedBox(
-              height: 15,
-            ),
-            Container(
-              width: double.infinity,
-              height: 40,
-              decoration: BoxDecoration(
-                color: const Color(0xffF0F0F0),
-                borderRadius: BorderRadius.circular(5),
               ),
-              child: TextField(
-                controller: addressController.customerName,
+              const SizedBox(
+                height: 15,
+              ),
+              Text(
+                'addresss_phone'.tr,
                 style: GoogleFonts.ebGaramond(
                   color: Colors.black,
                   fontSize: 13,
                   fontWeight: FontWeight.w400,
                 ),
-                textAlign: TextAlign.left,
-                decoration: InputDecoration(
-                  contentPadding: const EdgeInsets.only(
-                    bottom: 7,
-                    left: 15,
-                  ),
-                  hintText: 'address_enter_name'.tr,
-                  hintStyle: GoogleFonts.ebGaramond(
-                    color: const Color(0xffD0D0D0),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Container(
+                width: double.infinity,
+                height: 40,
+                decoration: BoxDecoration(
+                  color: const Color(0xffF0F0F0),
+                  borderRadius: BorderRadius.circular(5),
+                ),
+                child: TextField(
+                  controller: addressController.customerPhone,
+                  style: GoogleFonts.ebGaramond(
+                    color: Colors.black,
                     fontSize: 13,
                     fontWeight: FontWeight.w400,
                   ),
-                  border: InputBorder.none,
+                  textAlign: TextAlign.left,
+                  decoration: InputDecoration(
+                    contentPadding: const EdgeInsets.only(
+                      bottom: 7,
+                      left: 15,
+                    ),
+                    hintText: 'address_enter_phone'.tr,
+                    hintStyle: GoogleFonts.ebGaramond(
+                      color: const Color(0xffD0D0D0),
+                      fontSize: 13,
+                      fontWeight: FontWeight.w400,
+                    ),
+                    border: InputBorder.none,
+                  ),
+                  cursorColor: Colors.black,
                 ),
-                cursorColor: Colors.black,
               ),
-            ),
-            const SizedBox(
-              height: 15,
-            ),
-            Container(
-              width: double.infinity,
-              height: 40,
-              decoration: BoxDecoration(
-                color: const Color(0xffF0F0F0),
-                borderRadius: BorderRadius.circular(5),
+              const SizedBox(
+                height: 15,
               ),
-              child: TextField(
-                controller: addressController.customerAddress,
+              Text(
+                'addresss_province'.tr,
                 style: GoogleFonts.ebGaramond(
                   color: Colors.black,
                   fontSize: 13,
                   fontWeight: FontWeight.w400,
                 ),
-                textAlign: TextAlign.left,
-                decoration: InputDecoration(
-                  contentPadding: const EdgeInsets.only(
-                    bottom: 7,
-                    left: 15,
-                  ),
-                  hintText: 'address_enter_address'.tr,
-                  hintStyle: GoogleFonts.ebGaramond(
-                    color: const Color(0xffD0D0D0),
-                    fontSize: 13,
-                    fontWeight: FontWeight.w400,
-                  ),
-                  border: InputBorder.none,
-                ),
-                cursorColor: Colors.black,
               ),
-            ),
-            const SizedBox(
-              height: 15,
-            ),
-            SizedBox(
-              width: double.infinity,
-              height: 40,
-              child: Row(
-                children: [
-                  Expanded(
-                    child: GestureDetector(
-                      onTap: () => Get.back(),
-                      child: Container(
-                        width: double.infinity,
-                        height: double.infinity,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          border: Border.all(
-                            color: Colors.black,
-                          ),
+              const SizedBox(
+                height: 10,
+              ),
+              GetBuilder<AddressController>(
+                init: addressController,
+                builder: (controller) => Container(
+                  width: double.infinity,
+                  height: 40,
+                  decoration: BoxDecoration(
+                    color: const Color(0xffF0F0F0),
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                  child: DropdownSearch<Province>(
+                    showClearButton: true,
+                    clearButton: const Icon(
+                      Icons.close,
+                      color: Colors.black,
+                      size: 15,
+                    ),
+                    dropDownButton: const Icon(
+                      Icons.arrow_drop_down,
+                      color: Colors.black,
+                      size: 25,
+                    ),
+                    popupShape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.vertical(
+                        top: Radius.circular(16),
+                      ),
+                    ),
+                    showSearchBox: true,
+                    mode: Mode.BOTTOM_SHEET,
+                    items: controller.listProvince,
+                    // selectedItem: controller.nameCompany.value,
+                    popupItemBuilder: (context, item, isSelected) => Container(
+                      padding: const EdgeInsets.all(16),
+                      child: Text(
+                        item.name ?? '',
+                        style: GoogleFonts.ebGaramond(
+                          color: Colors.black,
+                          fontSize: 13,
+                          fontWeight: FontWeight.w400,
                         ),
-                        child: Center(
-                          child: Text(
-                            'address_cancel'.tr,
-                            style: GoogleFonts.ebGaramond(
+                      ),
+                    ),
+                    itemAsString: (item) {
+                      return item?.name ?? 'select_province'.tr;
+                    },
+                    dropdownBuilder: (context, item) {
+                      return Text(
+                        item?.name ?? 'select_province'.tr,
+                        style: GoogleFonts.ebGaramond(
+                          color: item == null
+                              ? const Color(0xffD0D0D0)
+                              : Colors.black,
+                          fontSize: 13,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      );
+                    },
+                    onSaved: (item) {},
+                    onChanged: (item) {
+                      if (item != null) {
+                        controller.province.value = item.name!;
+                        controller.getDistricts(item.code!);
+                        controller.update();
+                      }
+                    },
+                    dropdownSearchDecoration: InputDecoration(
+                      contentPadding: const EdgeInsets.only(left: 15),
+                      isDense: true,
+                      border: InputBorder.none,
+                      hintStyle: GoogleFonts.ebGaramond(
+                        color: const Color(0xffD0D0D0),
+                        fontSize: 13,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 15,
+              ),
+              Text(
+                'addresss_district'.tr,
+                style: GoogleFonts.ebGaramond(
+                  color: Colors.black,
+                  fontSize: 13,
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              GetBuilder<AddressController>(
+                init: addressController,
+                builder: (controller) => Container(
+                  width: double.infinity,
+                  height: 40,
+                  decoration: BoxDecoration(
+                    color: const Color(0xffF0F0F0),
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                  child: DropdownSearch<District>(
+                    showClearButton: true,
+                    clearButton: const Icon(
+                      Icons.close,
+                      color: Colors.black,
+                      size: 15,
+                    ),
+                    dropDownButton: const Icon(
+                      Icons.arrow_drop_down,
+                      color: Colors.black,
+                      size: 25,
+                    ),
+                    popupShape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.vertical(
+                        top: Radius.circular(16),
+                      ),
+                    ),
+                    showSearchBox: true,
+                    mode: Mode.BOTTOM_SHEET,
+                    items: controller.listDistrict,
+                    // selectedItem: controller.nameCompany.value,
+                    popupItemBuilder: (context, item, isSelected) => Container(
+                      padding: const EdgeInsets.all(16),
+                      child: Text(
+                        item.name ?? '',
+                        style: GoogleFonts.ebGaramond(
+                          color: Colors.black,
+                          fontSize: 13,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                    ),
+                    itemAsString: (item) {
+                      return item?.name ?? 'select_district'.tr;
+                    },
+                    dropdownBuilder: (context, item) {
+                      return Text(
+                        item?.name ?? 'select_district'.tr,
+                        style: GoogleFonts.ebGaramond(
+                          color: item == null
+                              ? const Color(0xffD0D0D0)
+                              : Colors.black,
+                          fontSize: 13,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      );
+                    },
+                    onSaved: (item) {},
+                    onChanged: (item) {
+                      if (item != null) {
+                        controller.district.value = item.name!;
+                        controller.getWards(item.code!);
+                        controller.update();
+                      }
+                    },
+                    dropdownSearchDecoration: InputDecoration(
+                      contentPadding: const EdgeInsets.only(left: 15),
+                      isDense: true,
+                      border: InputBorder.none,
+                      hintStyle: GoogleFonts.ebGaramond(
+                        color: const Color(0xffD0D0D0),
+                        fontSize: 13,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 15,
+              ),
+              Text(
+                'address_ward'.tr,
+                style: GoogleFonts.ebGaramond(
+                  color: Colors.black,
+                  fontSize: 13,
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              GetBuilder<AddressController>(
+                init: addressController,
+                builder: (controller) => Container(
+                  width: double.infinity,
+                  height: 40,
+                  decoration: BoxDecoration(
+                    color: const Color(0xffF0F0F0),
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                  child: DropdownSearch<Ward>(
+                    showClearButton: true,
+                    clearButton: const Icon(
+                      Icons.close,
+                      color: Colors.black,
+                      size: 15,
+                    ),
+                    dropDownButton: const Icon(
+                      Icons.arrow_drop_down,
+                      color: Colors.black,
+                      size: 25,
+                    ),
+                    popupShape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.vertical(
+                        top: Radius.circular(16),
+                      ),
+                    ),
+                    showSearchBox: true,
+                    mode: Mode.BOTTOM_SHEET,
+                    items: controller.listWard,
+                    // selectedItem: controller.nameCompany.value,
+                    popupItemBuilder: (context, item, isSelected) => Container(
+                      padding: const EdgeInsets.all(16),
+                      child: Text(
+                        item.name ?? '',
+                        style: GoogleFonts.ebGaramond(
+                          color: Colors.black,
+                          fontSize: 13,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                    ),
+                    itemAsString: (item) {
+                      return item?.name ?? 'select_ward'.tr;
+                    },
+                    dropdownBuilder: (context, item) {
+                      return Text(
+                        item?.name ?? 'select_ward'.tr,
+                        style: GoogleFonts.ebGaramond(
+                          color: item == null
+                              ? const Color(0xffD0D0D0)
+                              : Colors.black,
+                          fontSize: 13,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      );
+                    },
+                    onSaved: (item) {},
+                    onChanged: (item) {
+                      if (item != null) {
+                        controller.ward.value = item.name!;
+                        controller.update();
+                      }
+                    },
+                    dropdownSearchDecoration: InputDecoration(
+                      contentPadding: const EdgeInsets.only(left: 15),
+                      isDense: true,
+                      border: InputBorder.none,
+                      hintStyle: GoogleFonts.ebGaramond(
+                        color: const Color(0xffD0D0D0),
+                        fontSize: 13,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 15,
+              ),
+              Text(
+                'addresss_street'.tr,
+                style: GoogleFonts.ebGaramond(
+                  color: Colors.black,
+                  fontSize: 13,
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Container(
+                width: double.infinity,
+                height: 40,
+                decoration: BoxDecoration(
+                  color: const Color(0xffF0F0F0),
+                  borderRadius: BorderRadius.circular(5),
+                ),
+                child: TextField(
+                  controller: addressController.customerStreet,
+                  style: GoogleFonts.ebGaramond(
+                    color: Colors.black,
+                    fontSize: 13,
+                    fontWeight: FontWeight.w400,
+                  ),
+                  textAlign: TextAlign.left,
+                  decoration: InputDecoration(
+                    contentPadding: const EdgeInsets.only(
+                      bottom: 7,
+                      left: 15,
+                    ),
+                    hintText: 'address_enter_street'.tr,
+                    hintStyle: GoogleFonts.ebGaramond(
+                      color: const Color(0xffD0D0D0),
+                      fontSize: 13,
+                      fontWeight: FontWeight.w400,
+                    ),
+                    border: InputBorder.none,
+                  ),
+                  cursorColor: Colors.black,
+                ),
+              ),
+              const SizedBox(
+                height: 15,
+              ),
+              SizedBox(
+                width: double.infinity,
+                height: 40,
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: GestureDetector(
+                        onTap: () {
+                          addressController.clear();
+                          Get.back();
+                        },
+                        child: Container(
+                          width: double.infinity,
+                          height: double.infinity,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            border: Border.all(
                               color: Colors.black,
-                              fontSize: 14,
-                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          child: Center(
+                            child: Text(
+                              'address_cancel'.tr,
+                              style: GoogleFonts.ebGaramond(
+                                color: Colors.black,
+                                fontSize: 14,
+                                fontWeight: FontWeight.w600,
+                              ),
                             ),
                           ),
                         ),
                       ),
                     ),
-                  ),
-                  const SizedBox(
-                    width: 15,
-                  ),
-                  Expanded(
-                    child: Container(
-                      width: double.infinity,
-                      height: double.infinity,
-                      decoration: const BoxDecoration(
-                        color: Colors.black,
-                      ),
-                      child: Center(
-                        child: Text(
-                          'address_confirm'.tr,
-                          style: GoogleFonts.ebGaramond(
-                            color: Colors.white,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w600,
+                    const SizedBox(
+                      width: 15,
+                    ),
+                    GetBuilder<AddressController>(
+                      init: addressController,
+                      builder: (controller) => Expanded(
+                        child: GestureDetector(
+                          onTap: () {
+                            if (controller.province.value.isEmpty ||
+                                controller.district.value.isEmpty ||
+                                controller.ward.value.isEmpty ||
+                                controller.customerName.text.isEmpty ||
+                                controller.customerPhone.text.isEmpty ||
+                                controller.customerStreet.text.isEmpty) {
+                              Get.snackbar(
+                                  'Validate', 'Vui lòng nhập đầy đủ thông tin',
+                                  colorText: Colors.black,
+                                  backgroundColor: Colors.white);
+                              return;
+                            }
+                            controller.createAddress(
+                              controller.province.value,
+                              controller.district.value,
+                              controller.ward.value,
+                              controller.customerStreet.text,
+                              controller.customerName.text,
+                              controller.customerPhone.text,
+                            );
+                            addressController.clear();
+                            controller.update();
+                            Get.back();
+                          },
+                          child: Container(
+                            width: double.infinity,
+                            height: double.infinity,
+                            decoration: const BoxDecoration(
+                              color: Colors.black,
+                            ),
+                            child: Center(
+                              child: Text(
+                                'address_confirm'.tr,
+                                style: GoogleFonts.ebGaramond(
+                                  color: Colors.white,
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                            ),
                           ),
                         ),
                       ),
                     ),
-                  ),
-                ],
-              ),
-            )
-          ],
+                  ],
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );
   }
 
-  Widget editAddress(BuildContext context, String name) {
-    addressController.customerNameEdit.text = name;
+  Widget editAddress(BuildContext context, Address address) {
+    addressController.customerName.text = address.nameReciever ?? '';
+    addressController.customerPhone.text = address.phoneReciever ?? '';
+    addressController.customerStreet.text = address.street ?? '';
+    addressController.statusSwitch.value = address.status ?? false;
     return Padding(
       padding: EdgeInsets.only(
         bottom: MediaQuery.of(context).viewInsets.bottom,
@@ -214,203 +600,591 @@ class AddressPage extends StatelessWidget {
             topRight: Radius.circular(30),
           ),
         ),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Text(
-                      'address_edit'.tr,
-                      style: GoogleFonts.ebGaramond(
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Text(
+                        'address_edit'.tr,
+                        style: GoogleFonts.ebGaramond(
+                          color: Colors.black,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 5,
+                      ),
+                      Container(
+                        width: 30,
+                        height: 2,
                         color: Colors.black,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600,
+                      ),
+                    ],
+                  ),
+                  GestureDetector(
+                    onTap: () => Get.back(),
+                    child: const Icon(
+                      Icons.close,
+                      size: 20,
+                      color: Colors.black,
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(
+                height: 15,
+              ),
+              Text(
+                'addresss_name'.tr,
+                style: GoogleFonts.ebGaramond(
+                  color: Colors.black,
+                  fontSize: 13,
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Container(
+                width: double.infinity,
+                height: 40,
+                decoration: BoxDecoration(
+                  color: const Color(0xffF0F0F0),
+                  borderRadius: BorderRadius.circular(5),
+                ),
+                child: TextField(
+                  controller: addressController.customerName,
+                  style: GoogleFonts.ebGaramond(
+                    color: Colors.black,
+                    fontSize: 13,
+                    fontWeight: FontWeight.w400,
+                  ),
+                  textAlign: TextAlign.left,
+                  decoration: InputDecoration(
+                    contentPadding: const EdgeInsets.only(
+                      bottom: 7,
+                      left: 15,
+                    ),
+                    hintText: 'address_enter_name'.tr,
+                    hintStyle: GoogleFonts.ebGaramond(
+                      color: const Color(0xffD0D0D0),
+                      fontSize: 13,
+                      fontWeight: FontWeight.w400,
+                    ),
+                    border: InputBorder.none,
+                  ),
+                  cursorColor: Colors.black,
+                ),
+              ),
+              const SizedBox(
+                height: 15,
+              ),
+              Text(
+                'addresss_phone'.tr,
+                style: GoogleFonts.ebGaramond(
+                  color: Colors.black,
+                  fontSize: 13,
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Container(
+                width: double.infinity,
+                height: 40,
+                decoration: BoxDecoration(
+                  color: const Color(0xffF0F0F0),
+                  borderRadius: BorderRadius.circular(5),
+                ),
+                child: TextField(
+                  controller: addressController.customerPhone,
+                  style: GoogleFonts.ebGaramond(
+                    color: Colors.black,
+                    fontSize: 13,
+                    fontWeight: FontWeight.w400,
+                  ),
+                  textAlign: TextAlign.left,
+                  decoration: InputDecoration(
+                    contentPadding: const EdgeInsets.only(
+                      bottom: 7,
+                      left: 15,
+                    ),
+                    hintText: 'address_enter_phone'.tr,
+                    hintStyle: GoogleFonts.ebGaramond(
+                      color: const Color(0xffD0D0D0),
+                      fontSize: 13,
+                      fontWeight: FontWeight.w400,
+                    ),
+                    border: InputBorder.none,
+                  ),
+                  cursorColor: Colors.black,
+                ),
+              ),
+              const SizedBox(
+                height: 15,
+              ),
+              Text(
+                'addresss_province'.tr,
+                style: GoogleFonts.ebGaramond(
+                  color: Colors.black,
+                  fontSize: 13,
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              GetBuilder<AddressController>(
+                init: addressController,
+                builder: (controller) => Container(
+                  width: double.infinity,
+                  height: 40,
+                  decoration: BoxDecoration(
+                    color: const Color(0xffF0F0F0),
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                  child: DropdownSearch<String>(
+                    showClearButton: true,
+                    clearButton: const Icon(
+                      Icons.close,
+                      color: Colors.black,
+                      size: 15,
+                    ),
+                    dropDownButton: const Icon(
+                      Icons.arrow_drop_down,
+                      color: Colors.black,
+                      size: 25,
+                    ),
+                    popupShape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.vertical(
+                        top: Radius.circular(16),
                       ),
                     ),
-                    const SizedBox(
-                      height: 5,
+                    showSearchBox: true,
+                    mode: Mode.BOTTOM_SHEET,
+                    items: controller.listProvince
+                        .map((element) => element.name!)
+                        .toList(),
+                    selectedItem: address.province ?? '',
+                    popupItemBuilder: (context, item, isSelected) => Container(
+                      padding: const EdgeInsets.all(16),
+                      child: Text(
+                        item,
+                        style: GoogleFonts.ebGaramond(
+                          color: Colors.black,
+                          fontSize: 13,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
                     ),
-                    Container(
-                      width: 30,
-                      height: 2,
+                    itemAsString: (item) {
+                      return item ?? 'select_province'.tr;
+                    },
+                    dropdownBuilder: (context, item) {
+                      return Text(
+                        item ?? 'select_province'.tr,
+                        style: GoogleFonts.ebGaramond(
+                          color: item == null
+                              ? const Color(0xffD0D0D0)
+                              : Colors.black,
+                          fontSize: 13,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      );
+                    },
+                    onSaved: (item) {},
+                    onChanged: (item) {
+                      if (item != null) {
+                        controller.province.value = item;
+                        for (var e in controller.listProvince) {
+                          if (e.name == item) {
+                            controller.getDistricts(e.code!);
+                          }
+                        }
+                        controller.update();
+                      }
+                    },
+                    dropdownSearchDecoration: InputDecoration(
+                      contentPadding: const EdgeInsets.only(left: 15),
+                      isDense: true,
+                      border: InputBorder.none,
+                      hintStyle: GoogleFonts.ebGaramond(
+                        color: const Color(0xffD0D0D0),
+                        fontSize: 13,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 15,
+              ),
+              Text(
+                'addresss_district'.tr,
+                style: GoogleFonts.ebGaramond(
+                  color: Colors.black,
+                  fontSize: 13,
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              GetBuilder<AddressController>(
+                init: addressController,
+                builder: (controller) => Container(
+                  width: double.infinity,
+                  height: 40,
+                  decoration: BoxDecoration(
+                    color: const Color(0xffF0F0F0),
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                  child: DropdownSearch<String>(
+                    showClearButton: true,
+                    clearButton: const Icon(
+                      Icons.close,
                       color: Colors.black,
+                      size: 15,
+                    ),
+                    dropDownButton: const Icon(
+                      Icons.arrow_drop_down,
+                      color: Colors.black,
+                      size: 25,
+                    ),
+                    popupShape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.vertical(
+                        top: Radius.circular(16),
+                      ),
+                    ),
+                    showSearchBox: true,
+                    mode: Mode.BOTTOM_SHEET,
+                    items: controller.listDistrict.map((e) => e.name!).toList(),
+                    selectedItem: address.district ?? '',
+                    popupItemBuilder: (context, item, isSelected) => Container(
+                      padding: const EdgeInsets.all(16),
+                      child: Text(
+                        item,
+                        style: GoogleFonts.ebGaramond(
+                          color: Colors.black,
+                          fontSize: 13,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                    ),
+                    itemAsString: (item) {
+                      return item ?? 'select_district'.tr;
+                    },
+                    dropdownBuilder: (context, item) {
+                      return Text(
+                        item ?? 'select_district'.tr,
+                        style: GoogleFonts.ebGaramond(
+                          color: item == null
+                              ? const Color(0xffD0D0D0)
+                              : Colors.black,
+                          fontSize: 13,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      );
+                    },
+                    onSaved: (item) {},
+                    onChanged: (item) {
+                      if (item != null) {
+                        controller.district.value = item;
+                        for (var e in controller.listDistrict) {
+                          if (e.name == item) {
+                            controller.getWards(e.code!);
+                          }
+                        }
+                        controller.update();
+                      }
+                    },
+                    dropdownSearchDecoration: InputDecoration(
+                      contentPadding: const EdgeInsets.only(left: 15),
+                      isDense: true,
+                      border: InputBorder.none,
+                      hintStyle: GoogleFonts.ebGaramond(
+                        color: const Color(0xffD0D0D0),
+                        fontSize: 13,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 15,
+              ),
+              Text(
+                'address_ward'.tr,
+                style: GoogleFonts.ebGaramond(
+                  color: Colors.black,
+                  fontSize: 13,
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              GetBuilder<AddressController>(
+                init: addressController,
+                builder: (controller) => Container(
+                  width: double.infinity,
+                  height: 40,
+                  decoration: BoxDecoration(
+                    color: const Color(0xffF0F0F0),
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                  child: DropdownSearch<String>(
+                    showClearButton: true,
+                    clearButton: const Icon(
+                      Icons.close,
+                      color: Colors.black,
+                      size: 15,
+                    ),
+                    dropDownButton: const Icon(
+                      Icons.arrow_drop_down,
+                      color: Colors.black,
+                      size: 25,
+                    ),
+                    popupShape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.vertical(
+                        top: Radius.circular(16),
+                      ),
+                    ),
+                    showSearchBox: true,
+                    mode: Mode.BOTTOM_SHEET,
+                    items: controller.listWard.map((e) => e.name!).toList(),
+                    selectedItem: address.ward ?? '',
+                    popupItemBuilder: (context, item, isSelected) => Container(
+                      padding: const EdgeInsets.all(16),
+                      child: Text(
+                        item,
+                        style: GoogleFonts.ebGaramond(
+                          color: Colors.black,
+                          fontSize: 13,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                    ),
+                    itemAsString: (item) {
+                      return item ?? 'select_ward'.tr;
+                    },
+                    dropdownBuilder: (context, item) {
+                      return Text(
+                        item ?? 'select_ward'.tr,
+                        style: GoogleFonts.ebGaramond(
+                          color: item == null
+                              ? const Color(0xffD0D0D0)
+                              : Colors.black,
+                          fontSize: 13,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      );
+                    },
+                    onSaved: (item) {},
+                    onChanged: (item) {
+                      if (item != null) {
+                        controller.ward.value = item;
+                        controller.update();
+                      }
+                    },
+                    dropdownSearchDecoration: InputDecoration(
+                      contentPadding: const EdgeInsets.only(left: 15),
+                      isDense: true,
+                      border: InputBorder.none,
+                      hintStyle: GoogleFonts.ebGaramond(
+                        color: const Color(0xffD0D0D0),
+                        fontSize: 13,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 15,
+              ),
+              Text(
+                'addresss_street'.tr,
+                style: GoogleFonts.ebGaramond(
+                  color: Colors.black,
+                  fontSize: 13,
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Container(
+                width: double.infinity,
+                height: 40,
+                decoration: BoxDecoration(
+                  color: const Color(0xffF0F0F0),
+                  borderRadius: BorderRadius.circular(5),
+                ),
+                child: TextField(
+                  controller: addressController.customerStreet,
+                  style: GoogleFonts.ebGaramond(
+                    color: Colors.black,
+                    fontSize: 13,
+                    fontWeight: FontWeight.w400,
+                  ),
+                  textAlign: TextAlign.left,
+                  decoration: InputDecoration(
+                    contentPadding: const EdgeInsets.only(
+                      bottom: 7,
+                      left: 15,
+                    ),
+                    hintText: 'address_enter_street'.tr,
+                    hintStyle: GoogleFonts.ebGaramond(
+                      color: const Color(0xffD0D0D0),
+                      fontSize: 13,
+                      fontWeight: FontWeight.w400,
+                    ),
+                    border: InputBorder.none,
+                  ),
+                  cursorColor: Colors.black,
+                ),
+              ),
+              const SizedBox(
+                height: 15,
+              ),
+              GetBuilder<AddressController>(
+                init: addressController,
+                builder: (controller) => Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    FlutterSwitch(
+                      width: 45,
+                      height: 25,
+                      value: controller.statusSwitch.value,
+                      activeColor: Colors.black,
+                      onToggle: (val) {
+                        controller.statusSwitch.value = val;
+                        controller.updateDefaultAddress(address.id ?? '');
+                        controller.update();
+                      },
+                    ),
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    Text(
+                      'address_set_default_address'.tr,
+                      style: GoogleFonts.ebGaramond(
+                        color: Colors.black,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w400,
+                      ),
                     ),
                   ],
                 ),
-                GestureDetector(
-                  onTap: () => Get.back(),
-                  child: const Icon(
-                    Icons.close,
-                    size: 20,
-                    color: Colors.black,
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(
-              height: 15,
-            ),
-            Container(
-              width: double.infinity,
-              height: 40,
-              decoration: BoxDecoration(
-                color: const Color(0xffF0F0F0),
-                borderRadius: BorderRadius.circular(5),
               ),
-              child: TextField(
-                controller: addressController.customerNameEdit,
-                style: GoogleFonts.ebGaramond(
-                  color: Colors.black,
-                  fontSize: 13,
-                  fontWeight: FontWeight.w400,
-                ),
-                textAlign: TextAlign.left,
-                decoration: InputDecoration(
-                  contentPadding: const EdgeInsets.only(
-                    bottom: 7,
-                    left: 15,
-                  ),
-                  hintText: 'address_enter_name'.tr,
-                  hintStyle: GoogleFonts.ebGaramond(
-                    color: const Color(0xffD0D0D0),
-                    fontSize: 13,
-                    fontWeight: FontWeight.w400,
-                  ),
-                  border: InputBorder.none,
-                ),
-                cursorColor: Colors.black,
+              const SizedBox(
+                height: 15,
               ),
-            ),
-            const SizedBox(
-              height: 15,
-            ),
-            Container(
-              width: double.infinity,
-              height: 40,
-              decoration: BoxDecoration(
-                color: const Color(0xffF0F0F0),
-                borderRadius: BorderRadius.circular(5),
-              ),
-              child: TextField(
-                controller: addressController.customerAddressEdit,
-                style: GoogleFonts.ebGaramond(
-                  color: Colors.black,
-                  fontSize: 13,
-                  fontWeight: FontWeight.w400,
-                ),
-                textAlign: TextAlign.left,
-                decoration: InputDecoration(
-                  contentPadding: const EdgeInsets.only(
-                    bottom: 7,
-                    left: 15,
-                  ),
-                  hintText: 'address_enter_address'.tr,
-                  hintStyle: GoogleFonts.ebGaramond(
-                    color: const Color(0xffD0D0D0),
-                    fontSize: 13,
-                    fontWeight: FontWeight.w400,
-                  ),
-                  border: InputBorder.none,
-                ),
-                cursorColor: Colors.black,
-              ),
-            ),
-            const SizedBox(
-              height: 15,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Obx(
-                  () => FlutterSwitch(
-                    width: 45,
-                    height: 25,
-                    value: addressController.statusSwitch.value,
-                    activeColor: Colors.black,
-                    onToggle: (val) {
-                      addressController.statusSwitch.value = val;
-                    },
-                  ),
-                ),
-                const SizedBox(
-                  width: 10,
-                ),
-                Text(
-                  'address_set_default_address'.tr,
-                  style: GoogleFonts.ebGaramond(
-                    color: Colors.black,
-                    fontSize: 14,
-                    fontWeight: FontWeight.w400,
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(
-              height: 15,
-            ),
-            SizedBox(
-              width: double.infinity,
-              height: 40,
-              child: Row(
-                children: [
-                  Expanded(
-                    child: GestureDetector(
-                      onTap: () => Get.back(),
-                      child: Container(
-                        width: double.infinity,
-                        height: double.infinity,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          border: Border.all(
-                            color: Colors.black,
-                          ),
-                        ),
-                        child: Center(
-                          child: Text(
-                            'address_cancel'.tr,
-                            style: GoogleFonts.ebGaramond(
+              SizedBox(
+                width: double.infinity,
+                height: 40,
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: GestureDetector(
+                        onTap: () => Get.back(),
+                        child: Container(
+                          width: double.infinity,
+                          height: double.infinity,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            border: Border.all(
                               color: Colors.black,
-                              fontSize: 14,
-                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          child: Center(
+                            child: Text(
+                              'address_cancel'.tr,
+                              style: GoogleFonts.ebGaramond(
+                                color: Colors.black,
+                                fontSize: 14,
+                                fontWeight: FontWeight.w600,
+                              ),
                             ),
                           ),
                         ),
                       ),
                     ),
-                  ),
-                  const SizedBox(
-                    width: 15,
-                  ),
-                  Expanded(
-                    child: Container(
-                      width: double.infinity,
-                      height: double.infinity,
-                      decoration: const BoxDecoration(
-                        color: Colors.black,
-                      ),
-                      child: Center(
-                        child: Text(
-                          'address_confirm'.tr,
-                          style: GoogleFonts.ebGaramond(
-                            color: Colors.white,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w600,
+                    const SizedBox(
+                      width: 15,
+                    ),
+                    GetBuilder<AddressController>(
+                      init: addressController,
+                      builder: (controller) => Expanded(
+                        child: GestureDetector(
+                          onTap: () {
+                            if (controller.province.value.isEmpty ||
+                                controller.district.value.isEmpty ||
+                                controller.ward.value.isEmpty ||
+                                controller.customerName.text.isEmpty ||
+                                controller.customerPhone.text.isEmpty ||
+                                controller.customerStreet.text.isEmpty) {
+                              Get.snackbar(
+                                  'Validate', 'Vui lòng nhập đầy đủ thông tin',
+                                  colorText: Colors.black,
+                                  backgroundColor: Colors.white);
+                              return;
+                            }
+                            controller.updateAddress(
+                              address.id ?? '',
+                              controller.province.value,
+                              controller.district.value,
+                              controller.ward.value,
+                              controller.customerStreet.text,
+                              address.status ?? false,
+                              controller.customerName.text,
+                              controller.customerPhone.text,
+                            );
+                            controller.clear();
+                            controller.update();
+                            Get.back();
+                          },
+                          child: Container(
+                            width: double.infinity,
+                            height: double.infinity,
+                            decoration: const BoxDecoration(
+                              color: Colors.black,
+                            ),
+                            child: Center(
+                              child: Text(
+                                'address_confirm'.tr,
+                                style: GoogleFonts.ebGaramond(
+                                  color: Colors.white,
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                            ),
                           ),
                         ),
                       ),
                     ),
-                  ),
-                ],
-              ),
-            )
-          ],
+                  ],
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );
@@ -526,6 +1300,8 @@ class AddressPage extends StatelessWidget {
                       child: GestureDetector(
                         onTap: () {
                           controller.deleteAddress(id);
+                          controller.update();
+                          Get.back();
                         },
                         child: Container(
                           width: double.infinity,
@@ -629,7 +1405,7 @@ class AddressPage extends StatelessWidget {
                       const SizedBox(
                         height: 20,
                       ),
-                      controller.listAddressDefault.value ==
+                      controller.listAddressDefault.value !=
                               Address.fromJson({})
                           ? Container(
                               width: double.infinity,
@@ -662,7 +1438,7 @@ class AddressPage extends StatelessWidget {
                                           MainAxisAlignment.center,
                                       children: [
                                         Text(
-                                          '${controller.listAddressDefault.value.nameReciever != null && controller.listAddressDefault.value.nameReciever!.isNotEmpty ? controller.listAddressDefault.value.nameReciever : '--'}',
+                                          '${controller.listAddressDefault.value.nameReciever != null && controller.listAddressDefault.value.nameReciever!.isNotEmpty ? controller.listAddressDefault.value.nameReciever : '--'} - ${controller.listAddressDefault.value.phoneReciever != null && controller.listAddressDefault.value.phoneReciever!.isNotEmpty ? controller.listAddressDefault.value.phoneReciever : '--'}',
                                           style: GoogleFonts.ebGaramond(
                                             color: Colors.black,
                                             fontSize: 14,
@@ -677,7 +1453,9 @@ class AddressPage extends StatelessWidget {
                                               ', ' +
                                               '${controller.listAddressDefault.value.ward != null && controller.listAddressDefault.value.ward!.isNotEmpty ? controller.listAddressDefault.value.ward : '--'}' +
                                               ', ' +
-                                              '${controller.listAddressDefault.value.district != null && controller.listAddressDefault.value.district!.isNotEmpty ? controller.listAddressDefault.value.district : '--'}',
+                                              '${controller.listAddressDefault.value.district != null && controller.listAddressDefault.value.district!.isNotEmpty ? controller.listAddressDefault.value.district : '--'}' +
+                                              ', ' +
+                                              '${controller.listAddressDefault.value.province != null && controller.listAddressDefault.value.province!.isNotEmpty ? controller.listAddressDefault.value.province : '--'}',
                                           style: GoogleFonts.ebGaramond(
                                             color: Colors.black,
                                             fontSize: 14,
@@ -702,8 +1480,8 @@ class AddressPage extends StatelessWidget {
                                           Get.bottomSheet(
                                             editAddress(
                                                 context,
-                                                controller.listAddressDefault
-                                                    .value.nameReciever!),
+                                                controller
+                                                    .listAddressDefault.value),
                                             isScrollControlled: true,
                                           );
                                         },
@@ -826,7 +1604,7 @@ class AddressPage extends StatelessWidget {
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       Text(
-                                        '${controller.listAddress[index].nameReciever != null && controller.listAddress[index].nameReciever!.isNotEmpty ? controller.listAddress[index].nameReciever : '--'}',
+                                        '${controller.listAddress[index].nameReciever != null && controller.listAddress[index].nameReciever!.isNotEmpty ? controller.listAddress[index].nameReciever : '--'} - ${controller.listAddress[index].phoneReciever != null && controller.listAddress[index].phoneReciever!.isNotEmpty ? controller.listAddress[index].phoneReciever : '--'}',
                                         style: GoogleFonts.ebGaramond(
                                           color: Colors.black,
                                           fontSize: 14,
@@ -841,7 +1619,9 @@ class AddressPage extends StatelessWidget {
                                             ', ' +
                                             '${controller.listAddress[index].ward != null && controller.listAddress[index].ward!.isNotEmpty ? controller.listAddress[index].ward : '--'}' +
                                             ', ' +
-                                            '${controller.listAddress[index].district != null && controller.listAddress[index].district!.isNotEmpty ? controller.listAddress[index].district : '--'}',
+                                            '${controller.listAddress[index].district != null && controller.listAddress[index].district!.isNotEmpty ? controller.listAddress[index].district : '--'}' +
+                                            ', ' +
+                                            '${controller.listAddress[index].province != null && controller.listAddress[index].province!.isNotEmpty ? controller.listAddress[index].province : '--'}',
                                         style: GoogleFonts.ebGaramond(
                                           color: Colors.black,
                                           fontSize: 14,
@@ -864,10 +1644,8 @@ class AddressPage extends StatelessWidget {
                                     GestureDetector(
                                       onTap: () {
                                         Get.bottomSheet(
-                                          editAddress(
-                                              context,
-                                              controller.listAddress[index]
-                                                  .nameReciever!),
+                                          editAddress(context,
+                                              controller.listAddress[index]),
                                           isScrollControlled: true,
                                         );
                                       },

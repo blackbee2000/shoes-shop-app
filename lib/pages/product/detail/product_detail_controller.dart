@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shoes_shop_app/models/company.dart';
 import 'package:shoes_shop_app/models/product.dart';
+import 'package:shoes_shop_app/pages/cart/cart_controller.dart';
 import 'package:shoes_shop_app/pages/cart/cart_page.dart';
 import 'package:shoes_shop_app/pages/product/product_provider.dart';
 import 'package:shoes_shop_app/pages/profile/profile_controller.dart';
@@ -17,6 +18,8 @@ class ProductDetailController extends GetxController
   final companyData = Company.fromJson({}).obs;
   List<Product> listProductRelated = <Product>[].obs;
   final profileController = Get.put(ProfileController());
+  final cartController = Get.put(CartController());
+  final isLike = false.obs;
 
   plusAmount() {
     amount.value = amount.value + 1;
@@ -80,23 +83,11 @@ class ProductDetailController extends GetxController
           'Authorization': 'Bearer ${ApiToken.to.appToken}',
         },
       ),
-      beforeSend: () {
-        Get.dialog(
-          const SizedBox(
-            height: 15,
-            width: 15,
-            child: Center(
-              child: CircularProgressIndicator(
-                valueColor: AlwaysStoppedAnimation(Colors.white),
-                strokeWidth: 2,
-              ),
-            ),
-          ),
-          barrierDismissible: false,
-        );
-      },
+      beforeSend: () {},
       onSuccess: (res) {
         print('ADD TO CART SUCCESS ====>>>>> ${res.data.toString()}');
+        cartController.onInit();
+        cartController.update();
         Get.to(CartPage(id: idWidget), id: idWidget);
         update();
       },

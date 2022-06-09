@@ -10,7 +10,7 @@ class ProductOrder {
   String? imageProduct;
   String? descriptionVi;
   String? descriptionEn;
-  dynamic rating;
+  num? rating;
   TypeProductOrder? type;
   String? idCompany;
   int? price;

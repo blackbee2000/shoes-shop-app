@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:shoes_shop_app/pages/auth/auth_provider.dart';
+import 'package:shoes_shop_app/pages/dashboard/dashboard_controller.dart';
 import 'package:shoes_shop_app/pages/dashboard/dashboard_page.dart';
 import 'package:shoes_shop_app/pages/profile/profile_controller.dart';
 import 'package:shoes_shop_app/pages/user/user_controller.dart';
@@ -21,6 +22,7 @@ class LoginController extends GetxController {
   final storage = GetStorage();
   final phoneForOtp = ''.obs;
   final userController = Get.put(UserController());
+  final dashboardController = Get.put(DashboardController());
 
   setToken(token) async {
     await storage.write('token', token);
@@ -54,6 +56,8 @@ class LoginController extends GetxController {
         setToken(res.data?.token);
         print('TOKEN NEFFFFFFF =>>>>>> ${ApiToken.to.appToken}');
         if (type == 'login') {
+          dashboardController.onInit();
+          dashboardController.update();
           Get.offAll(const DashboardPage());
         } else if (type == 'register') {
           profileController.onInit();

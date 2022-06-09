@@ -4,7 +4,10 @@ import 'package:get/get.dart';
 import 'package:shoes_shop_app/models/company.dart';
 import 'package:shoes_shop_app/models/product.dart';
 import 'package:shoes_shop_app/pages/home/home_provider.dart';
+import 'package:shoes_shop_app/pages/product/product_provider.dart';
+import 'package:shoes_shop_app/pages/profile/profile_provider.dart';
 import 'package:shoes_shop_app/pages/search/search_provider.dart';
+import 'package:shoes_shop_app/services/api_token.dart';
 
 class SearchController extends GetxController {
   final sortSelected = ''.obs;
@@ -15,6 +18,7 @@ class SearchController extends GetxController {
 
   List<Company> listCompany = <Company>[].obs;
   List<Product> listProductSearch = <Product>[].obs;
+  List<String> listProductFavorite = <String>[].obs;
   @override
   void onInit() async {
     super.onInit();
@@ -68,6 +72,12 @@ class SearchController extends GetxController {
       },
       onSuccess: (res) {
         listProductSearch = res.data ?? [];
+        for (var e in listProductSearch) {
+          e.isLike = false;
+        }
+        if (ApiToken.to.isTokenExisted == true) {
+          getListProductFavorite(listProductSearch);
+        }
         print('SEARCH SUCCESS =======> ${listProductSearch.toString()}');
         Get.back();
         update();
@@ -75,6 +85,35 @@ class SearchController extends GetxController {
       onError: (e) {
         print('SEARCH FAIL ====> ${e.toString()}');
         Get.back();
+        update();
+      },
+    );
+  }
+
+  getListProductFavorite(List<Product> productList) {
+    ProfileProvider().getListProductFavorite(
+      option: Options(
+        headers: {
+          'Authorization': 'Bearer ${ApiToken.to.appToken}',
+        },
+      ),
+      beforeSend: () {},
+      onSuccess: (res) {
+        listProductFavorite = res.data ?? [];
+
+        for (var x in productList) {
+          for (var k in listProductFavorite) {
+            if (k == x.id) {
+              x.isLike = true;
+            }
+          }
+        }
+        print(
+            'GET ALLL PRODUCT FAVORITE SUCESSS =======> ${productList.last.isLike.toString()}');
+        update();
+      },
+      onError: (e) {
+        print('GET ALLL PRODUCT FAVORITE ===> ${e.toString()}');
         update();
       },
     );
@@ -97,5 +136,52 @@ class SearchController extends GetxController {
         break;
     }
     update();
+  }
+
+  likeProduct(String id, bool isLike) {
+    ProductProvider().likeProduct(
+      params: {"idProduct": id},
+      option: Options(
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': 'Bearer ${ApiToken.to.appToken}',
+        },
+      ),
+      beforeSend: () {},
+      onSuccess: (res) {
+        if (isLike == false) {
+          Get.snackbar(
+            'Success',
+            'Đã thích sản phẩm',
+            colorText: Colors.black,
+            backgroundColor: Colors.white,
+          );
+        } else {
+          Get.snackbar(
+            'Success',
+            'Đã hủy thích sản phẩm',
+            colorText: Colors.black,
+            backgroundColor: Colors.white,
+          );
+        }
+
+        for (var e in listProductSearch) {
+          if (id == e.id) {
+            e.isLike = !e.isLike!;
+          }
+        }
+        update();
+      },
+      onError: (e) {
+        Get.snackbar(
+          'Fail',
+          'Đã xảy ra lỗi',
+          colorText: Colors.black,
+          backgroundColor: Colors.white,
+        );
+        print('ĐÃ XẢY RA LỖI PRODUCT =====> ${e}');
+        update();
+      },
+    );
   }
 }

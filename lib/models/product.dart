@@ -10,7 +10,7 @@ class Product {
   List<String>? imageProduct;
   String? descriptionVi;
   String? descriptionEn;
-  dynamic rating;
+  num? rating;
   int? quantitySold;
   int? discount;
   List<TypeProduct>? type;

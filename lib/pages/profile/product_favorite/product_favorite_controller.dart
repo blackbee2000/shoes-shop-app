@@ -2,7 +2,6 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shoes_shop_app/models/product.dart';
-import 'package:shoes_shop_app/pages/product/product_controller.dart';
 import 'package:shoes_shop_app/pages/product/product_provider.dart';
 import 'package:shoes_shop_app/pages/profile/profile_provider.dart';
 import 'package:shoes_shop_app/services/api_token.dart';
@@ -11,7 +10,6 @@ class ProductFavoriteController extends GetxController {
   List<String> listProductFavorite = <String>[].obs;
   List<Product> listProductAll = <Product>[].obs;
   List<Product> listProductFavoriteFinal = <Product>[].obs;
-  final productController = Get.put(ProductController());
   @override
   void onInit() async {
     super.onInit();
@@ -62,7 +60,7 @@ class ProductFavoriteController extends GetxController {
           }
         }
         print(
-            'GET ALLL PRODUCT SUCESS ===> ${listProductFavoriteFinal.toString()}');
+            'GET ALLL PRODUCT FAVORITE ===> ${listProductFavoriteFinal.first.isLike.toString()}');
         update();
       },
       onError: (e) {
@@ -90,17 +88,12 @@ class ProductFavoriteController extends GetxController {
           backgroundColor: Colors.white,
         );
 
-        for (var e in listProductFavoriteFinal) {
-          if (id == e.id) {
-            e.isLike = !e.isLike!;
-            listProductFavoriteFinal.remove(e);
-          }
-        }
-        productController.update();
+        listProductFavoriteFinal.clear();
+        getAllProduct();
         update();
       },
       onError: (e) {
-        print('ĐÃ XẢY RA LỖI =====> ${e}');
+        print('ĐÃ XẢY RA LỖI =====> ${e.toString()}');
         update();
       },
     );

@@ -579,7 +579,10 @@ class ProfilePage extends GetView<ProfileController> {
                                           Expanded(
                                             child: GestureDetector(
                                               onTap: () {
-                                                Get.to(ProductFavoritePage(),
+                                                Get.to(
+                                                    const ProductFavoritePage(
+                                                      id: AppConstant.PROFILE,
+                                                    ),
                                                     id: AppConstant.PROFILE);
                                               },
                                               child: Container(

@@ -8,7 +8,7 @@ ProductOrder _$ProductOrderFromJson(Map<String, dynamic> json) {
     json['imageProduct'] as String?,
     json['descriptionVi'] as String?,
     json['descriptionEn'] as String?,
-    json['rating'] as dynamic,
+    json['rating'] as num?,
     json['type'] == null
         ? null
         : TypeProductOrder.fromJson(json['type'] as Map<String, dynamic>),

@@ -6,13 +6,11 @@ class TypeProduct {
   String? id;
   String? size;
   int? quantity;
-  String? color;
 
   TypeProduct(
     this.id,
     this.size,
     this.quantity,
-    this.color,
   );
 
   factory TypeProduct.fromJson(Map<String, dynamic> json) =>

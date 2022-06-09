@@ -6,6 +6,7 @@ import 'package:shoes_shop_app/models/blog.dart';
 import 'package:shoes_shop_app/pages/blog/blog_controller.dart';
 import 'package:shoes_shop_app/pages/blog/detail/blog_detail_controller.dart';
 import 'package:shoes_shop_app/pages/cart/cart_page.dart';
+import 'package:shoes_shop_app/pages/profile/product_favorite/product_favorite_page.dart';
 import 'package:shoes_shop_app/translations/app_translation.dart';
 import 'package:shoes_shop_app/utils/app_constant.dart';
 import 'package:widget_mask/widget_mask.dart';
@@ -77,30 +78,49 @@ class BlogDetailPage extends StatelessWidget {
                   GestureDetector(
                     onTap: () {
                       Get.to(
-                        CartPage(id: AppConstant.BLOG),
-                        id: AppConstant.BLOG,
-                      );
+                          const ProductFavoritePage(
+                            id: AppConstant.BLOG,
+                          ),
+                          id: AppConstant.BLOG);
                     },
-                    child: Image.asset(
-                      "assets/icons/icon_cart.png",
-                      width: 20,
-                      height: 20,
-                      fit: BoxFit.contain,
+                    child: const Icon(
+                      Icons.favorite_border,
+                      size: 20,
                       color: Colors.white,
                     ),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(left: 10, right: 20),
                     child: GestureDetector(
+                      onTap: () {
+                        Get.to(
+                          const CartPage(id: AppConstant.BLOG),
+                          id: AppConstant.BLOG,
+                        );
+                      },
                       child: Image.asset(
-                        "assets/icons/icon_message.png",
+                        "assets/icons/icon_cart.png",
                         width: 20,
                         height: 20,
-                        fit: BoxFit.contain,
                         color: Colors.white,
+                        fit: BoxFit.contain,
                       ),
                     ),
                   ),
+                  // Padding(
+                  //   padding: const EdgeInsets.only(left: 10, right: 20),
+                  //   child: GestureDetector(
+                  //     child: Image.asset(
+                  //       "assets/icons/icon_message.png",
+                  //       width: 20,
+                  //       height: 20,
+                  //       color: theme.theme == ThemeMode.light
+                  //           ? Colors.black
+                  //           : Colors.white,
+                  //       fit: BoxFit.contain,
+                  //     ),
+                  //   ),
+                  // ),
                 ],
               ),
               body: SingleChildScrollView(

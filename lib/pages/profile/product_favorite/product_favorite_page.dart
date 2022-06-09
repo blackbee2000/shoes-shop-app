@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:get/get_rx/src/rx_workers/utils/debouncer.dart';
 import 'package:shoes_shop_app/pages/cart/cart_page.dart';
 import 'package:shoes_shop_app/pages/product/detail/product_detail_page.dart';
+import 'package:shoes_shop_app/pages/product/product_controller.dart';
 import 'package:shoes_shop_app/pages/profile/product_favorite/product_favorite_controller.dart';
 import 'package:shoes_shop_app/theme/theme_controller.dart';
 import 'package:shoes_shop_app/translations/app_translation.dart';
@@ -12,13 +13,15 @@ import 'package:shoes_shop_app/utils/app_constant.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ProductFavoritePage extends StatefulWidget {
-  ProductFavoritePage({Key? key}) : super(key: key);
+  final int id;
+  const ProductFavoritePage({Key? key, required this.id}) : super(key: key);
   @override
   ProductFavoriteState createState() => ProductFavoriteState();
 }
 
 class ProductFavoriteState extends State<ProductFavoritePage> {
   final productFavoriteController = Get.put(ProductFavoriteController());
+  final productController = Get.put(ProductController());
 
   @override
   void initState() {
@@ -46,7 +49,7 @@ class ProductFavoriteState extends State<ProductFavoritePage> {
                   theme.theme == ThemeMode.light ? Colors.white : Colors.black,
               leading: IconButton(
                 onPressed: () {
-                  Get.back(id: AppConstant.PROFILE);
+                  Get.back(id: widget.id);
                 },
                 icon: Icon(
                   Icons.arrow_back_ios,
@@ -68,37 +71,40 @@ class ProductFavoriteState extends State<ProductFavoritePage> {
               ),
               centerTitle: true,
               actions: [
-                GestureDetector(
-                  onTap: () {
-                    Get.to(
-                      const CartPage(id: AppConstant.PROFILE),
-                      id: AppConstant.PROFILE,
-                    );
-                  },
-                  child: Image.asset(
-                    "assets/icons/icon_cart.png",
-                    width: 20,
-                    height: 20,
-                    fit: BoxFit.contain,
-                    color: theme.theme == ThemeMode.light
-                        ? Colors.black
-                        : Colors.white,
-                  ),
-                ),
                 Padding(
                   padding: const EdgeInsets.only(left: 10, right: 20),
                   child: GestureDetector(
+                    onTap: () {
+                      Get.to(
+                        const CartPage(id: AppConstant.PROFILE),
+                        id: AppConstant.PROFILE,
+                      );
+                    },
                     child: Image.asset(
-                      "assets/icons/icon_message.png",
+                      "assets/icons/icon_cart.png",
                       width: 20,
                       height: 20,
-                      fit: BoxFit.contain,
                       color: theme.theme == ThemeMode.light
                           ? Colors.black
                           : Colors.white,
+                      fit: BoxFit.contain,
                     ),
                   ),
                 ),
+                // Padding(
+                //   padding: const EdgeInsets.only(left: 10, right: 20),
+                //   child: GestureDetector(
+                //     child: Image.asset(
+                //       "assets/icons/icon_message.png",
+                //       width: 20,
+                //       height: 20,
+                //       color: theme.theme == ThemeMode.light
+                //           ? Colors.black
+                //           : Colors.white,
+                //       fit: BoxFit.contain,
+                //     ),
+                //   ),
+                // ),
               ],
             ),
             body: GetBuilder<ProductFavoriteController>(
@@ -128,12 +134,12 @@ class ProductFavoriteState extends State<ProductFavoritePage> {
                     itemBuilder: (context, index) => GestureDetector(
                       onTap: () {
                         Get.to(
-                            ProductDetailPage(
-                              product:
-                                  controller.listProductFavoriteFinal[index],
-                              id: AppConstant.PROFILE,
-                            ),
-                            id: AppConstant.PROFILE);
+                          ProductDetailPage(
+                            product: controller.listProductFavoriteFinal[index],
+                            id: widget.id,
+                          ),
+                          id: widget.id,
+                        );
                       },
                       child: SizedBox(
                         width: double.infinity,
@@ -151,16 +157,12 @@ class ProductFavoriteState extends State<ProductFavoritePage> {
                                 children: [
                                   GestureDetector(
                                     onTap: () {
-                                      Debouncer(
-                                              delay: const Duration(
-                                                  milliseconds: 500))
-                                          .call(() {
-                                        controller.likeProduct(controller
-                                                .listProductFavoriteFinal[index]
-                                                .id ??
-                                            '');
-                                      });
-
+                                      controller.likeProduct(controller
+                                              .listProductFavoriteFinal[index]
+                                              .id ??
+                                          '');
+                                      productController.onInit();
+                                      productController.update();
                                       controller.update();
                                     },
                                     child: Container(
@@ -185,20 +187,14 @@ class ProductFavoriteState extends State<ProductFavoritePage> {
                                                           index]
                                                       .isLike ==
                                                   true
-                                              ? Icon(
+                                              ? const Icon(
                                                   Icons.favorite,
-                                                  color: theme.theme ==
-                                                          ThemeMode.light
-                                                      ? Colors.black
-                                                      : Colors.white,
+                                                  color: Colors.black,
                                                   size: 20,
                                                 )
-                                              : Icon(
+                                              : const Icon(
                                                   Icons.favorite_border,
-                                                  color: theme.theme ==
-                                                          ThemeMode.light
-                                                      ? Colors.black
-                                                      : Colors.white,
+                                                  color: Colors.black,
                                                   size: 20,
                                                 ),
                                         ),
@@ -317,10 +313,9 @@ class ProductFavoriteState extends State<ProductFavoritePage> {
                             Container(
                               alignment: Alignment.topLeft,
                               child: RatingBarIndicator(
-                                rating: controller
-                                        .listProductFavoriteFinal[index]
-                                        .rating ??
-                                    0,
+                                rating: double.parse(controller
+                                    .listProductFavoriteFinal[index].rating
+                                    .toString()),
                                 itemBuilder: (context, index) => const Icon(
                                   Icons.star,
                                   color: Colors.amber,

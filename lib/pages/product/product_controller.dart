@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -16,7 +14,7 @@ class ProductController extends GetxController {
   List<Company> listCompany = <Company>[].obs;
   final nameBrand = ''.obs;
   @override
-  void onInit() async {
+  void onInit() {
     super.onInit();
     getAllCompany();
   }
@@ -67,6 +65,8 @@ class ProductController extends GetxController {
             }
           }
         }
+        print(
+            'GET PRODUCT SUCESSSSSSSSSSSSSS ==>>>>>>> ${listProduct.toString()}');
         update();
       },
       onError: (e) {

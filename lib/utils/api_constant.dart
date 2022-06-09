@@ -24,11 +24,13 @@ class ApiConstant {
   static final String PROFILE = '${url.toString()}/account/getAccount';
   static final String COMPANY = '${url.toString()}/company/all';
   static final String ADDRESS = '${url.toString()}/address/all';
-  static final String DELETEADDRESS = '${url.toString()}/address/delete';
+  static final String ADDRESSDEFAULT =
+      '${url.toString()}/address/getAddressDefault';
+  static final String DELETEADDRESS = '${url.toString()}/address/delete?getId=';
   static final String CREATEADDRESS = '${url.toString()}/address/create';
   static final String UPDATEADDRESS = '${url.toString()}/address/update';
   static final String UPDATEDEFAULT =
-      '${url.toString()}/address/updateStatusDefault';
+      '${url.toString()}/address/updateStatusDefault?getId=';
   static final String ADDTOCART = '${url.toString()}/cart/create';
   static final String CART = '${url.toString()}/cart/all';
   static final String PRODUCTRELATED =
@@ -39,4 +41,10 @@ class ApiConstant {
       '${url.toString()}/account/getFavoriteAccount';
   static final String VOUCHER = '${url.toString()}/voucher/all';
   static final String ORDER = '${url.toString()}/order/create';
+  static const String PROVINCE =
+      'https://api.mysupership.vn/v1/partner/areas/province';
+  static const String DISTRICT =
+      'https://api.mysupership.vn/v1/partner/areas/district';
+  static const String WARD =
+      'https://api.mysupership.vn/v1/partner/areas/commune';
 }

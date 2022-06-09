@@ -8,11 +8,14 @@ Order _$OrderFromJson(Map<String, dynamic> json) {
         .toList(),
     json['idAccount'] as String?,
     json['status'] as int?,
+    json['totalDiscount'] as int?,
+    json['totalShipping'] as int?,
+    json['totalPriceProduct'] as int?,
     json['totalPrice'] as int?,
     json['statusPayment'] as bool?,
-    (json['address'] as List<dynamic>?)
-        ?.map((e) => AddressOrder.fromJson(e as Map<String, dynamic>))
-        .toList(),
+    json['address'] == null
+        ? null
+        : Address.fromJson(json['address'] as Map<String, dynamic>),
     json['voucher'] as String?,
     json['isDeleted'] as bool?,
     json['createdAt'] as String?,
@@ -26,6 +29,9 @@ Map<String, dynamic> _$OrderToJson(Order instance) => <String, dynamic>{
       'lstCart': instance.lstCart,
       'idAccount': instance.idAccount,
       'status': instance.status,
+      'totalDiscount': instance.totalDiscount,
+      'totalShipping': instance.totalShipping,
+      'totalPriceProduct': instance.totalPriceProduct,
       'totalPrice': instance.totalPrice,
       'statusPayment': instance.statusPayment,
       'address': instance.address,

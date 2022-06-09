@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
+import 'package:shoes_shop_app/pages/profile/product_favorite/product_favorite_page.dart';
 import 'package:shoes_shop_app/pages/voucher/voucher_controller.dart';
 
 class VoucherPage extends StatelessWidget {
@@ -50,15 +51,34 @@ class VoucherPage extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(left: 10, right: 20),
                     child: GestureDetector(
-                      child: Image.asset(
-                        "assets/icons/icon_message.png",
-                        width: 20,
-                        height: 20,
-                        fit: BoxFit.contain,
+                      onTap: () {
+                        Get.to(
+                            ProductFavoritePage(
+                              id: id,
+                            ),
+                            id: id);
+                      },
+                      child: const Icon(
+                        Icons.favorite_border,
+                        size: 20,
                         color: Colors.white,
                       ),
                     ),
                   ),
+                  // Padding(
+                  //   padding: const EdgeInsets.only(left: 10, right: 20),
+                  //   child: GestureDetector(
+                  //     child: Image.asset(
+                  //       "assets/icons/icon_message.png",
+                  //       width: 20,
+                  //       height: 20,
+                  //       color: theme.theme == ThemeMode.light
+                  //           ? Colors.black
+                  //           : Colors.white,
+                  //       fit: BoxFit.contain,
+                  //     ),
+                  //   ),
+                  // ),
                 ],
               ),
               body: SizedBox(

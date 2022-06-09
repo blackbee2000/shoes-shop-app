@@ -5,7 +5,6 @@ TypeProduct _$TypeProductFromJson(Map<String, dynamic> json) {
     json['id'] as String?,
     json['size'] as String?,
     json['quantity'] as int?,
-    json['color'] as String?,
   );
 }
 
@@ -14,5 +13,4 @@ Map<String, dynamic> _$TypeProductToJson(TypeProduct instance) =>
       'id': instance.id,
       'size': instance.size,
       'quantity': instance.quantity,
-      'color': instance.color,
     };

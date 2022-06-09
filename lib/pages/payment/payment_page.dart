@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:shoes_shop_app/models/voucher.dart';
+import 'package:shoes_shop_app/pages/address/address_controller.dart';
 import 'package:shoes_shop_app/pages/address/address_page.dart';
 import 'package:shoes_shop_app/pages/cart/cart_controller.dart';
 import 'package:shoes_shop_app/pages/payment/payment_controller.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shoes_shop_app/pages/profile/product_favorite/product_favorite_page.dart';
 import 'package:shoes_shop_app/pages/voucher/voucher_page.dart';
 import 'package:shoes_shop_app/theme/theme_controller.dart';
 
@@ -23,6 +25,7 @@ class PaymentPage extends StatefulWidget {
 class PaymentState extends State<PaymentPage> {
   final paymentController = Get.put(PaymentController());
   final cartController = Get.put(CartController());
+  final addressController = Get.put(AddressController());
   int total = 0;
 
   @override
@@ -78,17 +81,36 @@ class PaymentState extends State<PaymentPage> {
                 Padding(
                   padding: const EdgeInsets.only(left: 10, right: 20),
                   child: GestureDetector(
-                    child: Image.asset(
-                      "assets/icons/icon_message.png",
-                      width: 20,
-                      height: 20,
-                      fit: BoxFit.contain,
+                    onTap: () {
+                      Get.to(
+                          ProductFavoritePage(
+                            id: widget.id,
+                          ),
+                          id: widget.id);
+                    },
+                    child: Icon(
+                      Icons.favorite_border,
+                      size: 20,
                       color: theme.theme == ThemeMode.light
                           ? Colors.black
                           : Colors.white,
                     ),
                   ),
                 ),
+                // Padding(
+                //   padding: const EdgeInsets.only(left: 10, right: 20),
+                //   child: GestureDetector(
+                //     child: Image.asset(
+                //       "assets/icons/icon_message.png",
+                //       width: 20,
+                //       height: 20,
+                //       color: theme.theme == ThemeMode.light
+                //           ? Colors.black
+                //           : Colors.white,
+                //       fit: BoxFit.contain,
+                //     ),
+                //   ),
+                // ),
               ],
             ),
             backgroundColor: Colors.black.withOpacity(0),
@@ -122,56 +144,68 @@ class PaymentState extends State<PaymentPage> {
                       ),
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Row(
-                                children: [
-                                  Text(
-                                    'cart_address'.tr,
-                                    style: GoogleFonts.ebGaramond(
-                                      color: Colors.black,
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w600,
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Row(
+                                  children: [
+                                    Text(
+                                      'cart_address'.tr,
+                                      style: GoogleFonts.ebGaramond(
+                                        color: Colors.black,
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w600,
+                                      ),
                                     ),
-                                  ),
-                                  const SizedBox(
-                                    width: 10,
-                                  ),
-                                  Image.asset(
-                                    'assets/icons/icon-address-payment.png',
-                                    width: 20,
-                                    height: 20,
-                                    fit: BoxFit.contain,
-                                  ),
-                                ],
-                              ),
-                              const SizedBox(
-                                height: 5,
-                              ),
-                              Text(
-                                'Trần Thái Tuấn',
-                                style: GoogleFonts.ebGaramond(
-                                  color: Colors.black,
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w600,
+                                    const SizedBox(
+                                      width: 10,
+                                    ),
+                                    Image.asset(
+                                      'assets/icons/icon-address-payment.png',
+                                      width: 20,
+                                      height: 20,
+                                      fit: BoxFit.contain,
+                                    ),
+                                  ],
                                 ),
-                              ),
-                              const SizedBox(
-                                height: 5,
-                              ),
-                              Text(
-                                '108 Sao Hoả, Hệ Mặt Trời',
-                                style: GoogleFonts.ebGaramond(
-                                  color: Colors.black,
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w400,
+                                const SizedBox(
+                                  height: 5,
                                 ),
-                              ),
-                            ],
+                                Text(
+                                  '${addressController.listAddressDefault.value.nameReciever != null && addressController.listAddressDefault.value.nameReciever!.isNotEmpty ? addressController.listAddressDefault.value.nameReciever : '--'} - ${addressController.listAddressDefault.value.phoneReciever != null && addressController.listAddressDefault.value.phoneReciever!.isNotEmpty ? addressController.listAddressDefault.value.phoneReciever : '--'}',
+                                  style: GoogleFonts.ebGaramond(
+                                    color: Colors.black,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: 5,
+                                ),
+                                Text(
+                                  '${addressController.listAddressDefault.value.street != null && addressController.listAddressDefault.value.street!.isNotEmpty ? addressController.listAddressDefault.value.street : '--'}' +
+                                      ', ' +
+                                      '${addressController.listAddressDefault.value.ward != null && addressController.listAddressDefault.value.ward!.isNotEmpty ? addressController.listAddressDefault.value.ward : '--'}' +
+                                      ', ' +
+                                      '${addressController.listAddressDefault.value.district != null && addressController.listAddressDefault.value.district!.isNotEmpty ? addressController.listAddressDefault.value.district : '--'}' +
+                                      ', ' +
+                                      '${addressController.listAddressDefault.value.province != null && addressController.listAddressDefault.value.province!.isNotEmpty ? addressController.listAddressDefault.value.province : '--'}',
+                                  style: GoogleFonts.ebGaramond(
+                                    color: Colors.black,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                  maxLines: 3,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              ],
+                            ),
+                          ),
+                          const SizedBox(
+                            width: 30,
                           ),
                           GestureDetector(
                             onTap: () {
@@ -774,6 +808,8 @@ class PaymentState extends State<PaymentPage> {
                                             onTap: () {
                                               paymentController
                                                   .indexSelected.value = e.key;
+                                              paymentController.typePayment
+                                                  .value = e.value.type ?? '';
                                             },
                                             child: ClipOval(
                                               child: Container(
@@ -944,7 +980,9 @@ class PaymentState extends State<PaymentPage> {
                           cartController.listCartSelected.clear();
                           controller.payment(
                               controller.voucher.value.voucherCode ?? '',
-                              total);
+                              controller.typePayment.value,
+                              total,
+                              addressController.listAddressDefault.value);
                           controller.update();
                         },
                         child: Container(

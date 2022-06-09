@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:shoes_shop_app/models/address.dart';
 import 'package:shoes_shop_app/models/address_order.dart';
 import 'package:shoes_shop_app/models/list_cart.dart';
 part 'order.g.dart';
@@ -9,9 +10,12 @@ class Order {
   List<ListCart>? lstCart;
   String? idAccount;
   int? status;
+  int? totalDiscount;
+  int? totalShipping;
+  int? totalPriceProduct;
   int? totalPrice;
   bool? statusPayment;
-  List<AddressOrder>? address;
+  Address? address;
   String? voucher;
   bool? isDeleted;
   String? createdAt;
@@ -23,6 +27,9 @@ class Order {
     this.lstCart,
     this.idAccount,
     this.status,
+    this.totalDiscount,
+    this.totalShipping,
+    this.totalPriceProduct,
     this.totalPrice,
     this.statusPayment,
     this.address,

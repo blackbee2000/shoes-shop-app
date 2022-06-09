@@ -5,9 +5,12 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
 import 'package:shoes_shop_app/models/company.dart';
 import 'package:shoes_shop_app/models/product.dart';
+import 'package:shoes_shop_app/pages/auth/login/login_page.dart';
 import 'package:shoes_shop_app/pages/cart/cart_page.dart';
 import 'package:shoes_shop_app/pages/product/detail/product_detail_page.dart';
+import 'package:shoes_shop_app/pages/profile/product_favorite/product_favorite_page.dart';
 import 'package:shoes_shop_app/pages/search/search_controller.dart';
+import 'package:shoes_shop_app/services/api_token.dart';
 import 'package:shoes_shop_app/theme/theme_controller.dart';
 import 'package:shoes_shop_app/translations/app_translation.dart';
 import 'package:shoes_shop_app/utils/app_constant.dart';
@@ -83,6 +86,143 @@ class SearchPage extends StatelessWidget {
     );
   }
 
+  Widget loginPopup(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.only(
+        bottom: MediaQuery.of(context).viewInsets.bottom,
+      ),
+      child: Container(
+        width: double.infinity,
+        padding: const EdgeInsets.all(30),
+        decoration: const BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(30),
+            topRight: Radius.circular(30),
+          ),
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Text(
+                      'notification'.tr,
+                      style: GoogleFonts.ebGaramond(
+                        color: Colors.black,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    Container(
+                      width: 30,
+                      height: 2,
+                      color: Colors.black,
+                    ),
+                  ],
+                ),
+                GestureDetector(
+                  onTap: () => Get.back(),
+                  child: const Icon(
+                    Icons.close,
+                    size: 20,
+                    color: Colors.black,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: 15,
+            ),
+            Align(
+              alignment: Alignment.center,
+              child: Text(
+                'login_popup'.tr,
+                style: GoogleFonts.ebGaramond(
+                  color: Colors.black,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 15,
+            ),
+            SizedBox(
+              width: double.infinity,
+              height: 40,
+              child: Row(
+                children: [
+                  Expanded(
+                    child: GestureDetector(
+                      onTap: () => Navigator.pop(context),
+                      child: Container(
+                        width: double.infinity,
+                        height: double.infinity,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          border: Border.all(
+                            color: Colors.black,
+                          ),
+                        ),
+                        child: Center(
+                          child: Text(
+                            'address_cancel'.tr,
+                            style: GoogleFonts.ebGaramond(
+                              color: Colors.black,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 15,
+                  ),
+                  Expanded(
+                    child: GestureDetector(
+                      onTap: () {
+                        Get.to(const LoginPage());
+                      },
+                      child: Container(
+                        width: double.infinity,
+                        height: double.infinity,
+                        decoration: const BoxDecoration(
+                          color: Colors.black,
+                        ),
+                        child: Center(
+                          child: Text(
+                            'address_confirm'.tr,
+                            style: GoogleFonts.ebGaramond(
+                              color: Colors.white,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Navigator(
@@ -118,15 +258,14 @@ class SearchPage extends StatelessWidget {
                     GestureDetector(
                       onTap: () {
                         Get.to(
-                          CartPage(id: AppConstant.SEARCH),
-                          id: AppConstant.SEARCH,
-                        );
+                            const ProductFavoritePage(
+                              id: AppConstant.SEARCH,
+                            ),
+                            id: AppConstant.SEARCH);
                       },
-                      child: Image.asset(
-                        "assets/icons/icon_cart.png",
-                        width: 20,
-                        height: 20,
-                        fit: BoxFit.contain,
+                      child: Icon(
+                        Icons.favorite_border,
+                        size: 20,
                         color: theme.theme == ThemeMode.light
                             ? Colors.black
                             : Colors.white,
@@ -135,17 +274,37 @@ class SearchPage extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.only(left: 10, right: 20),
                       child: GestureDetector(
+                        onTap: () {
+                          Get.to(
+                            const CartPage(id: AppConstant.SEARCH),
+                            id: AppConstant.SEARCH,
+                          );
+                        },
                         child: Image.asset(
-                          "assets/icons/icon_message.png",
+                          "assets/icons/icon_cart.png",
                           width: 20,
                           height: 20,
-                          fit: BoxFit.contain,
                           color: theme.theme == ThemeMode.light
                               ? Colors.black
                               : Colors.white,
+                          fit: BoxFit.contain,
                         ),
                       ),
                     ),
+                    // Padding(
+                    //   padding: const EdgeInsets.only(left: 10, right: 20),
+                    //   child: GestureDetector(
+                    //     child: Image.asset(
+                    //       "assets/icons/icon_message.png",
+                    //       width: 20,
+                    //       height: 20,
+                    //       color: theme.theme == ThemeMode.light
+                    //           ? Colors.black
+                    //           : Colors.white,
+                    //       fit: BoxFit.contain,
+                    //     ),
+                    //   ),
+                    // ),
                   ],
                 ),
                 body: GetBuilder<SearchController>(
@@ -272,11 +431,7 @@ class SearchPage extends StatelessWidget {
                               if (item != null) {
                                 controller.showClearButton.value = true;
                                 controller.nameCompany.value = item;
-                                for (var e in controller.listCompany) {
-                                  if (item == e) {
-                                    controller.idCompany.value = e.id!;
-                                  }
-                                }
+                                controller.idCompany.value = item.id!;
                                 controller.update();
                               }
                             },
@@ -439,11 +594,12 @@ class SearchPage extends StatelessWidget {
                                       GestureDetector(
                                     onTap: () {
                                       Get.to(
-                                          ProductDetailPage(
-                                            product: Product.fromJson({}),
-                                            id: AppConstant.SEARCH,
-                                          ),
-                                          id: AppConstant.SEARCH);
+                                        ProductDetailPage(
+                                          product: Product.fromJson({}),
+                                          id: AppConstant.SEARCH,
+                                        ),
+                                        id: AppConstant.SEARCH,
+                                      );
                                     },
                                     child: SizedBox(
                                       width: double.infinity,
@@ -461,37 +617,90 @@ class SearchPage extends StatelessWidget {
                                             ),
                                             child: Column(
                                               children: [
-                                                Container(
-                                                  width: double.infinity,
-                                                  height: 36,
-                                                  alignment: Alignment.topRight,
+                                                GestureDetector(
+                                                  onTap: () {
+                                                    if (ApiToken
+                                                        .to.isTokenExisted) {
+                                                      if (controller
+                                                              .listProductSearch[
+                                                                  index]
+                                                              .isLike ==
+                                                          false) {
+                                                        controller.likeProduct(
+                                                            controller
+                                                                    .listProductSearch[
+                                                                        index]
+                                                                    .id ??
+                                                                '',
+                                                            false);
+                                                      } else {
+                                                        controller.likeProduct(
+                                                            controller
+                                                                    .listProductSearch[
+                                                                        index]
+                                                                    .id ??
+                                                                '',
+                                                            true);
+                                                      }
+                                                      controller.update();
+                                                    } else {
+                                                      Get.bottomSheet(
+                                                          loginPopup(context));
+                                                    }
+                                                  },
                                                   child: Container(
-                                                    width: 41,
-                                                    height: double.infinity,
-                                                    decoration: BoxDecoration(
-                                                      color: theme.theme ==
-                                                              ThemeMode.light
-                                                          ? Colors.white
-                                                          : Colors.black,
-                                                      borderRadius:
-                                                          const BorderRadius
-                                                              .only(
-                                                        topRight:
-                                                            Radius.circular(10),
-                                                        bottomLeft:
-                                                            Radius.circular(10),
-                                                      ),
-                                                    ),
-                                                    child: Center(
-                                                      child: Image.asset(
-                                                        "assets/icons/icon-like.png",
-                                                        width: 20,
-                                                        height: 20,
+                                                    width: double.infinity,
+                                                    height: 36,
+                                                    alignment:
+                                                        Alignment.topRight,
+                                                    child: Container(
+                                                      width: 41,
+                                                      height: double.infinity,
+                                                      decoration: BoxDecoration(
                                                         color: theme.theme ==
                                                                 ThemeMode.light
-                                                            ? Colors.black
-                                                            : Colors.white,
-                                                        fit: BoxFit.contain,
+                                                            ? Colors.white
+                                                            : Colors.black,
+                                                        borderRadius:
+                                                            const BorderRadius
+                                                                .only(
+                                                          topRight:
+                                                              Radius.circular(
+                                                                  10),
+                                                          bottomLeft:
+                                                              Radius.circular(
+                                                                  10),
+                                                        ),
+                                                      ),
+                                                      child: Center(
+                                                        child: controller
+                                                                    .listProductSearch[
+                                                                        index]
+                                                                    .isLike ==
+                                                                true
+                                                            ? Icon(
+                                                                Icons.favorite,
+                                                                color: theme.theme ==
+                                                                        ThemeMode
+                                                                            .light
+                                                                    ? Colors
+                                                                        .black
+                                                                    : Colors
+                                                                        .white,
+                                                                size: 20,
+                                                              )
+                                                            : Icon(
+                                                                Icons
+                                                                    .favorite_border,
+                                                                color: theme.theme ==
+                                                                        ThemeMode
+                                                                            .light
+                                                                    ? Colors
+                                                                        .black
+                                                                    : Colors
+                                                                        .white,
+                                                                size: 20,
+                                                              ),
                                                       ),
                                                     ),
                                                   ),
@@ -624,10 +833,10 @@ class SearchPage extends StatelessWidget {
                                           Container(
                                             alignment: Alignment.topLeft,
                                             child: RatingBarIndicator(
-                                              rating: controller
-                                                      .listProductSearch[index]
-                                                      .rating ??
-                                                  0,
+                                              rating: double.parse(controller
+                                                  .listProductSearch[index]
+                                                  .rating
+                                                  .toString()),
                                               itemBuilder: (context, index) =>
                                                   const Icon(
                                                 Icons.star,

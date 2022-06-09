@@ -9,6 +9,7 @@ import 'package:shoes_shop_app/pages/cart/cart_page.dart';
 import 'package:shoes_shop_app/pages/product/detail/product_detail_controller.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shoes_shop_app/pages/product/product_controller.dart';
+import 'package:shoes_shop_app/pages/profile/product_favorite/product_favorite_page.dart';
 import 'package:shoes_shop_app/services/api_token.dart';
 import 'package:shoes_shop_app/translations/app_translation.dart';
 import 'package:shoes_shop_app/utils/app_constant.dart';
@@ -35,6 +36,7 @@ class ProductDetailState extends State<ProductDetailPage>
   @override
   void initState() {
     super.initState();
+    productDetailController.isLike.value = widget.product.isLike ?? false;
     if (widget.product.type!.isNotEmpty) {
       productDetailController.sizeShoes.value =
           widget.product.type!.first.size!;
@@ -134,7 +136,7 @@ class ProductDetailState extends State<ProductDetailPage>
                 children: [
                   Expanded(
                     child: GestureDetector(
-                      onTap: () => Navigator.pop(context),
+                      onTap: () => Get.back(),
                       child: Container(
                         width: double.infinity,
                         height: double.infinity,
@@ -469,28 +471,50 @@ class ProductDetailState extends State<ProductDetailPage>
             actions: [
               GestureDetector(
                 onTap: () {
-                  Get.to(CartPage(id: widget.id), id: widget.id);
+                  Get.to(
+                      ProductFavoritePage(
+                        id: widget.id,
+                      ),
+                      id: AppConstant.HOME);
                 },
-                child: Image.asset(
-                  "assets/icons/icon_cart.png",
-                  width: 20,
-                  height: 20,
-                  fit: BoxFit.contain,
+                child: const Icon(
+                  Icons.favorite_border,
+                  size: 20,
                   color: Colors.black,
                 ),
               ),
               Padding(
                 padding: const EdgeInsets.only(left: 10, right: 20),
                 child: GestureDetector(
+                  onTap: () {
+                    Get.to(
+                      CartPage(id: widget.id),
+                      id: widget.id,
+                    );
+                  },
                   child: Image.asset(
-                    "assets/icons/icon_message.png",
+                    "assets/icons/icon_cart.png",
                     width: 20,
                     height: 20,
-                    fit: BoxFit.contain,
                     color: Colors.black,
+                    fit: BoxFit.contain,
                   ),
                 ),
               ),
+              // Padding(
+              //   padding: const EdgeInsets.only(left: 10, right: 20),
+              //   child: GestureDetector(
+              //     child: Image.asset(
+              //       "assets/icons/icon_message.png",
+              //       width: 20,
+              //       height: 20,
+              //       color: theme.theme == ThemeMode.light
+              //           ? Colors.black
+              //           : Colors.white,
+              //       fit: BoxFit.contain,
+              //     ),
+              //   ),
+              // ),
             ],
           ),
           backgroundColor: Colors.black.withOpacity(0),
@@ -526,10 +550,21 @@ class ProductDetailState extends State<ProductDetailPage>
                                   init: productDetailController,
                                   builder: (controller) => GestureDetector(
                                     onTap: () {
-                                      productController.likeProduct(
-                                          widget.product.id ?? '',
-                                          widget.product.isLike!);
-                                      productController.update();
+                                      if (ApiToken.to.isTokenExisted) {
+                                        if (widget.product.isLike == false) {
+                                          productController.likeProduct(
+                                              widget.product.id ?? '', false);
+                                        } else {
+                                          productController.likeProduct(
+                                              widget.product.id ?? '', true);
+                                        }
+                                        productController.update();
+                                        controller.isLike.value =
+                                            !controller.isLike.value;
+                                      } else {
+                                        Get.bottomSheet(loginPopup(context));
+                                      }
+
                                       controller.update();
                                     },
                                     child: Container(
@@ -547,7 +582,7 @@ class ProductDetailState extends State<ProductDetailPage>
                                           ),
                                         ),
                                         child: Center(
-                                          child: widget.product.isLike == true
+                                          child: controller.isLike.value == true
                                               ? const Icon(
                                                   Icons.favorite,
                                                   color: Colors.black,
@@ -636,7 +671,8 @@ class ProductDetailState extends State<ProductDetailPage>
                               Container(
                                 alignment: Alignment.topLeft,
                                 child: RatingBarIndicator(
-                                  rating: widget.product.rating ?? 0,
+                                  rating: double.parse(
+                                      widget.product.rating.toString()),
                                   itemBuilder: (context, index) => const Icon(
                                     Icons.star,
                                     color: Colors.amber,

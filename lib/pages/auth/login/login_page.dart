@@ -388,7 +388,7 @@ class LoginState extends State<LoginPage> {
                           alignment: Alignment.center,
                           child: GestureDetector(
                             onTap: () {
-                              if (loginController.phone.text.isEmpty &&
+                              if (loginController.phone.text.isEmpty ||
                                   loginController.password.text.isEmpty) {
                                 Get.snackbar(
                                   'Validation',

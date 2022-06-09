@@ -7,6 +7,9 @@ import 'package:shoes_shop_app/pages/dashboard/dashboard_controller.dart';
 import 'package:shoes_shop_app/pages/home/home_controller.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:shoes_shop_app/pages/product/detail/product_detail_page.dart';
+import 'package:shoes_shop_app/pages/product/product_controller.dart';
+import 'package:shoes_shop_app/pages/profile/product_favorite/product_favorite_page.dart';
+import 'package:shoes_shop_app/services/api_token.dart';
 import 'package:shoes_shop_app/theme/theme_controller.dart';
 import 'package:shoes_shop_app/translations/app_translation.dart';
 import 'package:shoes_shop_app/utils/app_constant.dart';
@@ -23,20 +26,7 @@ class HomePageState extends State<HomePage> {
   CarouselController homeCarouselController = CarouselController();
   final homeController = Get.put(HomeController());
   final dashboardController = Get.put(DashboardController());
-
-  // @override
-  // void initState() {
-  //   homeController.getNewProduct();
-  //   homeController.getDiscountProduct();
-  //   homeController.getAllCompany();
-  //   homeController.getTrendingProduct();
-  //   super.initState();
-  // }
-
-  // @override
-  // void dispose() {
-  //   super.dispose();
-  // }
+  final productController = Get.put(ProductController());
 
   @override
   Widget build(BuildContext context) {
@@ -68,25 +58,30 @@ class HomePageState extends State<HomePage> {
                     GestureDetector(
                       onTap: () {
                         Get.to(
-                          CartPage(id: AppConstant.HOME),
-                          id: AppConstant.HOME,
-                        );
+                            const ProductFavoritePage(
+                              id: AppConstant.HOME,
+                            ),
+                            id: AppConstant.HOME);
                       },
-                      child: Image.asset(
-                        "assets/icons/icon_cart.png",
-                        width: 20,
-                        height: 20,
+                      child: Icon(
+                        Icons.favorite_border,
+                        size: 20,
                         color: theme.theme == ThemeMode.light
                             ? Colors.black
                             : Colors.white,
-                        fit: BoxFit.contain,
                       ),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(left: 10, right: 20),
                       child: GestureDetector(
+                        onTap: () {
+                          Get.to(
+                            const CartPage(id: AppConstant.HOME),
+                            id: AppConstant.HOME,
+                          );
+                        },
                         child: Image.asset(
-                          "assets/icons/icon_message.png",
+                          "assets/icons/icon_cart.png",
                           width: 20,
                           height: 20,
                           color: theme.theme == ThemeMode.light
@@ -96,6 +91,20 @@ class HomePageState extends State<HomePage> {
                         ),
                       ),
                     ),
+                    // Padding(
+                    //   padding: const EdgeInsets.only(left: 10, right: 20),
+                    //   child: GestureDetector(
+                    //     child: Image.asset(
+                    //       "assets/icons/icon_message.png",
+                    //       width: 20,
+                    //       height: 20,
+                    //       color: theme.theme == ThemeMode.light
+                    //           ? Colors.black
+                    //           : Colors.white,
+                    //       fit: BoxFit.contain,
+                    //     ),
+                    //   ),
+                    // ),
                   ],
                 ),
                 body: GetBuilder<HomeController>(
@@ -493,7 +502,8 @@ class HomePageState extends State<HomePage> {
                                         alignment: Alignment.topLeft,
                                         child: RichText(
                                           text: TextSpan(
-                                            text: '250',
+                                            text:
+                                                '${controller.listDiscountProduct[index].price ?? '--'}',
                                             style: GoogleFonts.ebGaramond(
                                               color: Colors.white,
                                               fontSize: 20,
@@ -508,10 +518,9 @@ class HomePageState extends State<HomePage> {
                                       Container(
                                         alignment: Alignment.topLeft,
                                         child: RatingBarIndicator(
-                                          rating: controller
-                                                  .listDiscountProduct[index]
-                                                  .rating ??
-                                              0,
+                                          rating: double.parse(controller
+                                              .listDiscountProduct[index].rating
+                                              .toString()),
                                           itemBuilder: (context, index) =>
                                               const Icon(
                                             Icons.star,
@@ -603,53 +612,73 @@ class HomePageState extends State<HomePage> {
                               child: ListView.builder(
                                 scrollDirection: Axis.horizontal,
                                 itemCount: controller.listCompany.length,
-                                itemBuilder: (context, index) => Container(
-                                  margin: const EdgeInsets.symmetric(
-                                    horizontal: 10,
-                                    vertical: 10,
-                                  ),
-                                  width: 100,
-                                  height: double.infinity,
-                                  padding: const EdgeInsets.all(10),
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                    color: Colors.white,
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Colors.black.withOpacity(0.25),
-                                        spreadRadius: 0,
-                                        blurRadius: 4,
-                                        offset: const Offset(
-                                            0, 4), // changes position of shadow
-                                      ),
-                                    ],
-                                  ),
-                                  child: Center(
-                                    child: CachedNetworkImage(
-                                      width: 80,
-                                      fit: BoxFit.contain,
-                                      imageUrl: controller
-                                              .listCompany[index].logoCompany ??
-                                          '',
-                                      useOldImageOnUrlChange: false,
-                                      progressIndicatorBuilder:
-                                          (context, url, downloadProgress) =>
-                                              SizedBox(
-                                        height: 15,
-                                        width: 15,
-                                        child: Center(
-                                          child: CircularProgressIndicator(
-                                            value: downloadProgress.progress,
-                                            valueColor:
-                                                const AlwaysStoppedAnimation(
-                                                    Colors.white),
-                                            strokeWidth: 2,
+                                itemBuilder: (context, index) =>
+                                    GestureDetector(
+                                  onTap: () {
+                                    productController.nameBrand.value =
+                                        controller
+                                            .listCompany[index].nameCompany!;
+                                    if (ApiToken.to.isTokenExisted == true) {
+                                      productController.getListProductFavorite(
+                                          controller.listCompany[index].id ??
+                                              '');
+                                    } else {
+                                      productController.getAllProduct(
+                                          controller.listCompany[index].id!,
+                                          []);
+                                    }
+                                    productController.update();
+                                    controller.update();
+                                    dashboardController.tabIndex.value = 1;
+                                  },
+                                  child: Container(
+                                    margin: const EdgeInsets.symmetric(
+                                      horizontal: 10,
+                                      vertical: 10,
+                                    ),
+                                    width: 100,
+                                    height: double.infinity,
+                                    padding: const EdgeInsets.all(10),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      color: Colors.white,
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.black.withOpacity(0.25),
+                                          spreadRadius: 0,
+                                          blurRadius: 4,
+                                          offset: const Offset(0,
+                                              4), // changes position of shadow
+                                        ),
+                                      ],
+                                    ),
+                                    child: Center(
+                                      child: CachedNetworkImage(
+                                        width: 80,
+                                        fit: BoxFit.contain,
+                                        imageUrl: controller.listCompany[index]
+                                                .logoCompany ??
+                                            '',
+                                        useOldImageOnUrlChange: false,
+                                        progressIndicatorBuilder:
+                                            (context, url, downloadProgress) =>
+                                                SizedBox(
+                                          height: 15,
+                                          width: 15,
+                                          child: Center(
+                                            child: CircularProgressIndicator(
+                                              value: downloadProgress.progress,
+                                              valueColor:
+                                                  const AlwaysStoppedAnimation(
+                                                      Colors.white),
+                                              strokeWidth: 2,
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                      errorWidget: (context, url, error) =>
-                                          ClipOval(
-                                        child: Container(),
+                                        errorWidget: (context, url, error) =>
+                                            ClipOval(
+                                          child: Container(),
+                                        ),
                                       ),
                                     ),
                                   ),
@@ -789,7 +818,8 @@ class HomePageState extends State<HomePage> {
                                         alignment: Alignment.topLeft,
                                         child: RichText(
                                           text: TextSpan(
-                                            text: '250',
+                                            text:
+                                                '${controller.listTrendingProduct[index].price ?? '--'}',
                                             style: GoogleFonts.ebGaramond(
                                               color:
                                                   theme.theme == ThemeMode.light
@@ -807,10 +837,9 @@ class HomePageState extends State<HomePage> {
                                       Container(
                                         alignment: Alignment.topLeft,
                                         child: RatingBarIndicator(
-                                          rating: controller
-                                                  .listTrendingProduct[index]
-                                                  .rating ??
-                                              0,
+                                          rating: double.parse(controller
+                                              .listTrendingProduct[index].rating
+                                              .toString()),
                                           itemBuilder: (context, index) =>
                                               const Icon(
                                             Icons.star,

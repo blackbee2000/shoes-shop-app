@@ -6,30 +6,17 @@ import 'package:shoes_shop_app/pages/auth/login/login_page.dart';
 import 'package:shoes_shop_app/pages/cart/cart_page.dart';
 import 'package:shoes_shop_app/pages/product/detail/product_detail_page.dart';
 import 'package:shoes_shop_app/pages/product/product_controller.dart';
+import 'package:shoes_shop_app/pages/profile/product_favorite/product_favorite_page.dart';
 import 'package:shoes_shop_app/services/api_token.dart';
 import 'package:shoes_shop_app/theme/theme_controller.dart';
 import 'package:shoes_shop_app/translations/app_translation.dart';
 import 'package:shoes_shop_app/utils/app_constant.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class ProductPage extends StatefulWidget {
-  ProductPage({Key? key}) : super(key: key);
-  @override
-  ProductState createState() => ProductState();
-}
-
-class ProductState extends State<ProductPage> {
+class ProductPage extends GetView<ProductController> {
   final productController = Get.put(ProductController());
 
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-  }
+  ProductPage({Key? key}) : super(key: key);
 
   Widget loginPopup(BuildContext context) {
     return Padding(
@@ -209,30 +196,49 @@ class ProductState extends State<ProductPage> {
                         GestureDetector(
                           onTap: () {
                             Get.to(
-                              const CartPage(id: AppConstant.PRODUCT),
-                              id: AppConstant.PRODUCT,
-                            );
+                                const ProductFavoritePage(
+                                  id: AppConstant.PRODUCT,
+                                ),
+                                id: AppConstant.PRODUCT);
                           },
-                          child: Image.asset(
-                            "assets/icons/icon_cart.png",
-                            width: 20,
-                            height: 20,
-                            fit: BoxFit.contain,
+                          child: const Icon(
+                            Icons.favorite_border,
+                            size: 20,
                             color: Colors.white,
                           ),
                         ),
                         Padding(
                           padding: const EdgeInsets.only(left: 10, right: 20),
                           child: GestureDetector(
+                            onTap: () {
+                              Get.to(
+                                const CartPage(id: AppConstant.HOME),
+                                id: AppConstant.HOME,
+                              );
+                            },
                             child: Image.asset(
-                              "assets/icons/icon_message.png",
+                              "assets/icons/icon_cart.png",
                               width: 20,
                               height: 20,
-                              fit: BoxFit.contain,
                               color: Colors.white,
+                              fit: BoxFit.contain,
                             ),
                           ),
                         ),
+                        // Padding(
+                        //   padding: const EdgeInsets.only(left: 10, right: 20),
+                        //   child: GestureDetector(
+                        //     child: Image.asset(
+                        //       "assets/icons/icon_message.png",
+                        //       width: 20,
+                        //       height: 20,
+                        //       color: theme.theme == ThemeMode.light
+                        //           ? Colors.black
+                        //           : Colors.white,
+                        //       fit: BoxFit.contain,
+                        //     ),
+                        //   ),
+                        // ),
                       ],
                     ),
                     body: GetBuilder<ProductController>(
@@ -633,10 +639,9 @@ class ProductState extends State<ProductPage> {
                                           Container(
                                             alignment: Alignment.topLeft,
                                             child: RatingBarIndicator(
-                                              rating: controller
-                                                      .listProduct[index]
-                                                      .rating ??
-                                                  0,
+                                              rating: double.parse(controller
+                                                  .listProduct[index].rating
+                                                  .toString()),
                                               itemBuilder: (context, index) =>
                                                   const Icon(
                                                 Icons.star,

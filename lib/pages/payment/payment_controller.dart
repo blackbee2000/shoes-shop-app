@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shoes_shop_app/models/address.dart';
 import 'package:shoes_shop_app/models/paymethod.dart';
 import 'package:shoes_shop_app/models/voucher.dart';
 import 'package:shoes_shop_app/pages/cart/cart_controller.dart';
@@ -14,6 +15,7 @@ class PaymentController extends GetxController {
   final voucher = Voucher.fromJson({}).obs;
   final cartController = Get.put(CartController());
   final profileController = Get.put(ProfileController());
+  final typePayment = ''.obs;
 
   @override
   void onInit() {
@@ -22,31 +24,25 @@ class PaymentController extends GetxController {
   }
 
   fetchData() {
-    listPayMethod.add(PayMethod(name: 'Pay via VNpay'));
-    listPayMethod.add(PayMethod(name: 'Pay via Paypal'));
-    listPayMethod.add(PayMethod(name: 'Pay via COD'));
+    listPayMethod.add(PayMethod(name: 'Pay via VNpay', type: 'VnPay'));
+    listPayMethod.add(PayMethod(name: 'Pay via Paypal', type: 'Paypal'));
+    listPayMethod.add(PayMethod(name: 'Pay via COD', type: 'COD'));
     update();
   }
 
-  payment(String voucherCode, int totalPriceProduct) {
+  payment(String voucherCode, String typePayment, int totalPriceProduct,
+      Address address) {
     OrderProvider().payment(
       params: {
         "lstCart": cartController.listCartSelected,
         "idAccount": profileController.profile.value.id,
         "status": 1,
         "statusPayment": false,
+        "typePayment": typePayment,
         "voucher": voucherCode,
         "totalShipping": 12000,
         "totalPriceProduct": totalPriceProduct,
-        "address": {
-          "district": "Thủ Đức",
-          "ward": "Linh Trung",
-          "street": "số 17",
-          "status": true,
-          "nameReciever": "Chopper",
-          "phoneReciever": 338671454,
-          "_id": "6246ac006c4c3bdff0290cc2"
-        }
+        "address": address,
       },
       option: Options(
         headers: {
