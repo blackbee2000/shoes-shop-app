@@ -8,7 +8,7 @@ part 'order.g.dart';
 @JsonSerializable()
 class Order {
   String? id;
-  List<Cart>? lstCart;
+  List<ListCart>? lstCart;
   String? idAccount;
   int? status;
   int? totalDiscount;
@@ -16,7 +16,7 @@ class Order {
   int? totalPriceProduct;
   int? totalPrice;
   bool? statusPayment;
-  Address? address;
+  // Address? address;
   String? voucher;
   bool? isDeleted;
   String? createdAt;
@@ -33,7 +33,7 @@ class Order {
     this.totalPriceProduct,
     this.totalPrice,
     this.statusPayment,
-    this.address,
+    // this.address,
     this.voucher,
     this.isDeleted,
     this.createdAt,

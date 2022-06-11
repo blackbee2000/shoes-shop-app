@@ -7,13 +7,13 @@ class ListCart {
   ProductOrder? lstProduct;
   int? amount;
   int? totalPrice;
-  String? idAccount;
+  String? id;
 
   ListCart(
     this.lstProduct,
     this.amount,
     this.totalPrice,
-    this.idAccount,
+    this.id,
   );
 
   factory ListCart.fromJson(Map<String, dynamic> json) =>

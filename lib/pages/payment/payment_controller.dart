@@ -8,8 +8,7 @@ import 'package:shoes_shop_app/pages/cart/cart_controller.dart';
 import 'package:shoes_shop_app/pages/payment/payment_provider.dart';
 import 'package:shoes_shop_app/pages/profile/profile_controller.dart';
 import 'package:shoes_shop_app/services/api_token.dart';
-
-import '../../utils/utils.dart';
+import 'package:shoes_shop_app/utils/utils.dart';
 
 class PaymentController extends GetxController {
   final indexSelected = 4.obs;
@@ -18,6 +17,7 @@ class PaymentController extends GetxController {
   final cartController = Get.put(CartController());
   final profileController = Get.put(ProfileController());
   final typePayment = ''.obs;
+  final addressSelected = Address.fromJson({}).obs;
 
   @override
   void onInit() {
@@ -64,9 +64,9 @@ class PaymentController extends GetxController {
             backgroundColor: Colors.black,
           );
         } else {
-          print('THANH TOÁN THÀNH CÔNG =====> ${data.toString()}');
-          launchInBrowser(
-              'https://sandbox.vnpayment.vn/paymentv2/Ncb/Transaction/Index.html?token=35c03968b8cc42ae9ef6fb0b03cd6144');
+          var url = data['data'];
+          print('THANH TOÁN THÀNH CÔNG =====> ${data['data']}');
+          launchInWebViewOrVC(Uri.parse(url));
         }
 
         cartController.listCartSelected.clear();

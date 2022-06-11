@@ -5,7 +5,7 @@ part 'order_response.g.dart';
 @JsonSerializable()
 class OrderResponse {
   String? message;
-  Order? data;
+  List<Order>? data;
 
   OrderResponse(
     this.message,

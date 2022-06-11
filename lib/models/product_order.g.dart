@@ -2,19 +2,17 @@ part of 'product_order.dart';
 
 ProductOrder _$ProductOrderFromJson(Map<String, dynamic> json) {
   return ProductOrder(
-    json['_id'] as String?,
-    json['nameProductVi'] as String?,
-    json['nameProductEn'] as String?,
-    json['imageProduct'] as String?,
-    json['descriptionVi'] as String?,
-    json['descriptionEn'] as String?,
-    json['rating'] as num?,
-    json['type'] == null
-        ? null
-        : TypeProductOrder.fromJson(json['type'] as Map<String, dynamic>),
-    json['idCompany'] as String?,
-    json['price'] as int?,
-    json['productCode'] as String?,
+    json['_id'] as dynamic,
+    json['nameProductVi'] as dynamic,
+    json['nameProductEn'] as dynamic,
+    json['imageProduct'] as dynamic,
+    json['descriptionVi'] as dynamic,
+    json['descriptionEn'] as dynamic,
+    json['rating'] as dynamic,
+    json['type'] as dynamic,
+    json['idCompany'] as dynamic,
+    json['price'] as dynamic,
+    json['productCode'] as dynamic,
   );
 }
 

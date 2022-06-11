@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:shoes_shop_app/models/company.dart';
 import 'package:shoes_shop_app/models/product.dart';
 import 'package:shoes_shop_app/models/product_new.dart';
+import 'package:shoes_shop_app/pages/address/address_controller.dart';
 import 'package:shoes_shop_app/pages/home/home_provider.dart';
 
 class HomeController extends GetxController {
@@ -11,6 +12,7 @@ class HomeController extends GetxController {
   List<ProductNew> listNewProduct = <ProductNew>[].obs;
   List<Product> listDiscountProduct = <Product>[].obs;
   List<Product> listTrendingProduct = <Product>[].obs;
+  final addressController = Get.put(AddressController());
 
   @override
   void onInit() {
@@ -19,6 +21,8 @@ class HomeController extends GetxController {
     getNewProduct();
     getDiscountProduct();
     getTrendingProduct();
+    addressController.getAddressDefault();
+    addressController.update();
   }
 
   getAllCompany() {

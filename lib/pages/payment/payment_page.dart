@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:shoes_shop_app/models/voucher.dart';
+import 'package:shoes_shop_app/pages/address/address_controller.dart';
 import 'package:shoes_shop_app/pages/address/address_page.dart';
 import 'package:shoes_shop_app/pages/cart/cart_controller.dart';
 import 'package:shoes_shop_app/pages/payment/payment_controller.dart';
@@ -55,6 +56,8 @@ class PaymentState extends State<PaymentPage> {
                 onPressed: () {
                   Get.back(id: widget.id);
                   cartController.listCartSelected.clear();
+                  cartController.onInit();
+                  cartController.update();
                 },
                 icon: Icon(
                   Icons.arrow_back_ios,
@@ -144,62 +147,65 @@ class PaymentState extends State<PaymentPage> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Row(
-                                  children: [
-                                    Text(
-                                      'cart_address'.tr,
-                                      style: GoogleFonts.ebGaramond(
-                                        color: Colors.black,
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w600,
+                            child: GetBuilder<PaymentController>(
+                              init: paymentController,
+                              builder: (controller) => Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Row(
+                                    children: [
+                                      Text(
+                                        'cart_address'.tr,
+                                        style: GoogleFonts.ebGaramond(
+                                          color: Colors.black,
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w600,
+                                        ),
                                       ),
-                                    ),
-                                    const SizedBox(
-                                      width: 10,
-                                    ),
-                                    Image.asset(
-                                      'assets/icons/icon-address-payment.png',
-                                      width: 20,
-                                      height: 20,
-                                      fit: BoxFit.contain,
-                                    ),
-                                  ],
-                                ),
-                                const SizedBox(
-                                  height: 5,
-                                ),
-                                Text(
-                                  '${cartController.addressPayment.value.nameReciever != null && cartController.addressPayment.value.nameReciever!.isNotEmpty ? cartController.addressPayment.value.nameReciever : '--'} - ${cartController.addressPayment.value.phoneReciever != null && cartController.addressPayment.value.phoneReciever!.isNotEmpty ? cartController.addressPayment.value.phoneReciever : '--'}',
-                                  style: GoogleFonts.ebGaramond(
-                                    color: Colors.black,
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w600,
+                                      const SizedBox(
+                                        width: 10,
+                                      ),
+                                      Image.asset(
+                                        'assets/icons/icon-address-payment.png',
+                                        width: 20,
+                                        height: 20,
+                                        fit: BoxFit.contain,
+                                      ),
+                                    ],
                                   ),
-                                ),
-                                const SizedBox(
-                                  height: 5,
-                                ),
-                                Text(
-                                  '${cartController.addressPayment.value.street != null && cartController.addressPayment.value.street!.isNotEmpty ? cartController.addressPayment.value.street : '--'}' +
-                                      ', ' +
-                                      '${cartController.addressPayment.value.ward != null && cartController.addressPayment.value.ward!.isNotEmpty ? cartController.addressPayment.value.ward : '--'}' +
-                                      ', ' +
-                                      '${cartController.addressPayment.value.district != null && cartController.addressPayment.value.district!.isNotEmpty ? cartController.addressPayment.value.district : '--'}' +
-                                      ', ' +
-                                      '${cartController.addressPayment.value.province != null && cartController.addressPayment.value.province!.isNotEmpty ? cartController.addressPayment.value.province : '--'}',
-                                  style: GoogleFonts.ebGaramond(
-                                    color: Colors.black,
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w400,
+                                  const SizedBox(
+                                    height: 5,
                                   ),
-                                  maxLines: 3,
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                              ],
+                                  Text(
+                                    '${controller.addressSelected.value.nameReciever != null && controller.addressSelected.value.nameReciever!.isNotEmpty ? controller.addressSelected.value.nameReciever : '--'} - ${controller.addressSelected.value.phoneReciever != null && controller.addressSelected.value.phoneReciever!.isNotEmpty ? controller.addressSelected.value.phoneReciever : '--'}',
+                                    style: GoogleFonts.ebGaramond(
+                                      color: Colors.black,
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    height: 5,
+                                  ),
+                                  Text(
+                                    '${controller.addressSelected.value.street != null && controller.addressSelected.value.street!.isNotEmpty ? controller.addressSelected.value.street : '--'}' +
+                                        ', ' +
+                                        '${controller.addressSelected.value.ward != null && controller.addressSelected.value.ward!.isNotEmpty ? controller.addressSelected.value.ward : '--'}' +
+                                        ', ' +
+                                        '${controller.addressSelected.value.district != null && controller.addressSelected.value.district!.isNotEmpty ? controller.addressSelected.value.district : '--'}' +
+                                        ', ' +
+                                        '${controller.addressSelected.value.province != null && controller.addressSelected.value.province!.isNotEmpty ? controller.addressSelected.value.province : '--'}',
+                                    style: GoogleFonts.ebGaramond(
+                                      color: Colors.black,
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w400,
+                                    ),
+                                    maxLines: 3,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                           const SizedBox(
@@ -314,8 +320,7 @@ class PaymentState extends State<PaymentPage> {
                                               width: 70,
                                               fit: BoxFit.contain,
                                               imageUrl: e.value.lstProduct!
-                                                      .imageProduct ??
-                                                  '',
+                                                  .imageProduct!.first,
                                               useOldImageOnUrlChange: false,
                                               progressIndicatorBuilder:
                                                   (context, url,
@@ -979,7 +984,7 @@ class PaymentState extends State<PaymentPage> {
                               controller.voucher.value.voucherCode ?? '',
                               controller.typePayment.value,
                               total,
-                              cartController.addressPayment.value);
+                              controller.addressSelected.value);
                           controller.update();
                         },
                         child: Container(

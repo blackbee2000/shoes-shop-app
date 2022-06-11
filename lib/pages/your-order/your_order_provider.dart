@@ -1,6 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:shoes_shop_app/models/bill_response.dart';
-import 'package:shoes_shop_app/models/bill_update_status.dart';
+import 'package:shoes_shop_app/models/order_response.dart';
 import 'package:shoes_shop_app/services/api_service.dart';
 import 'package:shoes_shop_app/utils/api_constant.dart';
 
@@ -8,21 +7,21 @@ abstract class BillAPIProtocol {
   getAllOrder({
     required Options option,
     required Function() beforeSend,
-    required Function(BillResponse data) onSuccess,
+    required Function(OrderResponse data) onSuccess,
     required Function(dynamic error) onError,
   });
   getOrderStatus({
     required Map<String, dynamic> params,
     required Options option,
     required Function() beforeSend,
-    required Function(BillResponse data) onSuccess,
+    required Function(OrderResponse data) onSuccess,
     required Function(dynamic error) onError,
   });
   updateStatusOrder({
     required Map<String, dynamic> params,
     required Options option,
     required Function() beforeSend,
-    required Function(BillUpdateStatus data) onSuccess,
+    required Function(dynamic data) onSuccess,
     required Function(dynamic error) onError,
   });
 }
@@ -32,7 +31,7 @@ class BillProvider extends BillAPIProtocol {
   getAllOrder(
       {required Options option,
       required Function() beforeSend,
-      required Function(BillResponse data) onSuccess,
+      required Function(OrderResponse data) onSuccess,
       required Function(dynamic error) onError}) {
     ApiService(
       path: ApiConstant.ORDERGETALL,
@@ -40,7 +39,7 @@ class BillProvider extends BillAPIProtocol {
     ).getAll(
       beforeSend: () => {beforeSend()},
       onSuccess: (data) {
-        onSuccess(BillResponse.fromJson(data));
+        onSuccess(OrderResponse.fromJson(data));
       },
       onError: (error) => {onError(error)},
     );
@@ -51,7 +50,7 @@ class BillProvider extends BillAPIProtocol {
       {required Map<String, dynamic> params,
       required Options option,
       required Function() beforeSend,
-      required Function(BillResponse data) onSuccess,
+      required Function(OrderResponse data) onSuccess,
       required Function(dynamic error) onError}) {
     ApiService(
       path: ApiConstant.ORDERBYSTATUS,
@@ -60,7 +59,7 @@ class BillProvider extends BillAPIProtocol {
     ).post(
       beforeSend: () => {beforeSend()},
       onSuccess: (data) {
-        onSuccess(BillResponse.fromJson(data));
+        onSuccess(OrderResponse.fromJson(data));
       },
       onError: (error) => {onError(error)},
     );
@@ -71,7 +70,7 @@ class BillProvider extends BillAPIProtocol {
       {required Map<String, dynamic> params,
       required Options option,
       required Function() beforeSend,
-      required Function(BillUpdateStatus data) onSuccess,
+      required Function(dynamic data) onSuccess,
       required Function(dynamic error) onError}) {
     ApiService(
       path: ApiConstant.ORDERUPDATESTATUS,
@@ -80,7 +79,7 @@ class BillProvider extends BillAPIProtocol {
     ).put(
       beforeSend: () => {beforeSend()},
       onSuccess: (data) {
-        onSuccess(BillUpdateStatus.fromJson(data));
+        onSuccess(data);
       },
       onError: (error) => {onError(error)},
     );

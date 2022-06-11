@@ -6,7 +6,7 @@ import 'package:shoes_shop_app/models/district.dart';
 import 'package:shoes_shop_app/models/province.dart';
 import 'package:shoes_shop_app/models/ward.dart';
 import 'package:shoes_shop_app/pages/address/address_provider.dart';
-import 'package:shoes_shop_app/pages/cart/cart_controller.dart';
+import 'package:shoes_shop_app/pages/payment/payment_controller.dart';
 import 'package:shoes_shop_app/services/api_token.dart';
 
 class AddressController extends GetxController {
@@ -25,7 +25,7 @@ class AddressController extends GetxController {
   final province = ''.obs;
   final district = ''.obs;
   final ward = ''.obs;
-  final cartController = Get.put(CartController());
+  final paymentController = Get.put(PaymentController());
 
   @override
   void dispose() {
@@ -63,6 +63,11 @@ class AddressController extends GetxController {
       beforeSend: () {},
       onSuccess: (res) {
         listAddress = res.data ?? [];
+        for (var e in listAddress) {
+          if (e.status == true) {
+            listAddress.remove(e);
+          }
+        }
         print('LIST ADDRESSSSSS =>>>>> ${listAddress.toString()}');
         update();
       },
@@ -83,7 +88,9 @@ class AddressController extends GetxController {
       beforeSend: () {},
       onSuccess: (res) {
         listAddressDefault.value = res.data!;
-        print('LIST ADDRESSSSSS DEFAULT =>>>>> ${listAddress.toString()}');
+        paymentController.addressSelected.value = res.data!;
+        print(
+            'LIST ADDRESSSSSS DEFAULT =>>>>> ${paymentController.addressSelected.toString()}');
         update();
       },
       onError: (e) {
@@ -329,8 +336,9 @@ class AddressController extends GetxController {
   }
 
   chooseAddressPayment(Address address, int id) {
-    cartController.addressPayment.value = address;
-    cartController.update();
+    paymentController.addressSelected.value = address;
+    paymentController.update();
+    update();
     Get.back(id: id);
   }
 }

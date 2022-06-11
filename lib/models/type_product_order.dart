@@ -4,11 +4,9 @@ part 'type_product_order.g.dart';
 @JsonSerializable()
 class TypeProductOrder {
   String? size;
-  int? quantity;
 
   TypeProductOrder(
     this.size,
-    this.quantity,
   );
 
   factory TypeProductOrder.fromJson(Map<String, dynamic> json) =>

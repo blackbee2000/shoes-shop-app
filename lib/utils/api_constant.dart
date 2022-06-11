@@ -33,6 +33,7 @@ class ApiConstant {
       '${url.toString()}/address/updateStatusDefault?getId=';
   static final String ADDTOCART = '${url.toString()}/cart/create';
   static final String CART = '${url.toString()}/cart/all';
+  static final String DELETECART = '${url.toString()}/cart/deleteMultiCart';
   static final String PRODUCTRELATED =
       '${url.toString()}/product/getRelatedProducts';
   static final String SEARCHPRODUCT = '${url.toString()}/product/search';

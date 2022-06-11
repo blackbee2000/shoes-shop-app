@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:shoes_shop_app/models/bill.dart';
+import 'package:shoes_shop_app/models/order.dart';
 import 'package:shoes_shop_app/models/tab_oder_status.dart';
 import 'package:shoes_shop_app/pages/your-order/your_order_provider.dart';
 import 'package:shoes_shop_app/services/api_token.dart';
@@ -9,9 +9,9 @@ import 'package:shoes_shop_app/services/api_token.dart';
 class YourOrderController extends GetxController
     with GetSingleTickerProviderStateMixin {
   late TabController tabController;
-  List<Bill> listOrder = <Bill>[].obs;
+  List<Order> listOrder = <Order>[].obs;
   final listTabOrderStatus = <TabOrderStatus>[].obs;
-  final statusOrder = 1.obs;
+  final statusOrder = true.obs;
 
   @override
   void onInit() {
@@ -95,5 +95,37 @@ class YourOrderController extends GetxController
         update();
       },
     );
+  }
+
+  cancelOrder(String idOrder) {
+    BillProvider().updateStatusOrder(
+        params: {"_id": idOrder, "status": 5},
+        option: Options(
+          headers: {
+            'Content-Type': 'application/json; charset=UTF-8',
+            'Authorization': 'Bearer ${ApiToken.to.appToken}',
+          },
+        ),
+        beforeSend: () {},
+        onSuccess: (data) {
+          Get.snackbar(
+            'Sucess',
+            'Đã hủy đơn hàng thành công',
+            colorText: Colors.white,
+            backgroundColor: Colors.black,
+          );
+          getOrderStatus(1);
+          update();
+        },
+        onError: (e) {
+          Get.snackbar(
+            'Fail',
+            'Hủy đơn hàng thất bại',
+            colorText: Colors.white,
+            backgroundColor: Colors.black,
+          );
+          print(e);
+          update();
+        });
   }
 }

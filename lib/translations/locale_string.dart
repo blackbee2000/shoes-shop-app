@@ -111,6 +111,9 @@ class LocaleString extends Translations {
           "bill_and_order": "Bill & profile",
           "delivered": "Delivered",
           "delivering": "Delivering",
+          "amount": "Amount: ",
+          "order_cancel": "Cancel order",
+          "order_warning": "Do you wanna cancel order?",
         },
         "vi_VN": {
           "product_title": "Sản phẩm",
@@ -203,6 +206,7 @@ class LocaleString extends Translations {
           "add_to_cart": "Bạn muốn thêm sản phẩm vào giỏ hàng?",
           "price": "Giá: ",
           "total": "Tổng: ",
+          "amount": "Số lượng: ",
           "product_favorite_title": "Sản phẩm yêu thích",
           "voucher": "Mã giảm giá",
           "voucher_select": "Chọn mã giảm giá",
@@ -221,6 +225,8 @@ class LocaleString extends Translations {
           "bill_and_order": "Đơn hàng và lịch sử mua hàng",
           "delivered": "Đã thanh toán",
           "delivering": "Chờ thanh toán",
+          "order_cancel": "Hủy đơn hàng",
+          "order_warning": "Bạn muốn hủy đơn hàng?",
         }
       };
 }

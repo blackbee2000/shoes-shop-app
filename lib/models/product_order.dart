@@ -4,17 +4,17 @@ part 'product_order.g.dart';
 
 @JsonSerializable()
 class ProductOrder {
-  String? id;
-  String? nameProductVi;
-  String? nameProductEn;
-  String? imageProduct;
-  String? descriptionVi;
-  String? descriptionEn;
-  num? rating;
-  TypeProductOrder? type;
-  String? idCompany;
-  int? price;
-  String? productCode;
+  dynamic id;
+  dynamic nameProductVi;
+  dynamic nameProductEn;
+  dynamic imageProduct;
+  dynamic descriptionVi;
+  dynamic descriptionEn;
+  dynamic rating;
+  dynamic type;
+  dynamic idCompany;
+  dynamic price;
+  dynamic productCode;
 
   ProductOrder(
     this.id,

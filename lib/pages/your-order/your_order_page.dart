@@ -17,6 +17,148 @@ class YourOrderPage extends StatefulWidget {
 class YourOrderState extends State<YourOrderPage> {
   final yourOderController = Get.put(YourOrderController());
 
+  Widget cancelOrder(BuildContext context, String id) {
+    return Padding(
+      padding: EdgeInsets.only(
+        bottom: MediaQuery.of(context).viewInsets.bottom,
+      ),
+      child: Container(
+        width: double.infinity,
+        padding: const EdgeInsets.all(30),
+        decoration: const BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(30),
+            topRight: Radius.circular(30),
+          ),
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Text(
+                      'order_cancel'.tr,
+                      style: GoogleFonts.ebGaramond(
+                        color: Colors.black,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    Container(
+                      width: 30,
+                      height: 2,
+                      color: Colors.black,
+                    ),
+                  ],
+                ),
+                GestureDetector(
+                  onTap: () => Get.back(),
+                  child: const Icon(
+                    Icons.close,
+                    size: 20,
+                    color: Colors.black,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: 15,
+            ),
+            Align(
+              alignment: Alignment.center,
+              child: Text(
+                'order_warning'.tr,
+                style: GoogleFonts.ebGaramond(
+                  color: Colors.black,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 15,
+            ),
+            SizedBox(
+              width: double.infinity,
+              height: 40,
+              child: Row(
+                children: [
+                  Expanded(
+                    child: GestureDetector(
+                      onTap: () => Get.back(),
+                      child: Container(
+                        width: double.infinity,
+                        height: double.infinity,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          border: Border.all(
+                            color: Colors.black,
+                          ),
+                        ),
+                        child: Center(
+                          child: Text(
+                            'address_cancel'.tr,
+                            style: GoogleFonts.ebGaramond(
+                              color: Colors.black,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 15,
+                  ),
+                  GetBuilder<YourOrderController>(
+                    init: yourOderController,
+                    builder: (controller) => Expanded(
+                      child: GestureDetector(
+                        onTap: () {
+                          controller.cancelOrder(id);
+                          controller.update();
+                          Get.back();
+                        },
+                        child: Container(
+                          width: double.infinity,
+                          height: double.infinity,
+                          decoration: const BoxDecoration(
+                            color: Colors.black,
+                          ),
+                          child: Center(
+                            child: Text(
+                              'address_confirm'.tr,
+                              style: GoogleFonts.ebGaramond(
+                                color: Colors.white,
+                                fontSize: 14,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -116,6 +258,11 @@ class YourOrderState extends State<YourOrderPage> {
                         onTap: () {
                           controller.tabController.index = index;
                           controller.listOrder.clear();
+                          if (index == 0) {
+                            controller.statusOrder.value = true;
+                          } else {
+                            controller.statusOrder.value = false;
+                          }
                           controller.getOrderStatus(
                               controller.listTabOrderStatus[index].code ?? 0);
                           controller.update();
@@ -173,168 +320,390 @@ class YourOrderState extends State<YourOrderPage> {
                   const SizedBox(
                     height: 20,
                   ),
-                  Expanded(
-                    child: controller.listOrder.isEmpty
-                        ? Container(
-                            alignment: Alignment.center,
-                            child: Column(
-                              children: [
-                                Image.asset(
-                                  'assets/icons/icon-box.png',
-                                  width: 45,
-                                  color: Colors.black,
-                                ),
-                                const SizedBox(
-                                  height: 10,
-                                ),
-                                Text(
-                                  'no_information'.tr,
-                                  style: GoogleFonts.ebGaramond(
-                                    color: Colors.black,
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          )
-                        : ListView.builder(
-                            itemCount: controller.listOrder.length,
-                            itemBuilder: (e, index) => GestureDetector(
-                              onTap: () {
-                                Get.to(const YourOrderDetailPage(),
-                                    id: AppConstant.PROFILE);
-                              },
-                              child: Container(
-                                width: double.infinity,
-                                margin: index == 0
-                                    ? const EdgeInsets.only(
-                                        left: 20,
-                                        right: 20,
-                                      )
-                                    : index == controller.listOrder.length - 1
-                                        ? const EdgeInsets.only(
-                                            top: 20,
-                                            left: 20,
-                                            right: 20,
-                                            bottom: 40,
-                                          )
-                                        : const EdgeInsets.only(
-                                            top: 20,
-                                            left: 20,
-                                            right: 20,
-                                          ),
-                                height: 100,
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(10),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.black.withOpacity(0.25),
-                                      spreadRadius: 0,
-                                      blurRadius: 4,
-                                      offset: const Offset(
-                                          0, 4), // changes position of shadow
-                                    ),
-                                  ],
-                                ),
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 20,
-                                ),
-                                child: Row(
-                                  children: [
-                                    Container(
-                                      width: 120,
-                                      height: double.infinity,
-                                      color: controller.listOrder[index]
-                                                  .statusPayment ==
-                                              true
-                                          ? const Color(0xff00C42B)
-                                          : const Color(0xffFFD600),
-                                      child: Center(
-                                        child: Image.asset(
-                                          controller.listOrder[index]
-                                                      .statusPayment ==
-                                                  true
-                                              ? 'assets/icons/icon-done.png'
-                                              : 'assets/icons/icon-shipping.png',
-                                          width: 30,
-                                          height: 30,
-                                          color: Colors.white,
-                                          fit: BoxFit.contain,
+                  controller.statusOrder.value == true
+                      ? Expanded(
+                          child: controller.listOrder.isEmpty
+                              ? Container(
+                                  alignment: Alignment.center,
+                                  child: Column(
+                                    children: [
+                                      Image.asset(
+                                        'assets/icons/icon-box.png',
+                                        width: 45,
+                                        color: Colors.black,
+                                      ),
+                                      const SizedBox(
+                                        height: 10,
+                                      ),
+                                      Text(
+                                        'no_information'.tr,
+                                        style: GoogleFonts.ebGaramond(
+                                          color: Colors.black,
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.w600,
                                         ),
                                       ),
-                                    ),
-                                    Container(
-                                      width: 10,
-                                      height: double.infinity,
-                                      color: const Color(0xffFFD9D9),
-                                    ),
-                                    const SizedBox(
-                                      width: 15,
-                                    ),
-                                    Expanded(
-                                      child: Container(
-                                        padding: const EdgeInsets.only(
-                                          top: 15,
-                                          bottom: 15,
-                                        ),
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              '${controller.listOrder[index].id != null && controller.listOrder[index].id!.isNotEmpty ? controller.listOrder[index].id?.substring(0, 10) : '--'}',
-                                              style: GoogleFonts.ebGaramond(
-                                                color: Colors.black,
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.w600,
-                                              ),
-                                            ),
-                                            const SizedBox(
-                                              height: 5,
-                                            ),
-                                            Text(
-                                              '${'payment_total_bill'.tr} ${controller.listOrder[index].totalPrice ?? '--'}',
-                                              style: GoogleFonts.ebGaramond(
-                                                color: Colors.black,
-                                                fontSize: 14,
-                                                fontWeight: FontWeight.w400,
-                                              ),
-                                            ),
-                                            const SizedBox(
-                                              height: 5,
-                                            ),
-                                            Align(
-                                              alignment: Alignment.topRight,
-                                              child: Text(
+                                    ],
+                                  ),
+                                )
+                              : ListView.builder(
+                                  itemCount: controller.listOrder.length,
+                                  itemBuilder: (e, index) => GestureDetector(
+                                    onTap: () {
+                                      Get.to(
+                                          YourOrderDetailPage(
+                                              order:
+                                                  controller.listOrder[index]),
+                                          id: AppConstant.PROFILE);
+                                    },
+                                    child: Container(
+                                      width: double.infinity,
+                                      margin: index == 0
+                                          ? const EdgeInsets.only(
+                                              left: 20,
+                                              right: 20,
+                                            )
+                                          : index ==
+                                                  controller.listOrder.length -
+                                                      1
+                                              ? const EdgeInsets.only(
+                                                  top: 20,
+                                                  left: 20,
+                                                  right: 20,
+                                                  bottom: 40,
+                                                )
+                                              : const EdgeInsets.only(
+                                                  top: 20,
+                                                  left: 20,
+                                                  right: 20,
+                                                ),
+                                      height: 100,
+                                      decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius: BorderRadius.circular(10),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color:
+                                                Colors.black.withOpacity(0.25),
+                                            spreadRadius: 0,
+                                            blurRadius: 4,
+                                            offset: const Offset(0,
+                                                4), // changes position of shadow
+                                          ),
+                                        ],
+                                      ),
+                                      padding: const EdgeInsets.symmetric(
+                                        horizontal: 20,
+                                      ),
+                                      child: Row(
+                                        children: [
+                                          Container(
+                                            width: 120,
+                                            height: double.infinity,
+                                            color: controller.listOrder[index]
+                                                        .statusPayment ==
+                                                    true
+                                                ? const Color(0xff00C42B)
+                                                : const Color(0xffFFD600),
+                                            child: Center(
+                                              child: Image.asset(
                                                 controller.listOrder[index]
                                                             .statusPayment ==
                                                         true
-                                                    ? 'delivered'.tr
-                                                    : 'delivering'.tr,
-                                                style: GoogleFonts.ebGaramond(
-                                                  color: controller
-                                                              .listOrder[index]
-                                                              .statusPayment ==
-                                                          true
-                                                      ? const Color(0xff00C32B)
-                                                      : const Color(0xffFFD600),
-                                                  fontSize: 14,
-                                                  fontWeight: FontWeight.w600,
+                                                    ? 'assets/icons/icon-done.png'
+                                                    : 'assets/icons/icon-shipping.png',
+                                                width: 30,
+                                                height: 30,
+                                                color: Colors.white,
+                                                fit: BoxFit.contain,
+                                              ),
+                                            ),
+                                          ),
+                                          Container(
+                                            width: 10,
+                                            height: double.infinity,
+                                            color: const Color(0xffFFD9D9),
+                                          ),
+                                          const SizedBox(
+                                            width: 15,
+                                          ),
+                                          Expanded(
+                                            child: Container(
+                                              padding: const EdgeInsets.only(
+                                                top: 15,
+                                                bottom: 15,
+                                              ),
+                                              child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Text(
+                                                    '${controller.listOrder[index].id != null && controller.listOrder[index].id!.isNotEmpty ? controller.listOrder[index].id?.substring(0, 10) : '--'}',
+                                                    style:
+                                                        GoogleFonts.ebGaramond(
+                                                      color: Colors.black,
+                                                      fontSize: 16,
+                                                      fontWeight:
+                                                          FontWeight.w600,
+                                                    ),
+                                                  ),
+                                                  const SizedBox(
+                                                    height: 5,
+                                                  ),
+                                                  Text(
+                                                    '${'payment_total_bill'.tr} ${controller.listOrder[index].totalPrice ?? '--'}',
+                                                    style:
+                                                        GoogleFonts.ebGaramond(
+                                                      color: Colors.black,
+                                                      fontSize: 14,
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                    ),
+                                                  ),
+                                                  const SizedBox(
+                                                    height: 5,
+                                                  ),
+                                                  Text(
+                                                    controller.listOrder[index]
+                                                                .statusPayment ==
+                                                            true
+                                                        ? 'delivered'.tr
+                                                        : 'delivering'.tr,
+                                                    style:
+                                                        GoogleFonts.ebGaramond(
+                                                      color: controller
+                                                                  .listOrder[
+                                                                      index]
+                                                                  .statusPayment ==
+                                                              true
+                                                          ? const Color(
+                                                              0xff00C32B)
+                                                          : const Color(
+                                                              0xffFFD600),
+                                                      fontSize: 14,
+                                                      fontWeight:
+                                                          FontWeight.w600,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                          const SizedBox(
+                                            width: 20,
+                                          ),
+                                          GestureDetector(
+                                            onTap: () {
+                                              Get.bottomSheet(cancelOrder(
+                                                  context,
+                                                  controller.listOrder[index]
+                                                          .id ??
+                                                      ''));
+                                            },
+                                            child: Container(
+                                              width: 40,
+                                              height: 40,
+                                              decoration: BoxDecoration(
+                                                color: Colors.white,
+                                                border: Border.all(
+                                                    color: Colors.black),
+                                                shape: BoxShape.circle,
+                                              ),
+                                              child: const Center(
+                                                child: Icon(
+                                                  Icons.close,
+                                                  size: 20,
+                                                  color: Colors.black,
                                                 ),
                                               ),
                                             ),
-                                          ],
-                                        ),
+                                          ),
+                                        ],
                                       ),
                                     ),
-                                  ],
+                                  ),
                                 ),
-                              ),
-                            ),
-                          ),
-                  ),
+                        )
+                      : Expanded(
+                          child: controller.listOrder.isEmpty
+                              ? Container(
+                                  alignment: Alignment.center,
+                                  child: Column(
+                                    children: [
+                                      Image.asset(
+                                        'assets/icons/icon-box.png',
+                                        width: 45,
+                                        color: Colors.black,
+                                      ),
+                                      const SizedBox(
+                                        height: 10,
+                                      ),
+                                      Text(
+                                        'no_information'.tr,
+                                        style: GoogleFonts.ebGaramond(
+                                          color: Colors.black,
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.w600,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                )
+                              : ListView.builder(
+                                  itemCount: controller.listOrder.length,
+                                  itemBuilder: (e, index) => GestureDetector(
+                                    onTap: () {
+                                      Get.to(
+                                          YourOrderDetailPage(
+                                              order:
+                                                  controller.listOrder[index]),
+                                          id: AppConstant.PROFILE);
+                                    },
+                                    child: Container(
+                                      width: double.infinity,
+                                      margin: index == 0
+                                          ? const EdgeInsets.only(
+                                              left: 20,
+                                              right: 20,
+                                            )
+                                          : index ==
+                                                  controller.listOrder.length -
+                                                      1
+                                              ? const EdgeInsets.only(
+                                                  top: 20,
+                                                  left: 20,
+                                                  right: 20,
+                                                  bottom: 40,
+                                                )
+                                              : const EdgeInsets.only(
+                                                  top: 20,
+                                                  left: 20,
+                                                  right: 20,
+                                                ),
+                                      height: 100,
+                                      decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius: BorderRadius.circular(10),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color:
+                                                Colors.black.withOpacity(0.25),
+                                            spreadRadius: 0,
+                                            blurRadius: 4,
+                                            offset: const Offset(0,
+                                                4), // changes position of shadow
+                                          ),
+                                        ],
+                                      ),
+                                      padding: const EdgeInsets.symmetric(
+                                        horizontal: 20,
+                                      ),
+                                      child: Row(
+                                        children: [
+                                          Container(
+                                            width: 120,
+                                            height: double.infinity,
+                                            color: controller.listOrder[index]
+                                                        .statusPayment ==
+                                                    true
+                                                ? const Color(0xff00C42B)
+                                                : const Color(0xffFFD600),
+                                            child: Center(
+                                              child: Image.asset(
+                                                controller.listOrder[index]
+                                                            .statusPayment ==
+                                                        true
+                                                    ? 'assets/icons/icon-done.png'
+                                                    : 'assets/icons/icon-shipping.png',
+                                                width: 30,
+                                                height: 30,
+                                                color: Colors.white,
+                                                fit: BoxFit.contain,
+                                              ),
+                                            ),
+                                          ),
+                                          Container(
+                                            width: 10,
+                                            height: double.infinity,
+                                            color: const Color(0xffFFD9D9),
+                                          ),
+                                          const SizedBox(
+                                            width: 15,
+                                          ),
+                                          Expanded(
+                                            child: Container(
+                                              padding: const EdgeInsets.only(
+                                                top: 15,
+                                                bottom: 15,
+                                              ),
+                                              child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Text(
+                                                    '${controller.listOrder[index].id != null && controller.listOrder[index].id!.isNotEmpty ? controller.listOrder[index].id?.substring(0, 10) : '--'}',
+                                                    style:
+                                                        GoogleFonts.ebGaramond(
+                                                      color: Colors.black,
+                                                      fontSize: 16,
+                                                      fontWeight:
+                                                          FontWeight.w600,
+                                                    ),
+                                                  ),
+                                                  const SizedBox(
+                                                    height: 5,
+                                                  ),
+                                                  Text(
+                                                    '${'payment_total_bill'.tr} ${controller.listOrder[index].totalPrice ?? '--'}',
+                                                    style:
+                                                        GoogleFonts.ebGaramond(
+                                                      color: Colors.black,
+                                                      fontSize: 14,
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                    ),
+                                                  ),
+                                                  const SizedBox(
+                                                    height: 5,
+                                                  ),
+                                                  Align(
+                                                    alignment:
+                                                        Alignment.topRight,
+                                                    child: Text(
+                                                      controller
+                                                                  .listOrder[
+                                                                      index]
+                                                                  .statusPayment ==
+                                                              true
+                                                          ? 'delivered'.tr
+                                                          : 'delivering'.tr,
+                                                      style: GoogleFonts
+                                                          .ebGaramond(
+                                                        color: controller
+                                                                    .listOrder[
+                                                                        index]
+                                                                    .statusPayment ==
+                                                                true
+                                                            ? const Color(
+                                                                0xff00C32B)
+                                                            : const Color(
+                                                                0xffFFD600),
+                                                        fontSize: 14,
+                                                        fontWeight:
+                                                            FontWeight.w600,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                        ),
                 ],
               ),
             ),

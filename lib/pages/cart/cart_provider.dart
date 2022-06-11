@@ -10,6 +10,13 @@ abstract class CartAPIProtocol {
     required Function(CartList data) onSuccess,
     required Function(dynamic error) onError,
   });
+  deleteCart({
+    required Map<String, dynamic> params,
+    required Options option,
+    required Function() beforeSend,
+    required Function(dynamic data) onSuccess,
+    required Function(dynamic error) onError,
+  });
 }
 
 class CartProvider extends CartAPIProtocol {
@@ -26,6 +33,26 @@ class CartProvider extends CartAPIProtocol {
       beforeSend: () => {beforeSend()},
       onSuccess: (data) {
         onSuccess(CartList.fromJson(data));
+      },
+      onError: (error) => {onError(error)},
+    );
+  }
+
+  @override
+  deleteCart(
+      {required Map<String, dynamic> params,
+      required Options option,
+      required Function() beforeSend,
+      required Function(dynamic data) onSuccess,
+      required Function(dynamic error) onError}) {
+    ApiService(
+      path: ApiConstant.DELETECART,
+      params: params,
+      option: option,
+    ).post(
+      beforeSend: () => {beforeSend()},
+      onSuccess: (data) {
+        onSuccess(data);
       },
       onError: (error) => {onError(error)},
     );
