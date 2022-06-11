@@ -58,6 +58,12 @@ class ProductDetailState extends State<ProductDetailPage>
     tabController = TabController(length: 2, vsync: this);
   }
 
+  @override
+  void dispose() {
+    super.dispose();
+    tabController.dispose();
+  }
+
   Widget loginPopup(BuildContext context) {
     return Padding(
       padding: EdgeInsets.only(

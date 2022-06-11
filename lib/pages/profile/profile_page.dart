@@ -116,15 +116,14 @@ class ProfilePage extends GetView<ProfileController> {
                     GestureDetector(
                       onTap: () {
                         Get.to(
-                          CartPage(id: AppConstant.PROFILE),
-                          id: AppConstant.PROFILE,
-                        );
+                            const ProductFavoritePage(
+                              id: AppConstant.PROFILE,
+                            ),
+                            id: AppConstant.PROFILE);
                       },
-                      child: Image.asset(
-                        "assets/icons/icon_cart.png",
-                        width: 20,
-                        height: 20,
-                        fit: BoxFit.contain,
+                      child: Icon(
+                        Icons.favorite_border,
+                        size: 20,
                         color: theme.theme == ThemeMode.light
                             ? Colors.black
                             : Colors.white,
@@ -133,17 +132,37 @@ class ProfilePage extends GetView<ProfileController> {
                     Padding(
                       padding: const EdgeInsets.only(left: 10, right: 20),
                       child: GestureDetector(
+                        onTap: () {
+                          Get.to(
+                            const CartPage(id: AppConstant.PROFILE),
+                            id: AppConstant.PROFILE,
+                          );
+                        },
                         child: Image.asset(
-                          "assets/icons/icon_message.png",
+                          "assets/icons/icon_cart.png",
                           width: 20,
                           height: 20,
-                          fit: BoxFit.contain,
                           color: theme.theme == ThemeMode.light
                               ? Colors.black
                               : Colors.white,
+                          fit: BoxFit.contain,
                         ),
                       ),
                     ),
+                    // Padding(
+                    //   padding: const EdgeInsets.only(left: 10, right: 20),
+                    //   child: GestureDetector(
+                    //     child: Image.asset(
+                    //       "assets/icons/icon_message.png",
+                    //       width: 20,
+                    //       height: 20,
+                    //       color: theme.theme == ThemeMode.light
+                    //           ? Colors.black
+                    //           : Colors.white,
+                    //       fit: BoxFit.contain,
+                    //     ),
+                    //   ),
+                    // ),
                   ],
                 ),
                 backgroundColor: Colors.transparent,
@@ -633,9 +652,7 @@ class ProfilePage extends GetView<ProfileController> {
                                                 ),
                                                 child: Center(
                                                   child: Text(
-                                                    'profile_your_order'
-                                                        .tr
-                                                        .toUpperCase(),
+                                                    'bill'.tr.toUpperCase(),
                                                     style:
                                                         GoogleFonts.ebGaramond(
                                                       color: Colors.black,

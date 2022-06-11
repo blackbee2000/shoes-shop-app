@@ -44,6 +44,8 @@ class ApiService {
     required Function(dynamic error) onError,
   }) {
     beforeSend();
+    print('PARAMS ===> $path');
+    print('PARAMS ===> $params');
     dio.post(path, data: params, options: option).then((res) {
       onSuccess(res.data);
     }).catchError((e) {

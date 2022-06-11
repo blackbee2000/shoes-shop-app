@@ -20,7 +20,6 @@ class CartPage extends StatefulWidget {
 
 class CartState extends State<CartPage> {
   final cartController = Get.put(CartController());
-  final addressController = Get.put(AddressController());
 
   @override
   void initState() {
@@ -170,7 +169,7 @@ class CartState extends State<CartPage> {
                                     height: 5,
                                   ),
                                   Text(
-                                    '${addressController.listAddressDefault.value.nameReciever != null && addressController.listAddressDefault.value.nameReciever!.isNotEmpty ? addressController.listAddressDefault.value.nameReciever : '--'} - ${addressController.listAddressDefault.value.phoneReciever != null && addressController.listAddressDefault.value.phoneReciever!.isNotEmpty ? addressController.listAddressDefault.value.phoneReciever : '--'}',
+                                    '${controller.addressPayment.value.nameReciever != null && controller.addressPayment.value.nameReciever!.isNotEmpty ? controller.addressPayment.value.nameReciever : '--'} - ${controller.addressPayment.value.phoneReciever != null && controller.addressPayment.value.phoneReciever!.isNotEmpty ? controller.addressPayment.value.phoneReciever : '--'}',
                                     style: GoogleFonts.ebGaramond(
                                       color: Colors.black,
                                       fontSize: 14,
@@ -181,13 +180,13 @@ class CartState extends State<CartPage> {
                                     height: 5,
                                   ),
                                   Text(
-                                    '${addressController.listAddressDefault.value.street != null && addressController.listAddressDefault.value.street!.isNotEmpty ? addressController.listAddressDefault.value.street : '--'}' +
+                                    '${controller.addressPayment.value.street != null && controller.addressPayment.value.street!.isNotEmpty ? controller.addressPayment.value.street : '--'}' +
                                         ', ' +
-                                        '${addressController.listAddressDefault.value.ward != null && addressController.listAddressDefault.value.ward!.isNotEmpty ? addressController.listAddressDefault.value.ward : '--'}' +
+                                        '${controller.addressPayment.value.ward != null && controller.addressPayment.value.ward!.isNotEmpty ? controller.addressPayment.value.ward : '--'}' +
                                         ', ' +
-                                        '${addressController.listAddressDefault.value.district != null && addressController.listAddressDefault.value.district!.isNotEmpty ? addressController.listAddressDefault.value.district : '--'}' +
+                                        '${controller.addressPayment.value.district != null && controller.addressPayment.value.district!.isNotEmpty ? controller.addressPayment.value.district : '--'}' +
                                         ', ' +
-                                        '${addressController.listAddressDefault.value.province != null && addressController.listAddressDefault.value.province!.isNotEmpty ? addressController.listAddressDefault.value.province : '--'}',
+                                        '${controller.addressPayment.value.province != null && controller.addressPayment.value.province!.isNotEmpty ? controller.addressPayment.value.province : '--'}',
                                     style: GoogleFonts.ebGaramond(
                                       color: Colors.black,
                                       fontSize: 14,

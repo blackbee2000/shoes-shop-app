@@ -18,7 +18,8 @@ class RegisterPage extends StatelessWidget {
             Image.asset(
               'assets/images/background_singin.jpg',
               width: double.infinity,
-              fit: BoxFit.cover,
+              height: 385,
+              fit: BoxFit.fill,
             ),
             Scaffold(
               backgroundColor: Colors.transparent,

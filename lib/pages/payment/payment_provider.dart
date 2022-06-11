@@ -8,7 +8,7 @@ abstract class OrderAPIProtocol {
     required Map<String, dynamic> params,
     required Options option,
     required Function() beforeSend,
-    required Function(OrderResponse data) onSuccess,
+    required Function(dynamic data) onSuccess,
     required Function(dynamic error) onError,
   });
 }
@@ -19,7 +19,7 @@ class OrderProvider extends OrderAPIProtocol {
       {required Map<String, dynamic> params,
       required Options option,
       required Function() beforeSend,
-      required Function(OrderResponse data) onSuccess,
+      required Function(dynamic data) onSuccess,
       required Function(dynamic error) onError}) {
     ApiService(
       path: ApiConstant.ORDER,
@@ -28,7 +28,7 @@ class OrderProvider extends OrderAPIProtocol {
     ).post(
       beforeSend: () => {beforeSend()},
       onSuccess: (data) {
-        onSuccess(OrderResponse.fromJson(data));
+        onSuccess(data);
       },
       onError: (error) => {onError(error)},
     );

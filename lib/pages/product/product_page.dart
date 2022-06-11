@@ -212,8 +212,8 @@ class ProductPage extends GetView<ProductController> {
                           child: GestureDetector(
                             onTap: () {
                               Get.to(
-                                const CartPage(id: AppConstant.HOME),
-                                id: AppConstant.HOME,
+                                const CartPage(id: AppConstant.PRODUCT),
+                                id: AppConstant.PRODUCT,
                               );
                             },
                             child: Image.asset(

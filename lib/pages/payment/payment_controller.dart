@@ -9,8 +9,10 @@ import 'package:shoes_shop_app/pages/payment/payment_provider.dart';
 import 'package:shoes_shop_app/pages/profile/profile_controller.dart';
 import 'package:shoes_shop_app/services/api_token.dart';
 
+import '../../utils/utils.dart';
+
 class PaymentController extends GetxController {
-  final indexSelected = 0.obs;
+  final indexSelected = 4.obs;
   final listPayMethod = <PayMethod>[].obs;
   final voucher = Voucher.fromJson({}).obs;
   final cartController = Get.put(CartController());
@@ -32,13 +34,15 @@ class PaymentController extends GetxController {
 
   payment(String voucherCode, String typePayment, int totalPriceProduct,
       Address address) {
+    print(
+        'ID PROFILE =====> ${profileController.profile.value.id}, $typePayment $voucherCode, $totalPriceProduct');
     OrderProvider().payment(
       params: {
         "lstCart": cartController.listCartSelected,
         "idAccount": profileController.profile.value.id,
         "status": 1,
-        "statusPayment": false,
         "typePayment": typePayment,
+        "statusPayment": false,
         "voucher": voucherCode,
         "totalShipping": 12000,
         "totalPriceProduct": totalPriceProduct,
@@ -51,14 +55,23 @@ class PaymentController extends GetxController {
         },
       ),
       beforeSend: () {},
-      onSuccess: (res) {
-        print('THANH TOÁN THÀNH CÔNG =====> ${res.data.toString()}');
-        Get.snackbar(
-          'Success',
-          'Payment success',
-          colorText: Colors.white,
-          backgroundColor: Colors.black,
-        );
+      onSuccess: (data) {
+        if (typePayment == 'COD') {
+          Get.snackbar(
+            'Success',
+            'Payment success',
+            colorText: Colors.white,
+            backgroundColor: Colors.black,
+          );
+        } else {
+          print('THANH TOÁN THÀNH CÔNG =====> ${data.toString()}');
+          launchInBrowser(
+              'https://sandbox.vnpayment.vn/paymentv2/Ncb/Transaction/Index.html?token=35c03968b8cc42ae9ef6fb0b03cd6144');
+        }
+
+        cartController.listCartSelected.clear();
+        cartController.onInit();
+        cartController.update();
         update();
       },
       onError: (e) {

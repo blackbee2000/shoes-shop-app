@@ -41,6 +41,10 @@ class ApiConstant {
       '${url.toString()}/account/getFavoriteAccount';
   static final String VOUCHER = '${url.toString()}/voucher/all';
   static final String ORDER = '${url.toString()}/order/create';
+  static final String ORDERGETALL = '${url.toString()}/order/all';
+  static final String ORDERBYSTATUS = '${url.toString()}/order/getOrderStatus';
+  static final String ORDERUPDATESTATUS =
+      '${url.toString()}/order/updateStatus';
   static const String PROVINCE =
       'https://api.mysupership.vn/v1/partner/areas/province';
   static const String DISTRICT =

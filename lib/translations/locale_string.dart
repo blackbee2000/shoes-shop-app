@@ -107,6 +107,10 @@ class LocaleString extends Translations {
           "select_ward": "Select ward",
           "addresss_street": "House number, street, village",
           "address_enter_street": "Enter house number, street, village",
+          "bill": "Bill",
+          "bill_and_order": "Bill & profile",
+          "delivered": "Delivered",
+          "delivering": "Delivering",
         },
         "vi_VN": {
           "product_title": "Sản phẩm",
@@ -213,6 +217,10 @@ class LocaleString extends Translations {
           "select_ward": "Chọn phường/xã",
           "addresss_street": "Số nhà, đường, thôn",
           "address_enter_street": "Nhập số nhà, đường, thôn",
+          "bill": "Đơn hàng",
+          "bill_and_order": "Đơn hàng và lịch sử mua hàng",
+          "delivered": "Đã thanh toán",
+          "delivering": "Chờ thanh toán",
         }
       };
 }

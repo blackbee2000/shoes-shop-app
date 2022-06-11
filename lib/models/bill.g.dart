@@ -1,11 +1,12 @@
-part of 'order.dart';
+part of 'bill.dart';
 
-Order _$OrderFromJson(Map<String, dynamic> json) {
-  return Order(
+Bill _$BillFromJson(Map<String, dynamic> json) {
+  return Bill(
+    json['typePayment'] as String?,
     json['_id'] as String?,
-    (json['lstCart'] as List<dynamic>?)
-        ?.map((e) => Cart.fromJson(e as Map<String, dynamic>))
-        .toList(),
+    // (json['lstCart'] as List<dynamic>?)
+    //     ?.map((e) => Cart.fromJson(e as Map<String, dynamic>))
+    //     .toList(),
     json['idAccount'] as String?,
     json['status'] as int?,
     json['totalDiscount'] as int?,
@@ -13,9 +14,9 @@ Order _$OrderFromJson(Map<String, dynamic> json) {
     json['totalPriceProduct'] as int?,
     json['totalPrice'] as int?,
     json['statusPayment'] as bool?,
-    json['address'] == null
-        ? null
-        : Address.fromJson(json['address'] as Map<String, dynamic>),
+    // json['address'] == null
+    //     ? null
+    //     : Address.fromJson(json['address'] as Map<String, dynamic>),
     json['voucher'] as String?,
     json['isDeleted'] as bool?,
     json['createdAt'] as String?,
@@ -24,9 +25,10 @@ Order _$OrderFromJson(Map<String, dynamic> json) {
   );
 }
 
-Map<String, dynamic> _$OrderToJson(Order instance) => <String, dynamic>{
+Map<String, dynamic> _$BillToJson(Bill instance) => <String, dynamic>{
+      'typePayment': instance.typePayment,
       '_id': instance.id,
-      'lstCart': instance.lstCart,
+      // 'lstCart': instance.lstCart,
       'idAccount': instance.idAccount,
       'status': instance.status,
       'totalDiscount': instance.totalDiscount,
@@ -34,7 +36,7 @@ Map<String, dynamic> _$OrderToJson(Order instance) => <String, dynamic>{
       'totalPriceProduct': instance.totalPriceProduct,
       'totalPrice': instance.totalPrice,
       'statusPayment': instance.statusPayment,
-      'address': instance.address,
+      // 'address': instance.address,
       'voucher': instance.voucher,
       'isDeleted': instance.isDeleted,
       'createdAt': instance.createdAt,

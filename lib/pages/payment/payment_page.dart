@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:shoes_shop_app/models/voucher.dart';
-import 'package:shoes_shop_app/pages/address/address_controller.dart';
 import 'package:shoes_shop_app/pages/address/address_page.dart';
 import 'package:shoes_shop_app/pages/cart/cart_controller.dart';
 import 'package:shoes_shop_app/pages/payment/payment_controller.dart';
@@ -25,7 +24,6 @@ class PaymentPage extends StatefulWidget {
 class PaymentState extends State<PaymentPage> {
   final paymentController = Get.put(PaymentController());
   final cartController = Get.put(CartController());
-  final addressController = Get.put(AddressController());
   int total = 0;
 
   @override
@@ -175,7 +173,7 @@ class PaymentState extends State<PaymentPage> {
                                   height: 5,
                                 ),
                                 Text(
-                                  '${addressController.listAddressDefault.value.nameReciever != null && addressController.listAddressDefault.value.nameReciever!.isNotEmpty ? addressController.listAddressDefault.value.nameReciever : '--'} - ${addressController.listAddressDefault.value.phoneReciever != null && addressController.listAddressDefault.value.phoneReciever!.isNotEmpty ? addressController.listAddressDefault.value.phoneReciever : '--'}',
+                                  '${cartController.addressPayment.value.nameReciever != null && cartController.addressPayment.value.nameReciever!.isNotEmpty ? cartController.addressPayment.value.nameReciever : '--'} - ${cartController.addressPayment.value.phoneReciever != null && cartController.addressPayment.value.phoneReciever!.isNotEmpty ? cartController.addressPayment.value.phoneReciever : '--'}',
                                   style: GoogleFonts.ebGaramond(
                                     color: Colors.black,
                                     fontSize: 14,
@@ -186,13 +184,13 @@ class PaymentState extends State<PaymentPage> {
                                   height: 5,
                                 ),
                                 Text(
-                                  '${addressController.listAddressDefault.value.street != null && addressController.listAddressDefault.value.street!.isNotEmpty ? addressController.listAddressDefault.value.street : '--'}' +
+                                  '${cartController.addressPayment.value.street != null && cartController.addressPayment.value.street!.isNotEmpty ? cartController.addressPayment.value.street : '--'}' +
                                       ', ' +
-                                      '${addressController.listAddressDefault.value.ward != null && addressController.listAddressDefault.value.ward!.isNotEmpty ? addressController.listAddressDefault.value.ward : '--'}' +
+                                      '${cartController.addressPayment.value.ward != null && cartController.addressPayment.value.ward!.isNotEmpty ? cartController.addressPayment.value.ward : '--'}' +
                                       ', ' +
-                                      '${addressController.listAddressDefault.value.district != null && addressController.listAddressDefault.value.district!.isNotEmpty ? addressController.listAddressDefault.value.district : '--'}' +
+                                      '${cartController.addressPayment.value.district != null && cartController.addressPayment.value.district!.isNotEmpty ? cartController.addressPayment.value.district : '--'}' +
                                       ', ' +
-                                      '${addressController.listAddressDefault.value.province != null && addressController.listAddressDefault.value.province!.isNotEmpty ? addressController.listAddressDefault.value.province : '--'}',
+                                      '${cartController.addressPayment.value.province != null && cartController.addressPayment.value.province!.isNotEmpty ? cartController.addressPayment.value.province : '--'}',
                                   style: GoogleFonts.ebGaramond(
                                     color: Colors.black,
                                     fontSize: 14,
@@ -977,12 +975,11 @@ class PaymentState extends State<PaymentPage> {
                       init: paymentController,
                       builder: (controller) => GestureDetector(
                         onTap: () {
-                          cartController.listCartSelected.clear();
                           controller.payment(
                               controller.voucher.value.voucherCode ?? '',
                               controller.typePayment.value,
                               total,
-                              addressController.listAddressDefault.value);
+                              cartController.addressPayment.value);
                           controller.update();
                         },
                         child: Container(

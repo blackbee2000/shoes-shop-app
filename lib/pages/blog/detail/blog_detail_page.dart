@@ -9,7 +9,6 @@ import 'package:shoes_shop_app/pages/cart/cart_page.dart';
 import 'package:shoes_shop_app/pages/profile/product_favorite/product_favorite_page.dart';
 import 'package:shoes_shop_app/translations/app_translation.dart';
 import 'package:shoes_shop_app/utils/app_constant.dart';
-import 'package:widget_mask/widget_mask.dart';
 import 'package:flutter_share/flutter_share.dart';
 import 'package:google_fonts/google_fonts.dart';
 // import 'package:flutter_html/flutter_html.dart';
@@ -35,7 +34,7 @@ class BlogDetailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     listBlogRelated = blogController.listBlog;
     // for (var e in listBlogRelated) {
-    //   if (e.id == blog.id) {
+    //   if (blog.id == e.id) {
     //     listBlogRelated.remove(e);
     //   }
     // }
@@ -46,13 +45,8 @@ class BlogDetailPage extends StatelessWidget {
         color: Colors.white,
         child: Stack(
           children: [
-            Image.asset(
-              "assets/images/background_blog_detail.jpg",
-              width: double.infinity,
-              fit: BoxFit.cover,
-            ),
             Scaffold(
-              backgroundColor: Colors.black.withOpacity(0),
+              backgroundColor: Colors.white,
               appBar: AppBar(
                 leading: IconButton(
                   onPressed: () {
@@ -61,14 +55,14 @@ class BlogDetailPage extends StatelessWidget {
                   icon: const Icon(
                     Icons.arrow_back_ios,
                     size: 20,
-                    color: Colors.white,
+                    color: Colors.black,
                   ),
                 ),
-                backgroundColor: Colors.black.withOpacity(0),
+                backgroundColor: Colors.white,
                 title: Text(
                   "blog_detail_title".tr,
                   style: GoogleFonts.ebGaramond(
-                    color: Colors.white,
+                    color: Colors.black,
                     fontSize: 20,
                     fontWeight: FontWeight.w600,
                   ),
@@ -86,7 +80,7 @@ class BlogDetailPage extends StatelessWidget {
                     child: const Icon(
                       Icons.favorite_border,
                       size: 20,
-                      color: Colors.white,
+                      color: Colors.black,
                     ),
                   ),
                   Padding(
@@ -102,7 +96,7 @@ class BlogDetailPage extends StatelessWidget {
                         "assets/icons/icon_cart.png",
                         width: 20,
                         height: 20,
-                        color: Colors.white,
+                        color: Colors.black,
                         fit: BoxFit.contain,
                       ),
                     ),
@@ -126,6 +120,9 @@ class BlogDetailPage extends StatelessWidget {
               body: SingleChildScrollView(
                 child: Column(
                   children: [
+                    const SizedBox(
+                      height: 20,
+                    ),
                     Container(
                       width: double.infinity,
                       height: 200,
@@ -172,7 +169,7 @@ class BlogDetailPage extends StatelessWidget {
                                 Text(
                                   '${AppTranslation.instance.language == AppTranslation.english ? (blog.titleEn != null && blog.titleEn!.isNotEmpty ? blog.titleEn : '--') : (blog.titleVi != null && blog.titleVi!.isNotEmpty ? blog.titleVi : '--')}',
                                   style: GoogleFonts.ebGaramond(
-                                    color: Colors.white,
+                                    color: Colors.black,
                                     fontSize: 22,
                                     fontWeight: FontWeight.w600,
                                   ),
@@ -191,7 +188,7 @@ class BlogDetailPage extends StatelessWidget {
                                       width: 13,
                                       height: 13,
                                       fit: BoxFit.contain,
-                                      color: Colors.white,
+                                      color: Colors.black,
                                     ),
                                     const SizedBox(
                                       width: 10,
@@ -204,7 +201,7 @@ class BlogDetailPage extends StatelessWidget {
                                                   .toLocal())
                                           : '--',
                                       style: GoogleFonts.ebGaramond(
-                                        color: Colors.white,
+                                        color: Colors.black,
                                         fontSize: 13,
                                         fontWeight: FontWeight.w400,
                                       ),
@@ -231,8 +228,8 @@ class BlogDetailPage extends StatelessWidget {
                                   width: 50,
                                   height: 50,
                                   decoration: BoxDecoration(
-                                    color: Colors.black,
-                                    border: Border.all(color: Colors.white),
+                                    color: Colors.white,
+                                    border: Border.all(color: Colors.black),
                                     shape: BoxShape.circle,
                                   ),
                                   child: Center(
@@ -240,6 +237,7 @@ class BlogDetailPage extends StatelessWidget {
                                       'assets/icons/icon-share.png',
                                       width: 30,
                                       height: 30,
+                                      color: Colors.black,
                                       fit: BoxFit.contain,
                                     ),
                                   ),
@@ -316,39 +314,23 @@ class BlogDetailPage extends StatelessWidget {
                     const SizedBox(
                       height: 15,
                     ),
-                    WidgetMask(
-                      blendMode: BlendMode.difference,
-                      mask: Text(
-                        'blog_detail_related'.tr,
-                        style: GoogleFonts.ebGaramond(
-                          color: Colors.white,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600,
-                        ),
-                        textAlign: TextAlign.center,
+                    Text(
+                      'blog_detail_related'.tr,
+                      style: GoogleFonts.ebGaramond(
+                        color: Colors.white,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
                       ),
-                      child: Container(
-                        width: double.infinity,
-                        height: 20,
-                        color: Colors.transparent,
-                      ),
+                      textAlign: TextAlign.center,
                     ),
                     const SizedBox(
                       height: 10,
                     ),
-                    WidgetMask(
-                      blendMode: BlendMode.difference,
-                      mask: Container(
-                        alignment: Alignment.center,
-                        width: 50,
-                        height: 1,
-                        color: Colors.black,
-                      ),
-                      child: Container(
-                        width: 50,
-                        height: 1,
-                        color: Colors.black,
-                      ),
+                    Container(
+                      alignment: Alignment.center,
+                      width: 50,
+                      height: 1,
+                      color: Colors.black,
                     ),
                     const SizedBox(
                       height: 20,
@@ -396,7 +378,7 @@ class BlogDetailPage extends StatelessWidget {
                                           ),
                                           child: CachedNetworkImage(
                                             fit: BoxFit.cover,
-                                            imageUrl: '',
+                                            imageUrl: e.imageBlog ?? '',
                                             useOldImageOnUrlChange: false,
                                             progressIndicatorBuilder: (context,
                                                     url, downloadProgress) =>

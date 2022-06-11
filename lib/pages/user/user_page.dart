@@ -112,7 +112,8 @@ class _UserPageState extends State<UserPage> {
             Image.asset(
               'assets/images/background_update_profile.jpg',
               width: double.infinity,
-              fit: BoxFit.cover,
+              height: 480,
+              fit: BoxFit.fill,
             ),
             Scaffold(
               appBar: AppBar(
