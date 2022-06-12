@@ -22,12 +22,10 @@ class BlogController extends GetxController {
       ),
       beforeSend: () {},
       onSuccess: (res) {
-        print('GET DATA BLOG SUCESSS =>>>>>> ${res.toString()}');
         listBlog = res.data ?? [];
         update();
       },
       onError: (e) {
-        print('GET DATA BLOG FAIL =>>>>>> ${e.toString()}');
         update();
       },
     );

@@ -28,8 +28,8 @@ class ProductDetailController extends GetxController
   minusAmount() {
     if (amount.value < 1) {
       Get.snackbar(
-        'Warning',
-        'Vui lòng chọn đúng số lượng',
+        'warning'.tr,
+        ''.tr,
         colorText: Colors.black,
         backgroundColor: Colors.white,
       );
@@ -45,12 +45,9 @@ class ProductDetailController extends GetxController
       beforeSend: () {},
       onSuccess: (res) {
         listProductRelated = res.data ?? [];
-        print(
-            'GET RELATED PRODUCT SUCESS ====> ${listProductRelated.toString()}');
         update();
       },
       onError: (e) {
-        print('GET RELATED PRODUCT FAIL ====> ${e.toString()}');
         update();
       },
     );
@@ -85,14 +82,12 @@ class ProductDetailController extends GetxController
       ),
       beforeSend: () {},
       onSuccess: (res) {
-        print('ADD TO CART SUCCESS ====>>>>> ${res.data.toString()}');
         cartController.onInit();
         cartController.update();
         Get.to(CartPage(id: idWidget), id: idWidget);
         update();
       },
       onError: (e) {
-        print('ADD TO CART FAIL ====>>>>> ${e.toString()}');
         update();
       },
     );

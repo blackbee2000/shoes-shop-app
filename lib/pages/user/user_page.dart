@@ -531,7 +531,26 @@ class _UserPageState extends State<UserPage> {
                           width: double.infinity,
                           child: GestureDetector(
                             onTap: () {
-                              // Get.offAll(DashboardPage());
+                              if (controller.name.text.isEmpty ||
+                                  controller.phone.text.isEmpty ||
+                                  controller.email.text.isEmpty) {
+                                Get.snackbar(
+                                  'validation'.tr,
+                                  'name_phone_email_empty'.tr,
+                                  colorText: Colors.black,
+                                  backgroundColor: Colors.white,
+                                );
+                                return;
+                              }
+                              if (controller.phone.text.length != 10) {
+                                Get.snackbar(
+                                  'validation'.tr,
+                                  'enter_diff_ten_phone'.tr,
+                                  colorText: Colors.black,
+                                  backgroundColor: Colors.white,
+                                );
+                                return;
+                              }
                               controller.updateProfile(
                                 controller.name.text,
                                 controller.phone.text,

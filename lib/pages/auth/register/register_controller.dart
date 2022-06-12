@@ -42,18 +42,16 @@ class RegisterController extends GetxController {
         );
       },
       onSuccess: (res) {
-        print('REGISTER SUCESS =>>>>> ${res.toString()}');
         loginController.login(phone, password, 'register');
       },
       onError: (e) {
-        print('REGISTER FAIL =>>>>> ${e.toString()}');
+        Get.back();
         Get.snackbar(
-          'Fail',
-          'Lỗi đăng ký',
+          'fail'.tr,
+          'register_fail'.tr,
           colorText: Colors.black,
           backgroundColor: Colors.white,
         );
-        Get.back();
       },
     );
   }

@@ -33,8 +33,13 @@ class ResetPasswordController extends GetxController {
         Get.to(const LoginPage());
       },
       onError: (e) {
-        print('ĐÂY LÀ LỖI NÈ :)))) ${e.toString()}');
         Get.back();
+        Get.snackbar(
+          'fail'.tr,
+          'reset_password_fail'.tr,
+          colorText: Colors.black,
+          backgroundColor: Colors.white,
+        );
       },
     );
   }

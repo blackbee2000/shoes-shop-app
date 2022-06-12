@@ -236,11 +236,41 @@ class ChangePasswordPage extends StatelessWidget {
                           width: double.infinity,
                           child: GestureDetector(
                             onTap: () {
+                              if (controller.oldPassword.text.isEmpty ||
+                                  controller.newPassword.text.isEmpty ||
+                                  controller.confirmPassword.text.isEmpty) {
+                                Get.snackbar(
+                                  'validation'.tr,
+                                  'old_new_confirm_password_is_empty'.tr,
+                                  colorText: Colors.black,
+                                  backgroundColor: Colors.white,
+                                );
+                                return;
+                              }
+                              if (controller.oldPassword.text.length < 5) {
+                                Get.snackbar(
+                                  'validation'.tr,
+                                  'enter_than_five_password_old'.tr,
+                                  colorText: Colors.black,
+                                  backgroundColor: Colors.white,
+                                );
+                                return;
+                              }
+                              if (controller.newPassword.text.length < 5) {
+                                Get.snackbar(
+                                  'validation'.tr,
+                                  'enter_than_five_password_new'.tr,
+                                  colorText: Colors.black,
+                                  backgroundColor: Colors.white,
+                                );
+                                return;
+                              }
+
                               if (controller.newPassword.text !=
                                   controller.confirmPassword.text) {
                                 Get.snackbar(
-                                  'Validation',
-                                  'Mật khẩu mới và xác nhận mật khẩu không trùng khớp',
+                                  'validation'.tr,
+                                  'match_password'.tr,
                                   colorText: Colors.black,
                                   backgroundColor: Colors.white,
                                 );

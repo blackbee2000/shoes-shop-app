@@ -32,7 +32,6 @@ class OtpController extends GetxController {
         );
       },
       onSuccess: (res) {
-        print('SEND OTP SUCESSS =>>>>>> ${res.toString()}');
         otpResponse.value = res.body!;
         if (type == 'login') {
           Get.to(OtpPage());
@@ -42,7 +41,6 @@ class OtpController extends GetxController {
         update();
       },
       onError: (e) {
-        print('SEND OTP FAIL =>>>>>> ${e.toString()}');
         Get.back();
         update();
       },
@@ -84,7 +82,6 @@ class OtpController extends GetxController {
         );
       },
       onError: (e) {
-        print('ĐÂY LÀ LỖI NÈ :)))) ${e.toString()}');
         Get.back();
       },
     );

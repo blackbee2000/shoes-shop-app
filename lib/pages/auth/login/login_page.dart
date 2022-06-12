@@ -151,8 +151,17 @@ class LoginState extends State<LoginPage> {
                       onTap: () {
                         if (loginController.numberPhone.text.isEmpty) {
                           Get.snackbar(
-                            'Validation',
-                            'Vui lòng nhập số điện thoại',
+                            'validation'.tr,
+                            'enter_phone_forget_pass',
+                            colorText: Colors.black,
+                            backgroundColor: Colors.white,
+                          );
+                          return;
+                        }
+                        if (loginController.numberPhone.text.length != 10) {
+                          Get.snackbar(
+                            'validation'.tr,
+                            'enter_diff_ten_phone'.tr,
                             colorText: Colors.black,
                             backgroundColor: Colors.white,
                           );
@@ -277,6 +286,10 @@ class LoginState extends State<LoginPage> {
                                   ),
                                 ),
                                 cursorColor: Colors.black,
+                                keyboardType: TextInputType.number,
+                                inputFormatters: <TextInputFormatter>[
+                                  FilteringTextInputFormatter.digitsOnly
+                                ], // O
                               ),
                             ],
                           ),
@@ -392,15 +405,33 @@ class LoginState extends State<LoginPage> {
                               if (loginController.phone.text.isEmpty ||
                                   loginController.password.text.isEmpty) {
                                 Get.snackbar(
-                                  'Validation',
-                                  'Phone, password is empty',
+                                  'validation'.tr,
+                                  'phone_password_is_empty'.tr,
                                   colorText: Colors.black,
                                   backgroundColor: Colors.white,
                                 );
-                              } else {
-                                controller.login(controller.phone.text,
-                                    controller.password.text, 'login');
+                                return;
                               }
+                              if (loginController.phone.text.length != 10) {
+                                Get.snackbar(
+                                  'validation'.tr,
+                                  'enter_diff_ten_phone'.tr,
+                                  colorText: Colors.black,
+                                  backgroundColor: Colors.white,
+                                );
+                                return;
+                              }
+                              if (loginController.password.text.length < 5) {
+                                Get.snackbar(
+                                  'validation'.tr,
+                                  'enter_than_five_password'.tr,
+                                  colorText: Colors.black,
+                                  backgroundColor: Colors.white,
+                                );
+                                return;
+                              }
+                              controller.login(controller.phone.text,
+                                  controller.password.text, 'login');
                             },
                             child: ClipOval(
                               child: Container(

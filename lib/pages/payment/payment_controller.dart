@@ -5,6 +5,7 @@ import 'package:shoes_shop_app/models/address.dart';
 import 'package:shoes_shop_app/models/paymethod.dart';
 import 'package:shoes_shop_app/models/voucher.dart';
 import 'package:shoes_shop_app/pages/cart/cart_controller.dart';
+import 'package:shoes_shop_app/pages/dashboard/dashboard_page.dart';
 import 'package:shoes_shop_app/pages/payment/payment_provider.dart';
 import 'package:shoes_shop_app/pages/profile/profile_controller.dart';
 import 'package:shoes_shop_app/services/api_token.dart';
@@ -34,8 +35,6 @@ class PaymentController extends GetxController {
 
   payment(String voucherCode, String typePayment, int totalPriceProduct,
       Address address) {
-    print(
-        'ID PROFILE =====> ${profileController.profile.value.id}, $typePayment $voucherCode, $totalPriceProduct');
     OrderProvider().payment(
       params: {
         "lstCart": cartController.listCartSelected,
@@ -54,18 +53,33 @@ class PaymentController extends GetxController {
           'Authorization': 'Bearer ${ApiToken.to.appToken}',
         },
       ),
-      beforeSend: () {},
+      beforeSend: () {
+        Get.dialog(
+          const SizedBox(
+            height: 15,
+            width: 15,
+            child: Center(
+              child: CircularProgressIndicator(
+                valueColor: AlwaysStoppedAnimation(Colors.white),
+                strokeWidth: 2,
+              ),
+            ),
+          ),
+          barrierDismissible: false,
+        );
+      },
       onSuccess: (data) {
         if (typePayment == 'COD') {
+          Get.back();
+          Get.offAll(const DashboardPage());
           Get.snackbar(
-            'Success',
-            'Payment success',
+            'success'.tr,
+            'payment_success'.tr,
             colorText: Colors.white,
             backgroundColor: Colors.black,
           );
         } else {
           var url = data['data'];
-          print('THANH TOÁN THÀNH CÔNG =====> ${data['data']}');
           launchInWebViewOrVC(Uri.parse(url));
         }
 
@@ -75,10 +89,10 @@ class PaymentController extends GetxController {
         update();
       },
       onError: (e) {
-        print('THANH TOÁN THẤT BẠI =====> ${e.toString()}');
+        Get.back();
         Get.snackbar(
-          'Fail',
-          'Payment fail',
+          'fail'.tr,
+          'payment_fail'.tr,
           colorText: Colors.white,
           backgroundColor: Colors.black,
         );

@@ -34,11 +34,9 @@ class CartController extends GetxController {
         for (var e in listCart) {
           e.isChecked = false;
         }
-        print('GET DATA ALL CART SUCESSS =>>>>>> ${listCart.first.isChecked}');
         update();
       },
       onError: (e) {
-        print('GET DATA ALL CART =>>>>>> ${e.toString()}');
         update();
       },
     );
@@ -85,7 +83,6 @@ class CartController extends GetxController {
           listCartDelete.add(e.id ?? '');
         }
       }
-      print('LIST DELETE ==> ${listCartDelete.toString()}');
       deleteCart(listCartDelete);
     }
   }
@@ -99,11 +96,26 @@ class CartController extends GetxController {
           'Authorization': 'Bearer ${ApiToken.to.appToken}',
         },
       ),
-      beforeSend: () {},
+      beforeSend: () {
+        Get.dialog(
+          const SizedBox(
+            height: 15,
+            width: 15,
+            child: Center(
+              child: CircularProgressIndicator(
+                valueColor: AlwaysStoppedAnimation(Colors.white),
+                strokeWidth: 2,
+              ),
+            ),
+          ),
+          barrierDismissible: false,
+        );
+      },
       onSuccess: (data) {
+        Get.back();
         Get.snackbar(
-          'Success',
-          'Delete success',
+          'success'.tr,
+          'delete_success'.tr,
           colorText: Colors.white,
           backgroundColor: Colors.black,
         );
@@ -111,10 +123,10 @@ class CartController extends GetxController {
         update();
       },
       onError: (e) {
-        print('DELETE CART FAIL ====> ${e.toString()}');
+        Get.back();
         Get.snackbar(
-          'Success',
-          'Delete fail',
+          'fail'.tr,
+          'delete_fail'.tr,
           colorText: Colors.white,
           backgroundColor: Colors.black,
         );

@@ -318,8 +318,8 @@ class ProductDetailState extends State<ProductDetailPage>
                         onTap: () {
                           // Navigator.of(context);
                           Get.back();
-                          controller.addToCart(product, size, color, amount,
-                              AppConstant.PRODUCT);
+                          controller.addToCart(
+                              product, size, color, amount, widget.id);
                         },
                         child: Container(
                           width: double.infinity,

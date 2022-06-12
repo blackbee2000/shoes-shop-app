@@ -31,12 +31,9 @@ class SearchController extends GetxController {
       beforeSend: () {},
       onSuccess: (res) {
         listCompany = res.data ?? [];
-        print(
-            'SUCESSSSSSSS COMPANY IN PRODUCT ======>>>>>> ${listCompany.toString()}');
         update();
       },
       onError: (e) {
-        print('FAILLL =>>>>>>>> ${e.toString()}');
         update();
       },
     );
@@ -78,12 +75,10 @@ class SearchController extends GetxController {
         if (ApiToken.to.isTokenExisted == true) {
           getListProductFavorite(listProductSearch);
         }
-        print('SEARCH SUCCESS =======> ${listProductSearch.toString()}');
         Get.back();
         update();
       },
       onError: (e) {
-        print('SEARCH FAIL ====> ${e.toString()}');
         Get.back();
         update();
       },
@@ -108,12 +103,9 @@ class SearchController extends GetxController {
             }
           }
         }
-        print(
-            'GET ALLL PRODUCT FAVORITE SUCESSS =======> ${productList.last.isLike.toString()}');
         update();
       },
       onError: (e) {
-        print('GET ALLL PRODUCT FAVORITE ===> ${e.toString()}');
         update();
       },
     );
@@ -151,8 +143,8 @@ class SearchController extends GetxController {
       onSuccess: (res) {
         if (isLike == false) {
           Get.snackbar(
-            'Success',
-            'Đã thích sản phẩm',
+            'success'.tr,
+            'product_liked',
             colorText: Colors.black,
             backgroundColor: Colors.white,
           );
@@ -174,12 +166,11 @@ class SearchController extends GetxController {
       },
       onError: (e) {
         Get.snackbar(
-          'Fail',
-          'Đã xảy ra lỗi',
+          'fail'.tr,
+          'happen_error'.tr,
           colorText: Colors.black,
           backgroundColor: Colors.white,
         );
-        print('ĐÃ XẢY RA LỖI PRODUCT =====> ${e}');
         update();
       },
     );

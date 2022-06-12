@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:get/get.dart';
@@ -82,6 +83,9 @@ class OtpPage extends GetView<OtpController> {
                     selectedColor: Colors.black,
                   ),
                   keyboardType: TextInputType.number,
+                  inputFormatters: <TextInputFormatter>[
+                    FilteringTextInputFormatter.digitsOnly
+                  ],
                   textStyle: TextStyle(
                     color: Get.theme.primaryColor,
                     fontSize: 30,

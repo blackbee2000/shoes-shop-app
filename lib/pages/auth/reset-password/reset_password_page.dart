@@ -102,6 +102,15 @@ class ResetPasswordPage extends StatelessWidget {
                 alignment: Alignment.center,
                 child: GestureDetector(
                   onTap: () {
+                    if (controller.password.text.length < 5) {
+                      Get.snackbar(
+                        'validation'.tr,
+                        'enter_than_five_password'.tr,
+                        colorText: Colors.black,
+                        backgroundColor: Colors.white,
+                      );
+                      return;
+                    }
                     controller.resetPassword(phone, controller.password.text);
                   },
                   child: Container(

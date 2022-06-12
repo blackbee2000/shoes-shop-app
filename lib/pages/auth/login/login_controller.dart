@@ -52,9 +52,7 @@ class LoginController extends GetxController {
         );
       },
       onSuccess: (res) {
-        print('LOGIN SUCESSS =>>>>>> ${res.toString()}');
         setToken(res.data?.token);
-        print('TOKEN NEFFFFFFF =>>>>>> ${ApiToken.to.appToken}');
         if (type == 'login') {
           dashboardController.onInit();
           dashboardController.update();
@@ -62,8 +60,6 @@ class LoginController extends GetxController {
         } else if (type == 'register') {
           profileController.onInit();
           Future.delayed(const Duration(milliseconds: 500)).then((_) {
-            print(
-                'LAY ID NE HAAAAAAAAA ==>>>>>>> ${profileController.profile.value.fullName}');
             Get.to(
               UserPage(
                 id: 1,
@@ -75,14 +71,13 @@ class LoginController extends GetxController {
         update();
       },
       onError: (e) {
+        Get.back();
         Get.snackbar(
-          'Fail',
-          'Lỗi đăng nhập',
+          'fail'.tr,
+          'login_fail'.tr,
           colorText: Colors.black,
           backgroundColor: Colors.white,
         );
-        // Get.back();
-        print('LOGIN FAIL =>>> ${e.toString()}');
         update();
       },
     );

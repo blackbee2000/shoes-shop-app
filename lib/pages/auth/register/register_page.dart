@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:shoes_shop_app/pages/auth/register/register_controller.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:email_validator/email_validator.dart';
 
 class RegisterPage extends StatelessWidget {
   final registerController = Get.put(RegisterController());
   RegisterPage({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -33,7 +36,7 @@ class RegisterPage extends StatelessWidget {
                         height: 90,
                       ),
                       Text(
-                        'Register',
+                        'register'.tr,
                         style: GoogleFonts.ebGaramond(
                           color: Colors.white,
                           fontSize: 50,
@@ -92,6 +95,10 @@ class RegisterPage extends StatelessWidget {
                                   ),
                                 ),
                                 cursorColor: Colors.black,
+                                keyboardType: TextInputType.number,
+                                inputFormatters: <TextInputFormatter>[
+                                  FilteringTextInputFormatter.digitsOnly
+                                ], //
                               ),
                             ],
                           ),
@@ -186,8 +193,12 @@ class RegisterPage extends StatelessWidget {
                                 height: 20,
                                 fit: BoxFit.contain,
                               ),
-                              TextField(
+                              TextFormField(
                                 controller: controller.email,
+                                validator: (value) =>
+                                    EmailValidator.validate(value!)
+                                        ? null
+                                        : "please_enter_a_valid_email".tr,
                                 style: GoogleFonts.ebGaramond(
                                   color: Colors.black,
                                   fontSize: 14,
@@ -219,6 +230,35 @@ class RegisterPage extends StatelessWidget {
                           width: double.infinity,
                           child: GestureDetector(
                             onTap: () {
+                              if (controller.phone.text.isEmpty ||
+                                  controller.password.text.isEmpty ||
+                                  controller.email.text.isEmpty) {
+                                Get.snackbar(
+                                  'validation'.tr,
+                                  'phone_password_email_empty'.tr,
+                                  colorText: Colors.black,
+                                  backgroundColor: Colors.white,
+                                );
+                                return;
+                              }
+                              if (controller.phone.text.length != 10) {
+                                Get.snackbar(
+                                  'validation'.tr,
+                                  'enter_diff_ten_phone'.tr,
+                                  colorText: Colors.black,
+                                  backgroundColor: Colors.white,
+                                );
+                                return;
+                              }
+                              if (controller.password.text.length < 5) {
+                                Get.snackbar(
+                                  'validation'.tr,
+                                  'enter_than_five_password'.tr,
+                                  colorText: Colors.black,
+                                  backgroundColor: Colors.white,
+                                );
+                                return;
+                              }
                               controller.register(
                                   controller.phone.text,
                                   controller.password.text,

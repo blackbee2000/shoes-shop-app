@@ -31,12 +31,10 @@ class ProductController extends GetxController {
         } else {
           getAllProduct(listCompany.first.id ?? '', []);
         }
-        print(
-            'SUCESSSSSSSS COMPANY IN PRODUCT ======>>>>>> ${listCompany.first.id.toString()}');
+
         update();
       },
       onError: (e) {
-        print('FAILLL =>>>>>>>> ${e.toString()}');
         update();
       },
     );
@@ -65,12 +63,10 @@ class ProductController extends GetxController {
             }
           }
         }
-        print(
-            'GET PRODUCT SUCESSSSSSSSSSSSSS ==>>>>>>> ${listProduct.toString()}');
+
         update();
       },
       onError: (e) {
-        print('GET PRODUCT FAIL ==>>>>>>> ${e.toString()}');
         update();
       },
     );
@@ -89,8 +85,8 @@ class ProductController extends GetxController {
       onSuccess: (res) {
         if (isLike == false) {
           Get.snackbar(
-            'Success',
-            'Đã thích sản phẩm',
+            'success'.tr,
+            'product_liked',
             colorText: Colors.black,
             backgroundColor: Colors.white,
           );
@@ -112,12 +108,11 @@ class ProductController extends GetxController {
       },
       onError: (e) {
         Get.snackbar(
-          'Fail',
-          'Đã xảy ra lỗi',
+          'fail'.tr,
+          'happen_error'.tr,
           colorText: Colors.black,
           backgroundColor: Colors.white,
         );
-        print('ĐÃ XẢY RA LỖI PRODUCT =====> ${e}');
         update();
       },
     );
@@ -137,7 +132,6 @@ class ProductController extends GetxController {
         update();
       },
       onError: (e) {
-        print('GET ALLL PRODUCT FAVORITE ===> ${e.toString()}');
         update();
       },
     );

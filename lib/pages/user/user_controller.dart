@@ -90,7 +90,6 @@ class UserController extends GetxController with StateMixin {
   }
 
   updateProfile(String name, String phone, String email, String image) {
-    print('PROFILE =>>>>>>> ${DateTime.now().toUtc().toString()}');
     UserProvider().updateProfile(
       params: {
         "fullName": name,
@@ -123,25 +122,21 @@ class UserController extends GetxController with StateMixin {
           ),
           barrierDismissible: false,
         );
-        print('IDDDDD ${profileController.profile.value.id}');
       },
       onSuccess: (res) {
-        print('UPDATE PROFILE SUCESSS =>>>>>> ${res.toString()}');
         profileController.onInit();
         profileController.update();
-        Future.delayed(const Duration(milliseconds: 1000)).then((_) {
-          Get.offAll(const DashboardPage());
-        });
+        Get.back();
+        Get.offAll(const DashboardPage());
         update();
       },
       onError: (e) {
         Get.snackbar(
-          'Fail',
-          'Lỗi cập nhật thông tin',
+          'fail'.tr,
+          'update_info_fail'.tr,
           colorText: Colors.black,
           backgroundColor: Colors.white,
         );
-        print('UPDATE PROFILE FAIL =>>> ${e.toString()}');
         update();
       },
     );

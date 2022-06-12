@@ -29,27 +29,27 @@ class YourOrderController extends GetxController
 
   fetchData() {
     listTabOrderStatus.add(TabOrderStatus(
-      name: 'Chưa thanh toán',
+      name: 'new_order'.tr,
       code: 1,
       image: 'assets/icons/icon-no-pay.png',
     ));
     listTabOrderStatus.add(TabOrderStatus(
-      name: 'Đã đóng gói',
+      name: 'packed'.tr,
       code: 2,
       image: 'assets/icons/icon-box-2.png',
     ));
     listTabOrderStatus.add(TabOrderStatus(
-      name: 'Đã giao hàng',
+      name: 'shipping'.tr,
       code: 3,
       image: 'assets/icons/icon-shipping.png',
     ));
     listTabOrderStatus.add(TabOrderStatus(
-      name: 'Hoàn tất',
+      name: 'done'.tr,
       code: 4,
       image: 'assets/icons/icon-done-cart.png',
     ));
     listTabOrderStatus.add(TabOrderStatus(
-      name: 'Đơn đã hủy',
+      name: 'cancel_order'.tr,
       code: 5,
       image: 'assets/icons/icon-cancel.png',
     ));
@@ -65,12 +65,10 @@ class YourOrderController extends GetxController
       ),
       beforeSend: () {},
       onSuccess: (res) {
-        print('GET ALL ORDER SUCESS ====> ${res.data.toString()}');
         listOrder = res.data ?? [];
         update();
       },
       onError: (e) {
-        print('GET ALL ORDER FAIL ====> ${e.toString()}');
         update();
       },
     );
@@ -86,12 +84,10 @@ class YourOrderController extends GetxController
       ),
       beforeSend: () {},
       onSuccess: (res) {
-        print('GET ALL ORDER SUCESS ====> ${res.data.toString()}');
         listOrder = res.data ?? [];
         update();
       },
       onError: (e) {
-        print('GET ALL ORDER FAIL ====> ${e.toString()}');
         update();
       },
     );
@@ -109,8 +105,8 @@ class YourOrderController extends GetxController
         beforeSend: () {},
         onSuccess: (data) {
           Get.snackbar(
-            'Sucess',
-            'Đã hủy đơn hàng thành công',
+            'success'.tr,
+            'cancel_order_success'.tr,
             colorText: Colors.white,
             backgroundColor: Colors.black,
           );
@@ -119,12 +115,11 @@ class YourOrderController extends GetxController
         },
         onError: (e) {
           Get.snackbar(
-            'Fail',
-            'Hủy đơn hàng thất bại',
+            'fail',
+            'cancel_order_fail'.tr,
             colorText: Colors.white,
             backgroundColor: Colors.black,
           );
-          print(e);
           update();
         });
   }

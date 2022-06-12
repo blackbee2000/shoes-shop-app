@@ -5,6 +5,7 @@ import 'package:shoes_shop_app/pages/change-password/change_password_provider.da
 import 'package:shoes_shop_app/pages/profile/profile_controller.dart';
 import 'package:shoes_shop_app/pages/profile/profile_page.dart';
 import 'package:shoes_shop_app/services/api_token.dart';
+import 'package:shoes_shop_app/utils/app_constant.dart';
 
 class ChangePasswordController extends GetxController {
   TextEditingController oldPassword = TextEditingController();
@@ -44,21 +45,24 @@ class ChangePasswordController extends GetxController {
       },
       onSuccess: (res) {
         profileController.profile.value = res.data!;
+        Get.back();
         Get.snackbar(
-          '',
-          'Đổi mật khẩu thành công',
+          'success'.tr,
+          'change_password_success'.tr,
           colorText: Colors.black,
           backgroundColor: Colors.white,
         );
-        // Future.delayed(const Duration(milliseconds: 500)).then((_) {
-        //   Get.to(ProfilePage());
-        // });
+
         update();
       },
       onError: (e) {
         Get.back();
-        print('CHANGE PASSWORD FAIL =>>> ${e.toString()}');
-        Get.back();
+        Get.snackbar(
+          'fail'.tr,
+          'change_password_fail'.tr,
+          colorText: Colors.black,
+          backgroundColor: Colors.white,
+        );
         update();
       },
     );
