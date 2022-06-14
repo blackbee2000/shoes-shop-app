@@ -42,6 +42,12 @@ class OtpController extends GetxController {
       },
       onError: (e) {
         Get.back();
+        Get.snackbar(
+          'fail'.tr,
+          'happen_error'.tr,
+          colorText: Colors.white,
+          backgroundColor: const Color(0xffFF0000),
+        );
         update();
       },
     );
@@ -83,6 +89,12 @@ class OtpController extends GetxController {
       },
       onError: (e) {
         Get.back();
+        Get.snackbar(
+          'fail'.tr,
+          'happen_error'.tr,
+          colorText: Colors.white,
+          backgroundColor: const Color(0xffFF0000),
+        );
       },
     );
   }

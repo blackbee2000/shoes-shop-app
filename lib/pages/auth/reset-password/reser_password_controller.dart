@@ -37,8 +37,8 @@ class ResetPasswordController extends GetxController {
         Get.snackbar(
           'fail'.tr,
           'reset_password_fail'.tr,
-          colorText: Colors.black,
-          backgroundColor: Colors.white,
+          colorText: Colors.white,
+          backgroundColor: const Color(0xffFF0000),
         );
       },
     );

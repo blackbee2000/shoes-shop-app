@@ -82,10 +82,10 @@ class ProductFavoriteController extends GetxController {
       beforeSend: () {},
       onSuccess: (res) {
         Get.snackbar(
-          'Success',
-          'Đã hủy thích sản phẩm',
-          colorText: Colors.black,
-          backgroundColor: Colors.white,
+          'success'.tr,
+          'product_canceled_like'.tr,
+          colorText: Colors.white,
+          backgroundColor: const Color(0xff00FF00),
         );
 
         listProductFavoriteFinal.clear();
@@ -93,7 +93,12 @@ class ProductFavoriteController extends GetxController {
         update();
       },
       onError: (e) {
-        print('ĐÃ XẢY RA LỖI =====> ${e.toString()}');
+        Get.snackbar(
+          'fail'.tr,
+          'happen_error'.tr,
+          colorText: Colors.white,
+          backgroundColor: const Color(0xffFF0000),
+        );
         update();
       },
     );

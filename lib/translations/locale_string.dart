@@ -155,6 +155,16 @@ class LocaleString extends Translations {
           "cancel_order": "Order canceled",
           "cancel_order_success": "Cancel order success",
           "cancel_order_fail": "Cancel order failed",
+          "no_cart": "Cart is empty, please add product to cart",
+          "go_to_product": "Go to products",
+          "add_address_success": "Add address success",
+          "add_address_fail": "Add address fail",
+          "update_address_success": "Update address success",
+          "update_address_fail": "Update address failed",
+          "set_address_default_success": "Set address default success",
+          "set_address_default_fail": "Set address default fail",
+          "delete_address_success": "Delete address success",
+          "delete_address_fail": "Delete address fail",
         },
         "vi_VN": {
           "product_title": "Sản phẩm",
@@ -312,6 +322,16 @@ class LocaleString extends Translations {
           "cancel_order": "Đơn đã hủy",
           "cancel_order_success": "Đã hủy đơn hàng thành công",
           "cancel_order_fail": "Hủy đơn hàng thất bại",
+          "no_cart": "Giỏ hàng rỗng, hãy thêm sản phẩm vào giỏ",
+          "go_to_product": "Đi đến sản phẩm",
+          "add_address_success": "Thêm địa chỉ thành công",
+          "add_address_fail": "Thêm địa chỉ thất bại",
+          "update_address_success": "Cập nhật địa chỉ thành công",
+          "update_address_fail": "Cập nhật địa chỉ thất bại",
+          "set_address_default_success": "Cài đặt địa chỉ mặc định thành công",
+          "set_address_default_fail": "Cài đặt địa chỉ mặc định thất bại",
+          "delete_address_success": "Xóa địa chỉ thành công",
+          "delete_address_fail": "Xóa địa chỉ thất bại",
         }
       };
 }

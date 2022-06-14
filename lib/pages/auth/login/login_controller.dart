@@ -75,8 +75,8 @@ class LoginController extends GetxController {
         Get.snackbar(
           'fail'.tr,
           'login_fail'.tr,
-          colorText: Colors.black,
-          backgroundColor: Colors.white,
+          colorText: Colors.white,
+          backgroundColor: const Color(0xffFF0000),
         );
         update();
       },

@@ -117,7 +117,7 @@ class CartController extends GetxController {
           'success'.tr,
           'delete_success'.tr,
           colorText: Colors.white,
-          backgroundColor: Colors.black,
+          backgroundColor: const Color(0xff00FF00),
         );
         getAllCart();
         update();
@@ -128,7 +128,7 @@ class CartController extends GetxController {
           'fail'.tr,
           'delete_fail'.tr,
           colorText: Colors.white,
-          backgroundColor: Colors.black,
+          backgroundColor: const Color(0xffFF0000),
         );
       },
     );

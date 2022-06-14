@@ -87,15 +87,15 @@ class ProductController extends GetxController {
           Get.snackbar(
             'success'.tr,
             'product_liked',
-            colorText: Colors.black,
-            backgroundColor: Colors.white,
+            colorText: Colors.white,
+            backgroundColor: const Color(0xff00FF00),
           );
         } else {
           Get.snackbar(
-            'Success',
-            'Đã hủy thích sản phẩm',
-            colorText: Colors.black,
-            backgroundColor: Colors.white,
+            'success'.tr,
+            'product_canceled_like'.tr,
+            colorText: Colors.white,
+            backgroundColor: const Color(0xff00FF00),
           );
         }
 
@@ -110,8 +110,8 @@ class ProductController extends GetxController {
         Get.snackbar(
           'fail'.tr,
           'happen_error'.tr,
-          colorText: Colors.black,
-          backgroundColor: Colors.white,
+          colorText: Colors.white,
+          backgroundColor: const Color(0xffFF0000),
         );
         update();
       },

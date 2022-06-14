@@ -68,11 +68,9 @@ class AddressController extends GetxController {
             listAddress.remove(e);
           }
         }
-        print('LIST ADDRESSSSSS =>>>>> ${listAddress.toString()}');
         update();
       },
       onError: (e) {
-        print('GET ALL ADDRESS FAIL =>>>>> ${e.toString()}');
         update();
       },
     );
@@ -89,12 +87,9 @@ class AddressController extends GetxController {
       onSuccess: (res) {
         listAddressDefault.value = res.data!;
         paymentController.addressSelected.value = res.data!;
-        print(
-            'LIST ADDRESSSSSS DEFAULT =>>>>> ${paymentController.addressSelected.toString()}');
         update();
       },
       onError: (e) {
-        print('GET DEFAULT ADDRESS FAIL =>>>>> ${e.toString()}');
         update();
       },
     );
@@ -105,12 +100,10 @@ class AddressController extends GetxController {
       option: Options(),
       beforeSend: () {},
       onSuccess: (res) {
-        print('GET DATA PROVINCE SUCESS ====> ${res.results.toString()}');
         listProvince = res.results ?? [];
         update();
       },
       onError: (e) {
-        print('GET DATA PROVINCE FAIL ====> ${e.toString()}');
         update();
       },
     );
@@ -122,12 +115,10 @@ class AddressController extends GetxController {
       option: Options(),
       beforeSend: () {},
       onSuccess: (res) {
-        print('GET DATA DISTRICTS SUCESS ====> ${res.results.toString()}');
         listDistrict = res.results ?? [];
         update();
       },
       onError: (e) {
-        print('GET DATA DISTRICTS FAIL ====> ${e.toString()}');
         update();
       },
     );
@@ -139,12 +130,10 @@ class AddressController extends GetxController {
       option: Options(),
       beforeSend: () {},
       onSuccess: (res) {
-        print('GET DATA WARDS SUCESS ====> ${res.results.toString()}');
         listWard = res.results ?? [];
         update();
       },
       onError: (e) {
-        print('GET DATA WARDS FAIL ====> ${e.toString()}');
         update();
       },
     );
@@ -176,12 +165,22 @@ class AddressController extends GetxController {
       onSuccess: (res) {
         init();
         Get.back();
-        print('DELETE ADDRES SUCESS ${res.data.toString()}');
+        Get.snackbar(
+          'success'.tr,
+          'delete_address_success'.tr,
+          colorText: Colors.white,
+          backgroundColor: const Color(0xff00FF00),
+        );
         update();
       },
       onError: (e) {
         Get.back();
-        print('DELETE ADDRES FAIL ${e.toString()}');
+        Get.snackbar(
+          'fail'.tr,
+          'delete_address_fail'.tr,
+          colorText: Colors.white,
+          backgroundColor: const Color(0xffFF0000),
+        );
         update();
       },
     );
@@ -229,12 +228,22 @@ class AddressController extends GetxController {
       onSuccess: (res) {
         init();
         Get.back();
-        print('CREATE ADDRES SUCESS ${res.data.toString()}');
+        Get.snackbar(
+          'success'.tr,
+          'add_address_success'.tr,
+          colorText: Colors.white,
+          backgroundColor: const Color(0xff00FF00),
+        );
         update();
       },
       onError: (e) {
         Get.back();
-        print('CREATE ADDRES FAIL ${e.toString()}');
+        Get.snackbar(
+          'fail'.tr,
+          'add_address_fail'.tr,
+          colorText: Colors.white,
+          backgroundColor: const Color(0xffFF0000),
+        );
         update();
       },
     );
@@ -285,12 +294,22 @@ class AddressController extends GetxController {
       onSuccess: (res) {
         init();
         Get.back();
-        print('UPDATE ADDRES SUCESS ${res.data.toString()}');
+        Get.snackbar(
+          'success'.tr,
+          'update_address_success'.tr,
+          colorText: Colors.white,
+          backgroundColor: const Color(0xff00FF00),
+        );
         update();
       },
       onError: (e) {
         Get.back();
-        print('UPDATE ADDRES FAIL ${e.toString()}');
+        Get.snackbar(
+          'fail'.tr,
+          'update_address_fail'.tr,
+          colorText: Colors.white,
+          backgroundColor: const Color(0xffFF0000),
+        );
         update();
       },
     );
@@ -324,12 +343,22 @@ class AddressController extends GetxController {
       onSuccess: (res) {
         init();
         Get.back();
-        print('UPDATE DEFAULT ADDRES SUCESS ${res.data.toString()}');
+        Get.snackbar(
+          'fail'.tr,
+          'set_address_default_success'.tr,
+          colorText: Colors.white,
+          backgroundColor: const Color(0xff00FF00),
+        );
         update();
       },
       onError: (e) {
         Get.back();
-        print('UPDATE DEFAULT ADDRES FAIL ${e.toString()}');
+        Get.snackbar(
+          'fail'.tr,
+          'set_address_default_fail'.tr,
+          colorText: Colors.white,
+          backgroundColor: const Color(0xffFF0000),
+        );
         update();
       },
     );

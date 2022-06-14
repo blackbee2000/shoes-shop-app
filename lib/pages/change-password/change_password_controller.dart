@@ -49,8 +49,8 @@ class ChangePasswordController extends GetxController {
         Get.snackbar(
           'success'.tr,
           'change_password_success'.tr,
-          colorText: Colors.black,
-          backgroundColor: Colors.white,
+          colorText: Colors.white,
+          backgroundColor: const Color(0xff00FF00),
         );
 
         update();
@@ -60,8 +60,8 @@ class ChangePasswordController extends GetxController {
         Get.snackbar(
           'fail'.tr,
           'change_password_fail'.tr,
-          colorText: Colors.black,
-          backgroundColor: Colors.white,
+          colorText: Colors.white,
+          backgroundColor: const Color(0xffFF0000),
         );
         update();
       },

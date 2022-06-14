@@ -49,8 +49,8 @@ class RegisterController extends GetxController {
         Get.snackbar(
           'fail'.tr,
           'register_fail'.tr,
-          colorText: Colors.black,
-          backgroundColor: Colors.white,
+          colorText: Colors.white,
+          backgroundColor: const Color(0xffFF0000),
         );
       },
     );

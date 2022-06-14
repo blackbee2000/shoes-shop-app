@@ -76,7 +76,7 @@ class PaymentController extends GetxController {
             'success'.tr,
             'payment_success'.tr,
             colorText: Colors.white,
-            backgroundColor: Colors.black,
+            backgroundColor: const Color(0xff00FF00),
           );
         } else {
           var url = data['data'];
@@ -94,7 +94,7 @@ class PaymentController extends GetxController {
           'fail'.tr,
           'payment_fail'.tr,
           colorText: Colors.white,
-          backgroundColor: Colors.black,
+          backgroundColor: const Color(0xffFF0000),
         );
         update();
       },

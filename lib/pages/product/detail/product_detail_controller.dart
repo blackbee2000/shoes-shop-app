@@ -88,6 +88,12 @@ class ProductDetailController extends GetxController
         update();
       },
       onError: (e) {
+        Get.snackbar(
+          'fail'.tr,
+          'happen_error'.tr,
+          colorText: Colors.white,
+          backgroundColor: const Color(0xffFF0000),
+        );
         update();
       },
     );

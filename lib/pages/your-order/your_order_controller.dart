@@ -108,7 +108,7 @@ class YourOrderController extends GetxController
             'success'.tr,
             'cancel_order_success'.tr,
             colorText: Colors.white,
-            backgroundColor: Colors.black,
+            backgroundColor: const Color(0xff00FF00),
           );
           getOrderStatus(1);
           update();
@@ -118,7 +118,7 @@ class YourOrderController extends GetxController
             'fail',
             'cancel_order_fail'.tr,
             colorText: Colors.white,
-            backgroundColor: Colors.black,
+            backgroundColor: const Color(0xffFF0000),
           );
           update();
         });

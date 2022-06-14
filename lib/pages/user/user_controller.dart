@@ -134,8 +134,8 @@ class UserController extends GetxController with StateMixin {
         Get.snackbar(
           'fail'.tr,
           'update_info_fail'.tr,
-          colorText: Colors.black,
-          backgroundColor: Colors.white,
+          colorText: Colors.white,
+          backgroundColor: const Color(0xffFF0000),
         );
         update();
       },
