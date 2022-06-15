@@ -715,8 +715,7 @@ class SearchPage extends StatelessWidget {
                                                     imageUrl: controller
                                                         .listProductSearch[
                                                             index]
-                                                        .imageProduct!
-                                                        .first,
+                                                        .imageProduct!,
                                                     useOldImageOnUrlChange:
                                                         false,
                                                     progressIndicatorBuilder:

@@ -7,7 +7,7 @@ class Product {
   String? id;
   String? nameProductVi;
   String? nameProductEn;
-  List<String>? imageProduct;
+  String? imageProduct;
   String? descriptionVi;
   String? descriptionEn;
   num? rating;

@@ -165,6 +165,7 @@ class LocaleString extends Translations {
           "set_address_default_fail": "Set address default fail",
           "delete_address_success": "Delete address success",
           "delete_address_fail": "Delete address fail",
+          "rate": "Rate",
         },
         "vi_VN": {
           "product_title": "Sản phẩm",
@@ -332,6 +333,7 @@ class LocaleString extends Translations {
           "set_address_default_fail": "Cài đặt địa chỉ mặc định thất bại",
           "delete_address_success": "Xóa địa chỉ thành công",
           "delete_address_fail": "Xóa địa chỉ thất bại",
+          "rate": "Đánh giá",
         }
       };
 }

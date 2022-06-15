@@ -308,8 +308,8 @@ class HomePageState extends State<HomePage> {
                                               child: CachedNetworkImage(
                                                 width: 300,
                                                 fit: BoxFit.contain,
-                                                imageUrl: e.product!
-                                                    .imageProduct!.first,
+                                                imageUrl:
+                                                    e.product!.imageProduct!,
                                                 useOldImageOnUrlChange: false,
                                                 progressIndicatorBuilder:
                                                     (context, url,
@@ -346,7 +346,7 @@ class HomePageState extends State<HomePage> {
                             Obx(
                               () => Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
-                                children: [1, 2, 3, 4, 5]
+                                children: homeController.listNewProduct
                                     .asMap()
                                     .entries
                                     .map(
@@ -472,8 +472,7 @@ class HomePageState extends State<HomePage> {
                                         fit: BoxFit.contain,
                                         imageUrl: controller
                                             .listDiscountProduct[index]
-                                            .imageProduct!
-                                            .first,
+                                            .imageProduct!,
                                         useOldImageOnUrlChange: false,
                                         progressIndicatorBuilder:
                                             (context, url, downloadProgress) =>
@@ -788,8 +787,7 @@ class HomePageState extends State<HomePage> {
                                         fit: BoxFit.contain,
                                         imageUrl: controller
                                             .listTrendingProduct[index]
-                                            .imageProduct!
-                                            .first,
+                                            .imageProduct!,
                                         useOldImageOnUrlChange: false,
                                         progressIndicatorBuilder:
                                             (context, url, downloadProgress) =>

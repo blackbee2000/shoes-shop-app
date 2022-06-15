@@ -14,7 +14,7 @@ import 'routes/app_routes.dart';
 void main() async {
   FlavorConfig(
     values: FlavorValues(
-      baseUrl: 'https://lt-shoes-shop.herokuapp.com/api',
+      baseUrl: 'http://172.16.1.180:3001/api',
     ),
   );
   WidgetsFlutterBinding.ensureInitialized();

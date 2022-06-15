@@ -610,7 +610,7 @@ class ProductDetailState extends State<ProductDetailPage>
                                 CachedNetworkImage(
                                   width: 100,
                                   fit: BoxFit.contain,
-                                  imageUrl: widget.product.imageProduct!.first,
+                                  imageUrl: widget.product.imageProduct!,
                                   useOldImageOnUrlChange: false,
                                   progressIndicatorBuilder:
                                       (context, url, downloadProgress) =>
@@ -1106,7 +1106,7 @@ class ProductDetailState extends State<ProductDetailPage>
                                   CachedNetworkImage(
                                     width: 120,
                                     fit: BoxFit.contain,
-                                    imageUrl: e.imageProduct!.first,
+                                    imageUrl: e.imageProduct!,
                                     useOldImageOnUrlChange: false,
                                     progressIndicatorBuilder:
                                         (context, url, downloadProgress) =>

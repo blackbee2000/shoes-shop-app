@@ -533,8 +533,7 @@ class ProductPage extends GetView<ProductController> {
                                                           imageUrl: controller
                                                               .listProduct[
                                                                   index]
-                                                              .imageProduct!
-                                                              .first,
+                                                              .imageProduct!,
                                                           useOldImageOnUrlChange:
                                                               false,
                                                           progressIndicatorBuilder:

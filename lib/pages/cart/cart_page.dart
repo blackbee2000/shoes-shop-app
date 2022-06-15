@@ -240,8 +240,7 @@ class CartState extends State<CartPage> {
                                                           imageUrl: e
                                                               .value
                                                               .lstProduct!
-                                                              .imageProduct!
-                                                              .first,
+                                                              .imageProduct!,
                                                           useOldImageOnUrlChange:
                                                               false,
                                                           progressIndicatorBuilder:

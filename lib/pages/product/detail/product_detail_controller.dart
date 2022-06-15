@@ -60,11 +60,11 @@ class ProductDetailController extends GetxController
           "_id": product.id,
           "nameProductVi": product.nameProductVi,
           "nameProductEn": product.nameProductEn,
-          "imageProduct": product.imageProduct!.first,
+          "imageProduct": product.imageProduct,
           "descriptionVi": product.descriptionVi,
           "descriptionEn": product.descriptionEn,
           "rating": product.rating,
-          "type": {"size": size, "color": color},
+          "type": {"size": size},
           "idCompany": product.idCompany,
           "price": product.price,
           "productCode": product.productCode
@@ -88,6 +88,7 @@ class ProductDetailController extends GetxController
         update();
       },
       onError: (e) {
+        print(e.toString());
         Get.snackbar(
           'fail'.tr,
           'happen_error'.tr,

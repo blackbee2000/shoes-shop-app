@@ -32,12 +32,6 @@ class BlogDetailPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    listBlogRelated = blogController.listBlog;
-    // for (var e in listBlogRelated) {
-    //   if (blog.id == e.id) {
-    //     listBlogRelated.remove(e);
-    //   }
-    // }
     return SafeArea(
       child: Container(
         width: double.infinity,

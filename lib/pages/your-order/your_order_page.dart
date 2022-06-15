@@ -438,7 +438,7 @@ class YourOrderState extends State<YourOrderPage> {
                                                     CrossAxisAlignment.start,
                                                 children: [
                                                   Text(
-                                                    '${controller.listOrder[index].id != null && controller.listOrder[index].id!.isNotEmpty ? controller.listOrder[index].id?.substring(0, 10) : '--'}',
+                                                    '${controller.listOrder[index].id != null && controller.listOrder[index].id!.isNotEmpty ? controller.listOrder[index].id : '--'}',
                                                     style:
                                                         GoogleFonts.ebGaramond(
                                                       color: Colors.black,

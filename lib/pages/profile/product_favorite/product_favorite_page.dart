@@ -210,8 +210,7 @@ class ProductFavoriteState extends State<ProductFavoritePage> {
                                       fit: BoxFit.contain,
                                       imageUrl: controller
                                           .listProductFavoriteFinal[index]
-                                          .imageProduct!
-                                          .first,
+                                          .imageProduct!,
                                       useOldImageOnUrlChange: false,
                                       progressIndicatorBuilder:
                                           (context, url, downloadProgress) =>

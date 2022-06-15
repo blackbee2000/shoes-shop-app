@@ -320,7 +320,7 @@ class PaymentState extends State<PaymentPage> {
                                               width: 70,
                                               fit: BoxFit.contain,
                                               imageUrl: e.value.lstProduct!
-                                                  .imageProduct!.first,
+                                                  .imageProduct!,
                                               useOldImageOnUrlChange: false,
                                               progressIndicatorBuilder:
                                                   (context, url,
