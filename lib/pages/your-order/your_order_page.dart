@@ -446,6 +446,9 @@ class YourOrderState extends State<YourOrderPage> {
                                                       fontWeight:
                                                           FontWeight.w600,
                                                     ),
+                                                    maxLines: 1,
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
                                                   ),
                                                   const SizedBox(
                                                     height: 5,
@@ -641,7 +644,7 @@ class YourOrderState extends State<YourOrderPage> {
                                                     CrossAxisAlignment.start,
                                                 children: [
                                                   Text(
-                                                    '${controller.listOrder[index].id != null && controller.listOrder[index].id!.isNotEmpty ? controller.listOrder[index].id?.substring(0, 10) : '--'}',
+                                                    '${controller.listOrder[index].id != null && controller.listOrder[index].id!.isNotEmpty ? controller.listOrder[index].id : '--'}',
                                                     style:
                                                         GoogleFonts.ebGaramond(
                                                       color: Colors.black,
@@ -649,6 +652,9 @@ class YourOrderState extends State<YourOrderPage> {
                                                       fontWeight:
                                                           FontWeight.w600,
                                                     ),
+                                                    maxLines: 1,
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
                                                   ),
                                                   const SizedBox(
                                                     height: 5,

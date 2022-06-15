@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:shoes_shop_app/pages/address/address_page.dart';
 import 'package:shoes_shop_app/pages/cart/cart_controller.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shoes_shop_app/pages/dashboard/dashboard_controller.dart';
 import 'package:shoes_shop_app/pages/profile/product_favorite/product_favorite_page.dart';
 import 'package:shoes_shop_app/theme/theme_controller.dart';
 
@@ -351,24 +352,36 @@ class CartState extends State<CartPage> {
                                                               children: [
                                                                 ClipOval(
                                                                   child:
-                                                                      Container(
-                                                                    width: 25,
-                                                                    height: 25,
-                                                                    color: Colors
-                                                                        .black,
+                                                                      GestureDetector(
+                                                                    onTap: () {
+                                                                      controller.minusAmount(e
+                                                                          .value
+                                                                          .lstProduct!
+                                                                          .id);
+                                                                      controller
+                                                                          .update();
+                                                                    },
                                                                     child:
-                                                                        Center(
+                                                                        Container(
+                                                                      width: 25,
+                                                                      height:
+                                                                          25,
+                                                                      color: Colors
+                                                                          .black,
                                                                       child:
-                                                                          Text(
-                                                                        '-',
-                                                                        style: GoogleFonts
-                                                                            .ebGaramond(
-                                                                          color:
-                                                                              Colors.white,
-                                                                          fontSize:
-                                                                              14,
-                                                                          fontWeight:
-                                                                              FontWeight.w400,
+                                                                          Center(
+                                                                        child:
+                                                                            Text(
+                                                                          '-',
+                                                                          style:
+                                                                              GoogleFonts.ebGaramond(
+                                                                            color:
+                                                                                Colors.white,
+                                                                            fontSize:
+                                                                                14,
+                                                                            fontWeight:
+                                                                                FontWeight.w400,
+                                                                          ),
                                                                         ),
                                                                       ),
                                                                     ),
@@ -378,7 +391,7 @@ class CartState extends State<CartPage> {
                                                                   width: 15,
                                                                 ),
                                                                 Text(
-                                                                  '1',
+                                                                  '${controller.amount.value}',
                                                                   style: GoogleFonts
                                                                       .ebGaramond(
                                                                     color: Colors
@@ -395,24 +408,36 @@ class CartState extends State<CartPage> {
                                                                 ),
                                                                 ClipOval(
                                                                   child:
-                                                                      Container(
-                                                                    width: 25,
-                                                                    height: 25,
-                                                                    color: Colors
-                                                                        .black,
+                                                                      GestureDetector(
+                                                                    onTap: () {
+                                                                      controller.plusAmount(e
+                                                                          .value
+                                                                          .lstProduct!
+                                                                          .id);
+                                                                      controller
+                                                                          .update();
+                                                                    },
                                                                     child:
-                                                                        Center(
+                                                                        Container(
+                                                                      width: 25,
+                                                                      height:
+                                                                          25,
+                                                                      color: Colors
+                                                                          .black,
                                                                       child:
-                                                                          Text(
-                                                                        '+',
-                                                                        style: GoogleFonts
-                                                                            .ebGaramond(
-                                                                          color:
-                                                                              Colors.white,
-                                                                          fontSize:
-                                                                              14,
-                                                                          fontWeight:
-                                                                              FontWeight.w400,
+                                                                          Center(
+                                                                        child:
+                                                                            Text(
+                                                                          '+',
+                                                                          style:
+                                                                              GoogleFonts.ebGaramond(
+                                                                            color:
+                                                                                Colors.white,
+                                                                            fontSize:
+                                                                                14,
+                                                                            fontWeight:
+                                                                                FontWeight.w400,
+                                                                          ),
                                                                         ),
                                                                       ),
                                                                     ),
@@ -457,34 +482,40 @@ class CartState extends State<CartPage> {
                                         ),
                                       ),
                                       const SizedBox(
-                                        height: 10,
+                                        height: 20,
                                       ),
-                                      Container(
-                                        width: 200,
-                                        height: 50,
-                                        decoration: BoxDecoration(
-                                          color: theme.theme == ThemeMode.light
-                                              ? Colors.white
-                                              : Colors.black,
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                          border: Border.all(
+                                      GestureDetector(
+                                        onTap: () {
+                                          Get.offAll(DashboardController());
+                                        },
+                                        child: Container(
+                                          width: 200,
+                                          height: 50,
+                                          decoration: BoxDecoration(
                                             color:
                                                 theme.theme == ThemeMode.light
-                                                    ? Colors.black
-                                                    : Colors.white,
-                                          ),
-                                        ),
-                                        child: Center(
-                                          child: Text(
-                                            'go_to_product'.tr,
-                                            style: GoogleFonts.ebGaramond(
+                                                    ? Colors.white
+                                                    : Colors.black,
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                            border: Border.all(
                                               color:
                                                   theme.theme == ThemeMode.light
                                                       ? Colors.black
                                                       : Colors.white,
-                                              fontSize: 18,
-                                              fontWeight: FontWeight.w600,
+                                            ),
+                                          ),
+                                          child: Center(
+                                            child: Text(
+                                              'go_to_product'.tr,
+                                              style: GoogleFonts.ebGaramond(
+                                                color: theme.theme ==
+                                                        ThemeMode.light
+                                                    ? Colors.black
+                                                    : Colors.white,
+                                                fontSize: 18,
+                                                fontWeight: FontWeight.w600,
+                                              ),
                                             ),
                                           ),
                                         ),

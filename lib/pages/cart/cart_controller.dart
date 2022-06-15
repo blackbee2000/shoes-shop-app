@@ -15,10 +15,61 @@ class CartController extends GetxController {
 
   final addressPayment = Address.fromJson({}).obs;
 
+  final amount = 1.obs;
+
   @override
   void onInit() async {
     super.onInit();
     getAllCart();
+  }
+
+  plusAmount(String idProduct) {
+    amount.value = amount.value + 1;
+    CartProvider().updateAmounCart(
+      params: {"_id": idProduct, "amount": amount.value},
+      option: Options(
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': 'Bearer ${ApiToken.to.appToken}',
+        },
+      ),
+      beforeSend: () {},
+      onSuccess: (data) {
+        print('SUCESSSS ==> ${data.toString()}');
+      },
+      onError: (e) {
+        print('FAILLL ==> ${e.toString()}');
+      },
+    );
+  }
+
+  minusAmount(String idProduct) {
+    if (amount.value < 1) {
+      Get.snackbar(
+        'warning'.tr,
+        ''.tr,
+        colorText: Colors.white,
+        backgroundColor: Colors.black,
+      );
+      return;
+    }
+    amount.value = amount.value - 1;
+    CartProvider().updateAmounCart(
+      params: {"_id": idProduct, "amount": amount.value},
+      option: Options(
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': 'Bearer ${ApiToken.to.appToken}',
+        },
+      ),
+      beforeSend: () {},
+      onSuccess: (data) {
+        print('SUCESSSS ==> ${data.toString()}');
+      },
+      onError: (e) {
+        print('FAILLL ==> ${e.toString()}');
+      },
+    );
   }
 
   getAllCart() {

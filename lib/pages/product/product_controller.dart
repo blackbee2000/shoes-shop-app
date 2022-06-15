@@ -86,7 +86,7 @@ class ProductController extends GetxController {
         if (isLike == false) {
           Get.snackbar(
             'success'.tr,
-            'product_liked',
+            'product_liked'.tr,
             colorText: Colors.white,
             backgroundColor: const Color(0xff00FF00),
           );

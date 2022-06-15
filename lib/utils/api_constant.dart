@@ -34,6 +34,8 @@ class ApiConstant {
   static final String ADDTOCART = '${url.toString()}/cart/create';
   static final String CART = '${url.toString()}/cart/all';
   static final String DELETECART = '${url.toString()}/cart/deleteMultiCart';
+  static final String UPDATEAMOUNTCART =
+      '${url.toString()}/cart/updateAmountCart';
   static final String PRODUCTRELATED =
       '${url.toString()}/product/getRelatedProducts';
   static final String SEARCHPRODUCT = '${url.toString()}/product/search';
@@ -46,6 +48,11 @@ class ApiConstant {
   static final String ORDERBYSTATUS = '${url.toString()}/order/getOrderStatus';
   static final String ORDERUPDATESTATUS =
       '${url.toString()}/order/updateStatus';
+  static final String CREATERATING = '${url.toString()}/rate/create';
+  static final String GETRATEBYACCOUNT =
+      '${url.toString()}/rate/getRateProductByAccount';
+  static final String UPDATERATEBYACCOUNT =
+      '${url.toString()}/rate/updateRateByAccount';
   static const String PROVINCE =
       'https://api.mysupership.vn/v1/partner/areas/province';
   static const String DISTRICT =

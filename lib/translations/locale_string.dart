@@ -166,6 +166,11 @@ class LocaleString extends Translations {
           "delete_address_success": "Delete address success",
           "delete_address_fail": "Delete address fail",
           "rate": "Rate",
+          "rate_product": 'Rate product',
+          "rate_success": "You rated product success",
+          "rate_fail": "You rated product failed",
+          "rate_update_success": "You updated to rate product success",
+          "rate_update_fail": "You updated to rate product failed",
         },
         "vi_VN": {
           "product_title": "Sản phẩm",
@@ -334,6 +339,11 @@ class LocaleString extends Translations {
           "delete_address_success": "Xóa địa chỉ thành công",
           "delete_address_fail": "Xóa địa chỉ thất bại",
           "rate": "Đánh giá",
+          "rate_product": "Đánh giá sản phẩm",
+          "rate_success": "Bạn đã đánh giá sản phẩm thành công",
+          "rate_fail": "Bạn đã đánh giá sản phẩm thất bại",
+          "rate_update_success": "Bạn đã cập nhật đánh giá sản phẩm thành công",
+          "rate_update_fail": "Bạn đã cập nhật đánh giá sản phẩm thất bại",
         }
       };
 }

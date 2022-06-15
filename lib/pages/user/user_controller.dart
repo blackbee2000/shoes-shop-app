@@ -131,6 +131,7 @@ class UserController extends GetxController with StateMixin {
         update();
       },
       onError: (e) {
+        Get.back();
         Get.snackbar(
           'fail'.tr,
           'update_info_fail'.tr,

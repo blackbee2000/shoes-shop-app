@@ -17,6 +17,13 @@ abstract class CartAPIProtocol {
     required Function(dynamic data) onSuccess,
     required Function(dynamic error) onError,
   });
+  updateAmounCart({
+    required Map<String, dynamic> params,
+    required Options option,
+    required Function() beforeSend,
+    required Function(dynamic data) onSuccess,
+    required Function(dynamic error) onError,
+  });
 }
 
 class CartProvider extends CartAPIProtocol {
@@ -50,6 +57,26 @@ class CartProvider extends CartAPIProtocol {
       params: params,
       option: option,
     ).post(
+      beforeSend: () => {beforeSend()},
+      onSuccess: (data) {
+        onSuccess(data);
+      },
+      onError: (error) => {onError(error)},
+    );
+  }
+
+  @override
+  updateAmounCart(
+      {required Map<String, dynamic> params,
+      required Options option,
+      required Function() beforeSend,
+      required Function(dynamic data) onSuccess,
+      required Function(dynamic error) onError}) {
+    ApiService(
+      path: ApiConstant.UPDATEAMOUNTCART,
+      params: params,
+      option: option,
+    ).put(
       beforeSend: () => {beforeSend()},
       onSuccess: (data) {
         onSuccess(data);
