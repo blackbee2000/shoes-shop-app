@@ -202,34 +202,37 @@ class ProductFavoriteState extends State<ProductFavoritePage> {
                                     ),
                                   ),
                                   const SizedBox(
-                                    height: 15,
+                                    height: 20,
                                   ),
-                                  Center(
-                                    child: CachedNetworkImage(
-                                      width: 80,
-                                      fit: BoxFit.contain,
-                                      imageUrl: controller
-                                          .listProductFavoriteFinal[index]
-                                          .imageProduct!,
-                                      useOldImageOnUrlChange: false,
-                                      progressIndicatorBuilder:
-                                          (context, url, downloadProgress) =>
-                                              SizedBox(
-                                        height: 15,
-                                        width: 15,
-                                        child: Center(
-                                          child: CircularProgressIndicator(
-                                            value: downloadProgress.progress,
-                                            valueColor:
-                                                const AlwaysStoppedAnimation(
-                                                    Colors.white),
-                                            strokeWidth: 2,
+                                  RotatedBox(
+                                    quarterTurns: 1,
+                                    child: Center(
+                                      child: CachedNetworkImage(
+                                        width: 90,
+                                        fit: BoxFit.contain,
+                                        imageUrl: controller
+                                            .listProductFavoriteFinal[index]
+                                            .imageProduct!,
+                                        useOldImageOnUrlChange: false,
+                                        progressIndicatorBuilder:
+                                            (context, url, downloadProgress) =>
+                                                SizedBox(
+                                          height: 15,
+                                          width: 15,
+                                          child: Center(
+                                            child: CircularProgressIndicator(
+                                              value: downloadProgress.progress,
+                                              valueColor:
+                                                  const AlwaysStoppedAnimation(
+                                                      Colors.white),
+                                              strokeWidth: 2,
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                      errorWidget: (context, url, error) =>
-                                          ClipOval(
-                                        child: Container(),
+                                        errorWidget: (context, url, error) =>
+                                            ClipOval(
+                                          child: Container(),
+                                        ),
                                       ),
                                     ),
                                   ),
@@ -312,9 +315,10 @@ class ProductFavoriteState extends State<ProductFavoritePage> {
                             Container(
                               alignment: Alignment.topLeft,
                               child: RatingBarIndicator(
-                                rating: double.parse(controller
-                                    .listProductFavoriteFinal[index].rating
-                                    .toString()),
+                                rating: controller
+                                        .listProductFavoriteFinal[index]
+                                        .rating ??
+                                    0.0,
                                 itemBuilder: (context, index) => const Icon(
                                   Icons.star,
                                   color: Colors.amber,

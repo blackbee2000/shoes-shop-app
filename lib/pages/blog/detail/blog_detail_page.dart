@@ -14,13 +14,28 @@ import 'package:google_fonts/google_fonts.dart';
 // import 'package:flutter_html/flutter_html.dart';
 import 'package:html/parser.dart' show parse;
 
-class BlogDetailPage extends StatelessWidget {
+class BlogDetailPage extends StatefulWidget {
   final Blog blog;
-  List<Blog> listBlogRelated = <Blog>[].obs;
+  BlogDetailPage({Key? key, required this.blog}) : super(key: key);
+
+  @override
+  State<BlogDetailPage> createState() => BlogDetailState();
+}
+
+class BlogDetailState extends State<BlogDetailPage> {
   final blogDetailController = Get.put(BlogDetailController());
   final blogController = Get.put(BlogController());
 
-  BlogDetailPage({Key? key, required this.blog}) : super(key: key);
+  @override
+  void initState() {
+    super.initState();
+    blogDetailController.getAllBlogDifferent(widget.blog.id ?? '');
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
 
   Future<void> share(title, description, link) async {
     await FlutterShare.share(
@@ -126,7 +141,7 @@ class BlogDetailPage extends StatelessWidget {
                       ),
                       child: CachedNetworkImage(
                         fit: BoxFit.cover,
-                        imageUrl: blog.imageBlog ?? '',
+                        imageUrl: widget.blog.imageBlog ?? '',
                         useOldImageOnUrlChange: false,
                         progressIndicatorBuilder:
                             (context, url, downloadProgress) => SizedBox(
@@ -161,7 +176,7 @@ class BlogDetailPage extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
                                 Text(
-                                  '${AppTranslation.instance.language == AppTranslation.english ? (blog.titleEn != null && blog.titleEn!.isNotEmpty ? blog.titleEn : '--') : (blog.titleVi != null && blog.titleVi!.isNotEmpty ? blog.titleVi : '--')}',
+                                  '${AppTranslation.instance.language == AppTranslation.english ? (widget.blog.titleEn != null && widget.blog.titleEn!.isNotEmpty ? widget.blog.titleEn : '--') : (widget.blog.titleVi != null && widget.blog.titleVi!.isNotEmpty ? widget.blog.titleVi : '--')}',
                                   style: GoogleFonts.ebGaramond(
                                     color: Colors.black,
                                     fontSize: 22,
@@ -188,10 +203,11 @@ class BlogDetailPage extends StatelessWidget {
                                       width: 10,
                                     ),
                                     Text(
-                                      blog.time != null && blog.time!.isNotEmpty
+                                      widget.blog.time != null &&
+                                              widget.blog.time!.isNotEmpty
                                           ? DateFormat('HH:mm dd/MM/yyyy')
                                               .format(DateTime.parse(
-                                                      blog.time ?? '')
+                                                      widget.blog.time ?? '')
                                                   .toLocal())
                                           : '--',
                                       style: GoogleFonts.ebGaramond(
@@ -213,10 +229,14 @@ class BlogDetailPage extends StatelessWidget {
                                 onTap: () {
                                   AppTranslation.instance.language ==
                                           AppTranslation.english
-                                      ? share(blog.titleEn,
-                                          blog.descriptionShortEn, blog.link)
-                                      : share(blog.titleEn,
-                                          blog.descriptionShortEn, blog.link);
+                                      ? share(
+                                          widget.blog.titleEn,
+                                          widget.blog.descriptionShortEn,
+                                          widget.blog.link)
+                                      : share(
+                                          widget.blog.titleEn,
+                                          widget.blog.descriptionShortEn,
+                                          widget.blog.link);
                                 },
                                 child: Container(
                                   width: 50,
@@ -260,10 +280,10 @@ class BlogDetailPage extends StatelessWidget {
                       ),
                       child: AppTranslation.instance.language ==
                               AppTranslation.english
-                          ? (blog.contentEn != null &&
-                                  blog.contentEn!.isNotEmpty
+                          ? (widget.blog.contentEn != null &&
+                                  widget.blog.contentEn!.isNotEmpty
                               ? Text(
-                                  parse(blog.contentEn).outerHtml,
+                                  parse(widget.blog.contentEn).outerHtml,
                                 )
                               : Column(
                                   children: [
@@ -282,10 +302,10 @@ class BlogDetailPage extends StatelessWidget {
                                     ),
                                   ],
                                 ))
-                          : (blog.contentVi != null &&
-                                  blog.contentVi!.isNotEmpty
+                          : (widget.blog.contentVi != null &&
+                                  widget.blog.contentVi!.isNotEmpty
                               ? Text(
-                                  parse(blog.contentVi).outerHtml,
+                                  parse(widget.blog.contentVi).outerHtml,
                                 )
                               : Column(
                                   children: [
@@ -311,7 +331,7 @@ class BlogDetailPage extends StatelessWidget {
                     Text(
                       'blog_detail_related'.tr,
                       style: GoogleFonts.ebGaramond(
-                        color: Colors.white,
+                        color: Colors.black,
                         fontSize: 16,
                         fontWeight: FontWeight.w600,
                       ),
@@ -329,168 +349,177 @@ class BlogDetailPage extends StatelessWidget {
                     const SizedBox(
                       height: 20,
                     ),
-                    Column(
-                      children: listBlogRelated.isNotEmpty
-                          ? listBlogRelated
-                              .map(
-                                (e) => GestureDetector(
-                                  child: Container(
-                                    width: double.infinity,
-                                    margin: const EdgeInsets.only(
-                                      bottom: 20,
-                                      left: 20,
-                                      right: 20,
-                                    ),
-                                    height: 130,
-                                    decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      borderRadius: BorderRadius.circular(10),
-                                      boxShadow: [
-                                        BoxShadow(
-                                          color: Colors.black.withOpacity(0.25),
-                                          spreadRadius: 0,
-                                          blurRadius: 4,
-                                          offset: const Offset(0,
-                                              4), // changes position of shadow
-                                        ),
-                                      ],
-                                    ),
-                                    padding: const EdgeInsets.only(
-                                      left: 15,
-                                      right: 20,
-                                    ),
-                                    child: Row(
-                                      children: [
-                                        Container(
-                                          width: 110,
-                                          height: double.infinity,
-                                          decoration: const BoxDecoration(
-                                            borderRadius: BorderRadius.only(
-                                              topLeft: Radius.circular(10),
-                                              bottomLeft: Radius.circular(10),
-                                            ),
+                    GetBuilder<BlogDetailController>(
+                      init: blogDetailController,
+                      builder: (controller) => Column(
+                        children: controller.listBlogDifferent.isNotEmpty
+                            ? controller.listBlogDifferent
+                                .map(
+                                  (e) => GestureDetector(
+                                    child: Container(
+                                      width: double.infinity,
+                                      margin: const EdgeInsets.only(
+                                        bottom: 20,
+                                        left: 20,
+                                        right: 20,
+                                      ),
+                                      height: 130,
+                                      decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius: BorderRadius.circular(10),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color:
+                                                Colors.black.withOpacity(0.25),
+                                            spreadRadius: 0,
+                                            blurRadius: 4,
+                                            offset: const Offset(0,
+                                                4), // changes position of shadow
                                           ),
-                                          child: CachedNetworkImage(
-                                            fit: BoxFit.cover,
-                                            imageUrl: e.imageBlog ?? '',
-                                            useOldImageOnUrlChange: false,
-                                            progressIndicatorBuilder: (context,
-                                                    url, downloadProgress) =>
-                                                SizedBox(
-                                              height: 15,
-                                              width: 15,
-                                              child: Center(
-                                                child:
-                                                    CircularProgressIndicator(
-                                                  value:
-                                                      downloadProgress.progress,
-                                                  valueColor:
-                                                      const AlwaysStoppedAnimation(
-                                                          Colors.white),
-                                                  strokeWidth: 2,
-                                                ),
+                                        ],
+                                      ),
+                                      padding: const EdgeInsets.only(
+                                        left: 15,
+                                        right: 20,
+                                      ),
+                                      child: Row(
+                                        children: [
+                                          Container(
+                                            width: 110,
+                                            height: double.infinity,
+                                            decoration: const BoxDecoration(
+                                              borderRadius: BorderRadius.only(
+                                                topLeft: Radius.circular(10),
+                                                bottomLeft: Radius.circular(10),
                                               ),
                                             ),
-                                            errorWidget:
-                                                (context, url, error) =>
-                                                    ClipOval(
-                                              child: Container(),
+                                            child: CachedNetworkImage(
+                                              fit: BoxFit.cover,
+                                              imageUrl: e.imageBlog ?? '',
+                                              useOldImageOnUrlChange: false,
+                                              progressIndicatorBuilder:
+                                                  (context, url,
+                                                          downloadProgress) =>
+                                                      SizedBox(
+                                                height: 15,
+                                                width: 15,
+                                                child: Center(
+                                                  child:
+                                                      CircularProgressIndicator(
+                                                    value: downloadProgress
+                                                        .progress,
+                                                    valueColor:
+                                                        const AlwaysStoppedAnimation(
+                                                            Colors.white),
+                                                    strokeWidth: 2,
+                                                  ),
+                                                ),
+                                              ),
+                                              errorWidget:
+                                                  (context, url, error) =>
+                                                      ClipOval(
+                                                child: Container(),
+                                              ),
                                             ),
                                           ),
-                                        ),
-                                        Container(
-                                          width: 5,
-                                          height: double.infinity,
-                                          color: const Color(0xffFFD9D9),
-                                        ),
-                                        const SizedBox(
-                                          width: 15,
-                                        ),
-                                        Expanded(
-                                          child: Container(
-                                            padding: const EdgeInsets.only(
-                                              top: 15,
-                                              bottom: 15,
-                                            ),
-                                            child: Column(
-                                              children: [
-                                                Text(
-                                                  '${AppTranslation.instance.language == AppTranslation.english ? (e.titleEn != null && e.titleEn!.isNotEmpty ? e.titleEn : '--') : (e.titleVi != null && e.titleVi!.isNotEmpty ? e.titleVi : '--')}',
-                                                  style: GoogleFonts.ebGaramond(
-                                                    color: Colors.black,
-                                                    fontSize: 16,
-                                                    fontWeight: FontWeight.w600,
-                                                  ),
-                                                  maxLines: 1,
-                                                  overflow:
-                                                      TextOverflow.ellipsis,
-                                                  textAlign: TextAlign.left,
-                                                ),
-                                                const SizedBox(
-                                                  height: 5,
-                                                ),
-                                                Text(
-                                                  '${AppTranslation.instance.language == AppTranslation.english ? (e.descriptionShortEn != null && e.descriptionShortEn!.isNotEmpty ? e.descriptionShortEn : '--') : (e.descriptionShortVi != null && e.descriptionShortVi!.isNotEmpty ? e.descriptionShortVi : '--')}',
-                                                  style: GoogleFonts.ebGaramond(
-                                                    color: Colors.black,
-                                                    fontSize: 13,
-                                                    fontWeight: FontWeight.w400,
-                                                  ),
-                                                  maxLines: 3,
-                                                  overflow:
-                                                      TextOverflow.ellipsis,
-                                                  textAlign: TextAlign.left,
-                                                ),
-                                                const SizedBox(
-                                                  height: 5,
-                                                ),
-                                                Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.end,
-                                                  children: [
-                                                    Image.asset(
-                                                      "assets/icons/icon_calendar.png",
-                                                      width: 10,
-                                                      height: 10,
-                                                      fit: BoxFit.contain,
+                                          Container(
+                                            width: 5,
+                                            height: double.infinity,
+                                            color: const Color(0xffFFD9D9),
+                                          ),
+                                          const SizedBox(
+                                            width: 15,
+                                          ),
+                                          Expanded(
+                                            child: Container(
+                                              padding: const EdgeInsets.only(
+                                                top: 15,
+                                                bottom: 15,
+                                              ),
+                                              child: Column(
+                                                children: [
+                                                  Text(
+                                                    '${AppTranslation.instance.language == AppTranslation.english ? (e.titleEn != null && e.titleEn!.isNotEmpty ? e.titleEn : '--') : (e.titleVi != null && e.titleVi!.isNotEmpty ? e.titleVi : '--')}',
+                                                    style:
+                                                        GoogleFonts.ebGaramond(
                                                       color: Colors.black,
+                                                      fontSize: 16,
+                                                      fontWeight:
+                                                          FontWeight.w600,
                                                     ),
-                                                    const SizedBox(
-                                                      width: 10,
+                                                    maxLines: 1,
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
+                                                    textAlign: TextAlign.left,
+                                                  ),
+                                                  const SizedBox(
+                                                    height: 5,
+                                                  ),
+                                                  Text(
+                                                    '${AppTranslation.instance.language == AppTranslation.english ? (e.descriptionShortEn != null && e.descriptionShortEn!.isNotEmpty ? e.descriptionShortEn : '--') : (e.descriptionShortVi != null && e.descriptionShortVi!.isNotEmpty ? e.descriptionShortVi : '--')}',
+                                                    style:
+                                                        GoogleFonts.ebGaramond(
+                                                      color: Colors.black,
+                                                      fontSize: 13,
+                                                      fontWeight:
+                                                          FontWeight.w400,
                                                     ),
-                                                    Text(
-                                                      e.time != null &&
-                                                              e.time!.isNotEmpty
-                                                          ? DateFormat(
-                                                                  'HH:mm dd/MM/yyyy')
-                                                              .format(DateTime
-                                                                      .parse(
-                                                                          e.time ??
-                                                                              '')
-                                                                  .toLocal())
-                                                          : '--',
-                                                      style: GoogleFonts
-                                                          .ebGaramond(
+                                                    maxLines: 3,
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
+                                                    textAlign: TextAlign.left,
+                                                  ),
+                                                  const SizedBox(
+                                                    height: 5,
+                                                  ),
+                                                  Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.end,
+                                                    children: [
+                                                      Image.asset(
+                                                        "assets/icons/icon_calendar.png",
+                                                        width: 10,
+                                                        height: 10,
+                                                        fit: BoxFit.contain,
                                                         color: Colors.black,
-                                                        fontSize: 12,
-                                                        fontWeight:
-                                                            FontWeight.w400,
                                                       ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ],
+                                                      const SizedBox(
+                                                        width: 10,
+                                                      ),
+                                                      Text(
+                                                        e.time != null &&
+                                                                e.time!
+                                                                    .isNotEmpty
+                                                            ? DateFormat(
+                                                                    'HH:mm dd/MM/yyyy')
+                                                                .format(DateTime.parse(
+                                                                        e.time ??
+                                                                            '')
+                                                                    .toLocal())
+                                                            : '--',
+                                                        style: GoogleFonts
+                                                            .ebGaramond(
+                                                          color: Colors.black,
+                                                          fontSize: 12,
+                                                          fontWeight:
+                                                              FontWeight.w400,
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ],
+                                              ),
                                             ),
                                           ),
-                                        ),
-                                      ],
+                                        ],
+                                      ),
                                     ),
                                   ),
-                                ),
-                              )
-                              .toList()
-                          : [],
-                    )
+                                )
+                                .toList()
+                            : [],
+                      ),
+                    ),
                   ],
                 ),
               ),

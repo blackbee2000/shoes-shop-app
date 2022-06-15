@@ -48,7 +48,8 @@ class YourOrderDetailPage extends StatelessWidget {
                 ),
                 const SizedBox(height: 10),
                 RatingBar.builder(
-                  initialRating: controller.ratingController.value,
+                  initialRating: double.parse(
+                      controller.ratingController.value.toString()),
                   minRating: 1,
                   direction: Axis.horizontal,
                   allowHalfRating: true,
@@ -467,10 +468,10 @@ class YourOrderDetailPage extends StatelessWidget {
                                                                 .topLeft,
                                                             child:
                                                                 RatingBarIndicator(
-                                                              rating: double.parse(e
-                                                                  .lstProduct!
-                                                                  .rating
-                                                                  .toString()),
+                                                              rating: e
+                                                                      .lstProduct!
+                                                                      .rating ??
+                                                                  0.0,
                                                               itemBuilder: (context,
                                                                       index) =>
                                                                   const Icon(

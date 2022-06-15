@@ -13,6 +13,8 @@ class ApiConstant {
   static final String SUBMITOTP = '${url.toString()}/account/submitOTP';
   static final String UPDATE = '${url.toString()}/account/update';
   static final String BLOG = '${url.toString()}/blog/all';
+  static final String BLOGDIFFERENT =
+      '${url.toString()}/blog/getDifferentBlogs';
   static final String PRODUCT = '${url.toString()}/product/all';
   static final String PRODUCTBYCOMPANY =
       '${url.toString()}/product/GetProductByCompany';

@@ -605,31 +605,34 @@ class ProductDetailState extends State<ProductDetailPage>
                                   ),
                                 ),
                                 const SizedBox(
-                                  height: 5,
+                                  height: 10,
                                 ),
-                                CachedNetworkImage(
-                                  width: 100,
-                                  fit: BoxFit.contain,
-                                  imageUrl: widget.product.imageProduct!,
-                                  useOldImageOnUrlChange: false,
-                                  progressIndicatorBuilder:
-                                      (context, url, downloadProgress) =>
-                                          SizedBox(
-                                    height: 15,
-                                    width: 15,
-                                    child: Center(
-                                      child: CircularProgressIndicator(
-                                        value: downloadProgress.progress,
-                                        valueColor:
-                                            const AlwaysStoppedAnimation(
-                                                Colors.white),
-                                        strokeWidth: 2,
+                                RotatedBox(
+                                  quarterTurns: 1,
+                                  child: CachedNetworkImage(
+                                    width: 120,
+                                    fit: BoxFit.contain,
+                                    imageUrl: widget.product.imageProduct!,
+                                    useOldImageOnUrlChange: false,
+                                    progressIndicatorBuilder:
+                                        (context, url, downloadProgress) =>
+                                            SizedBox(
+                                      height: 15,
+                                      width: 15,
+                                      child: Center(
+                                        child: CircularProgressIndicator(
+                                          value: downloadProgress.progress,
+                                          valueColor:
+                                              const AlwaysStoppedAnimation(
+                                                  Colors.white),
+                                          strokeWidth: 2,
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                  errorWidget: (context, url, error) =>
-                                      ClipOval(
-                                    child: Container(),
+                                    errorWidget: (context, url, error) =>
+                                        ClipOval(
+                                      child: Container(),
+                                    ),
                                   ),
                                 ),
                               ],
@@ -677,8 +680,7 @@ class ProductDetailState extends State<ProductDetailPage>
                               Container(
                                 alignment: Alignment.topLeft,
                                 child: RatingBarIndicator(
-                                  rating: double.parse(
-                                      widget.product.rating.toString()),
+                                  rating: widget.product.rating ?? 0.0,
                                   itemBuilder: (context, index) => const Icon(
                                     Icons.star,
                                     color: Colors.amber,

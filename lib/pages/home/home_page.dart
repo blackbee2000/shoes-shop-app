@@ -14,6 +14,7 @@ import 'package:shoes_shop_app/theme/theme_controller.dart';
 import 'package:shoes_shop_app/translations/app_translation.dart';
 import 'package:shoes_shop_app/utils/app_constant.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'dart:math' as math;
 
 class HomePage extends StatefulWidget {
   HomePage({Key? key}) : super(key: key);
@@ -142,149 +143,127 @@ class HomePageState extends State<HomePage> {
                                         width: double.infinity,
                                         child: Stack(
                                           children: [
-                                            Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.start,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Text(
-                                                  'home_new_collection'.tr,
-                                                  style: GoogleFonts.ebGaramond(
-                                                    color: theme.theme ==
-                                                            ThemeMode.light
-                                                        ? Colors.black
-                                                        : Colors.white,
-                                                    fontSize: 22,
-                                                    fontWeight: FontWeight.w600,
+                                            Expanded(
+                                              flex: 7,
+                                              child: Column(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.start,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Text(
+                                                    'home_new_collection'.tr,
+                                                    style:
+                                                        GoogleFonts.ebGaramond(
+                                                      color: theme.theme ==
+                                                              ThemeMode.light
+                                                          ? Colors.black
+                                                          : Colors.white,
+                                                      fontSize: 22,
+                                                      fontWeight:
+                                                          FontWeight.w600,
+                                                    ),
                                                   ),
-                                                ),
-                                                const SizedBox(
-                                                  height: 5,
-                                                ),
-                                                Text(
-                                                  'Nike Original 2022',
-                                                  style: GoogleFonts.ebGaramond(
-                                                    color: theme.theme ==
-                                                            ThemeMode.light
-                                                        ? Colors.black
-                                                        : Colors.white,
-                                                    fontSize: 12,
-                                                    fontWeight: FontWeight.w400,
+                                                  const SizedBox(
+                                                    height: 5,
                                                   ),
-                                                ),
-                                                const SizedBox(
-                                                  height: 50,
-                                                ),
-                                                Container(
-                                                  width: double.infinity,
-                                                  padding:
-                                                      const EdgeInsets.all(20),
-                                                  decoration: BoxDecoration(
-                                                    color: theme.theme ==
-                                                            ThemeMode.light
-                                                        ? Colors.black
-                                                        : Colors.white,
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            10),
+                                                  Text(
+                                                    'Nike Original 2022',
+                                                    style:
+                                                        GoogleFonts.ebGaramond(
+                                                      color: theme.theme ==
+                                                              ThemeMode.light
+                                                          ? Colors.black
+                                                          : Colors.white,
+                                                      fontSize: 12,
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                    ),
                                                   ),
-                                                  child: Column(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment.start,
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      Text(
-                                                        '${AppTranslation.instance.language == AppTranslation.english ? (e.product!.nameProductEn != null && e.product!.nameProductEn!.isNotEmpty ? e.product!.nameProductEn : '--') : (e.product!.nameProductVi != null && e.product!.nameProductVi!.isNotEmpty ? e.product!.nameProductVi : '--')}',
-                                                        style: GoogleFonts
-                                                            .ebGaramond(
-                                                          color: theme.theme ==
-                                                                  ThemeMode
-                                                                      .light
-                                                              ? Colors.white
-                                                              : Colors.black,
-                                                          fontSize: 16,
-                                                          fontWeight:
-                                                              FontWeight.w600,
-                                                        ),
-                                                      ),
-                                                      const SizedBox(
-                                                        height: 5,
-                                                      ),
-                                                      Text(
-                                                        '${e.companyName != null && e.companyName!.isNotEmpty ? e.companyName : '--'}',
-                                                        style: GoogleFonts
-                                                            .ebGaramond(
-                                                          color: theme.theme ==
-                                                                  ThemeMode
-                                                                      .light
-                                                              ? Colors.white
-                                                              : Colors.black,
-                                                          fontSize: 12,
-                                                          fontWeight:
-                                                              FontWeight.w400,
-                                                        ),
-                                                      ),
-                                                      const SizedBox(
-                                                        height: 20,
-                                                      ),
-                                                      GestureDetector(
-                                                        onTap: () {
-                                                          dashboardController
-                                                              .tabIndex
-                                                              .value = 2;
-                                                        },
-                                                        child: Container(
-                                                          width: 120,
-                                                          height: 30,
-                                                          decoration:
-                                                              BoxDecoration(
-                                                            border: Border.all(
+                                                  const SizedBox(
+                                                    height: 50,
+                                                  ),
+                                                  Container(
+                                                    width: double.infinity,
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            20),
+                                                    decoration: BoxDecoration(
+                                                      color: theme.theme ==
+                                                              ThemeMode.light
+                                                          ? Colors.black
+                                                          : Colors.white,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              10),
+                                                    ),
+                                                    child: Column(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .start,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        SizedBox(
+                                                          width: 200,
+                                                          child: Text(
+                                                            '${AppTranslation.instance.language == AppTranslation.english ? (e.product!.nameProductEn != null && e.product!.nameProductEn!.isNotEmpty ? e.product!.nameProductEn : '--') : (e.product!.nameProductVi != null && e.product!.nameProductVi!.isNotEmpty ? e.product!.nameProductVi : '--')}',
+                                                            style: GoogleFonts
+                                                                .ebGaramond(
                                                               color: theme.theme ==
                                                                       ThemeMode
                                                                           .light
                                                                   ? Colors.white
                                                                   : Colors
                                                                       .black,
+                                                              fontSize: 16,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w600,
                                                             ),
+                                                            maxLines: 1,
+                                                            overflow:
+                                                                TextOverflow
+                                                                    .ellipsis,
                                                           ),
-                                                          child: Row(
-                                                            mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .center,
-                                                            crossAxisAlignment:
-                                                                CrossAxisAlignment
-                                                                    .center,
-                                                            children: [
-                                                              Text(
-                                                                'home_shop_now'
-                                                                    .tr,
-                                                                style: GoogleFonts
-                                                                    .ebGaramond(
-                                                                  color: theme.theme ==
-                                                                          ThemeMode
-                                                                              .light
-                                                                      ? Colors
-                                                                          .white
-                                                                      : Colors
-                                                                          .black,
-                                                                  fontSize: 14,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w400,
-                                                                ),
-                                                              ),
-                                                              const SizedBox(
-                                                                width: 10,
-                                                              ),
-                                                              Image.asset(
-                                                                "assets/icons/icon_arrow_right.png",
-                                                                width: 20,
-                                                                height: 20,
-                                                                fit: BoxFit
-                                                                    .contain,
+                                                        ),
+                                                        const SizedBox(
+                                                          height: 5,
+                                                        ),
+                                                        Text(
+                                                          '${e.companyName != null && e.companyName!.isNotEmpty ? e.companyName : '--'}',
+                                                          style: GoogleFonts
+                                                              .ebGaramond(
+                                                            color: theme.theme ==
+                                                                    ThemeMode
+                                                                        .light
+                                                                ? Colors.white
+                                                                : Colors.black,
+                                                            fontSize: 12,
+                                                            fontWeight:
+                                                                FontWeight.w400,
+                                                          ),
+                                                          maxLines: 1,
+                                                          overflow: TextOverflow
+                                                              .ellipsis,
+                                                        ),
+                                                        const SizedBox(
+                                                          height: 20,
+                                                        ),
+                                                        GestureDetector(
+                                                          onTap: () {
+                                                            dashboardController
+                                                                .tabIndex
+                                                                .value = 2;
+                                                          },
+                                                          child: Container(
+                                                            width: 120,
+                                                            height: 30,
+                                                            decoration:
+                                                                BoxDecoration(
+                                                              border:
+                                                                  Border.all(
                                                                 color: theme.theme ==
                                                                         ThemeMode
                                                                             .light
@@ -293,46 +272,95 @@ class HomePageState extends State<HomePage> {
                                                                     : Colors
                                                                         .black,
                                                               ),
-                                                            ],
+                                                            ),
+                                                            child: Row(
+                                                              mainAxisAlignment:
+                                                                  MainAxisAlignment
+                                                                      .center,
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .center,
+                                                              children: [
+                                                                Text(
+                                                                  'home_shop_now'
+                                                                      .tr,
+                                                                  style: GoogleFonts
+                                                                      .ebGaramond(
+                                                                    color: theme.theme ==
+                                                                            ThemeMode
+                                                                                .light
+                                                                        ? Colors
+                                                                            .white
+                                                                        : Colors
+                                                                            .black,
+                                                                    fontSize:
+                                                                        14,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w400,
+                                                                  ),
+                                                                ),
+                                                                const SizedBox(
+                                                                  width: 10,
+                                                                ),
+                                                                Image.asset(
+                                                                  "assets/icons/icon_arrow_right.png",
+                                                                  width: 20,
+                                                                  height: 20,
+                                                                  fit: BoxFit
+                                                                      .contain,
+                                                                  color: theme.theme ==
+                                                                          ThemeMode
+                                                                              .light
+                                                                      ? Colors
+                                                                          .white
+                                                                      : Colors
+                                                                          .black,
+                                                                ),
+                                                              ],
+                                                            ),
                                                           ),
-                                                        ),
-                                                      )
-                                                    ],
-                                                  ),
-                                                )
-                                              ],
+                                                        )
+                                                      ],
+                                                    ),
+                                                  )
+                                                ],
+                                              ),
                                             ),
                                             Positioned(
-                                              top: 20,
-                                              right: -78,
-                                              child: CachedNetworkImage(
-                                                width: 300,
-                                                fit: BoxFit.contain,
-                                                imageUrl:
-                                                    e.product!.imageProduct!,
-                                                useOldImageOnUrlChange: false,
-                                                progressIndicatorBuilder:
-                                                    (context, url,
-                                                            downloadProgress) =>
-                                                        SizedBox(
-                                                  height: 15,
-                                                  width: 15,
-                                                  child: Center(
-                                                    child:
-                                                        CircularProgressIndicator(
-                                                      value: downloadProgress
-                                                          .progress,
-                                                      valueColor:
-                                                          const AlwaysStoppedAnimation(
-                                                              Colors.white),
-                                                      strokeWidth: 2,
+                                              top: 0,
+                                              right: 30,
+                                              child: RotatedBox(
+                                                quarterTurns: 1,
+                                                child: CachedNetworkImage(
+                                                  width: 220,
+                                                  fit: BoxFit.contain,
+                                                  imageUrl:
+                                                      e.product!.imageProduct!,
+                                                  useOldImageOnUrlChange: false,
+                                                  progressIndicatorBuilder:
+                                                      (context, url,
+                                                              downloadProgress) =>
+                                                          SizedBox(
+                                                    height: 15,
+                                                    width: 15,
+                                                    child: Center(
+                                                      child:
+                                                          CircularProgressIndicator(
+                                                        value: downloadProgress
+                                                            .progress,
+                                                        valueColor:
+                                                            const AlwaysStoppedAnimation(
+                                                                Colors.white),
+                                                        strokeWidth: 2,
+                                                      ),
                                                     ),
                                                   ),
-                                                ),
-                                                errorWidget:
-                                                    (context, url, error) =>
-                                                        ClipOval(
-                                                  child: Container(),
+                                                  errorWidget:
+                                                      (context, url, error) =>
+                                                          ClipOval(
+                                                    child: Container(),
+                                                  ),
                                                 ),
                                               ),
                                             ),
@@ -465,33 +493,37 @@ class HomePageState extends State<HomePage> {
                                         overflow: TextOverflow.ellipsis,
                                       ),
                                       const SizedBox(
-                                        height: 15,
+                                        height: 20,
                                       ),
-                                      CachedNetworkImage(
-                                        width: 80,
-                                        fit: BoxFit.contain,
-                                        imageUrl: controller
-                                            .listDiscountProduct[index]
-                                            .imageProduct!,
-                                        useOldImageOnUrlChange: false,
-                                        progressIndicatorBuilder:
-                                            (context, url, downloadProgress) =>
-                                                SizedBox(
-                                          height: 15,
-                                          width: 15,
-                                          child: Center(
-                                            child: CircularProgressIndicator(
-                                              value: downloadProgress.progress,
-                                              valueColor:
-                                                  const AlwaysStoppedAnimation(
-                                                      Colors.white),
-                                              strokeWidth: 2,
+                                      RotatedBox(
+                                        quarterTurns: 1,
+                                        child: CachedNetworkImage(
+                                          width: 90,
+                                          fit: BoxFit.contain,
+                                          imageUrl: controller
+                                              .listDiscountProduct[index]
+                                              .imageProduct!,
+                                          useOldImageOnUrlChange: false,
+                                          progressIndicatorBuilder: (context,
+                                                  url, downloadProgress) =>
+                                              SizedBox(
+                                            height: 15,
+                                            width: 15,
+                                            child: Center(
+                                              child: CircularProgressIndicator(
+                                                value:
+                                                    downloadProgress.progress,
+                                                valueColor:
+                                                    const AlwaysStoppedAnimation(
+                                                        Colors.white),
+                                                strokeWidth: 2,
+                                              ),
                                             ),
                                           ),
-                                        ),
-                                        errorWidget: (context, url, error) =>
-                                            ClipOval(
-                                          child: Container(),
+                                          errorWidget: (context, url, error) =>
+                                              ClipOval(
+                                            child: Container(),
+                                          ),
                                         ),
                                       ),
                                       const SizedBox(
@@ -517,9 +549,10 @@ class HomePageState extends State<HomePage> {
                                       Container(
                                         alignment: Alignment.topLeft,
                                         child: RatingBarIndicator(
-                                          rating: double.parse(controller
-                                              .listDiscountProduct[index].rating
-                                              .toString()),
+                                          rating: controller
+                                                  .listDiscountProduct[index]
+                                                  .rating ??
+                                              0.0,
                                           itemBuilder: (context, index) =>
                                               const Icon(
                                             Icons.star,
@@ -780,33 +813,37 @@ class HomePageState extends State<HomePage> {
                                         overflow: TextOverflow.ellipsis,
                                       ),
                                       const SizedBox(
-                                        height: 15,
+                                        height: 20,
                                       ),
-                                      CachedNetworkImage(
-                                        width: 80,
-                                        fit: BoxFit.contain,
-                                        imageUrl: controller
-                                            .listTrendingProduct[index]
-                                            .imageProduct!,
-                                        useOldImageOnUrlChange: false,
-                                        progressIndicatorBuilder:
-                                            (context, url, downloadProgress) =>
-                                                SizedBox(
-                                          height: 15,
-                                          width: 15,
-                                          child: Center(
-                                            child: CircularProgressIndicator(
-                                              value: downloadProgress.progress,
-                                              valueColor:
-                                                  const AlwaysStoppedAnimation(
-                                                      Colors.white),
-                                              strokeWidth: 2,
+                                      RotatedBox(
+                                        quarterTurns: 1,
+                                        child: CachedNetworkImage(
+                                          width: 100,
+                                          fit: BoxFit.contain,
+                                          imageUrl: controller
+                                              .listTrendingProduct[index]
+                                              .imageProduct!,
+                                          useOldImageOnUrlChange: false,
+                                          progressIndicatorBuilder: (context,
+                                                  url, downloadProgress) =>
+                                              SizedBox(
+                                            height: 15,
+                                            width: 15,
+                                            child: Center(
+                                              child: CircularProgressIndicator(
+                                                value:
+                                                    downloadProgress.progress,
+                                                valueColor:
+                                                    const AlwaysStoppedAnimation(
+                                                        Colors.white),
+                                                strokeWidth: 2,
+                                              ),
                                             ),
                                           ),
-                                        ),
-                                        errorWidget: (context, url, error) =>
-                                            ClipOval(
-                                          child: Container(),
+                                          errorWidget: (context, url, error) =>
+                                              ClipOval(
+                                            child: Container(),
+                                          ),
                                         ),
                                       ),
                                       const SizedBox(
@@ -835,9 +872,10 @@ class HomePageState extends State<HomePage> {
                                       Container(
                                         alignment: Alignment.topLeft,
                                         child: RatingBarIndicator(
-                                          rating: double.parse(controller
-                                              .listTrendingProduct[index].rating
-                                              .toString()),
+                                          rating: controller
+                                                  .listTrendingProduct[index]
+                                                  .rating ??
+                                              0.0,
                                           itemBuilder: (context, index) =>
                                               const Icon(
                                             Icons.star,

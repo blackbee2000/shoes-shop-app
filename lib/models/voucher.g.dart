@@ -12,7 +12,7 @@ Voucher _$VoucherFromJson(Map<String, dynamic> json) {
     json['createdAt'] as String?,
     json['updatedAt'] as String?,
     json['__v'] as int?,
-    json['quantity'] as String?,
+    json['quantity'] as int?,
   );
 }
 

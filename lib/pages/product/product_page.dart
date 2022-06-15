@@ -523,43 +523,48 @@ class ProductPage extends GetView<ProductController> {
                                                         ),
                                                       ),
                                                       const SizedBox(
-                                                        height: 15,
+                                                        height: 20,
                                                       ),
-                                                      Center(
-                                                        child:
-                                                            CachedNetworkImage(
-                                                          width: 80,
-                                                          fit: BoxFit.contain,
-                                                          imageUrl: controller
-                                                              .listProduct[
-                                                                  index]
-                                                              .imageProduct!,
-                                                          useOldImageOnUrlChange:
-                                                              false,
-                                                          progressIndicatorBuilder:
-                                                              (context, url,
-                                                                      downloadProgress) =>
-                                                                  SizedBox(
-                                                            height: 15,
-                                                            width: 15,
-                                                            child: Center(
-                                                              child:
-                                                                  CircularProgressIndicator(
-                                                                value:
-                                                                    downloadProgress
-                                                                        .progress,
-                                                                valueColor:
-                                                                    const AlwaysStoppedAnimation(
-                                                                        Colors
-                                                                            .white),
-                                                                strokeWidth: 2,
+                                                      RotatedBox(
+                                                        quarterTurns: 1,
+                                                        child: Center(
+                                                          child:
+                                                              CachedNetworkImage(
+                                                            width: 90,
+                                                            fit: BoxFit.contain,
+                                                            imageUrl: controller
+                                                                .listProduct[
+                                                                    index]
+                                                                .imageProduct!,
+                                                            useOldImageOnUrlChange:
+                                                                false,
+                                                            progressIndicatorBuilder:
+                                                                (context, url,
+                                                                        downloadProgress) =>
+                                                                    SizedBox(
+                                                              height: 15,
+                                                              width: 15,
+                                                              child: Center(
+                                                                child:
+                                                                    CircularProgressIndicator(
+                                                                  value: downloadProgress
+                                                                      .progress,
+                                                                  valueColor:
+                                                                      const AlwaysStoppedAnimation(
+                                                                          Colors
+                                                                              .white),
+                                                                  strokeWidth:
+                                                                      2,
+                                                                ),
                                                               ),
                                                             ),
-                                                          ),
-                                                          errorWidget: (context,
-                                                                  url, error) =>
-                                                              ClipOval(
-                                                            child: Container(),
+                                                            errorWidget:
+                                                                (context, url,
+                                                                        error) =>
+                                                                    ClipOval(
+                                                              child:
+                                                                  Container(),
+                                                            ),
                                                           ),
                                                         ),
                                                       ),
@@ -662,11 +667,10 @@ class ProductPage extends GetView<ProductController> {
                                                 Container(
                                                   alignment: Alignment.topLeft,
                                                   child: RatingBarIndicator(
-                                                    rating: double.parse(
-                                                        controller
+                                                    rating: controller
                                                             .listProduct[index]
-                                                            .rating
-                                                            .toString()),
+                                                            .rating ??
+                                                        0.0,
                                                     itemBuilder:
                                                         (context, index) =>
                                                             const Icon(

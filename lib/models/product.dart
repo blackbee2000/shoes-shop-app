@@ -10,7 +10,7 @@ class Product {
   String? imageProduct;
   String? descriptionVi;
   String? descriptionEn;
-  num? rating;
+  double? rating;
   int? quantitySold;
   int? discount;
   List<TypeProduct>? type;

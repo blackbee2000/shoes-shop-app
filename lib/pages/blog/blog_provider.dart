@@ -11,6 +11,13 @@ abstract class BlogAPIProtocol {
     required Function(BlogResponse data) onSuccess,
     required Function(dynamic error) onError,
   });
+  getAllBlogDifferent({
+    required Map<String, dynamic> params,
+    required Options option,
+    required Function() beforeSend,
+    required Function(BlogResponse data) onSuccess,
+    required Function(dynamic error) onError,
+  });
 }
 
 class BlogProvider extends BlogAPIProtocol {
@@ -26,6 +33,26 @@ class BlogProvider extends BlogAPIProtocol {
       params: params,
       option: option,
     ).post(
+      beforeSend: () => {beforeSend()},
+      onSuccess: (data) {
+        onSuccess(BlogResponse.fromJson(data));
+      },
+      onError: (error) => {onError(error)},
+    );
+  }
+
+  @override
+  getAllBlogDifferent(
+      {required Map<String, dynamic> params,
+      required Options option,
+      required Function() beforeSend,
+      required Function(BlogResponse data) onSuccess,
+      required Function(dynamic error) onError}) {
+    ApiService(
+      path: ApiConstant.BLOGDIFFERENT,
+      params: params,
+      option: option,
+    ).get(
       beforeSend: () => {beforeSend()},
       onSuccess: (data) {
         onSuccess(BlogResponse.fromJson(data));

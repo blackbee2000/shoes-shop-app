@@ -85,9 +85,11 @@ class YourOrderController extends GetxController
       beforeSend: () {},
       onSuccess: (res) {
         listOrder = res.data ?? [];
+        print('SUCESSSS ===> ${res.data.toString()}');
         update();
       },
       onError: (e) {
+        print('FAIL ===> ${e.toString()}');
         update();
       },
     );

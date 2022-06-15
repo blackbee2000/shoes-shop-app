@@ -31,7 +31,9 @@ class YourOrderDetailController extends GetxController
       onSuccess: (res) {
         if (res.data != null) {
           rateProductNowOfAccount.value = res.data!;
-          ratingController.value = rateProductNowOfAccount.value.rating ?? 0.0;
+          ratingController.value =
+              double.parse(rateProductNowOfAccount.value.rating.toString()) ??
+                  0.0;
         } else {
           ratingController.value = 0.0;
         }

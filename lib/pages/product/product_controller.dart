@@ -51,6 +51,7 @@ class ProductController extends GetxController {
       beforeSend: () {},
       onSuccess: (res) {
         listProduct = res.data ?? [];
+        print('GET PRODUCT SUCCESS =>>>> ${res.data.toString()}');
         for (var e in listProduct) {
           e.isLike = false;
         }
@@ -67,6 +68,7 @@ class ProductController extends GetxController {
         update();
       },
       onError: (e) {
+        print('GET PRODUCT FAIL =>>>> ${e.toString()}');
         update();
       },
     );

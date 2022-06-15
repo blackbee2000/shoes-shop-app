@@ -595,7 +595,8 @@ class SearchPage extends StatelessWidget {
                                     onTap: () {
                                       Get.to(
                                         ProductDetailPage(
-                                          product: Product.fromJson({}),
+                                          product: controller
+                                              .listProductSearch[index],
                                           id: AppConstant.SEARCH,
                                         ),
                                         id: AppConstant.SEARCH,
@@ -706,41 +707,45 @@ class SearchPage extends StatelessWidget {
                                                   ),
                                                 ),
                                                 const SizedBox(
-                                                  height: 15,
+                                                  height: 20,
                                                 ),
-                                                Center(
-                                                  child: CachedNetworkImage(
-                                                    width: 80,
-                                                    fit: BoxFit.contain,
-                                                    imageUrl: controller
-                                                        .listProductSearch[
-                                                            index]
-                                                        .imageProduct!,
-                                                    useOldImageOnUrlChange:
-                                                        false,
-                                                    progressIndicatorBuilder:
-                                                        (context, url,
-                                                                downloadProgress) =>
-                                                            SizedBox(
-                                                      height: 15,
-                                                      width: 15,
-                                                      child: Center(
-                                                        child:
-                                                            CircularProgressIndicator(
-                                                          value:
-                                                              downloadProgress
-                                                                  .progress,
-                                                          valueColor:
-                                                              const AlwaysStoppedAnimation(
-                                                                  Colors.white),
-                                                          strokeWidth: 2,
+                                                RotatedBox(
+                                                  quarterTurns: 1,
+                                                  child: Center(
+                                                    child: CachedNetworkImage(
+                                                      width: 90,
+                                                      fit: BoxFit.contain,
+                                                      imageUrl: controller
+                                                          .listProductSearch[
+                                                              index]
+                                                          .imageProduct!,
+                                                      useOldImageOnUrlChange:
+                                                          false,
+                                                      progressIndicatorBuilder:
+                                                          (context, url,
+                                                                  downloadProgress) =>
+                                                              SizedBox(
+                                                        height: 15,
+                                                        width: 15,
+                                                        child: Center(
+                                                          child:
+                                                              CircularProgressIndicator(
+                                                            value:
+                                                                downloadProgress
+                                                                    .progress,
+                                                            valueColor:
+                                                                const AlwaysStoppedAnimation(
+                                                                    Colors
+                                                                        .white),
+                                                            strokeWidth: 2,
+                                                          ),
                                                         ),
                                                       ),
-                                                    ),
-                                                    errorWidget:
-                                                        (context, url, error) =>
-                                                            ClipOval(
-                                                      child: Container(),
+                                                      errorWidget: (context,
+                                                              url, error) =>
+                                                          ClipOval(
+                                                        child: Container(),
+                                                      ),
                                                     ),
                                                   ),
                                                 ),
@@ -832,10 +837,10 @@ class SearchPage extends StatelessWidget {
                                           Container(
                                             alignment: Alignment.topLeft,
                                             child: RatingBarIndicator(
-                                              rating: double.parse(controller
-                                                  .listProductSearch[index]
-                                                  .rating
-                                                  .toString()),
+                                              rating: controller
+                                                      .listProductSearch[index]
+                                                      .rating ??
+                                                  0.0,
                                               itemBuilder: (context, index) =>
                                                   const Icon(
                                                 Icons.star,

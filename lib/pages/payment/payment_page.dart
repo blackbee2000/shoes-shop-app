@@ -315,35 +315,38 @@ class PaymentState extends State<PaymentPage> {
                                           width: 120,
                                           height: double.infinity,
                                           color: Colors.black,
-                                          child: Center(
-                                            child: CachedNetworkImage(
-                                              width: 70,
-                                              fit: BoxFit.contain,
-                                              imageUrl: e.value.lstProduct!
-                                                  .imageProduct!,
-                                              useOldImageOnUrlChange: false,
-                                              progressIndicatorBuilder:
-                                                  (context, url,
-                                                          downloadProgress) =>
-                                                      SizedBox(
-                                                height: 15,
-                                                width: 15,
-                                                child: Center(
-                                                  child:
-                                                      CircularProgressIndicator(
-                                                    value: downloadProgress
-                                                        .progress,
-                                                    valueColor:
-                                                        const AlwaysStoppedAnimation(
-                                                            Colors.white),
-                                                    strokeWidth: 2,
+                                          child: RotatedBox(
+                                            quarterTurns: 1,
+                                            child: Center(
+                                              child: CachedNetworkImage(
+                                                width: 90,
+                                                fit: BoxFit.contain,
+                                                imageUrl: e.value.lstProduct!
+                                                    .imageProduct!,
+                                                useOldImageOnUrlChange: false,
+                                                progressIndicatorBuilder:
+                                                    (context, url,
+                                                            downloadProgress) =>
+                                                        SizedBox(
+                                                  height: 15,
+                                                  width: 15,
+                                                  child: Center(
+                                                    child:
+                                                        CircularProgressIndicator(
+                                                      value: downloadProgress
+                                                          .progress,
+                                                      valueColor:
+                                                          const AlwaysStoppedAnimation(
+                                                              Colors.white),
+                                                      strokeWidth: 2,
+                                                    ),
                                                   ),
                                                 ),
-                                              ),
-                                              errorWidget:
-                                                  (context, url, error) =>
-                                                      ClipOval(
-                                                child: Container(),
+                                                errorWidget:
+                                                    (context, url, error) =>
+                                                        ClipOval(
+                                                  child: Container(),
+                                                ),
                                               ),
                                             ),
                                           ),

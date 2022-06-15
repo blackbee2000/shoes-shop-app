@@ -13,7 +13,7 @@ class Voucher {
   String? createdAt;
   String? updatedAt;
   int? __v;
-  String? quantity;
+  int? quantity;
 
   Voucher(
     this.id,
