@@ -5,6 +5,8 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:get/get.dart';
 import 'package:shoes_shop_app/pages/cart/cart_page.dart';
 import 'package:shoes_shop_app/pages/dashboard/dashboard_controller.dart';
+import 'package:shoes_shop_app/pages/home/all-product/all_product_controller.dart';
+import 'package:shoes_shop_app/pages/home/all-product/all_product_page.dart';
 import 'package:shoes_shop_app/pages/home/home_controller.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:shoes_shop_app/pages/product/detail/product_detail_page.dart';
@@ -28,6 +30,7 @@ class HomePageState extends State<HomePage> {
   final homeController = Get.put(HomeController());
   final dashboardController = Get.put(DashboardController());
   final productController = Get.put(ProductController());
+  final allProductController = Get.put(AllProductController());
 
   @override
   Widget build(BuildContext context) {
@@ -423,8 +426,13 @@ class HomePageState extends State<HomePage> {
                                     ),
                                   ),
                                   GestureDetector(
-                                    onTap: () =>
-                                        dashboardController.tabIndex.value = 2,
+                                    onTap: () {
+                                      allProductController.listProduct.clear();
+                                      allProductController.getDiscountProduct();
+                                      allProductController.update();
+                                      Get.to(const AllProductPage(),
+                                          id: AppConstant.HOME);
+                                    },
                                     child: Row(
                                       children: [
                                         Text(
@@ -567,8 +575,14 @@ class HomePageState extends State<HomePage> {
                                                       : Colors.black,
                                                   fontSize: 20,
                                                   fontWeight: FontWeight.w600,
-                                                  decoration: TextDecoration
-                                                      .lineThrough,
+                                                  decoration: controller
+                                                              .listDiscountProduct[
+                                                                  index]
+                                                              .discount !=
+                                                          0
+                                                      ? TextDecoration
+                                                          .lineThrough
+                                                      : TextDecoration.none,
                                                 ),
                                               ),
                                             ),
@@ -841,7 +855,11 @@ class HomePageState extends State<HomePage> {
                                   ),
                                   GestureDetector(
                                     onTap: () {
-                                      dashboardController.tabIndex.value = 2;
+                                      allProductController.listProduct.clear();
+                                      allProductController.getTrendingProduct();
+                                      allProductController.update();
+                                      Get.to(const AllProductPage(),
+                                          id: AppConstant.HOME);
                                     },
                                     child: Row(
                                       children: [

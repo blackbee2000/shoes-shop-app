@@ -743,8 +743,13 @@ class ProductDetailState extends State<ProductDetailPage>
                                                     : Colors.white,
                                             fontSize: 25,
                                             fontWeight: FontWeight.w600,
-                                            decoration:
-                                                TextDecoration.lineThrough,
+                                            decoration: productDetailController
+                                                        .productDetail
+                                                        .value
+                                                        .discount !=
+                                                    0
+                                                ? TextDecoration.lineThrough
+                                                : TextDecoration.none,
                                           ),
                                         ),
                                       ),

@@ -387,7 +387,7 @@ class ProductPage extends GetView<ProductController> {
                                     ? GridView.builder(
                                         gridDelegate:
                                             const SliverGridDelegateWithFixedCrossAxisCount(
-                                          childAspectRatio: 0.52,
+                                          childAspectRatio: 0.55,
                                           crossAxisSpacing: 20,
                                           mainAxisSpacing: 20,
                                           crossAxisCount: 2,
@@ -634,12 +634,73 @@ class ProductPage extends GetView<ProductController> {
                                                   ),
                                                 ),
                                                 const SizedBox(
-                                                  height: 10,
+                                                  height: 5,
+                                                ),
+                                                Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.start,
+                                                  children: [
+                                                    RichText(
+                                                      text: TextSpan(
+                                                        text:
+                                                            CurrencyTextInputFormatter(
+                                                          locale: AppTranslation
+                                                                      .instance
+                                                                      .language ==
+                                                                  AppTranslation
+                                                                      .english
+                                                              ? "vi_VN"
+                                                              : "en_US",
+                                                          decimalDigits: 0,
+                                                          symbol: "",
+                                                        ).format((controller
+                                                                    .listProduct[
+                                                                        index]
+                                                                    .price)
+                                                                .toString()),
+                                                        style: GoogleFonts
+                                                            .ebGaramond(
+                                                          color: theme.theme ==
+                                                                  ThemeMode
+                                                                      .light
+                                                              ? Colors.black
+                                                              : Colors.white,
+                                                          fontSize: 20,
+                                                          fontWeight:
+                                                              FontWeight.w600,
+                                                          decoration: controller
+                                                                      .listProduct[
+                                                                          index]
+                                                                      .discount !=
+                                                                  0
+                                                              ? TextDecoration
+                                                                  .lineThrough
+                                                              : TextDecoration
+                                                                  .none,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    RichText(
+                                                      text: TextSpan(
+                                                        text:
+                                                            ' - ${controller.listProduct[index].discount} %',
+                                                        style: GoogleFonts
+                                                            .ebGaramond(
+                                                          color: Colors.amber,
+                                                          fontSize: 14,
+                                                          fontWeight:
+                                                              FontWeight.w600,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                                const SizedBox(
+                                                  height: 5,
                                                 ),
                                                 Align(
                                                   alignment: Alignment.topLeft,
                                                   child: RichText(
-                                                    textAlign: TextAlign.start,
                                                     text: TextSpan(
                                                       text:
                                                           CurrencyTextInputFormatter(
@@ -652,10 +713,16 @@ class ProductPage extends GetView<ProductController> {
                                                             : "en_US",
                                                         decimalDigits: 0,
                                                         symbol: "",
-                                                      ).format((controller
-                                                                  .listProduct[
-                                                                      index]
-                                                                  .price)
+                                                      ).format(((controller
+                                                                          .listProduct[
+                                                                              index]
+                                                                          .price! *
+                                                                      (100 -
+                                                                          controller
+                                                                              .listProduct[index]
+                                                                              .discount!) /
+                                                                      100) /
+                                                                  10)
                                                               .toString()),
                                                       style: GoogleFonts
                                                           .ebGaramond(
@@ -671,7 +738,7 @@ class ProductPage extends GetView<ProductController> {
                                                   ),
                                                 ),
                                                 const SizedBox(
-                                                  height: 10,
+                                                  height: 5,
                                                 ),
                                                 Container(
                                                   alignment: Alignment.topLeft,
