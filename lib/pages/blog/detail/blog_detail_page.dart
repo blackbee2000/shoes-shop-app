@@ -11,8 +11,8 @@ import 'package:shoes_shop_app/translations/app_translation.dart';
 import 'package:shoes_shop_app/utils/app_constant.dart';
 import 'package:flutter_share/flutter_share.dart';
 import 'package:google_fonts/google_fonts.dart';
-// import 'package:flutter_html/flutter_html.dart';
-import 'package:html/parser.dart' show parse;
+import 'package:flutter_html/flutter_html.dart';
+// import 'package:html/parser.dart' show parse;
 
 class BlogDetailPage extends StatefulWidget {
   final Blog blog;
@@ -203,11 +203,12 @@ class BlogDetailState extends State<BlogDetailPage> {
                                       width: 10,
                                     ),
                                     Text(
-                                      widget.blog.time != null &&
-                                              widget.blog.time!.isNotEmpty
+                                      widget.blog.createdAt != null &&
+                                              widget.blog.createdAt!.isNotEmpty
                                           ? DateFormat('HH:mm dd/MM/yyyy')
                                               .format(DateTime.parse(
-                                                      widget.blog.time ?? '')
+                                                      widget.blog.createdAt ??
+                                                          '')
                                                   .toLocal())
                                           : '--',
                                       style: GoogleFonts.ebGaramond(
@@ -282,9 +283,10 @@ class BlogDetailState extends State<BlogDetailPage> {
                               AppTranslation.english
                           ? (widget.blog.contentEn != null &&
                                   widget.blog.contentEn!.isNotEmpty
-                              ? Text(
-                                  parse(widget.blog.contentEn).outerHtml,
-                                )
+                              ? Html(data: widget.blog.contentEn)
+                              // Text(
+                              //     parse(widget.blog.contentEn).outerHtml,
+                              //   )
                               : Column(
                                   children: [
                                     const Icon(
@@ -304,9 +306,10 @@ class BlogDetailState extends State<BlogDetailPage> {
                                 ))
                           : (widget.blog.contentVi != null &&
                                   widget.blog.contentVi!.isNotEmpty
-                              ? Text(
-                                  parse(widget.blog.contentVi).outerHtml,
-                                )
+                              ? Html(data: widget.blog.contentVi)
+                              // Text(
+                              //     parse(widget.blog.contentVi).outerHtml,
+                              //   )
                               : Column(
                                   children: [
                                     const Icon(
@@ -487,13 +490,13 @@ class BlogDetailState extends State<BlogDetailPage> {
                                                         width: 10,
                                                       ),
                                                       Text(
-                                                        e.time != null &&
-                                                                e.time!
+                                                        e.createdAt != null &&
+                                                                e.createdAt!
                                                                     .isNotEmpty
                                                             ? DateFormat(
                                                                     'HH:mm dd/MM/yyyy')
                                                                 .format(DateTime.parse(
-                                                                        e.time ??
+                                                                        e.createdAt ??
                                                                             '')
                                                                     .toLocal())
                                                             : '--',

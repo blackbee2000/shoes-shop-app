@@ -1,20 +1,20 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:shoes_shop_app/models/type_product_order.dart';
+import 'package:shoes_shop_app/models/type_product.dart';
 part 'product_order.g.dart';
 
 @JsonSerializable()
 class ProductOrder {
-  dynamic id;
-  dynamic nameProductVi;
-  dynamic nameProductEn;
-  dynamic imageProduct;
-  dynamic descriptionVi;
-  dynamic descriptionEn;
-  dynamic rating;
-  dynamic type;
-  dynamic idCompany;
-  dynamic price;
-  dynamic productCode;
+  String? id;
+  String? nameProductVi;
+  String? nameProductEn;
+  String? imageProduct;
+  String? descriptionVi;
+  String? descriptionEn;
+  num? rating;
+  TypeProduct? type;
+  String? idCompany;
+  int? price;
+  String? productCode;
 
   ProductOrder(
     this.id,

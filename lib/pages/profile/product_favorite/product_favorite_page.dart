@@ -45,6 +45,19 @@ class ProductFavoriteState extends State<ProductFavoritePage> {
             backgroundColor:
                 theme.theme == ThemeMode.light ? Colors.white : Colors.black,
             appBar: AppBar(
+              bottom: theme.theme == ThemeMode.dark
+                  ? PreferredSize(
+                      child: Container(
+                        width: double.infinity,
+                        color: const Color(0xffF01101),
+                        height: 1,
+                      ),
+                      preferredSize: const Size.fromHeight(0),
+                    )
+                  : PreferredSize(
+                      child: Container(),
+                      preferredSize: const Size.fromHeight(0),
+                    ),
               backgroundColor:
                   theme.theme == ThemeMode.light ? Colors.white : Colors.black,
               leading: IconButton(
@@ -122,217 +135,266 @@ class ProductFavoriteState extends State<ProductFavoritePage> {
                     top: 20,
                     bottom: 40,
                   ),
-                  child: GridView.builder(
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                      childAspectRatio: 0.52,
-                      crossAxisSpacing: 20,
-                      mainAxisSpacing: 20,
-                      crossAxisCount: 2,
-                    ),
-                    itemCount: controller.listProductFavoriteFinal.length,
-                    itemBuilder: (context, index) => GestureDetector(
-                      onTap: () {
-                        Get.to(
-                          ProductDetailPage(
-                            product: controller.listProductFavoriteFinal[index],
-                            id: widget.id,
+                  child: controller.listProductFavoriteFinal.isNotEmpty
+                      ? GridView.builder(
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                            childAspectRatio: 0.52,
+                            crossAxisSpacing: 20,
+                            mainAxisSpacing: 20,
+                            crossAxisCount: 2,
                           ),
-                          id: widget.id,
-                        );
-                      },
-                      child: SizedBox(
-                        width: double.infinity,
-                        child: Column(
-                          children: [
-                            Container(
+                          itemCount: controller.listProductFavoriteFinal.length,
+                          itemBuilder: (context, index) => GestureDetector(
+                            onTap: () {
+                              Get.to(
+                                ProductDetailPage(
+                                  product: controller
+                                      .listProductFavoriteFinal[index],
+                                  id: widget.id,
+                                ),
+                                id: widget.id,
+                              );
+                            },
+                            child: SizedBox(
                               width: double.infinity,
-                              decoration: BoxDecoration(
-                                color: theme.theme == ThemeMode.light
-                                    ? Colors.black
-                                    : Colors.white,
-                                borderRadius: BorderRadius.circular(10),
-                              ),
                               child: Column(
                                 children: [
-                                  GestureDetector(
-                                    onTap: () {
-                                      controller.likeProduct(controller
-                                              .listProductFavoriteFinal[index]
-                                              .id ??
-                                          '');
-                                      productController.onInit();
-                                      productController.update();
-                                      controller.update();
-                                    },
-                                    child: Container(
-                                      width: double.infinity,
-                                      height: 36,
-                                      alignment: Alignment.topRight,
-                                      child: Container(
-                                        width: 41,
-                                        height: double.infinity,
-                                        decoration: BoxDecoration(
-                                          color: theme.theme == ThemeMode.light
-                                              ? Colors.white
-                                              : Colors.black,
-                                          borderRadius: const BorderRadius.only(
-                                            topRight: Radius.circular(10),
-                                            bottomLeft: Radius.circular(10),
-                                          ),
-                                        ),
-                                        child: Center(
-                                          child: controller
-                                                      .listProductFavoriteFinal[
-                                                          index]
-                                                      .isLike ==
-                                                  true
-                                              ? const Icon(
-                                                  Icons.favorite,
-                                                  color: Colors.black,
-                                                  size: 20,
-                                                )
-                                              : const Icon(
-                                                  Icons.favorite_border,
-                                                  color: Colors.black,
-                                                  size: 20,
-                                                ),
-                                        ),
-                                      ),
+                                  Container(
+                                    width: double.infinity,
+                                    decoration: BoxDecoration(
+                                      color: theme.theme == ThemeMode.light
+                                          ? Colors.black
+                                          : Colors.white,
+                                      borderRadius: BorderRadius.circular(10),
                                     ),
-                                  ),
-                                  const SizedBox(
-                                    height: 20,
-                                  ),
-                                  RotatedBox(
-                                    quarterTurns: 1,
-                                    child: Center(
-                                      child: CachedNetworkImage(
-                                        width: 90,
-                                        fit: BoxFit.contain,
-                                        imageUrl: controller
-                                            .listProductFavoriteFinal[index]
-                                            .imageProduct!,
-                                        useOldImageOnUrlChange: false,
-                                        progressIndicatorBuilder:
-                                            (context, url, downloadProgress) =>
-                                                SizedBox(
-                                          height: 15,
-                                          width: 15,
-                                          child: Center(
-                                            child: CircularProgressIndicator(
-                                              value: downloadProgress.progress,
-                                              valueColor:
-                                                  const AlwaysStoppedAnimation(
-                                                      Colors.white),
-                                              strokeWidth: 2,
+                                    child: Column(
+                                      children: [
+                                        GestureDetector(
+                                          onTap: () {
+                                            controller.likeProduct(controller
+                                                    .listProductFavoriteFinal[
+                                                        index]
+                                                    .id ??
+                                                '');
+                                            productController.onInit();
+                                            productController.update();
+                                            controller.update();
+                                          },
+                                          child: Container(
+                                            width: double.infinity,
+                                            height: 36,
+                                            alignment: Alignment.topRight,
+                                            child: Container(
+                                              width: 41,
+                                              height: double.infinity,
+                                              decoration: BoxDecoration(
+                                                color: theme.theme ==
+                                                        ThemeMode.light
+                                                    ? Colors.white
+                                                    : Colors.black,
+                                                borderRadius:
+                                                    const BorderRadius.only(
+                                                  topRight: Radius.circular(10),
+                                                  bottomLeft:
+                                                      Radius.circular(10),
+                                                ),
+                                              ),
+                                              child: Center(
+                                                child: controller
+                                                            .listProductFavoriteFinal[
+                                                                index]
+                                                            .isLike ==
+                                                        true
+                                                    ? Icon(
+                                                        Icons.favorite,
+                                                        color: theme.theme ==
+                                                                ThemeMode.light
+                                                            ? Colors.black
+                                                            : Colors.white,
+                                                        size: 20,
+                                                      )
+                                                    : Icon(
+                                                        Icons.favorite_border,
+                                                        color: theme.theme ==
+                                                                ThemeMode.light
+                                                            ? Colors.black
+                                                            : Colors.white,
+                                                        size: 20,
+                                                      ),
+                                              ),
                                             ),
                                           ),
                                         ),
-                                        errorWidget: (context, url, error) =>
-                                            ClipOval(
-                                          child: Container(),
+                                        const SizedBox(
+                                          height: 20,
                                         ),
-                                      ),
+                                        RotatedBox(
+                                          quarterTurns: 1,
+                                          child: Center(
+                                            child: CachedNetworkImage(
+                                              width: 90,
+                                              fit: BoxFit.contain,
+                                              imageUrl: controller
+                                                  .listProductFavoriteFinal[
+                                                      index]
+                                                  .imageProduct!,
+                                              useOldImageOnUrlChange: false,
+                                              progressIndicatorBuilder:
+                                                  (context, url,
+                                                          downloadProgress) =>
+                                                      SizedBox(
+                                                height: 15,
+                                                width: 15,
+                                                child: Center(
+                                                  child:
+                                                      CircularProgressIndicator(
+                                                    value: downloadProgress
+                                                        .progress,
+                                                    valueColor:
+                                                        const AlwaysStoppedAnimation(
+                                                            Colors.white),
+                                                    strokeWidth: 2,
+                                                  ),
+                                                ),
+                                              ),
+                                              errorWidget:
+                                                  (context, url, error) =>
+                                                      ClipOval(
+                                                child: Container(),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        const SizedBox(
+                                          height: 15,
+                                        ),
+                                        Container(
+                                          width: double.infinity,
+                                          height: 36,
+                                          alignment: Alignment.bottomLeft,
+                                          child: Container(
+                                            width: 41,
+                                            height: double.infinity,
+                                            decoration: BoxDecoration(
+                                              color:
+                                                  theme.theme == ThemeMode.light
+                                                      ? Colors.white
+                                                      : Colors.black,
+                                              borderRadius:
+                                                  const BorderRadius.only(
+                                                topRight: Radius.circular(10),
+                                                bottomLeft: Radius.circular(10),
+                                              ),
+                                            ),
+                                            child: Center(
+                                              child: Image.asset(
+                                                "assets/icons/icon-cart.png",
+                                                width: 20,
+                                                height: 20,
+                                                color: theme.theme ==
+                                                        ThemeMode.light
+                                                    ? Colors.black
+                                                    : Colors.white,
+                                                fit: BoxFit.contain,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
                                     ),
                                   ),
                                   const SizedBox(
                                     height: 15,
                                   ),
-                                  Container(
-                                    width: double.infinity,
-                                    height: 36,
-                                    alignment: Alignment.bottomLeft,
-                                    child: Container(
-                                      width: 41,
-                                      height: double.infinity,
-                                      decoration: BoxDecoration(
+                                  Align(
+                                    alignment: Alignment.topLeft,
+                                    child: Text(
+                                      '${AppTranslation.instance.language == AppTranslation.english ? (controller.listProductFavoriteFinal[index].nameProductEn != null && controller.listProductFavoriteFinal[index].nameProductEn!.isNotEmpty ? controller.listProductFavoriteFinal[index].nameProductEn : '--') : (controller.listProductFavoriteFinal[index].nameProductVi != null && controller.listProductFavoriteFinal[index].nameProductVi!.isNotEmpty ? controller.listProductFavoriteFinal[index].nameProductVi : '--')}',
+                                      style: GoogleFonts.ebGaramond(
                                         color: theme.theme == ThemeMode.light
-                                            ? Colors.white
-                                            : Colors.black,
-                                        borderRadius: const BorderRadius.only(
-                                          topRight: Radius.circular(10),
-                                          bottomLeft: Radius.circular(10),
-                                        ),
+                                            ? Colors.black
+                                            : Colors.white,
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w600,
                                       ),
-                                      child: Center(
-                                        child: Image.asset(
-                                          "assets/icons/icon-cart.png",
-                                          width: 20,
-                                          height: 20,
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    height: 10,
+                                  ),
+                                  Align(
+                                    alignment: Alignment.topLeft,
+                                    child: RichText(
+                                      textAlign: TextAlign.start,
+                                      text: TextSpan(
+                                        text:
+                                            '${controller.listProductFavoriteFinal[index].price ?? '--'}',
+                                        style: GoogleFonts.ebGaramond(
                                           color: theme.theme == ThemeMode.light
                                               ? Colors.black
                                               : Colors.white,
-                                          fit: BoxFit.contain,
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.w600,
                                         ),
                                       ),
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    height: 10,
+                                  ),
+                                  Container(
+                                    alignment: Alignment.topLeft,
+                                    child: RatingBarIndicator(
+                                      rating: double.tryParse(controller
+                                              .listProductFavoriteFinal[index]
+                                              .rating
+                                              .toString()) ??
+                                          0.0,
+                                      itemBuilder: (context, index) =>
+                                          const Icon(
+                                        Icons.star,
+                                        color: Colors.amber,
+                                      ),
+                                      itemCount: 5,
+                                      itemSize: 20,
+                                      direction: Axis.horizontal,
                                     ),
                                   ),
                                 ],
                               ),
                             ),
-                            const SizedBox(
-                              height: 15,
-                            ),
-                            Align(
-                              alignment: Alignment.topLeft,
-                              child: Text(
-                                '${AppTranslation.instance.language == AppTranslation.english ? (controller.listProductFavoriteFinal[index].nameProductEn != null && controller.listProductFavoriteFinal[index].nameProductEn!.isNotEmpty ? controller.listProductFavoriteFinal[index].nameProductEn : '--') : (controller.listProductFavoriteFinal[index].nameProductVi != null && controller.listProductFavoriteFinal[index].nameProductVi!.isNotEmpty ? controller.listProductFavoriteFinal[index].nameProductVi : '--')}',
+                          ),
+                        )
+                      : Container(
+                          alignment: Alignment.center,
+                          child: Column(
+                            children: [
+                              Image.asset(
+                                'assets/icons/icon-box.png',
+                                width: 45,
+                                color: theme.theme == ThemeMode.light
+                                    ? Colors.black
+                                    : Colors.white,
+                              ),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              Text(
+                                'no_information'.tr,
                                 style: GoogleFonts.ebGaramond(
                                   color: theme.theme == ThemeMode.light
                                       ? Colors.black
                                       : Colors.white,
-                                  fontSize: 14,
+                                  fontSize: 18,
                                   fontWeight: FontWeight.w600,
                                 ),
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
                               ),
-                            ),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            Align(
-                              alignment: Alignment.topLeft,
-                              child: RichText(
-                                textAlign: TextAlign.start,
-                                text: TextSpan(
-                                  text:
-                                      '${controller.listProductFavoriteFinal[index].price ?? '--'}',
-                                  style: GoogleFonts.ebGaramond(
-                                    color: theme.theme == ThemeMode.light
-                                        ? Colors.black
-                                        : Colors.white,
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                ),
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            Container(
-                              alignment: Alignment.topLeft,
-                              child: RatingBarIndicator(
-                                rating: controller
-                                        .listProductFavoriteFinal[index]
-                                        .rating ??
-                                    0.0,
-                                itemBuilder: (context, index) => const Icon(
-                                  Icons.star,
-                                  color: Colors.amber,
-                                ),
-                                itemCount: 5,
-                                itemSize: 20,
-                                direction: Axis.horizontal,
-                              ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
-                      ),
-                    ),
-                  ),
                 ),
               ),
             ),

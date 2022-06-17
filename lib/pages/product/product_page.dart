@@ -225,26 +225,13 @@ class ProductPage extends GetView<ProductController> {
                             ),
                           ),
                         ),
-                        // Padding(
-                        //   padding: const EdgeInsets.only(left: 10, right: 20),
-                        //   child: GestureDetector(
-                        //     child: Image.asset(
-                        //       "assets/icons/icon_message.png",
-                        //       width: 20,
-                        //       height: 20,
-                        //       color: theme.theme == ThemeMode.light
-                        //           ? Colors.black
-                        //           : Colors.white,
-                        //       fit: BoxFit.contain,
-                        //     ),
-                        //   ),
-                        // ),
                       ],
                     ),
                     body: GetBuilder<ProductController>(
                       init: productController,
                       builder: (controller) => RefreshIndicator(
                         onRefresh: () async {
+                          controller.onInit();
                           controller.update();
                         },
                         child: Container(
@@ -260,7 +247,7 @@ class ProductPage extends GetView<ProductController> {
                               ),
                               Container(
                                 width: double.infinity,
-                                height: 80,
+                                height: 100,
                                 padding: const EdgeInsets.symmetric(
                                   horizontal: 10,
                                 ),
@@ -281,7 +268,7 @@ class ProductPage extends GetView<ProductController> {
                                   scrollDirection: Axis.horizontal,
                                   itemCount: controller.listCompany.length,
                                   itemBuilder: (context, index) => SizedBox(
-                                    width: 60,
+                                    width: 70,
                                     height: double.infinity,
                                     child: GestureDetector(
                                       onTap: () {
@@ -289,14 +276,25 @@ class ProductPage extends GetView<ProductController> {
                                             .listCompany[index].nameCompany!;
                                         if (ApiToken.to.isTokenExisted ==
                                             true) {
-                                          controller.getListProductFavorite(
-                                              controller
-                                                      .listCompany[index].id ??
-                                                  '');
+                                          controller.pagingController
+                                              .addPageRequestListener(
+                                                  (pageKey) {
+                                            controller.getListProductFavorite(
+                                                controller.listCompany[index]
+                                                        .id ??
+                                                    '',
+                                                pageKey);
+                                          });
                                         } else {
-                                          controller.getAllProduct(
-                                              controller.listCompany[index].id!,
-                                              []);
+                                          controller.pagingController
+                                              .addPageRequestListener(
+                                                  (pageKey) {
+                                            controller.getAllProduct(
+                                                controller
+                                                    .listCompany[index].id!,
+                                                [],
+                                                pageKey);
+                                          });
                                         }
                                         controller.update();
                                       },
@@ -309,40 +307,47 @@ class ProductPage extends GetView<ProductController> {
                                           children: [
                                             ClipOval(
                                               child: Container(
-                                                width: 40,
-                                                height: 40,
-                                                color: Colors.black,
-                                                child: CachedNetworkImage(
-                                                  width: double.infinity,
-                                                  height: double.infinity,
-                                                  fit: BoxFit.cover,
-                                                  imageUrl: controller
-                                                          .listCompany[index]
-                                                          .logoCompany ??
-                                                      '',
-                                                  useOldImageOnUrlChange: false,
-                                                  progressIndicatorBuilder:
-                                                      (context, url,
-                                                              downloadProgress) =>
-                                                          SizedBox(
-                                                    height: 15,
-                                                    width: 15,
-                                                    child: Center(
-                                                      child:
-                                                          CircularProgressIndicator(
-                                                        value: downloadProgress
-                                                            .progress,
-                                                        valueColor:
-                                                            const AlwaysStoppedAnimation(
-                                                                Colors.white),
-                                                        strokeWidth: 2,
+                                                width: 50,
+                                                height: 50,
+                                                decoration: BoxDecoration(
+                                                  color: Colors.white,
+                                                  border: Border.all(
+                                                      color: Colors.black),
+                                                  shape: BoxShape.circle,
+                                                ),
+                                                child: Center(
+                                                  child: CachedNetworkImage(
+                                                    fit: BoxFit.contain,
+                                                    imageUrl: controller
+                                                            .listCompany[index]
+                                                            .logoCompany ??
+                                                        '',
+                                                    useOldImageOnUrlChange:
+                                                        false,
+                                                    progressIndicatorBuilder:
+                                                        (context, url,
+                                                                downloadProgress) =>
+                                                            SizedBox(
+                                                      height: 15,
+                                                      width: 15,
+                                                      child: Center(
+                                                        child:
+                                                            CircularProgressIndicator(
+                                                          value:
+                                                              downloadProgress
+                                                                  .progress,
+                                                          valueColor:
+                                                              const AlwaysStoppedAnimation(
+                                                                  Colors.white),
+                                                          strokeWidth: 2,
+                                                        ),
                                                       ),
                                                     ),
-                                                  ),
-                                                  errorWidget:
-                                                      (context, url, error) =>
-                                                          ClipOval(
-                                                    child: Container(),
+                                                    errorWidget:
+                                                        (context, url, error) =>
+                                                            ClipOval(
+                                                      child: Container(),
+                                                    ),
                                                   ),
                                                 ),
                                               ),
@@ -354,7 +359,7 @@ class ProductPage extends GetView<ProductController> {
                                               '${controller.listCompany[index].nameCompany != null && controller.listCompany[index].nameCompany!.isNotEmpty ? controller.listCompany[index].nameCompany : '--'}',
                                               style: GoogleFonts.ebGaramond(
                                                 color: Colors.black,
-                                                fontSize: 13,
+                                                fontSize: 15,
                                                 fontWeight: FontWeight.w400,
                                               ),
                                             ),
@@ -667,9 +672,12 @@ class ProductPage extends GetView<ProductController> {
                                                 Container(
                                                   alignment: Alignment.topLeft,
                                                   child: RatingBarIndicator(
-                                                    rating: controller
-                                                            .listProduct[index]
-                                                            .rating ??
+                                                    rating: double.tryParse(
+                                                            controller
+                                                                .listProduct[
+                                                                    index]
+                                                                .rating
+                                                                .toString()) ??
                                                         0.0,
                                                     itemBuilder:
                                                         (context, index) =>

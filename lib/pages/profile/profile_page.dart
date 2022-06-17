@@ -101,6 +101,19 @@ class ProfilePage extends GetView<ProfileController> {
                   backgroundColor: theme.theme == ThemeMode.light
                       ? Colors.white
                       : Colors.black,
+                  bottom: theme.theme == ThemeMode.dark
+                      ? PreferredSize(
+                          child: Container(
+                            width: double.infinity,
+                            color: const Color(0xffF01101),
+                            height: 1,
+                          ),
+                          preferredSize: const Size.fromHeight(0),
+                        )
+                      : PreferredSize(
+                          child: Container(),
+                          preferredSize: const Size.fromHeight(0),
+                        ),
                   title: Text(
                     'profile_title'.tr,
                     style: GoogleFonts.ebGaramond(
@@ -149,20 +162,6 @@ class ProfilePage extends GetView<ProfileController> {
                         ),
                       ),
                     ),
-                    // Padding(
-                    //   padding: const EdgeInsets.only(left: 10, right: 20),
-                    //   child: GestureDetector(
-                    //     child: Image.asset(
-                    //       "assets/icons/icon_message.png",
-                    //       width: 20,
-                    //       height: 20,
-                    //       color: theme.theme == ThemeMode.light
-                    //           ? Colors.black
-                    //           : Colors.white,
-                    //       fit: BoxFit.contain,
-                    //     ),
-                    //   ),
-                    // ),
                   ],
                 ),
                 backgroundColor: Colors.transparent,
@@ -178,6 +177,39 @@ class ProfilePage extends GetView<ProfileController> {
                               const SizedBox(
                                 height: 20,
                               ),
+                              ApiToken().isTokenExisted
+                                  ? Container()
+                                  : Container(
+                                      margin: const EdgeInsets.symmetric(
+                                          vertical: 20),
+                                      alignment: Alignment.center,
+                                      child: Column(
+                                        children: [
+                                          Image.asset(
+                                            'assets/icons/icon-box.png',
+                                            width: 45,
+                                            color:
+                                                theme.theme == ThemeMode.light
+                                                    ? Colors.black
+                                                    : Colors.white,
+                                          ),
+                                          const SizedBox(
+                                            height: 10,
+                                          ),
+                                          Text(
+                                            'no_user'.tr,
+                                            style: GoogleFonts.ebGaramond(
+                                              color:
+                                                  theme.theme == ThemeMode.light
+                                                      ? Colors.black
+                                                      : Colors.white,
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.w600,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
                               ApiToken().isTokenExisted
                                   ? ClipOval(
                                       child: Container(
@@ -563,7 +595,7 @@ class ProfilePage extends GetView<ProfileController> {
                                             color:
                                                 theme.theme == ThemeMode.light
                                                     ? Colors.black
-                                                    : Colors.white,
+                                                    : const Color(0xffF01101),
                                             borderRadius:
                                                 BorderRadius.circular(10),
                                           ),
@@ -573,10 +605,7 @@ class ProfilePage extends GetView<ProfileController> {
                                                   .tr
                                                   .toUpperCase(),
                                               style: GoogleFonts.ebGaramond(
-                                                color: theme.theme ==
-                                                        ThemeMode.light
-                                                    ? Colors.white
-                                                    : Colors.black,
+                                                color: Colors.white,
                                                 fontSize: 16,
                                                 fontWeight: FontWeight.w600,
                                               ),
@@ -589,7 +618,6 @@ class ProfilePage extends GetView<ProfileController> {
                               ApiToken().isTokenExisted
                                   ? Container(
                                       margin: const EdgeInsets.only(
-                                        top: 20,
                                         left: 20,
                                         right: 20,
                                       ),
@@ -686,7 +714,7 @@ class ProfilePage extends GetView<ProfileController> {
                                     decoration: BoxDecoration(
                                       color: theme.theme == ThemeMode.light
                                           ? Colors.black
-                                          : Colors.white,
+                                          : const Color(0xffF01101),
                                       borderRadius: BorderRadius.circular(10),
                                     ),
                                     child: Center(
@@ -695,9 +723,7 @@ class ProfilePage extends GetView<ProfileController> {
                                             ? 'profile_logout'.tr.toUpperCase()
                                             : 'sign_in'.tr.toUpperCase(),
                                         style: GoogleFonts.ebGaramond(
-                                          color: theme.theme == ThemeMode.light
-                                              ? Colors.white
-                                              : Colors.black,
+                                          color: Colors.white,
                                           fontSize: 16,
                                           fontWeight: FontWeight.w600,
                                         ),

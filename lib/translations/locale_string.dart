@@ -171,6 +171,9 @@ class LocaleString extends Translations {
           "rate_fail": "You rated product failed",
           "rate_update_success": "You updated to rate product success",
           "rate_update_fail": "You updated to rate product failed",
+          "choose_amount": "Choose the wrong quantity",
+          "quantity": "Quantity",
+          "no_user": "No have user information, login now please",
         },
         "vi_VN": {
           "product_title": "Sản phẩm",
@@ -344,6 +347,9 @@ class LocaleString extends Translations {
           "rate_fail": "Bạn đã đánh giá sản phẩm thất bại",
           "rate_update_success": "Bạn đã cập nhật đánh giá sản phẩm thành công",
           "rate_update_fail": "Bạn đã cập nhật đánh giá sản phẩm thất bại",
+          "choose_amount": "Chọn số lượng không phù hợp",
+          "quantity": "Số lượng",
+          "no_user": "Không có thông tin tài khoản, vui lòng đăng nhập",
         }
       };
 }

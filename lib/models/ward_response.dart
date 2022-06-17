@@ -1,5 +1,4 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:shoes_shop_app/models/province.dart';
 import 'package:shoes_shop_app/models/ward.dart';
 part 'ward_response.g.dart';
 

@@ -4,6 +4,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:shoes_shop_app/models/profile.dart';
 import 'package:shoes_shop_app/pages/auth/login/login_page.dart';
 import 'package:shoes_shop_app/pages/profile/profile_provider.dart';
+import 'package:shoes_shop_app/pages/user/user_page.dart';
 import 'package:shoes_shop_app/services/api_token.dart';
 import 'package:shoes_shop_app/theme/app_theme.dart';
 import 'package:shoes_shop_app/translations/app_translation.dart';
@@ -20,7 +21,7 @@ class ProfileController extends GetxController {
   @override
   void onInit() async {
     super.onInit();
-    getProfile();
+    getProfile('profile');
     defaultValue();
   }
 
@@ -40,7 +41,7 @@ class ProfileController extends GetxController {
     Get.to(const LoginPage());
   }
 
-  getProfile() {
+  getProfile(String type) {
     ProfileProvider().getProfile(
       option: Options(
         headers: {
@@ -50,6 +51,16 @@ class ProfileController extends GetxController {
       beforeSend: () {},
       onSuccess: (res) {
         profile.value = res.data!;
+        if (type == 'register') {
+          Future.delayed(const Duration(milliseconds: 500)).then((_) {
+            Get.to(
+              UserPage(
+                id: 1,
+                idProfile: profile.value.id ?? '',
+              ),
+            );
+          });
+        }
         update();
       },
       onError: (e) {

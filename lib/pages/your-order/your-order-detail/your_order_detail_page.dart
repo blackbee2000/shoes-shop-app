@@ -48,8 +48,9 @@ class YourOrderDetailPage extends StatelessWidget {
                 ),
                 const SizedBox(height: 10),
                 RatingBar.builder(
-                  initialRating: double.parse(
-                      controller.ratingController.value.toString()),
+                  initialRating: double.tryParse(
+                          controller.ratingController.value.toString()) ??
+                      0.0,
                   minRating: 1,
                   direction: Axis.horizontal,
                   allowHalfRating: true,
@@ -60,7 +61,8 @@ class YourOrderDetailPage extends StatelessWidget {
                     color: Colors.amber,
                   ),
                   onRatingUpdate: (rating) {
-                    controller.ratingController.value = rating;
+                    controller.ratingController.value =
+                        double.tryParse(rating.toString()) ?? 0.0;
                     controller.update();
                   },
                 ),
@@ -106,14 +108,18 @@ class YourOrderDetailPage extends StatelessWidget {
                                   idProduct) {
                                 controller
                                         .rateProductNowOfAccount.value.rating =
-                                    double.parse(controller
+                                    double.tryParse(controller
                                         .ratingController.value
                                         .toString());
+                                print(
+                                    'RATING ===> ${controller.rateProductNowOfAccount.value.rating}');
                                 controller.updateRateByAccount(
                                     controller.rateProductNowOfAccount.value);
                               } else {
                                 controller.createRating(
-                                    controller.ratingController.value,
+                                    double.tryParse(controller
+                                        .ratingController.value
+                                        .toString()),
                                     idProduct);
                               }
                               Get.back();
@@ -468,9 +474,10 @@ class YourOrderDetailPage extends StatelessWidget {
                                                                 .topLeft,
                                                             child:
                                                                 RatingBarIndicator(
-                                                              rating: e
+                                                              rating: double.tryParse(e
                                                                       .lstProduct!
-                                                                      .rating ??
+                                                                      .rating
+                                                                      .toString()) ??
                                                                   0.0,
                                                               itemBuilder: (context,
                                                                       index) =>
@@ -530,10 +537,10 @@ class YourOrderDetailPage extends StatelessWidget {
                                               child: GestureDetector(
                                                 onTap: () {
                                                   controller.getRatingByAccount(
-                                                      e.lstProduct!.id);
+                                                      e.lstProduct!.id!);
                                                   Get.bottomSheet(ratingDialog(
                                                       context,
-                                                      e.lstProduct!.id));
+                                                      e.lstProduct!.id!));
                                                 },
                                                 child: Container(
                                                   width: 100,

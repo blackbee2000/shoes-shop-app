@@ -1,14 +1,12 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:shoes_shop_app/models/address.dart';
-import 'package:shoes_shop_app/models/address_order.dart';
 import 'package:shoes_shop_app/models/cart.dart';
-import 'package:shoes_shop_app/models/list_cart.dart';
 part 'order.g.dart';
 
 @JsonSerializable()
 class Order {
   String? id;
-  List<ListCart>? lstCart;
+  List<Cart>? lstCart;
   String? idAccount;
   int? status;
   int? totalDiscount;
@@ -16,7 +14,7 @@ class Order {
   int? totalPriceProduct;
   int? totalPrice;
   bool? statusPayment;
-  // Address? address;
+  Address? address;
   String? voucher;
   bool? isDeleted;
   String? createdAt;
@@ -33,7 +31,7 @@ class Order {
     this.totalPriceProduct,
     this.totalPrice,
     this.statusPayment,
-    // this.address,
+    this.address,
     this.voucher,
     this.isDeleted,
     this.createdAt,

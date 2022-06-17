@@ -89,26 +89,13 @@ class BlogPage extends StatelessWidget {
                             ),
                           ),
                         ),
-                        // Padding(
-                        //   padding: const EdgeInsets.only(left: 10, right: 20),
-                        //   child: GestureDetector(
-                        //     child: Image.asset(
-                        //       "assets/icons/icon_message.png",
-                        //       width: 20,
-                        //       height: 20,
-                        //       color: theme.theme == ThemeMode.light
-                        //           ? Colors.black
-                        //           : Colors.white,
-                        //       fit: BoxFit.contain,
-                        //     ),
-                        //   ),
-                        // ),
                       ],
                     ),
                     body: GetBuilder<BlogController>(
                       init: blogController,
                       builder: (controller) => RefreshIndicator(
                         onRefresh: () async {
+                          controller.onInit();
                           controller.update();
                         },
                         child: Container(
@@ -269,17 +256,17 @@ class BlogPage extends StatelessWidget {
                                                         controller
                                                                         .listBlog[
                                                                             index]
-                                                                        .time !=
+                                                                        .createdAt !=
                                                                     null &&
                                                                 controller
                                                                     .listBlog[
                                                                         index]
-                                                                    .time!
+                                                                    .createdAt!
                                                                     .isNotEmpty
                                                             ? DateFormat(
                                                                     'HH:mm dd/MM/yyyy')
                                                                 .format(DateTime.parse(
-                                                                        controller.listBlog[index].time ??
+                                                                        controller.listBlog[index].createdAt ??
                                                                             '')
                                                                     .toLocal())
                                                             : '--',

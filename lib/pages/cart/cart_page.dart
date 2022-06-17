@@ -7,6 +7,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:shoes_shop_app/pages/dashboard/dashboard_controller.dart';
 import 'package:shoes_shop_app/pages/profile/product_favorite/product_favorite_page.dart';
 import 'package:shoes_shop_app/theme/theme_controller.dart';
+import 'package:shoes_shop_app/utils/app_constant.dart';
 
 class CartPage extends StatefulWidget {
   final int id;
@@ -20,6 +21,7 @@ class CartPage extends StatefulWidget {
 
 class CartState extends State<CartPage> {
   final cartController = Get.put(CartController());
+  final dashboardController = Get.put(DashboardController());
 
   @override
   void initState() {
@@ -41,6 +43,19 @@ class CartState extends State<CartPage> {
           color: theme.theme == ThemeMode.light ? Colors.white : Colors.black,
           child: Scaffold(
             appBar: AppBar(
+              bottom: theme.theme == ThemeMode.dark
+                  ? PreferredSize(
+                      child: Container(
+                        width: double.infinity,
+                        color: const Color(0xffF01101),
+                        height: 1,
+                      ),
+                      preferredSize: const Size.fromHeight(0),
+                    )
+                  : PreferredSize(
+                      child: Container(),
+                      preferredSize: const Size.fromHeight(0),
+                    ),
               backgroundColor:
                   theme.theme == ThemeMode.light ? Colors.white : Colors.black,
               leading: IconButton(
@@ -86,20 +101,6 @@ class CartState extends State<CartPage> {
                     ),
                   ),
                 ),
-                // Padding(
-                //   padding: const EdgeInsets.only(left: 10, right: 20),
-                //   child: GestureDetector(
-                //     child: Image.asset(
-                //       "assets/icons/icon_message.png",
-                //       width: 20,
-                //       height: 20,
-                //       color: theme.theme == ThemeMode.light
-                //           ? Colors.black
-                //           : Colors.white,
-                //       fit: BoxFit.contain,
-                //     ),
-                //   ),
-                // ),
               ],
             ),
             backgroundColor: Colors.black.withOpacity(0),
@@ -359,10 +360,11 @@ class CartState extends State<CartPage> {
                                                                   child:
                                                                       GestureDetector(
                                                                     onTap: () {
-                                                                      controller.minusAmount(e
-                                                                          .value
-                                                                          .lstProduct!
-                                                                          .id);
+                                                                      controller.minusAmount(
+                                                                          e.value
+                                                                              .id!,
+                                                                          e.value
+                                                                              .amount!);
                                                                       controller
                                                                           .update();
                                                                     },
@@ -396,7 +398,7 @@ class CartState extends State<CartPage> {
                                                                   width: 15,
                                                                 ),
                                                                 Text(
-                                                                  '${controller.amount.value}',
+                                                                  '${e.value.amount ?? 1}',
                                                                   style: GoogleFonts
                                                                       .ebGaramond(
                                                                     color: Colors
@@ -415,10 +417,11 @@ class CartState extends State<CartPage> {
                                                                   child:
                                                                       GestureDetector(
                                                                     onTap: () {
-                                                                      controller.plusAmount(e
-                                                                          .value
-                                                                          .lstProduct!
-                                                                          .id);
+                                                                      controller.plusAmount(
+                                                                          e.value
+                                                                              .id!,
+                                                                          e.value
+                                                                              .amount!);
                                                                       controller
                                                                           .update();
                                                                     },
@@ -491,7 +494,17 @@ class CartState extends State<CartPage> {
                                       ),
                                       GestureDetector(
                                         onTap: () {
-                                          Get.offAll(DashboardController());
+                                          dashboardController.tabIndex.value =
+                                              1;
+                                          while (Get.nestedKey(
+                                                      AppConstant.PRODUCT)!
+                                                  .currentState
+                                                  ?.canPop() ==
+                                              true) {
+                                            Get.nestedKey(AppConstant.PRODUCT)
+                                                ?.currentState
+                                                ?.pop();
+                                          }
                                         },
                                         child: Container(
                                           width: 200,

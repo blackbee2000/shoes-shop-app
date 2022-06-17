@@ -11,6 +11,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:shoes_shop_app/pages/product/product_controller.dart';
 import 'package:shoes_shop_app/pages/profile/product_favorite/product_favorite_page.dart';
 import 'package:shoes_shop_app/services/api_token.dart';
+import 'package:shoes_shop_app/theme/theme_controller.dart';
 import 'package:shoes_shop_app/translations/app_translation.dart';
 import 'package:shoes_shop_app/utils/app_constant.dart';
 
@@ -36,11 +37,13 @@ class ProductDetailState extends State<ProductDetailPage>
   @override
   void initState() {
     super.initState();
-    productDetailController.isLike.value = widget.product.isLike ?? false;
-    if (widget.product.type!.isNotEmpty) {
+    productDetailController.productDetail.value = widget.product;
+    productDetailController.isLike.value =
+        productDetailController.productDetail.value.isLike ?? false;
+    if (productDetailController.productDetail.value.type!.isNotEmpty) {
       productDetailController.sizeShoes.value =
-          widget.product.type!.first.size!;
-      widget.product.type?.forEach((e) {
+          productDetailController.productDetail.value.type!.first.size!;
+      productDetailController.productDetail.value.type?.forEach((e) {
         productDetailController.listSize.add(e.size!.toString());
       });
     } else {
@@ -48,12 +51,13 @@ class ProductDetailState extends State<ProductDetailPage>
     }
 
     for (var e in productController.listCompany) {
-      if (e.id == widget.product.idCompany) {
+      if (e.id == productDetailController.productDetail.value.idCompany) {
         productDetailController.companyData.value = e;
       }
     }
 
-    productDetailController.getProductRelated(widget.product.id!);
+    productDetailController
+        .getProductRelated(productDetailController.productDetail.value.id!);
 
     tabController = TabController(length: 2, vsync: this);
   }
@@ -448,396 +452,222 @@ class ProductDetailState extends State<ProductDetailPage>
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Container(
-        width: double.infinity,
-        height: double.infinity,
-        color: Colors.white,
-        child: Scaffold(
-          appBar: AppBar(
-            backgroundColor: Colors.white,
-            leading: IconButton(
-              onPressed: () {
-                Get.back(id: widget.id);
-              },
-              icon: const Icon(
-                Icons.arrow_back_ios,
-                size: 20,
-                color: Colors.black,
-              ),
-            ),
-            title: Text(
-              'product_detail_title'.tr,
-              style: GoogleFonts.ebGaramond(
-                color: Colors.black,
-                fontSize: 20,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-            centerTitle: false,
-            actions: [
-              GestureDetector(
-                onTap: () {
-                  Get.to(
-                      ProductFavoritePage(
-                        id: widget.id,
+      child: GetBuilder<ThemeController>(
+        builder: (theme) => Container(
+          width: double.infinity,
+          height: double.infinity,
+          color: theme.theme == ThemeMode.light ? Colors.white : Colors.black,
+          child: Scaffold(
+            appBar: AppBar(
+              backgroundColor:
+                  theme.theme == ThemeMode.light ? Colors.white : Colors.black,
+              bottom: theme.theme == ThemeMode.dark
+                  ? PreferredSize(
+                      child: Container(
+                        width: double.infinity,
+                        color: const Color(0xffF01101),
+                        height: 1,
                       ),
-                      id: AppConstant.HOME);
+                      preferredSize: const Size.fromHeight(0),
+                    )
+                  : PreferredSize(
+                      child: Container(),
+                      preferredSize: const Size.fromHeight(0),
+                    ),
+              leading: IconButton(
+                onPressed: () {
+                  Get.back(id: widget.id);
                 },
-                child: const Icon(
-                  Icons.favorite_border,
+                icon: Icon(
+                  Icons.arrow_back_ios,
                   size: 20,
-                  color: Colors.black,
+                  color: theme.theme == ThemeMode.light
+                      ? Colors.black
+                      : Colors.white,
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.only(left: 10, right: 20),
-                child: GestureDetector(
+              title: Text(
+                'product_detail_title'.tr,
+                style: GoogleFonts.ebGaramond(
+                  color: theme.theme == ThemeMode.light
+                      ? Colors.black
+                      : Colors.white,
+                  fontSize: 20,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+              centerTitle: false,
+              actions: [
+                GestureDetector(
                   onTap: () {
                     Get.to(
-                      CartPage(id: widget.id),
-                      id: widget.id,
-                    );
+                        ProductFavoritePage(
+                          id: widget.id,
+                        ),
+                        id: AppConstant.HOME);
                   },
-                  child: Image.asset(
-                    "assets/icons/icon_cart.png",
-                    width: 20,
-                    height: 20,
-                    color: Colors.black,
-                    fit: BoxFit.contain,
+                  child: Icon(
+                    Icons.favorite_border,
+                    size: 20,
+                    color: theme.theme == ThemeMode.light
+                        ? Colors.black
+                        : Colors.white,
                   ),
                 ),
-              ),
-              // Padding(
-              //   padding: const EdgeInsets.only(left: 10, right: 20),
-              //   child: GestureDetector(
-              //     child: Image.asset(
-              //       "assets/icons/icon_message.png",
-              //       width: 20,
-              //       height: 20,
-              //       color: theme.theme == ThemeMode.light
-              //           ? Colors.black
-              //           : Colors.white,
-              //       fit: BoxFit.contain,
-              //     ),
-              //   ),
-              // ),
-            ],
-          ),
-          backgroundColor: Colors.black.withOpacity(0),
-          body: SizedBox(
-            width: double.infinity,
-            height: double.infinity,
-            child: SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  const SizedBox(
-                    height: 30,
-                  ),
-                  Container(
-                    width: double.infinity,
-                    margin: const EdgeInsets.symmetric(horizontal: 20),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Expanded(
-                          flex: 6,
-                          child: Container(
-                            width: double.infinity,
-                            height: 220,
-                            decoration: BoxDecoration(
-                              color: Colors.black,
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            child: Column(
-                              children: [
-                                GetBuilder<ProductDetailController>(
-                                  init: productDetailController,
-                                  builder: (controller) => GestureDetector(
-                                    onTap: () {
-                                      if (ApiToken.to.isTokenExisted) {
-                                        if (widget.product.isLike == false) {
-                                          productController.likeProduct(
-                                              widget.product.id ?? '', false);
-                                        } else {
-                                          productController.likeProduct(
-                                              widget.product.id ?? '', true);
-                                        }
-                                        productController.update();
-                                        controller.isLike.value =
-                                            !controller.isLike.value;
-                                      } else {
-                                        Get.bottomSheet(loginPopup(context));
-                                      }
-
-                                      controller.update();
-                                    },
-                                    child: Container(
-                                      width: double.infinity,
-                                      height: 36,
-                                      alignment: Alignment.topRight,
-                                      child: Container(
-                                        width: 41,
-                                        height: double.infinity,
-                                        decoration: const BoxDecoration(
-                                          color: Colors.white,
-                                          borderRadius: BorderRadius.only(
-                                            topRight: Radius.circular(10),
-                                            bottomLeft: Radius.circular(10),
-                                          ),
-                                        ),
-                                        child: Center(
-                                          child: controller.isLike.value == true
-                                              ? const Icon(
-                                                  Icons.favorite,
-                                                  color: Colors.black,
-                                                  size: 20,
-                                                )
-                                              : const Icon(
-                                                  Icons.favorite_border,
-                                                  color: Colors.black,
-                                                  size: 20,
-                                                ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                const SizedBox(
-                                  height: 10,
-                                ),
-                                RotatedBox(
-                                  quarterTurns: 1,
-                                  child: CachedNetworkImage(
-                                    width: 120,
-                                    fit: BoxFit.contain,
-                                    imageUrl: widget.product.imageProduct!,
-                                    useOldImageOnUrlChange: false,
-                                    progressIndicatorBuilder:
-                                        (context, url, downloadProgress) =>
-                                            SizedBox(
-                                      height: 15,
-                                      width: 15,
-                                      child: Center(
-                                        child: CircularProgressIndicator(
-                                          value: downloadProgress.progress,
-                                          valueColor:
-                                              const AlwaysStoppedAnimation(
-                                                  Colors.white),
-                                          strokeWidth: 2,
-                                        ),
-                                      ),
-                                    ),
-                                    errorWidget: (context, url, error) =>
-                                        ClipOval(
-                                      child: Container(),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        const SizedBox(
-                          width: 20,
-                        ),
-                        Expanded(
-                          flex: 6,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              SizedBox(
-                                width: double.infinity,
-                                child: Text(
-                                  '${AppTranslation.instance.language == AppTranslation.english ? (widget.product.nameProductEn != null && widget.product.nameProductEn!.isNotEmpty ? widget.product.nameProductEn : '--') : (widget.product.nameProductVi != null && widget.product.nameProductVi!.isNotEmpty ? widget.product.nameProductVi : '--')}',
-                                  style: GoogleFonts.ebGaramond(
-                                    color: Colors.black,
-                                    fontSize: 22,
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                  maxLines: 2,
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                              ),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              RichText(
-                                text: TextSpan(
-                                  text: '${widget.product.price ?? '--'}',
-                                  style: GoogleFonts.ebGaramond(
-                                    color: Colors.black,
-                                    fontSize: 30,
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              Container(
-                                alignment: Alignment.topLeft,
-                                child: RatingBarIndicator(
-                                  rating: widget.product.rating ?? 0.0,
-                                  itemBuilder: (context, index) => const Icon(
-                                    Icons.star,
-                                    color: Colors.amber,
-                                  ),
-                                  itemCount: 5,
-                                  itemSize: 30,
-                                  direction: Axis.horizontal,
-                                ),
-                              ),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              GestureDetector(
-                                onTap: () {
-                                  Get.bottomSheet(chooseSize(context));
-                                },
-                                child: Row(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                      'product_detail_size'.tr,
-                                      style: GoogleFonts.ebGaramond(
-                                        color: Colors.black,
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.w600,
-                                      ),
-                                    ),
-                                    const SizedBox(
-                                      width: 15,
-                                    ),
-                                    Obx(
-                                      () => Text(
-                                        productDetailController.sizeShoes.value,
-                                        style: GoogleFonts.ebGaramond(
-                                          color: Colors.black,
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.w600,
-                                        ),
-                                      ),
-                                    ),
-                                    const SizedBox(
-                                      width: 5,
-                                    ),
-                                    const Icon(
-                                      Icons.arrow_drop_down,
-                                      color: Colors.black,
-                                      size: 20,
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Container(
-                                width: 100,
-                                height: 1,
-                                color: Colors.black,
-                              )
-                            ],
-                          ),
-                        ),
-                      ],
+                Padding(
+                  padding: const EdgeInsets.only(left: 10, right: 20),
+                  child: GestureDetector(
+                    onTap: () {
+                      Get.to(
+                        CartPage(id: widget.id),
+                        id: widget.id,
+                      );
+                    },
+                    child: Image.asset(
+                      "assets/icons/icon_cart.png",
+                      width: 20,
+                      height: 20,
+                      color: theme.theme == ThemeMode.light
+                          ? Colors.black
+                          : Colors.white,
+                      fit: BoxFit.contain,
                     ),
                   ),
-                  const SizedBox(
-                    height: 30,
-                  ),
-                  GetBuilder<ProductDetailController>(
-                    init: productDetailController,
-                    builder: (controller) => Container(
+                ),
+              ],
+            ),
+            backgroundColor:
+                theme.theme == ThemeMode.light ? Colors.white : Colors.black,
+            body: SizedBox(
+              width: double.infinity,
+              height: double.infinity,
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    const SizedBox(
+                      height: 30,
+                    ),
+                    Container(
+                      width: double.infinity,
                       margin: const EdgeInsets.symmetric(horizontal: 20),
                       child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Expanded(
                             flex: 6,
                             child: Container(
                               width: double.infinity,
-                              height: 40,
+                              height: 220,
                               decoration: BoxDecoration(
-                                color: Colors.white,
-                                border: Border.all(color: Colors.black),
+                                color: theme.theme == ThemeMode.light
+                                    ? Colors.black
+                                    : Colors.white,
                                 borderRadius: BorderRadius.circular(10),
                               ),
-                              child: Row(
+                              child: Column(
                                 children: [
-                                  Expanded(
-                                    flex: 3,
-                                    child: GestureDetector(
+                                  GetBuilder<ProductDetailController>(
+                                    init: productDetailController,
+                                    builder: (controller) => GestureDetector(
                                       onTap: () {
-                                        controller.minusAmount();
+                                        if (ApiToken.to.isTokenExisted) {
+                                          if (productDetailController
+                                                  .productDetail.value.isLike ==
+                                              false) {
+                                            productController.likeProduct(
+                                                productDetailController
+                                                        .productDetail
+                                                        .value
+                                                        .id ??
+                                                    '',
+                                                false);
+                                          } else {
+                                            productController.likeProduct(
+                                                productDetailController
+                                                        .productDetail
+                                                        .value
+                                                        .id ??
+                                                    '',
+                                                true);
+                                          }
+                                          productController.update();
+                                          controller.isLike.value =
+                                              !controller.isLike.value;
+                                        } else {
+                                          Get.bottomSheet(loginPopup(context));
+                                        }
+
+                                        controller.update();
                                       },
                                       child: Container(
-                                        width: 30,
-                                        height: double.infinity,
-                                        decoration: const BoxDecoration(
-                                          color: Colors.black,
-                                          borderRadius: BorderRadius.only(
-                                            topLeft: Radius.circular(10),
-                                            bottomLeft: Radius.circular(10),
-                                          ),
-                                        ),
-                                        child: Center(
-                                          child: Text(
-                                            '-',
-                                            style: GoogleFonts.ebGaramond(
-                                              color: Colors.white,
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.w600,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  Obx(
-                                    () => Expanded(
-                                      flex: 6,
-                                      child: SizedBox(
                                         width: double.infinity,
-                                        height: double.infinity,
-                                        child: Center(
-                                          child: Text(
-                                            controller.amount.toString(),
-                                            style: GoogleFonts.ebGaramond(
-                                              color: Colors.black,
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.w600,
+                                        height: 36,
+                                        alignment: Alignment.topRight,
+                                        child: Container(
+                                          width: 41,
+                                          height: double.infinity,
+                                          decoration: const BoxDecoration(
+                                            color: Colors.white,
+                                            borderRadius: BorderRadius.only(
+                                              topRight: Radius.circular(10),
+                                              bottomLeft: Radius.circular(10),
                                             ),
+                                          ),
+                                          child: Center(
+                                            child:
+                                                controller.isLike.value == true
+                                                    ? Icon(
+                                                        Icons.favorite,
+                                                        color: theme.theme ==
+                                                                ThemeMode.light
+                                                            ? Colors.black
+                                                            : Colors.white,
+                                                        size: 20,
+                                                      )
+                                                    : Icon(
+                                                        Icons.favorite_border,
+                                                        color: theme.theme ==
+                                                                ThemeMode.light
+                                                            ? Colors.black
+                                                            : Colors.white,
+                                                        size: 20,
+                                                      ),
                                           ),
                                         ),
                                       ),
                                     ),
                                   ),
-                                  Expanded(
-                                    flex: 3,
-                                    child: GestureDetector(
-                                      onTap: () {
-                                        controller.plusAmount();
-                                      },
-                                      child: Container(
-                                        width: 30,
-                                        height: double.infinity,
-                                        decoration: const BoxDecoration(
-                                          color: Colors.black,
-                                          borderRadius: BorderRadius.only(
-                                            topRight: Radius.circular(10),
-                                            bottomRight: Radius.circular(10),
-                                          ),
-                                        ),
+                                  const SizedBox(
+                                    height: 10,
+                                  ),
+                                  RotatedBox(
+                                    quarterTurns: 1,
+                                    child: CachedNetworkImage(
+                                      width: 120,
+                                      fit: BoxFit.contain,
+                                      imageUrl: productDetailController
+                                          .productDetail.value.imageProduct!,
+                                      useOldImageOnUrlChange: false,
+                                      progressIndicatorBuilder:
+                                          (context, url, downloadProgress) =>
+                                              SizedBox(
+                                        height: 15,
+                                        width: 15,
                                         child: Center(
-                                          child: Text(
-                                            '+',
-                                            style: GoogleFonts.ebGaramond(
-                                              color: Colors.white,
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.w600,
-                                            ),
+                                          child: CircularProgressIndicator(
+                                            value: downloadProgress.progress,
+                                            valueColor:
+                                                const AlwaysStoppedAnimation(
+                                                    Colors.white),
+                                            strokeWidth: 2,
                                           ),
                                         ),
+                                      ),
+                                      errorWidget: (context, url, error) =>
+                                          ClipOval(
+                                        child: Container(),
                                       ),
                                     ),
                                   ),
@@ -846,269 +676,360 @@ class ProductDetailState extends State<ProductDetailPage>
                             ),
                           ),
                           const SizedBox(
-                            width: 30,
+                            width: 20,
                           ),
                           Expanded(
                             flex: 6,
-                            child: GestureDetector(
-                              onTap: () {
-                                ApiToken().isTokenExisted
-                                    ? Get.bottomSheet(addToCart(
-                                        context,
-                                        widget.product,
-                                        controller.sizeShoes.value,
-                                        'black',
-                                        controller.amount.value,
-                                      ))
-                                    : Get.bottomSheet(loginPopup(context));
-                              },
-                              child: Container(
-                                width: double.infinity,
-                                height: 40,
-                                decoration: BoxDecoration(
-                                  color: Colors.black,
-                                  border: Border.all(color: Colors.black),
-                                  borderRadius: BorderRadius.circular(10),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                SizedBox(
+                                  width: double.infinity,
+                                  child: Text(
+                                    '${AppTranslation.instance.language == AppTranslation.english ? (productDetailController.productDetail.value.nameProductEn != null && productDetailController.productDetail.value.nameProductEn!.isNotEmpty ? productDetailController.productDetail.value.nameProductEn : '--') : (productDetailController.productDetail.value.nameProductVi != null && productDetailController.productDetail.value.nameProductVi!.isNotEmpty ? productDetailController.productDetail.value.nameProductVi : '--')}',
+                                    style: GoogleFonts.ebGaramond(
+                                      color: theme.theme == ThemeMode.light
+                                          ? Colors.black
+                                          : Colors.white,
+                                      fontSize: 22,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                    maxLines: 2,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
                                 ),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                      'product_detail_add_cart'.tr,
-                                      style: GoogleFonts.ebGaramond(
-                                        color: Colors.white,
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.w600,
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                RichText(
+                                  text: TextSpan(
+                                    text:
+                                        '${productDetailController.productDetail.value.price ?? '--'}',
+                                    style: GoogleFonts.ebGaramond(
+                                      color: theme.theme == ThemeMode.light
+                                          ? Colors.black
+                                          : Colors.white,
+                                      fontSize: 30,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                Container(
+                                  alignment: Alignment.topLeft,
+                                  child: RatingBarIndicator(
+                                    rating: double.tryParse(
+                                            productDetailController
+                                                .productDetail.value.rating
+                                                .toString()) ??
+                                        0.0,
+                                    itemBuilder: (context, index) => const Icon(
+                                      Icons.star,
+                                      color: Colors.amber,
+                                    ),
+                                    itemCount: 5,
+                                    itemSize: 30,
+                                    direction: Axis.horizontal,
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                GestureDetector(
+                                  onTap: () {
+                                    Get.bottomSheet(chooseSize(context));
+                                  },
+                                  child: Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        'product_detail_size'.tr,
+                                        style: GoogleFonts.ebGaramond(
+                                          color: theme.theme == ThemeMode.light
+                                              ? Colors.black
+                                              : Colors.white,
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.w600,
+                                        ),
                                       ),
-                                    ),
-                                    const SizedBox(
-                                      width: 10,
-                                    ),
-                                    Image.asset(
-                                      'assets/icons/icon-add-to-cart.png',
-                                      width: 20,
-                                      height: 20,
-                                      fit: BoxFit.contain,
-                                      color: Colors.white,
-                                    ),
-                                  ],
+                                      const SizedBox(
+                                        width: 15,
+                                      ),
+                                      Obx(
+                                        () => Text(
+                                          productDetailController
+                                              .sizeShoes.value,
+                                          style: GoogleFonts.ebGaramond(
+                                            color:
+                                                theme.theme == ThemeMode.light
+                                                    ? Colors.black
+                                                    : Colors.white,
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.w600,
+                                          ),
+                                        ),
+                                      ),
+                                      const SizedBox(
+                                        width: 5,
+                                      ),
+                                      Icon(
+                                        Icons.arrow_drop_down,
+                                        color: theme.theme == ThemeMode.light
+                                            ? Colors.black
+                                            : Colors.white,
+                                        size: 20,
+                                      ),
+                                    ],
+                                  ),
                                 ),
-                              ),
+                                Container(
+                                  width: 100,
+                                  height: 1,
+                                  color: theme.theme == ThemeMode.light
+                                      ? Colors.black
+                                      : Colors.white,
+                                )
+                              ],
                             ),
                           ),
                         ],
                       ),
                     ),
-                  ),
-                  const SizedBox(
-                    height: 30,
-                  ),
-                  GetBuilder<ProductDetailController>(
-                    init: productDetailController,
-                    builder: (controller) => Align(
-                      alignment: Alignment.center,
-                      child: ClipOval(
-                        child: Container(
-                          width: 150,
-                          height: 150,
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            border: Border.all(color: Colors.black, width: 2),
-                            shape: BoxShape.circle,
-                          ),
-                          child: Center(
-                            child: ClipOval(
+                    const SizedBox(
+                      height: 30,
+                    ),
+                    GetBuilder<ProductDetailController>(
+                      init: productDetailController,
+                      builder: (controller) => Container(
+                        margin: const EdgeInsets.symmetric(horizontal: 20),
+                        child: Row(
+                          children: [
+                            Expanded(
+                              flex: 6,
                               child: Container(
-                                width: 135,
-                                height: 135,
+                                width: double.infinity,
+                                height: 40,
                                 decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  border:
-                                      Border.all(color: Colors.black, width: 2),
-                                  shape: BoxShape.circle,
+                                  color: theme.theme == ThemeMode.light
+                                      ? Colors.white
+                                      : Colors.black,
+                                  border: Border.all(
+                                      color: theme.theme == ThemeMode.light
+                                          ? Colors.black
+                                          : Colors.white),
+                                  borderRadius: BorderRadius.circular(10),
                                 ),
-                                child: CachedNetworkImage(
-                                  width: double.infinity,
-                                  height: double.infinity,
-                                  fit: BoxFit.cover,
-                                  imageUrl: controller
-                                          .companyData.value.logoCompany ??
-                                      '',
-                                  useOldImageOnUrlChange: false,
-                                  progressIndicatorBuilder:
-                                      (context, url, downloadProgress) =>
-                                          SizedBox(
-                                    height: 15,
-                                    width: 15,
-                                    child: Center(
-                                      child: CircularProgressIndicator(
-                                        value: downloadProgress.progress,
-                                        valueColor:
-                                            const AlwaysStoppedAnimation(
-                                                Colors.white),
-                                        strokeWidth: 2,
+                                child: Row(
+                                  children: [
+                                    Expanded(
+                                      flex: 3,
+                                      child: GestureDetector(
+                                        onTap: () {
+                                          controller.minusAmount();
+                                        },
+                                        child: Container(
+                                          width: 30,
+                                          height: double.infinity,
+                                          decoration: BoxDecoration(
+                                            color:
+                                                theme.theme == ThemeMode.light
+                                                    ? Colors.black
+                                                    : Colors.white,
+                                            borderRadius:
+                                                const BorderRadius.only(
+                                              topLeft: Radius.circular(10),
+                                              bottomLeft: Radius.circular(10),
+                                            ),
+                                          ),
+                                          child: Center(
+                                            child: Text(
+                                              '-',
+                                              style: GoogleFonts.ebGaramond(
+                                                color: theme.theme ==
+                                                        ThemeMode.light
+                                                    ? Colors.white
+                                                    : Colors.black,
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.w600,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
                                       ),
                                     ),
+                                    Obx(
+                                      () => Expanded(
+                                        flex: 6,
+                                        child: SizedBox(
+                                          width: double.infinity,
+                                          height: double.infinity,
+                                          child: Center(
+                                            child: Text(
+                                              controller.amount.toString(),
+                                              style: GoogleFonts.ebGaramond(
+                                                color: theme.theme ==
+                                                        ThemeMode.light
+                                                    ? Colors.black
+                                                    : Colors.white,
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.w600,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    Expanded(
+                                      flex: 3,
+                                      child: GestureDetector(
+                                        onTap: () {
+                                          controller.plusAmount();
+                                        },
+                                        child: Container(
+                                          width: 30,
+                                          height: double.infinity,
+                                          decoration: BoxDecoration(
+                                            color:
+                                                theme.theme == ThemeMode.light
+                                                    ? Colors.black
+                                                    : Colors.white,
+                                            borderRadius:
+                                                const BorderRadius.only(
+                                              topRight: Radius.circular(10),
+                                              bottomRight: Radius.circular(10),
+                                            ),
+                                          ),
+                                          child: Center(
+                                            child: Text(
+                                              '+',
+                                              style: GoogleFonts.ebGaramond(
+                                                color: theme.theme ==
+                                                        ThemeMode.light
+                                                    ? Colors.white
+                                                    : Colors.black,
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.w600,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            const SizedBox(
+                              width: 30,
+                            ),
+                            Expanded(
+                              flex: 6,
+                              child: GestureDetector(
+                                onTap: () {
+                                  ApiToken().isTokenExisted
+                                      ? Get.bottomSheet(addToCart(
+                                          context,
+                                          productDetailController
+                                              .productDetail.value,
+                                          controller.sizeShoes.value,
+                                          'black',
+                                          controller.amount.value,
+                                        ))
+                                      : Get.bottomSheet(loginPopup(context));
+                                },
+                                child: Container(
+                                  width: double.infinity,
+                                  height: 40,
+                                  decoration: BoxDecoration(
+                                    color: theme.theme == ThemeMode.light
+                                        ? Colors.black
+                                        : Colors.white,
+                                    border: Border.all(color: Colors.black),
+                                    borderRadius: BorderRadius.circular(10),
                                   ),
-                                  errorWidget: (context, url, error) =>
-                                      ClipOval(
-                                    child: Container(),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        'product_detail_add_cart'.tr,
+                                        style: GoogleFonts.ebGaramond(
+                                          color: theme.theme == ThemeMode.light
+                                              ? Colors.white
+                                              : Colors.black,
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.w600,
+                                        ),
+                                      ),
+                                      const SizedBox(
+                                        width: 10,
+                                      ),
+                                      Image.asset(
+                                        'assets/icons/icon-add-to-cart.png',
+                                        width: 20,
+                                        height: 20,
+                                        fit: BoxFit.contain,
+                                        color: theme.theme == ThemeMode.light
+                                            ? Colors.white
+                                            : Colors.black,
+                                      ),
+                                    ],
                                   ),
                                 ),
                               ),
                             ),
-                          ),
+                          ],
                         ),
                       ),
                     ),
-                  ),
-                  const SizedBox(
-                    height: 30,
-                  ),
-                  Container(
-                    margin: const EdgeInsets.symmetric(horizontal: 20),
-                    child: TabBar(
-                      controller: tabController,
-                      indicator: const BoxDecoration(
-                        border: Border(
-                          bottom: BorderSide(
-                            color: Colors.black,
-                          ),
-                        ),
-                      ),
-                      tabs: [
-                        Tab(
-                          child: Text(
-                            'product_detail_description'.tr,
-                            style: GoogleFonts.ebGaramond(
-                              color: Colors.black,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w400,
-                            ),
-                          ),
-                        ),
-                        Tab(
-                          child: Text(
-                            'product_detail_other'.tr,
-                            style: GoogleFonts.ebGaramond(
-                              color: Colors.black,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w400,
-                            ),
-                          ),
-                        ),
-                      ],
+                    const SizedBox(
+                      height: 30,
                     ),
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  Container(
-                    width: double.infinity,
-                    height: 300,
-                    margin: const EdgeInsets.symmetric(horizontal: 20),
-                    child: TabBarView(
-                      controller: tabController,
-                      children: [
-                        Container(
-                          margin: const EdgeInsets.symmetric(horizontal: 20),
-                          child: Text(
-                            '${AppTranslation.instance.language == AppTranslation.english ? (widget.product.descriptionEn != null && widget.product.descriptionEn!.isNotEmpty ? widget.product.descriptionEn : '--') : (widget.product.descriptionVi != null && widget.product.descriptionVi!.isNotEmpty ? widget.product.descriptionVi : '--')}',
-                            style: GoogleFonts.ebGaramond(
-                              color: Colors.black,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w400,
+                    GetBuilder<ProductDetailController>(
+                      init: productDetailController,
+                      builder: (controller) => Align(
+                        alignment: Alignment.center,
+                        child: ClipOval(
+                          child: Container(
+                            width: 150,
+                            height: 150,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              border: Border.all(
+                                  color: theme.theme == ThemeMode.light
+                                      ? Colors.black
+                                      : const Color(0xffF01101),
+                                  width: 2),
+                              shape: BoxShape.circle,
                             ),
-                          ),
-                        ),
-                        Container(
-                          margin: const EdgeInsets.symmetric(horizontal: 20),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Material: Canvas',
-                                style: GoogleFonts.ebGaramond(
-                                  color: Colors.black,
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w400,
-                                ),
-                              ),
-                              Text(
-                                'Shoe code: ${widget.product.productCode}',
-                                style: GoogleFonts.ebGaramond(
-                                  color: Colors.black,
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w400,
-                                ),
-                              ),
-                            ],
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Container(
-                    alignment: Alignment.center,
-                    margin: const EdgeInsets.symmetric(horizontal: 20),
-                    child: Column(
-                      children: [
-                        Text(
-                          'product_detail_related'.tr,
-                          style: GoogleFonts.ebGaramond(
-                            color: Colors.black,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 5,
-                        ),
-                        Container(
-                          width: 80,
-                          height: 1,
-                          color: Colors.black,
-                        ),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 30,
-                  ),
-                  GetBuilder<ProductDetailController>(
-                    init: productDetailController,
-                    builder: (controller) => CarouselSlider(
-                      options: CarouselOptions(
-                        onPageChanged: (index, reason) {},
-                        height: 290,
-                        viewportFraction: 0.5,
-                        enableInfiniteScroll: true,
-                        enlargeCenterPage: true,
-                      ),
-                      items: controller.listProductRelated
-                          .map(
-                            (e) => Container(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 20),
-                              decoration: BoxDecoration(
-                                color: Colors.black,
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              width: double.infinity,
-                              height: double.infinity,
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  CachedNetworkImage(
-                                    width: 120,
-                                    fit: BoxFit.contain,
-                                    imageUrl: e.imageProduct!,
+                            child: Center(
+                              child: ClipOval(
+                                child: Container(
+                                  width: 135,
+                                  height: 135,
+                                  decoration: BoxDecoration(
+                                    color: theme.theme == ThemeMode.light
+                                        ? Colors.white
+                                        : Colors.white,
+                                    border: Border.all(
+                                        color: theme.theme == ThemeMode.light
+                                            ? Colors.black
+                                            : const Color(0xffF01101),
+                                        width: 2),
+                                    shape: BoxShape.circle,
+                                  ),
+                                  child: CachedNetworkImage(
+                                    width: double.infinity,
+                                    height: double.infinity,
+                                    fit: BoxFit.cover,
+                                    imageUrl: controller
+                                            .companyData.value.logoCompany ??
+                                        '',
                                     useOldImageOnUrlChange: false,
                                     progressIndicatorBuilder:
                                         (context, url, downloadProgress) =>
@@ -1130,28 +1051,263 @@ class ProductDetailState extends State<ProductDetailPage>
                                       child: Container(),
                                     ),
                                   ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 30,
+                    ),
+                    Container(
+                      margin: const EdgeInsets.symmetric(horizontal: 20),
+                      child: TabBar(
+                        controller: tabController,
+                        indicator: BoxDecoration(
+                          border: Border(
+                            bottom: BorderSide(
+                              color: theme.theme == ThemeMode.light
+                                  ? Colors.black
+                                  : Colors.white,
+                            ),
+                          ),
+                        ),
+                        tabs: [
+                          Tab(
+                            child: Text(
+                              'product_detail_description'.tr,
+                              style: GoogleFonts.ebGaramond(
+                                color: theme.theme == ThemeMode.light
+                                    ? Colors.black
+                                    : Colors.white,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w400,
+                              ),
+                            ),
+                          ),
+                          Tab(
+                            child: Text(
+                              'product_detail_other'.tr,
+                              style: GoogleFonts.ebGaramond(
+                                color: theme.theme == ThemeMode.light
+                                    ? Colors.black
+                                    : Colors.white,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w400,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    Container(
+                      width: double.infinity,
+                      height: 200,
+                      margin: const EdgeInsets.symmetric(horizontal: 20),
+                      child: TabBarView(
+                        controller: tabController,
+                        children: [
+                          Container(
+                            margin: const EdgeInsets.symmetric(horizontal: 20),
+                            child: Text(
+                              '${AppTranslation.instance.language == AppTranslation.english ? (productDetailController.productDetail.value.descriptionEn != null && productDetailController.productDetail.value.descriptionEn!.isNotEmpty ? productDetailController.productDetail.value.descriptionEn : '--') : (productDetailController.productDetail.value.descriptionVi != null && productDetailController.productDetail.value.descriptionVi!.isNotEmpty ? productDetailController.productDetail.value.descriptionVi : '--')}',
+                              style: GoogleFonts.ebGaramond(
+                                color: theme.theme == ThemeMode.light
+                                    ? Colors.black
+                                    : Colors.white,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w400,
+                              ),
+                            ),
+                          ),
+                          Container(
+                            margin: const EdgeInsets.symmetric(horizontal: 20),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Material: Canvas',
+                                  style: GoogleFonts.ebGaramond(
+                                    color: theme.theme == ThemeMode.light
+                                        ? Colors.black
+                                        : Colors.white,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                ),
+                                Text(
+                                  'Shoe code: ${productDetailController.productDetail.value.productCode}',
+                                  style: GoogleFonts.ebGaramond(
+                                    color: theme.theme == ThemeMode.light
+                                        ? Colors.black
+                                        : Colors.white,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Container(
+                      alignment: Alignment.center,
+                      margin: const EdgeInsets.symmetric(horizontal: 20),
+                      child: Column(
+                        children: [
+                          Text(
+                            'product_detail_related'.tr,
+                            style: GoogleFonts.ebGaramond(
+                              color: theme.theme == ThemeMode.light
+                                  ? Colors.black
+                                  : Colors.white,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 5,
+                          ),
+                          Container(
+                            width: 80,
+                            height: 1,
+                            color: theme.theme == ThemeMode.light
+                                ? Colors.black
+                                : Colors.white,
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 30,
+                    ),
+                    GetBuilder<ProductDetailController>(
+                      init: productDetailController,
+                      builder: (controller) => controller
+                              .listProductRelated.isNotEmpty
+                          ? CarouselSlider(
+                              options: CarouselOptions(
+                                onPageChanged: (index, reason) {},
+                                height: 290,
+                                viewportFraction: 0.5,
+                                enableInfiniteScroll: true,
+                                enlargeCenterPage: true,
+                              ),
+                              items: controller.listProductRelated
+                                  .map(
+                                    (e) => Container(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 20),
+                                      decoration: BoxDecoration(
+                                        color: theme.theme == ThemeMode.light
+                                            ? Colors.black
+                                            : Colors.white,
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                      width: double.infinity,
+                                      height: double.infinity,
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          RotatedBox(
+                                            quarterTurns: 1,
+                                            child: CachedNetworkImage(
+                                              width: 140,
+                                              fit: BoxFit.contain,
+                                              imageUrl: e.imageProduct!,
+                                              useOldImageOnUrlChange: false,
+                                              progressIndicatorBuilder:
+                                                  (context, url,
+                                                          downloadProgress) =>
+                                                      SizedBox(
+                                                height: 15,
+                                                width: 15,
+                                                child: Center(
+                                                  child:
+                                                      CircularProgressIndicator(
+                                                    value: downloadProgress
+                                                        .progress,
+                                                    valueColor:
+                                                        const AlwaysStoppedAnimation(
+                                                            Colors.white),
+                                                    strokeWidth: 2,
+                                                  ),
+                                                ),
+                                              ),
+                                              errorWidget:
+                                                  (context, url, error) =>
+                                                      ClipOval(
+                                                child: Container(),
+                                              ),
+                                            ),
+                                          ),
+                                          const SizedBox(
+                                            height: 20,
+                                          ),
+                                          Text(
+                                            '${e.nameProductEn != null && e.nameProductEn!.isNotEmpty ? e.nameProductEn : '--'}',
+                                            style: GoogleFonts.ebGaramond(
+                                              color:
+                                                  theme.theme == ThemeMode.light
+                                                      ? Colors.white
+                                                      : Colors.black,
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w400,
+                                            ),
+                                            textAlign: TextAlign.center,
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  )
+                                  .toList(),
+                            )
+                          : Container(
+                              alignment: Alignment.center,
+                              child: Column(
+                                children: [
+                                  Image.asset(
+                                    'assets/icons/icon-box.png',
+                                    width: 45,
+                                    color: theme.theme == ThemeMode.light
+                                        ? Colors.black
+                                        : Colors.white,
+                                  ),
                                   const SizedBox(
-                                    height: 20,
+                                    height: 10,
                                   ),
                                   Text(
-                                    '${e.nameProductEn != null && e.nameProductEn!.isNotEmpty ? e.nameProductEn : '--'}',
+                                    'no_information'.tr,
                                     style: GoogleFonts.ebGaramond(
-                                      color: Colors.white,
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w400,
+                                      color: theme.theme == ThemeMode.light
+                                          ? Colors.black
+                                          : Colors.white,
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w600,
                                     ),
                                   ),
                                 ],
                               ),
                             ),
-                          )
-                          .toList(),
                     ),
-                  ),
-                  const SizedBox(
-                    height: 30,
-                  ),
-                ],
+                    const SizedBox(
+                      height: 30,
+                    ),
+                  ],
+                ),
               ),
             ),
           ),

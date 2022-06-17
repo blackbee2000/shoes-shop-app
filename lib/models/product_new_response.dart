@@ -1,5 +1,4 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:shoes_shop_app/models/company.dart';
 import 'package:shoes_shop_app/models/product_new.dart';
 part 'product_new_response.g.dart';
 

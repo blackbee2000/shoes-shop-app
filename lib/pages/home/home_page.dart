@@ -49,6 +49,19 @@ class HomePageState extends State<HomePage> {
                   backgroundColor: theme.theme == ThemeMode.light
                       ? Colors.white
                       : Colors.black,
+                  bottom: theme.theme == ThemeMode.dark
+                      ? PreferredSize(
+                          child: Container(
+                            width: double.infinity,
+                            color: const Color(0xffF01101),
+                            height: 1,
+                          ),
+                          preferredSize: const Size.fromHeight(0),
+                        )
+                      : PreferredSize(
+                          child: Container(),
+                          preferredSize: const Size.fromHeight(0),
+                        ),
                   title: Image.asset(
                     "assets/images/logo.png",
                     width: 50,
@@ -92,26 +105,13 @@ class HomePageState extends State<HomePage> {
                         ),
                       ),
                     ),
-                    // Padding(
-                    //   padding: const EdgeInsets.only(left: 10, right: 20),
-                    //   child: GestureDetector(
-                    //     child: Image.asset(
-                    //       "assets/icons/icon_message.png",
-                    //       width: 20,
-                    //       height: 20,
-                    //       color: theme.theme == ThemeMode.light
-                    //           ? Colors.black
-                    //           : Colors.white,
-                    //       fit: BoxFit.contain,
-                    //     ),
-                    //   ),
-                    // ),
                   ],
                 ),
                 body: GetBuilder<HomeController>(
                   init: homeController,
                   builder: (controller) => RefreshIndicator(
                     onRefresh: () async {
+                      controller.onInit();
                       controller.update();
                     },
                     child: SizedBox(
@@ -168,7 +168,7 @@ class HomePageState extends State<HomePage> {
                                                     height: 5,
                                                   ),
                                                   Text(
-                                                    'Nike Original 2022',
+                                                    'Sneaker Original 2022',
                                                     style:
                                                         GoogleFonts.ebGaramond(
                                                       color: theme.theme ==
@@ -391,7 +391,7 @@ class HomePageState extends State<HomePage> {
                                                 ? (theme.theme ==
                                                         ThemeMode.light
                                                     ? Colors.black
-                                                    : Colors.white)
+                                                    : const Color(0xffF01101))
                                                 : const Color(0xffBBBBBB),
                                           ),
                                         ),
@@ -478,14 +478,18 @@ class HomePageState extends State<HomePage> {
                                   padding: const EdgeInsets.all(20),
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(10),
-                                    color: Colors.black,
+                                    color: theme.theme == ThemeMode.light
+                                        ? Colors.black
+                                        : Colors.white,
                                   ),
                                   child: Column(
                                     children: [
                                       Text(
                                         '${AppTranslation.instance.language == AppTranslation.english ? (controller.listDiscountProduct[index].nameProductEn != null && controller.listDiscountProduct[index].nameProductEn!.isNotEmpty ? controller.listDiscountProduct[index].nameProductEn : '--') : (controller.listDiscountProduct[index].nameProductVi != null && controller.listDiscountProduct[index].nameProductVi!.isNotEmpty ? controller.listDiscountProduct[index].nameProductVi : '--')}',
                                         style: GoogleFonts.ebGaramond(
-                                          color: Colors.white,
+                                          color: theme.theme == ThemeMode.light
+                                              ? Colors.white
+                                              : Colors.black,
                                           fontSize: 14,
                                           fontWeight: FontWeight.w600,
                                         ),
@@ -498,7 +502,7 @@ class HomePageState extends State<HomePage> {
                                       RotatedBox(
                                         quarterTurns: 1,
                                         child: CachedNetworkImage(
-                                          width: 90,
+                                          width: 100,
                                           fit: BoxFit.contain,
                                           imageUrl: controller
                                               .listDiscountProduct[index]
@@ -536,7 +540,10 @@ class HomePageState extends State<HomePage> {
                                             text:
                                                 '${controller.listDiscountProduct[index].price ?? '--'}',
                                             style: GoogleFonts.ebGaramond(
-                                              color: Colors.white,
+                                              color:
+                                                  theme.theme == ThemeMode.light
+                                                      ? Colors.white
+                                                      : Colors.black,
                                               fontSize: 20,
                                               fontWeight: FontWeight.w600,
                                             ),
@@ -549,9 +556,10 @@ class HomePageState extends State<HomePage> {
                                       Container(
                                         alignment: Alignment.topLeft,
                                         child: RatingBarIndicator(
-                                          rating: controller
+                                          rating: double.tryParse(controller
                                                   .listDiscountProduct[index]
-                                                  .rating ??
+                                                  .rating
+                                                  .toString()) ??
                                               0.0,
                                           itemBuilder: (context, index) =>
                                               const Icon(
@@ -579,7 +587,10 @@ class HomePageState extends State<HomePage> {
                                           height: 30,
                                           decoration: BoxDecoration(
                                             border: Border.all(
-                                              color: Colors.white,
+                                              color:
+                                                  theme.theme == ThemeMode.light
+                                                      ? Colors.white
+                                                      : Colors.black,
                                             ),
                                           ),
                                           child: Row(
@@ -591,7 +602,10 @@ class HomePageState extends State<HomePage> {
                                               Text(
                                                 'home_go_detail'.tr,
                                                 style: GoogleFonts.ebGaramond(
-                                                  color: Colors.white,
+                                                  color: theme.theme ==
+                                                          ThemeMode.light
+                                                      ? Colors.white
+                                                      : Colors.black,
                                                   fontSize: 14,
                                                   fontWeight: FontWeight.w400,
                                                 ),
@@ -604,7 +618,10 @@ class HomePageState extends State<HomePage> {
                                                 width: 20,
                                                 height: 20,
                                                 fit: BoxFit.contain,
-                                                color: Colors.white,
+                                                color: theme.theme ==
+                                                        ThemeMode.light
+                                                    ? Colors.white
+                                                    : Colors.black,
                                               ),
                                             ],
                                           ),
@@ -651,13 +668,23 @@ class HomePageState extends State<HomePage> {
                                         controller
                                             .listCompany[index].nameCompany!;
                                     if (ApiToken.to.isTokenExisted == true) {
-                                      productController.getListProductFavorite(
-                                          controller.listCompany[index].id ??
-                                              '');
+                                      productController.pagingController
+                                          .addPageRequestListener((pageKey) {
+                                        productController
+                                            .getListProductFavorite(
+                                                controller.listCompany[index]
+                                                        .id ??
+                                                    '',
+                                                pageKey);
+                                      });
                                     } else {
-                                      productController.getAllProduct(
-                                          controller.listCompany[index].id!,
-                                          []);
+                                      productController.pagingController
+                                          .addPageRequestListener((pageKey) {
+                                        productController.getAllProduct(
+                                            controller.listCompany[index].id!,
+                                            [],
+                                            pageKey);
+                                      });
                                     }
                                     productController.update();
                                     controller.update();
@@ -872,9 +899,10 @@ class HomePageState extends State<HomePage> {
                                       Container(
                                         alignment: Alignment.topLeft,
                                         child: RatingBarIndicator(
-                                          rating: controller
+                                          rating: double.tryParse(controller
                                                   .listTrendingProduct[index]
-                                                  .rating ??
+                                                  .rating
+                                                  .toString()) ??
                                               0.0,
                                           itemBuilder: (context, index) =>
                                               const Icon(

@@ -1,6 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:shoes_shop_app/models/district.dart';
-import 'package:shoes_shop_app/models/province.dart';
 part 'district_response.g.dart';
 
 @JsonSerializable()

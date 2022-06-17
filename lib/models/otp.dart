@@ -1,6 +1,4 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:shoes_shop_app/models/address_order.dart';
-import 'package:shoes_shop_app/models/list_cart.dart';
 part 'otp.g.dart';
 
 @JsonSerializable()

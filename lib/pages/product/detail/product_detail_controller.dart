@@ -16,6 +16,7 @@ class ProductDetailController extends GetxController
   final amount = 1.obs;
   final listSize = <String>[].obs;
   final companyData = Company.fromJson({}).obs;
+  final productDetail = Product.fromJson({}).obs;
   List<Product> listProductRelated = <Product>[].obs;
   final profileController = Get.put(ProfileController());
   final cartController = Get.put(CartController());
@@ -29,7 +30,7 @@ class ProductDetailController extends GetxController
     if (amount.value < 1) {
       Get.snackbar(
         'warning'.tr,
-        ''.tr,
+        'choose_amount'.tr,
         colorText: Colors.black,
         backgroundColor: Colors.white,
       );

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:shoes_shop_app/pages/auth/login/login_controller.dart';
+import 'package:shoes_shop_app/pages/auth/login/test.dart';
 import 'package:shoes_shop_app/pages/auth/otp/otp_controller.dart';
 import 'package:shoes_shop_app/pages/auth/register/register_page.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -454,27 +455,32 @@ class LoginState extends State<LoginPage> {
                       const SizedBox(
                         height: 30,
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            'login_with_google'.tr,
-                            style: GoogleFonts.ebGaramond(
-                              color: Colors.black,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w400,
+                      GestureDetector(
+                        onTap: () {
+                          Get.to(SignInDemo());
+                        },
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              'login_with_google'.tr,
+                              style: GoogleFonts.ebGaramond(
+                                color: Colors.black,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w400,
+                              ),
                             ),
-                          ),
-                          const SizedBox(
-                            width: 10,
-                          ),
-                          Image.asset(
-                            'assets/icons/icon-google.png',
-                            width: 25,
-                            height: 25,
-                            fit: BoxFit.contain,
-                          ),
-                        ],
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            Image.asset(
+                              'assets/icons/icon-google.png',
+                              width: 25,
+                              height: 25,
+                              fit: BoxFit.contain,
+                            ),
+                          ],
+                        ),
                       ),
                       const SizedBox(
                         height: 10,

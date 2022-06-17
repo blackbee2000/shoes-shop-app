@@ -837,10 +837,10 @@ class SearchPage extends StatelessWidget {
                                           Container(
                                             alignment: Alignment.topLeft,
                                             child: RatingBarIndicator(
-                                              rating: controller
-                                                      .listProductSearch[index]
-                                                      .rating ??
-                                                  0.0,
+                                              rating: double.parse(controller
+                                                  .listProductSearch[index]
+                                                  .rating
+                                                  .toString()),
                                               itemBuilder: (context, index) =>
                                                   const Icon(
                                                 Icons.star,

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 ThemeData darkTheme = ThemeData(
   brightness: Brightness.dark,
@@ -11,7 +10,4 @@ ThemeData darkTheme = ThemeData(
   primaryColorLight: Colors.white,
   highlightColor: Colors.transparent,
   splashColor: Colors.transparent,
-  primaryTextTheme: TextTheme(
-    bodyText1: GoogleFonts.ebGaramond(color: Colors.white),
-  ),
 );

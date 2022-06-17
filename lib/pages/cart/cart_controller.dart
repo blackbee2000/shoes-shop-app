@@ -15,18 +15,16 @@ class CartController extends GetxController {
 
   final addressPayment = Address.fromJson({}).obs;
 
-  final amount = 1.obs;
-
   @override
   void onInit() async {
     super.onInit();
     getAllCart();
   }
 
-  plusAmount(String idProduct) {
-    amount.value = amount.value + 1;
+  plusAmount(String idCart, int amount) {
+    amount = amount + 1;
     CartProvider().updateAmounCart(
-      params: {"_id": idProduct, "amount": amount.value},
+      params: {"_id": idCart, "amount": amount},
       option: Options(
         headers: {
           'Content-Type': 'application/json; charset=UTF-8',
@@ -36,15 +34,18 @@ class CartController extends GetxController {
       beforeSend: () {},
       onSuccess: (data) {
         print('SUCESSSS ==> ${data.toString()}');
+        getAllCart();
+        update();
       },
       onError: (e) {
         print('FAILLL ==> ${e.toString()}');
+        update();
       },
     );
   }
 
-  minusAmount(String idProduct) {
-    if (amount.value < 1) {
+  minusAmount(String idCart, int amount) {
+    if (amount < 1) {
       Get.snackbar(
         'warning'.tr,
         ''.tr,
@@ -53,9 +54,9 @@ class CartController extends GetxController {
       );
       return;
     }
-    amount.value = amount.value - 1;
+    amount = amount - 1;
     CartProvider().updateAmounCart(
-      params: {"_id": idProduct, "amount": amount.value},
+      params: {"_id": idCart, "amount": amount},
       option: Options(
         headers: {
           'Content-Type': 'application/json; charset=UTF-8',
@@ -65,9 +66,12 @@ class CartController extends GetxController {
       beforeSend: () {},
       onSuccess: (data) {
         print('SUCESSSS ==> ${data.toString()}');
+        getAllCart();
+        update();
       },
       onError: (e) {
         print('FAILLL ==> ${e.toString()}');
+        update();
       },
     );
   }

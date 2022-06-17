@@ -31,9 +31,9 @@ class YourOrderDetailController extends GetxController
       onSuccess: (res) {
         if (res.data != null) {
           rateProductNowOfAccount.value = res.data!;
-          ratingController.value =
-              double.parse(rateProductNowOfAccount.value.rating.toString()) ??
-                  0.0;
+          ratingController.value = (rateProductNowOfAccount.value.rating != null
+              ? double.tryParse(rateProductNowOfAccount.value.rating.toString())
+              : 0.0)!;
         } else {
           ratingController.value = 0.0;
         }
@@ -47,9 +47,9 @@ class YourOrderDetailController extends GetxController
     );
   }
 
-  createRating(double rating, String idProduct) {
+  createRating(dynamic rating, String idProduct) {
     ProductProvider().createRating(
-      params: {"idProduct": idProduct, "rating": rating},
+      params: {"idProduct": idProduct, "rating": double.parse(rating)},
       option: Options(
         headers: {
           'Content-Type': 'application/json; charset=UTF-8',
