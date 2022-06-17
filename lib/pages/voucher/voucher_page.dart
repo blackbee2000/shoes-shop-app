@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -120,10 +121,36 @@ class VoucherPage extends StatelessWidget {
                         child: Row(
                           children: [
                             ClipOval(
-                              child: Container(
+                              child: SizedBox(
                                 width: 60,
                                 height: 60,
-                                color: Colors.black,
+                                child: CachedNetworkImage(
+                                  width: double.infinity,
+                                  height: double.infinity,
+                                  fit: BoxFit.cover,
+                                  imageUrl:
+                                      controller.listVoucher[index].image ?? '',
+                                  useOldImageOnUrlChange: false,
+                                  progressIndicatorBuilder:
+                                      (context, url, downloadProgress) =>
+                                          SizedBox(
+                                    height: 15,
+                                    width: 15,
+                                    child: Center(
+                                      child: CircularProgressIndicator(
+                                        value: downloadProgress.progress,
+                                        valueColor:
+                                            const AlwaysStoppedAnimation(
+                                                Colors.white),
+                                        strokeWidth: 2,
+                                      ),
+                                    ),
+                                  ),
+                                  errorWidget: (context, url, error) =>
+                                      ClipOval(
+                                    child: Container(),
+                                  ),
+                                ),
                               ),
                             ),
                             const SizedBox(

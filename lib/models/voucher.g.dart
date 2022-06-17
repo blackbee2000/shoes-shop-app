@@ -4,6 +4,7 @@ Voucher _$VoucherFromJson(Map<String, dynamic> json) {
   return Voucher(
     json['_id'] as String?,
     json['title'] as String?,
+    json['image'] as String?,
     json['voucherCode'] as String?,
     json['discount'] as int?,
     json['maxDiscount'] as int?,
@@ -19,6 +20,7 @@ Voucher _$VoucherFromJson(Map<String, dynamic> json) {
 Map<String, dynamic> _$VoucherToJson(Voucher instance) => <String, dynamic>{
       'id': instance.id,
       'title': instance.title,
+      'image': instance.image,
       'voucherCode': instance.voucherCode,
       'discount': instance.discount,
       'maxDiscount': instance.maxDiscount,

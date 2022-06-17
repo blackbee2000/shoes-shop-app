@@ -55,6 +55,12 @@ class ProductDetailController extends GetxController
   }
 
   addToCart(Product product, String size, String color, int amount, idWidget) {
+    num price;
+    if (product.price != null) {
+      price = (product.price! * (100 - product.discount!) / 100);
+    } else {
+      price = 0;
+    }
     ProductProvider().addToCart(
       params: {
         "lstProduct": {
@@ -67,12 +73,12 @@ class ProductDetailController extends GetxController
           "rating": product.rating,
           "type": {"size": size},
           "idCompany": product.idCompany,
-          "price": product.price,
+          "price": price,
           "productCode": product.productCode
         },
         "isOrdered": false,
         "amount": amount,
-        "totalPrice": amount * product.price!,
+        "totalPrice": amount * price,
         "idAccount": profileController.profile.value.id
       },
       option: Options(

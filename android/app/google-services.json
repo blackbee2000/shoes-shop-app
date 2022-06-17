@@ -1,41 +1,33 @@
 {
   "project_info": {
-    "project_number": "986376583177",
-    "project_id": "ktln-appshoesshop",
-    "storage_bucket": "ktln-appshoesshop.appspot.com"
+    "project_number": "114894092889",
+    "project_id": "shoes-shop-app-15ea1",
+    "storage_bucket": "shoes-shop-app-15ea1.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:986376583177:android:e3253b8f549bbd96d320d8",
+        "mobilesdk_app_id": "1:114894092889:android:31540c89c3f07c802b0f48",
         "android_client_info": {
           "package_name": "com.example.shoes_shop_app"
         }
       },
       "oauth_client": [
         {
-          "client_id": "986376583177-bnn3369vvb8gctb1vblm4ei41lltg0fi.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.shoes_shop_app",
-            "certificate_hash": "f7ab2cdd047ce0bc2f710bca668455e2ee56ebf9"
-          }
-        },
-        {
-          "client_id": "986376583177-fgg3p01ta34hin28pm2v67b14a9ldjoq.apps.googleusercontent.com",
+          "client_id": "114894092889-n1hdu3lcovk30t6cdkrosnjjpjtmlnrn.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBzMDfgL3wQF0YSnLJeKQM6wXDQFtIw87A"
+          "current_key": "AIzaSyDdCtO3MJADmxH8ij6p8XIXKJ-SAgxBHBc"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "986376583177-fgg3p01ta34hin28pm2v67b14a9ldjoq.apps.googleusercontent.com",
+              "client_id": "114894092889-n1hdu3lcovk30t6cdkrosnjjpjtmlnrn.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

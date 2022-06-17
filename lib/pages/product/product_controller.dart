@@ -7,34 +7,19 @@ import 'package:shoes_shop_app/pages/home/home_provider.dart';
 import 'package:shoes_shop_app/pages/product/product_provider.dart';
 import 'package:shoes_shop_app/pages/profile/profile_provider.dart';
 import 'package:shoes_shop_app/services/api_token.dart';
-import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
 class ProductController extends GetxController {
   List<String> listProductFavorite = <String>[].obs;
   List<Product> listProduct = <Product>[].obs;
   List<Company> listCompany = <Company>[].obs;
   final nameBrand = ''.obs;
-  final skip = 1.obs;
-  final limit = 8;
-  final PagingController<int, Product> pagingController =
-      PagingController(firstPageKey: 0);
-
-  @override
-  void onClose() {
-    super.onClose();
-    pagingController.dispose();
-  }
-
   @override
   void onInit() {
     super.onInit();
-
-    pagingController.addPageRequestListener((pageKey) {
-      getAllCompany(pageKey);
-    });
+    getAllCompany();
   }
 
-  getAllCompany(int pageKey) {
+  getAllCompany() {
     HomeProvider().getAllCompany(
       option: Options(),
       beforeSend: () {},
@@ -42,9 +27,9 @@ class ProductController extends GetxController {
         listCompany = res.data ?? [];
         nameBrand.value = listCompany.first.nameCompany ?? '';
         if (ApiToken.to.isTokenExisted == true) {
-          getListProductFavorite(listCompany.first.id ?? '', pageKey);
+          getListProductFavorite(listCompany.first.id ?? '');
         } else {
-          getAllProduct(listCompany.first.id ?? '', [], pageKey);
+          getAllProduct(listCompany.first.id ?? '', []);
         }
 
         update();
@@ -55,16 +40,29 @@ class ProductController extends GetxController {
     );
   }
 
-  getAllProduct(
-      String idCompany, List<String> productFavoriteList, int pageKey) {
+  getAllProduct(String idCompany, List<String> productFavoriteList) {
     ProductProvider().getAllProduct(
-      params: {"idCompany": idCompany, "skip": skip, "limit": limit},
+      params: {"idCompany": idCompany, "skip": 1, "limit": 10},
       option: Options(
         headers: {
           'Content-Type': 'application/json; charset=UTF-8',
         },
       ),
-      beforeSend: () {},
+      beforeSend: () {
+        Get.dialog(
+          const SizedBox(
+            height: 15,
+            width: 15,
+            child: Center(
+              child: CircularProgressIndicator(
+                valueColor: AlwaysStoppedAnimation(Colors.white),
+                strokeWidth: 2,
+              ),
+            ),
+          ),
+          barrierDismissible: false,
+        );
+      },
       onSuccess: (res) {
         listProduct = res.data ?? [];
         print('GET PRODUCT SUCCESS =>>>> ${res.data.toString()}');
@@ -80,24 +78,12 @@ class ProductController extends GetxController {
             }
           }
         }
-
-        skip.value = skip.value + 1;
-        try {
-          final isLastPage = listProduct.length < limit;
-          if (isLastPage) {
-            pagingController.appendLastPage(listProduct);
-          } else {
-            final nextPageKey = pageKey + listProduct.length;
-            pagingController.appendPage(listProduct, nextPageKey);
-          }
-        } catch (error) {
-          pagingController.error = error;
-        }
-
+        Get.back();
         update();
       },
       onError: (e) {
         print('GET PRODUCT FAIL =>>>> ${e.toString()}');
+        Get.back();
         update();
       },
     );
@@ -149,7 +135,7 @@ class ProductController extends GetxController {
     );
   }
 
-  getListProductFavorite(String idCompany, int pageKey) {
+  getListProductFavorite(String idCompany) {
     ProfileProvider().getListProductFavorite(
       option: Options(
         headers: {
@@ -159,7 +145,7 @@ class ProductController extends GetxController {
       beforeSend: () {},
       onSuccess: (res) {
         listProductFavorite = res.data ?? [];
-        getAllProduct(idCompany, listProductFavorite, pageKey);
+        getAllProduct(idCompany, listProductFavorite);
         update();
       },
       onError: (e) {

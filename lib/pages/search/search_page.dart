@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:currency_text_input_formatter/currency_text_input_formatter.dart';
 import 'package:flutter/material.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -346,7 +347,9 @@ class SearchPage extends StatelessWidget {
                               ),
                               hintText: 'search_enter_shoes_name'.tr,
                               hintStyle: GoogleFonts.ebGaramond(
-                                color: const Color(0xffD0D0D0),
+                                color: theme.theme == ThemeMode.light
+                                    ? Colors.black
+                                    : Colors.white,
                                 fontSize: 13,
                                 fontWeight: FontWeight.w400,
                               ),
@@ -819,7 +822,20 @@ class SearchPage extends StatelessWidget {
                                               textAlign: TextAlign.start,
                                               text: TextSpan(
                                                 text:
-                                                    '${controller.listProductSearch[index].price ?? '--'}',
+                                                    CurrencyTextInputFormatter(
+                                                  locale: AppTranslation
+                                                              .instance
+                                                              .language ==
+                                                          AppTranslation.english
+                                                      ? "vi_VN"
+                                                      : "en_US",
+                                                  decimalDigits: 0,
+                                                  symbol: "",
+                                                ).format((controller
+                                                            .listProductSearch[
+                                                                index]
+                                                            .price)
+                                                        .toString()),
                                                 style: GoogleFonts.ebGaramond(
                                                   color: theme.theme ==
                                                           ThemeMode.light

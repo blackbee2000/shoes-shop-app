@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:shoes_shop_app/pages/auth/login/login_controller.dart';
-import 'package:shoes_shop_app/pages/auth/login/test.dart';
 import 'package:shoes_shop_app/pages/auth/otp/otp_controller.dart';
 import 'package:shoes_shop_app/pages/auth/register/register_page.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -203,317 +202,322 @@ class LoginState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Container(
-        width: double.infinity,
-        height: double.infinity,
-        color: Colors.white,
-        child: Stack(
-          children: [
-            Image.asset(
-              'assets/images/background_singin.jpg',
-              width: double.infinity,
-              height: 385,
-              fit: BoxFit.fill,
-            ),
-            Scaffold(
-              backgroundColor: Colors.transparent,
-              body: SizedBox(
+    return GestureDetector(
+      onHorizontalDragEnd: (details) => {
+        if (details.primaryVelocity! > 0) {Get.offAll(const DashboardPage())}
+      },
+      child: SafeArea(
+        child: Container(
+          width: double.infinity,
+          height: double.infinity,
+          color: Colors.white,
+          child: Stack(
+            children: [
+              Image.asset(
+                'assets/images/background_singin.jpg',
                 width: double.infinity,
-                height: double.infinity,
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      const SizedBox(
-                        height: 140,
-                      ),
-                      Text(
-                        'sign_in'.tr,
-                        style: GoogleFonts.ebGaramond(
-                          color: Colors.white,
-                          fontSize: 50,
-                          fontWeight: FontWeight.w700,
+                height: 385,
+                fit: BoxFit.fill,
+              ),
+              Scaffold(
+                backgroundColor: Colors.transparent,
+                body: SizedBox(
+                  width: double.infinity,
+                  height: double.infinity,
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        const SizedBox(
+                          height: 140,
                         ),
-                        textAlign: TextAlign.center,
-                      ),
-                      const SizedBox(
-                        height: 40,
-                      ),
-                      GetBuilder<LoginController>(
-                        init: loginController,
-                        builder: (controller) => Container(
-                          width: double.infinity,
-                          height: 50,
-                          padding: const EdgeInsets.symmetric(horizontal: 15),
-                          margin: const EdgeInsets.symmetric(horizontal: 30),
-                          decoration: BoxDecoration(
+                        Text(
+                          'sign_in'.tr,
+                          style: GoogleFonts.ebGaramond(
                             color: Colors.white,
-                            borderRadius: BorderRadius.circular(10),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black.withOpacity(0.25),
-                                spreadRadius: 0,
-                                blurRadius: 4,
-                                offset: const Offset(
-                                    0, 4), // changes position of shadow
-                              ),
-                            ],
+                            fontSize: 50,
+                            fontWeight: FontWeight.w700,
                           ),
-                          child: Stack(
-                            alignment: AlignmentDirectional.centerStart,
-                            children: [
-                              Image.asset(
-                                'assets/icons/icon-phone.png',
-                                width: 20,
-                                height: 20,
-                                fit: BoxFit.contain,
-                              ),
-                              TextField(
-                                controller: controller.phone,
-                                style: GoogleFonts.ebGaramond(
-                                  color: Colors.black,
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w400,
+                          textAlign: TextAlign.center,
+                        ),
+                        const SizedBox(
+                          height: 40,
+                        ),
+                        GetBuilder<LoginController>(
+                          init: loginController,
+                          builder: (controller) => Container(
+                            width: double.infinity,
+                            height: 50,
+                            padding: const EdgeInsets.symmetric(horizontal: 15),
+                            margin: const EdgeInsets.symmetric(horizontal: 30),
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(10),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black.withOpacity(0.25),
+                                  spreadRadius: 0,
+                                  blurRadius: 4,
+                                  offset: const Offset(
+                                      0, 4), // changes position of shadow
                                 ),
-                                decoration: InputDecoration(
-                                  contentPadding:
-                                      const EdgeInsets.only(left: 35),
-                                  border: InputBorder.none,
-                                  hintText: 'login_your_phone'.tr,
-                                  hintStyle: GoogleFonts.ebGaramond(
-                                    color: const Color(0xffD0D0D0),
+                              ],
+                            ),
+                            child: Stack(
+                              alignment: AlignmentDirectional.centerStart,
+                              children: [
+                                Image.asset(
+                                  'assets/icons/icon-phone.png',
+                                  width: 20,
+                                  height: 20,
+                                  fit: BoxFit.contain,
+                                ),
+                                TextField(
+                                  controller: controller.phone,
+                                  style: GoogleFonts.ebGaramond(
+                                    color: Colors.black,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                  decoration: InputDecoration(
+                                    contentPadding:
+                                        const EdgeInsets.only(left: 35),
+                                    border: InputBorder.none,
+                                    hintText: 'login_your_phone'.tr,
+                                    hintStyle: GoogleFonts.ebGaramond(
+                                      color: const Color(0xffD0D0D0),
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w400,
+                                    ),
+                                  ),
+                                  cursorColor: Colors.black,
+                                  keyboardType: TextInputType.number,
+                                  inputFormatters: <TextInputFormatter>[
+                                    FilteringTextInputFormatter.digitsOnly
+                                  ], // O
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 30,
+                        ),
+                        GetBuilder<LoginController>(
+                          init: loginController,
+                          builder: (controller) => Container(
+                            width: double.infinity,
+                            height: 50,
+                            padding: const EdgeInsets.symmetric(horizontal: 15),
+                            margin: const EdgeInsets.symmetric(horizontal: 30),
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(10),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black.withOpacity(0.25),
+                                  spreadRadius: 0,
+                                  blurRadius: 4,
+                                  offset: const Offset(
+                                      0, 4), // changes position of shadow
+                                ),
+                              ],
+                            ),
+                            child: Stack(
+                              alignment: AlignmentDirectional.centerStart,
+                              children: [
+                                Image.asset(
+                                  'assets/icons/icon-lock.png',
+                                  width: 20,
+                                  height: 20,
+                                  fit: BoxFit.contain,
+                                ),
+                                TextField(
+                                  controller: controller.password,
+                                  obscureText: true,
+                                  style: GoogleFonts.ebGaramond(
+                                    color: Colors.black,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                  decoration: InputDecoration(
+                                    contentPadding:
+                                        const EdgeInsets.only(left: 35),
+                                    border: InputBorder.none,
+                                    hintText: 'login_your_password'.tr,
+                                    hintStyle: GoogleFonts.ebGaramond(
+                                      color: const Color(0xffD0D0D0),
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w400,
+                                    ),
+                                  ),
+                                  cursorColor: Colors.black,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 30),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              GestureDetector(
+                                onTap: () {
+                                  Get.to(RegisterPage());
+                                },
+                                child: Text(
+                                  'login_not_account'.tr,
+                                  style: GoogleFonts.ebGaramond(
+                                    color: Colors.black,
                                     fontSize: 14,
                                     fontWeight: FontWeight.w400,
                                   ),
                                 ),
-                                cursorColor: Colors.black,
-                                keyboardType: TextInputType.number,
-                                inputFormatters: <TextInputFormatter>[
-                                  FilteringTextInputFormatter.digitsOnly
-                                ], // O
                               ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 30,
-                      ),
-                      GetBuilder<LoginController>(
-                        init: loginController,
-                        builder: (controller) => Container(
-                          width: double.infinity,
-                          height: 50,
-                          padding: const EdgeInsets.symmetric(horizontal: 15),
-                          margin: const EdgeInsets.symmetric(horizontal: 30),
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(10),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black.withOpacity(0.25),
-                                spreadRadius: 0,
-                                blurRadius: 4,
-                                offset: const Offset(
-                                    0, 4), // changes position of shadow
-                              ),
-                            ],
-                          ),
-                          child: Stack(
-                            alignment: AlignmentDirectional.centerStart,
-                            children: [
-                              Image.asset(
-                                'assets/icons/icon-lock.png',
-                                width: 20,
-                                height: 20,
-                                fit: BoxFit.contain,
-                              ),
-                              TextField(
-                                controller: controller.password,
-                                obscureText: true,
-                                style: GoogleFonts.ebGaramond(
-                                  color: Colors.black,
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w400,
-                                ),
-                                decoration: InputDecoration(
-                                  contentPadding:
-                                      const EdgeInsets.only(left: 35),
-                                  border: InputBorder.none,
-                                  hintText: 'login_your_password'.tr,
-                                  hintStyle: GoogleFonts.ebGaramond(
-                                    color: const Color(0xffD0D0D0),
+                              GestureDetector(
+                                onTap: () {
+                                  Get.bottomSheet(
+                                    enterNumberPhone(context),
+                                    isScrollControlled: true,
+                                  );
+                                },
+                                child: Text(
+                                  'login_forget_password'.tr,
+                                  style: GoogleFonts.ebGaramond(
+                                    color: Colors.black,
                                     fontSize: 14,
                                     fontWeight: FontWeight.w400,
                                   ),
                                 ),
-                                cursorColor: Colors.black,
                               ),
                             ],
                           ),
                         ),
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 30),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            GestureDetector(
-                              onTap: () {
-                                Get.to(RegisterPage());
-                              },
-                              child: Text(
-                                'login_not_account'.tr,
-                                style: GoogleFonts.ebGaramond(
-                                  color: Colors.black,
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w400,
-                                ),
-                              ),
-                            ),
-                            GestureDetector(
-                              onTap: () {
-                                Get.bottomSheet(
-                                  enterNumberPhone(context),
-                                  isScrollControlled: true,
-                                );
-                              },
-                              child: Text(
-                                'login_forget_password'.tr,
-                                style: GoogleFonts.ebGaramond(
-                                  color: Colors.black,
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w400,
-                                ),
-                              ),
-                            ),
-                          ],
+                        const SizedBox(
+                          height: 60,
                         ),
-                      ),
-                      const SizedBox(
-                        height: 60,
-                      ),
-                      GetBuilder<LoginController>(
-                        init: loginController,
-                        builder: (controller) => Align(
-                          alignment: Alignment.center,
-                          child: GestureDetector(
-                            onTap: () {
-                              if (loginController.phone.text.isEmpty ||
-                                  loginController.password.text.isEmpty) {
-                                Get.snackbar(
-                                  'validation'.tr,
-                                  'phone_password_is_empty'.tr,
-                                  colorText: Colors.black,
-                                  backgroundColor: Colors.white,
-                                );
-                                return;
-                              }
-                              if (loginController.phone.text.length != 10) {
-                                Get.snackbar(
-                                  'validation'.tr,
-                                  'enter_diff_ten_phone'.tr,
-                                  colorText: Colors.black,
-                                  backgroundColor: Colors.white,
-                                );
-                                return;
-                              }
-                              if (loginController.password.text.length < 5) {
-                                Get.snackbar(
-                                  'validation'.tr,
-                                  'enter_than_five_password'.tr,
-                                  colorText: Colors.black,
-                                  backgroundColor: Colors.white,
-                                );
-                                return;
-                              }
-                              controller.login(controller.phone.text,
-                                  controller.password.text, 'login');
-                            },
-                            child: ClipOval(
-                              child: Container(
-                                width: 60,
-                                height: 60,
-                                color: Colors.black,
-                                child: Center(
-                                  child: Image.asset(
-                                    'assets/icons/icon-right-button.png',
-                                    width: 25,
-                                    height: 25,
-                                    fit: BoxFit.contain,
+                        GetBuilder<LoginController>(
+                          init: loginController,
+                          builder: (controller) => Align(
+                            alignment: Alignment.center,
+                            child: GestureDetector(
+                              onTap: () {
+                                if (loginController.phone.text.isEmpty ||
+                                    loginController.password.text.isEmpty) {
+                                  Get.snackbar(
+                                    'validation'.tr,
+                                    'phone_password_is_empty'.tr,
+                                    colorText: Colors.black,
+                                    backgroundColor: Colors.white,
+                                  );
+                                  return;
+                                }
+                                if (loginController.phone.text.length != 10) {
+                                  Get.snackbar(
+                                    'validation'.tr,
+                                    'enter_diff_ten_phone'.tr,
+                                    colorText: Colors.black,
+                                    backgroundColor: Colors.white,
+                                  );
+                                  return;
+                                }
+                                if (loginController.password.text.length < 5) {
+                                  Get.snackbar(
+                                    'validation'.tr,
+                                    'enter_than_five_password'.tr,
+                                    colorText: Colors.black,
+                                    backgroundColor: Colors.white,
+                                  );
+                                  return;
+                                }
+                                controller.login(controller.phone.text,
+                                    controller.password.text, 'login');
+                              },
+                              child: ClipOval(
+                                child: Container(
+                                  width: 60,
+                                  height: 60,
+                                  color: Colors.black,
+                                  child: Center(
+                                    child: Image.asset(
+                                      'assets/icons/icon-right-button.png',
+                                      width: 25,
+                                      height: 25,
+                                      fit: BoxFit.contain,
+                                    ),
                                   ),
                                 ),
                               ),
                             ),
                           ),
                         ),
-                      ),
-                      const SizedBox(
-                        height: 30,
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          Get.to(SignInDemo());
-                        },
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              'login_with_google'.tr,
-                              style: GoogleFonts.ebGaramond(
-                                color: Colors.black,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w400,
-                              ),
-                            ),
-                            const SizedBox(
-                              width: 10,
-                            ),
-                            Image.asset(
-                              'assets/icons/icon-google.png',
-                              width: 25,
-                              height: 25,
-                              fit: BoxFit.contain,
-                            ),
-                          ],
+                        const SizedBox(
+                          height: 30,
                         ),
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      Container(
-                        alignment: AlignmentDirectional.center,
-                        width: 170,
-                        height: 1,
-                        color: Colors.black,
-                      )
-                    ],
+                        // GestureDetector(
+                        //   onTap: () {
+                        //     Get.to(SignInDemo());
+                        //   },
+                        //   child: Row(
+                        //     mainAxisAlignment: MainAxisAlignment.center,
+                        //     children: [
+                        //       Text(
+                        //         'login_with_google'.tr,
+                        //         style: GoogleFonts.ebGaramond(
+                        //           color: Colors.black,
+                        //           fontSize: 16,
+                        //           fontWeight: FontWeight.w400,
+                        //         ),
+                        //       ),
+                        //       const SizedBox(
+                        //         width: 10,
+                        //       ),
+                        //       Image.asset(
+                        //         'assets/icons/icon-google.png',
+                        //         width: 25,
+                        //         height: 25,
+                        //         fit: BoxFit.contain,
+                        //       ),
+                        //     ],
+                        //   ),
+                        // ),
+                        // const SizedBox(
+                        //   height: 10,
+                        // ),
+                        // Container(
+                        //   alignment: AlignmentDirectional.center,
+                        //   width: 170,
+                        //   height: 1,
+                        //   color: Colors.black,
+                        // )
+                      ],
+                    ),
                   ),
                 ),
               ),
-            ),
-            Positioned(
-              bottom: 20,
-              left: 20,
-              child: RotatedBox(
-                quarterTurns: 2,
-                child: GestureDetector(
-                  onTap: () => Get.offAll(const DashboardPage()),
-                  child: Image.asset(
-                    'assets/icons/icon-right-button.png',
-                    width: 25,
-                    height: 25,
-                    color: Colors.black,
-                    fit: BoxFit.contain,
+              Positioned(
+                bottom: 20,
+                left: 20,
+                child: RotatedBox(
+                  quarterTurns: 2,
+                  child: GestureDetector(
+                    onTap: () => Get.offAll(const DashboardPage()),
+                    child: Image.asset(
+                      'assets/icons/icon-right-button.png',
+                      width: 25,
+                      height: 25,
+                      color: Colors.black,
+                      fit: BoxFit.contain,
+                    ),
                   ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:currency_text_input_formatter/currency_text_input_formatter.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:get/get.dart';
@@ -14,7 +15,6 @@ import 'package:shoes_shop_app/theme/theme_controller.dart';
 import 'package:shoes_shop_app/translations/app_translation.dart';
 import 'package:shoes_shop_app/utils/app_constant.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'dart:math' as math;
 
 class HomePage extends StatefulWidget {
   HomePage({Key? key}) : super(key: key);
@@ -502,7 +502,13 @@ class HomePageState extends State<HomePage> {
                                       RotatedBox(
                                         quarterTurns: 1,
                                         child: CachedNetworkImage(
-                                          width: 100,
+                                          width: controller
+                                                      .listDiscountProduct[
+                                                          index]
+                                                      .discount !=
+                                                  0
+                                              ? 80
+                                              : 100,
                                           fit: BoxFit.contain,
                                           imageUrl: controller
                                               .listDiscountProduct[index]
@@ -533,12 +539,89 @@ class HomePageState extends State<HomePage> {
                                       const SizedBox(
                                         height: 15,
                                       ),
+                                      Row(
+                                        children: [
+                                          Container(
+                                            alignment: Alignment.topLeft,
+                                            child: RichText(
+                                              text: TextSpan(
+                                                text:
+                                                    CurrencyTextInputFormatter(
+                                                  locale: AppTranslation
+                                                              .instance
+                                                              .language ==
+                                                          AppTranslation.english
+                                                      ? "vi_VN"
+                                                      : "en_US",
+                                                  decimalDigits: 0,
+                                                  symbol: "",
+                                                ).format((controller
+                                                            .listDiscountProduct[
+                                                                index]
+                                                            .price)
+                                                        .toString()),
+                                                style: GoogleFonts.ebGaramond(
+                                                  color: theme.theme ==
+                                                          ThemeMode.light
+                                                      ? Colors.white
+                                                      : Colors.black,
+                                                  fontSize: 20,
+                                                  fontWeight: FontWeight.w600,
+                                                  decoration: TextDecoration
+                                                      .lineThrough,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                          controller.listDiscountProduct[index]
+                                                      .discount !=
+                                                  0
+                                              ? Container(
+                                                  alignment: Alignment.topLeft,
+                                                  child: RichText(
+                                                    text: TextSpan(
+                                                      text:
+                                                          ' - ${controller.listDiscountProduct[index].discount ?? 0} %',
+                                                      style: GoogleFonts
+                                                          .ebGaramond(
+                                                        color: Colors.amber,
+                                                        fontSize: 20,
+                                                        fontWeight:
+                                                            FontWeight.w600,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                )
+                                              : Container(),
+                                        ],
+                                      ),
+                                      const SizedBox(
+                                        height: 5,
+                                      ),
                                       Container(
                                         alignment: Alignment.topLeft,
                                         child: RichText(
                                           text: TextSpan(
-                                            text:
-                                                '${controller.listDiscountProduct[index].price ?? '--'}',
+                                            text: CurrencyTextInputFormatter(
+                                              locale: AppTranslation
+                                                          .instance.language ==
+                                                      AppTranslation.english
+                                                  ? "vi_VN"
+                                                  : "en_US",
+                                              decimalDigits: 0,
+                                              symbol: "",
+                                            ).format(((controller
+                                                            .listDiscountProduct[
+                                                                index]
+                                                            .price! *
+                                                        (100 -
+                                                            controller
+                                                                .listDiscountProduct[
+                                                                    index]
+                                                                .discount!) /
+                                                        100) /
+                                                    10)
+                                                .toString()),
                                             style: GoogleFonts.ebGaramond(
                                               color:
                                                   theme.theme == ThemeMode.light
@@ -668,23 +751,13 @@ class HomePageState extends State<HomePage> {
                                         controller
                                             .listCompany[index].nameCompany!;
                                     if (ApiToken.to.isTokenExisted == true) {
-                                      productController.pagingController
-                                          .addPageRequestListener((pageKey) {
-                                        productController
-                                            .getListProductFavorite(
-                                                controller.listCompany[index]
-                                                        .id ??
-                                                    '',
-                                                pageKey);
-                                      });
+                                      productController.getListProductFavorite(
+                                          controller.listCompany[index].id ??
+                                              '');
                                     } else {
-                                      productController.pagingController
-                                          .addPageRequestListener((pageKey) {
-                                        productController.getAllProduct(
-                                            controller.listCompany[index].id!,
-                                            [],
-                                            pageKey);
-                                      });
+                                      productController.getAllProduct(
+                                          controller.listCompany[index].id!,
+                                          []);
                                     }
                                     productController.update();
                                     controller.update();
@@ -880,8 +953,18 @@ class HomePageState extends State<HomePage> {
                                         alignment: Alignment.topLeft,
                                         child: RichText(
                                           text: TextSpan(
-                                            text:
-                                                '${controller.listTrendingProduct[index].price ?? '--'}',
+                                            text: CurrencyTextInputFormatter(
+                                              locale: AppTranslation
+                                                          .instance.language ==
+                                                      AppTranslation.english
+                                                  ? "vi_VN"
+                                                  : "en_US",
+                                              decimalDigits: 0,
+                                              symbol: "",
+                                            ).format((controller
+                                                    .listTrendingProduct[index]
+                                                    .price)
+                                                .toString()),
                                             style: GoogleFonts.ebGaramond(
                                               color:
                                                   theme.theme == ThemeMode.light

@@ -6,7 +6,7 @@ import 'package:shoes_shop_app/pages/dashboard/dashboard_page.dart';
 import 'package:shoes_shop_app/pages/user/user_controller.dart';
 import 'package:shoes_shop_app/utils/app_constant.dart';
 import 'package:google_fonts/google_fonts.dart';
-
+import 'package:back_button_interceptor/back_button_interceptor.dart';
 import '../profile/profile_controller.dart';
 
 class UserPage extends StatefulWidget {
@@ -28,6 +28,7 @@ class _UserPageState extends State<UserPage> {
 
   @override
   void initState() {
+    BackButtonInterceptor.add(myInterceptor);
     userController.name.text = profileController.profile.value.fullName ?? "";
     userController.phone.text =
         profileController.profile.value.phoneNumber ?? "";
@@ -37,7 +38,13 @@ class _UserPageState extends State<UserPage> {
 
   @override
   void dispose() {
+    BackButtonInterceptor.remove(myInterceptor);
     super.dispose();
+  }
+
+  bool myInterceptor(bool stopDefaultButtonEvent, RouteInfo info) {
+    Get.back(id: widget.id);
+    return true;
   }
 
   Widget selectedProvide() {
@@ -102,146 +109,80 @@ class _UserPageState extends State<UserPage> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Container(
-        width: double.infinity,
-        height: double.infinity,
-        color: Colors.white,
-        child: Stack(
-          children: [
-            Image.asset(
-              'assets/images/background_update_profile.jpg',
-              width: double.infinity,
-              height: 480,
-              fit: BoxFit.fill,
-            ),
-            Scaffold(
-              appBar: AppBar(
-                backgroundColor: Colors.transparent,
-                leading: widget.id == AppConstant.PROFILE
-                    ? IconButton(
-                        onPressed: () {
-                          Get.back(id: AppConstant.PROFILE);
-                        },
-                        icon: const Icon(
-                          Icons.arrow_back_ios,
-                          size: 20,
-                          color: Colors.white,
-                        ),
-                      )
-                    : Container(),
-                title: Text(
-                  'user_update_information'.tr,
-                  style: GoogleFonts.ebGaramond(
-                    color: Colors.white,
-                    fontSize: 20,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-                centerTitle: true,
-              ),
-              backgroundColor: Colors.transparent,
-              body: SizedBox(
+    return GestureDetector(
+      onHorizontalDragEnd: (details) => {
+        if (details.primaryVelocity! > 0) {Get.back(id: widget.id)}
+      },
+      child: SafeArea(
+        child: Container(
+          width: double.infinity,
+          height: double.infinity,
+          color: Colors.white,
+          child: Stack(
+            children: [
+              Image.asset(
+                'assets/images/background_update_profile.jpg',
                 width: double.infinity,
-                height: double.infinity,
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      Stack(
-                        children: [
-                          GetBuilder<UserController>(
-                            init: userController,
-                            builder: (controller) => userController.imageUser ==
-                                    null
-                                ? profileController.profile.value.avatar != null
-                                    ? ClipOval(
-                                        child: Container(
-                                          width: 115,
-                                          height: 115,
-                                          decoration: BoxDecoration(
-                                            color: Colors.black,
-                                            border:
-                                                Border.all(color: Colors.white),
-                                            shape: BoxShape.circle,
-                                          ),
-                                          child: Center(
-                                            child: ClipOval(
-                                              child: Container(
-                                                width: 100,
-                                                height: 100,
-                                                decoration: const BoxDecoration(
-                                                  shape: BoxShape.circle,
-                                                ),
-                                                child: CachedNetworkImage(
-                                                  fit: BoxFit.cover,
-                                                  imageUrl: profileController
-                                                      .profile.value.avatar!,
-                                                  progressIndicatorBuilder: (context,
-                                                          url,
-                                                          downloadProgress) =>
-                                                      CircularProgressIndicator(
-                                                    value: downloadProgress
-                                                        .progress,
-                                                    color: Colors.white,
-                                                    strokeWidth: 0.5,
-                                                  ),
-                                                  errorWidget: (context, url,
-                                                          error) =>
-                                                      const Icon(Icons.error),
-                                                ),
-                                              ),
+                height: 480,
+                fit: BoxFit.fill,
+              ),
+              Scaffold(
+                appBar: AppBar(
+                  backgroundColor: Colors.transparent,
+                  leading: widget.id == AppConstant.PROFILE
+                      ? IconButton(
+                          onPressed: () {
+                            Get.back(id: AppConstant.PROFILE);
+                          },
+                          icon: const Icon(
+                            Icons.arrow_back_ios,
+                            size: 20,
+                            color: Colors.white,
+                          ),
+                        )
+                      : Container(),
+                  title: Text(
+                    'user_update_information'.tr,
+                    style: GoogleFonts.ebGaramond(
+                      color: Colors.white,
+                      fontSize: 20,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  centerTitle: true,
+                ),
+                backgroundColor: Colors.transparent,
+                body: SizedBox(
+                  width: double.infinity,
+                  height: double.infinity,
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        Stack(
+                          children: [
+                            GetBuilder<UserController>(
+                              init: userController,
+                              builder: (controller) => userController
+                                          .imageUser ==
+                                      null
+                                  ? profileController.profile.value.avatar !=
+                                          null
+                                      ? ClipOval(
+                                          child: Container(
+                                            width: 115,
+                                            height: 115,
+                                            decoration: BoxDecoration(
+                                              color: Colors.black,
+                                              border: Border.all(
+                                                  color: Colors.white),
+                                              shape: BoxShape.circle,
                                             ),
-                                          ),
-                                        ),
-                                      )
-                                    : ClipOval(
-                                        child: Container(
-                                          width: 115,
-                                          height: 115,
-                                          decoration: BoxDecoration(
-                                            color: Colors.black,
-                                            border:
-                                                Border.all(color: Colors.white),
-                                            shape: BoxShape.circle,
-                                          ),
-                                          child: Center(
-                                            child: ClipOval(
-                                              child: Container(
-                                                width: 100,
-                                                height: 100,
-                                                decoration: BoxDecoration(
-                                                  color: Colors.black,
-                                                  border: Border.all(
-                                                      color: Colors.white),
-                                                  shape: BoxShape.circle,
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      )
-                                : ClipOval(
-                                    child: Container(
-                                      width: 115,
-                                      height: 115,
-                                      decoration: BoxDecoration(
-                                        color: Colors.black,
-                                        border: Border.all(color: Colors.white),
-                                        shape: BoxShape.circle,
-                                      ),
-                                      child: Center(
-                                        child: ClipOval(
-                                          child: controller.isLoading
-                                              ? const Center(
-                                                  child:
-                                                      CircularProgressIndicator(
-                                                  color: Colors.white,
-                                                  strokeWidth: 0.5,
-                                                ))
-                                              : Container(
+                                            child: Center(
+                                              child: ClipOval(
+                                                child: Container(
                                                   width: 100,
                                                   height: 100,
                                                   decoration:
@@ -250,8 +191,8 @@ class _UserPageState extends State<UserPage> {
                                                   ),
                                                   child: CachedNetworkImage(
                                                     fit: BoxFit.cover,
-                                                    imageUrl:
-                                                        controller.imageUser!,
+                                                    imageUrl: profileController
+                                                        .profile.value.avatar!,
                                                     progressIndicatorBuilder: (context,
                                                             url,
                                                             downloadProgress) =>
@@ -266,325 +207,401 @@ class _UserPageState extends State<UserPage> {
                                                         const Icon(Icons.error),
                                                   ),
                                                 ),
+                                              ),
+                                            ),
+                                          ),
+                                        )
+                                      : ClipOval(
+                                          child: Container(
+                                            width: 115,
+                                            height: 115,
+                                            decoration: BoxDecoration(
+                                              color: Colors.black,
+                                              border: Border.all(
+                                                  color: Colors.white),
+                                              shape: BoxShape.circle,
+                                            ),
+                                            child: Center(
+                                              child: ClipOval(
+                                                child: Container(
+                                                  width: 100,
+                                                  height: 100,
+                                                  decoration: BoxDecoration(
+                                                    color: Colors.black,
+                                                    border: Border.all(
+                                                        color: Colors.white),
+                                                    shape: BoxShape.circle,
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        )
+                                  : ClipOval(
+                                      child: Container(
+                                        width: 115,
+                                        height: 115,
+                                        decoration: BoxDecoration(
+                                          color: Colors.black,
+                                          border:
+                                              Border.all(color: Colors.white),
+                                          shape: BoxShape.circle,
+                                        ),
+                                        child: Center(
+                                          child: ClipOval(
+                                            child: controller.isLoading
+                                                ? const Center(
+                                                    child:
+                                                        CircularProgressIndicator(
+                                                    color: Colors.white,
+                                                    strokeWidth: 0.5,
+                                                  ))
+                                                : Container(
+                                                    width: 100,
+                                                    height: 100,
+                                                    decoration:
+                                                        const BoxDecoration(
+                                                      shape: BoxShape.circle,
+                                                    ),
+                                                    child: CachedNetworkImage(
+                                                      fit: BoxFit.cover,
+                                                      imageUrl:
+                                                          controller.imageUser!,
+                                                      progressIndicatorBuilder:
+                                                          (context, url,
+                                                                  downloadProgress) =>
+                                                              CircularProgressIndicator(
+                                                        value: downloadProgress
+                                                            .progress,
+                                                        color: Colors.white,
+                                                        strokeWidth: 0.5,
+                                                      ),
+                                                      errorWidget: (context,
+                                                              url, error) =>
+                                                          const Icon(
+                                                              Icons.error),
+                                                    ),
+                                                  ),
+                                          ),
                                         ),
                                       ),
                                     ),
-                                  ),
-                          ),
-                          Positioned(
-                            top: 80,
-                            right: 0,
-                            child: ClipOval(
-                              child: Container(
-                                width: 35,
-                                height: 35,
-                                color: Colors.white,
-                                child: Center(
-                                  child: IconButton(
-                                    onPressed: () {
-                                      Get.bottomSheet(
-                                        selectedProvide(),
-                                        isScrollControlled: true,
-                                      );
-                                    },
-                                    icon: const Icon(
-                                      Icons.camera_alt,
-                                      size: 20,
-                                      color: Colors.black,
-                                    ),
-                                  ),
-                                ),
-                              ),
                             ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      GetBuilder<UserController>(
-                        init: userController,
-                        builder: (controller) => Container(
-                          width: double.infinity,
-                          height: 50,
-                          padding: const EdgeInsets.symmetric(horizontal: 15),
-                          margin: const EdgeInsets.symmetric(horizontal: 30),
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(10),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black.withOpacity(0.25),
-                                spreadRadius: 0,
-                                blurRadius: 4,
-                                offset: const Offset(
-                                    0, 4), // changes position of shadow
-                              ),
-                            ],
-                          ),
-                          child: Stack(
-                            alignment: AlignmentDirectional.centerStart,
-                            children: [
-                              Image.asset(
-                                'assets/icons/icon-user.png',
-                                width: 20,
-                                height: 20,
-                                fit: BoxFit.contain,
-                              ),
-                              TextField(
-                                controller: controller.name,
-                                style: GoogleFonts.ebGaramond(
-                                  color: Colors.black,
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w400,
-                                ),
-                                decoration: InputDecoration(
-                                  contentPadding:
-                                      const EdgeInsets.only(left: 35),
-                                  border: InputBorder.none,
-                                  hintText: 'user_your_name'.tr,
-                                  hintStyle: GoogleFonts.ebGaramond(
-                                    color: const Color(0xffD0D0D0),
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w400,
-                                  ),
-                                ),
-                                cursorColor: Colors.black,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      GetBuilder<UserController>(
-                        init: userController,
-                        builder: (controller) => Container(
-                          width: double.infinity,
-                          height: 50,
-                          padding: const EdgeInsets.symmetric(horizontal: 15),
-                          margin: const EdgeInsets.symmetric(horizontal: 30),
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(10),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black.withOpacity(0.25),
-                                spreadRadius: 0,
-                                blurRadius: 4,
-                                offset: const Offset(
-                                    0, 4), // changes position of shadow
-                              ),
-                            ],
-                          ),
-                          child: Stack(
-                            alignment: AlignmentDirectional.centerStart,
-                            children: [
-                              Image.asset(
-                                'assets/icons/icon-phone.png',
-                                width: 20,
-                                height: 20,
-                                fit: BoxFit.contain,
-                              ),
-                              TextField(
-                                controller: controller.phone,
-                                style: GoogleFonts.ebGaramond(
-                                  color: Colors.black,
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w400,
-                                ),
-                                decoration: InputDecoration(
-                                  contentPadding:
-                                      const EdgeInsets.only(left: 35),
-                                  border: InputBorder.none,
-                                  hintText: 'login_your_phone'.tr,
-                                  hintStyle: GoogleFonts.ebGaramond(
-                                    color: const Color(0xffD0D0D0),
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w400,
-                                  ),
-                                ),
-                                cursorColor: Colors.black,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      GetBuilder<UserController>(
-                        init: userController,
-                        builder: (controller) => Container(
-                          width: double.infinity,
-                          height: 50,
-                          padding: const EdgeInsets.symmetric(horizontal: 15),
-                          margin: const EdgeInsets.symmetric(horizontal: 30),
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(10),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black.withOpacity(0.25),
-                                spreadRadius: 0,
-                                blurRadius: 4,
-                                offset: const Offset(
-                                    0, 4), // changes position of shadow
-                              ),
-                            ],
-                          ),
-                          child: Stack(
-                            alignment: AlignmentDirectional.centerStart,
-                            children: [
-                              Image.asset(
-                                'assets/icons/icon-email.png',
-                                width: 20,
-                                height: 20,
-                                fit: BoxFit.contain,
-                              ),
-                              TextField(
-                                controller: controller.email,
-                                style: GoogleFonts.ebGaramond(
-                                  color: Colors.black,
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w400,
-                                ),
-                                decoration: InputDecoration(
-                                  contentPadding:
-                                      const EdgeInsets.only(left: 35),
-                                  border: InputBorder.none,
-                                  hintText: 'register_your_email'.tr,
-                                  hintStyle: GoogleFonts.ebGaramond(
-                                    color: const Color(0xffD0D0D0),
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w400,
-                                  ),
-                                ),
-                                cursorColor: Colors.black,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 30),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            GestureDetector(
-                              onTap: () {
-                                Get.to(
-                                    AddressPage(
-                                      id: widget.id,
-                                    ),
-                                    id: widget.id);
-                              },
-                              child: Row(
-                                children: [
-                                  Text(
-                                    'cart_address'.tr,
-                                    style: GoogleFonts.ebGaramond(
-                                      color: Colors.black,
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w400,
+                            Positioned(
+                              top: 80,
+                              right: 0,
+                              child: ClipOval(
+                                child: Container(
+                                  width: 35,
+                                  height: 35,
+                                  color: Colors.white,
+                                  child: Center(
+                                    child: IconButton(
+                                      onPressed: () {
+                                        Get.bottomSheet(
+                                          selectedProvide(),
+                                          isScrollControlled: true,
+                                        );
+                                      },
+                                      icon: const Icon(
+                                        Icons.camera_alt,
+                                        size: 20,
+                                        color: Colors.black,
+                                      ),
                                     ),
                                   ),
-                                  const SizedBox(
-                                    width: 10,
-                                  ),
-                                  Image.asset(
-                                    'assets/icons/icon-address.png',
-                                    width: 20,
-                                    height: 20,
-                                    fit: BoxFit.contain,
-                                  ),
-                                ],
-                              ),
-                            ),
-                            TextButton(
-                              onPressed: () {
-                                Get.offAll(const DashboardPage());
-                              },
-                              child: Text(
-                                'user_skip'.tr,
-                                style: GoogleFonts.ebGaramond(
-                                  color: Colors.black,
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w400,
                                 ),
                               ),
                             ),
                           ],
                         ),
-                      ),
-                      const SizedBox(
-                        height: 40,
-                      ),
-                      GetBuilder<UserController>(
-                        init: userController,
-                        builder: (controller) => SizedBox(
-                          width: double.infinity,
-                          child: GestureDetector(
-                            onTap: () {
-                              if (controller.name.text.isEmpty ||
-                                  controller.phone.text.isEmpty ||
-                                  controller.email.text.isEmpty) {
-                                Get.snackbar(
-                                  'validation'.tr,
-                                  'name_phone_email_empty'.tr,
-                                  colorText: Colors.black,
-                                  backgroundColor: Colors.white,
-                                );
-                                return;
-                              }
-                              if (controller.phone.text.length != 10) {
-                                Get.snackbar(
-                                  'validation'.tr,
-                                  'enter_diff_ten_phone'.tr,
-                                  colorText: Colors.black,
-                                  backgroundColor: Colors.white,
-                                );
-                                return;
-                              }
-                              controller.updateProfile(
-                                controller.name.text,
-                                controller.phone.text,
-                                controller.email.text,
-                                controller.imageUser ?? "",
-                              );
-                            },
-                            child: Stack(
-                              alignment: AlignmentDirectional.center,
-                              children: [
-                                ClipOval(
-                                  child: Container(
-                                    width: 60,
-                                    height: 60,
-                                    color: Colors.black,
-                                  ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        GetBuilder<UserController>(
+                          init: userController,
+                          builder: (controller) => Container(
+                            width: double.infinity,
+                            height: 50,
+                            padding: const EdgeInsets.symmetric(horizontal: 15),
+                            margin: const EdgeInsets.symmetric(horizontal: 30),
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(10),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black.withOpacity(0.25),
+                                  spreadRadius: 0,
+                                  blurRadius: 4,
+                                  offset: const Offset(
+                                      0, 4), // changes position of shadow
                                 ),
+                              ],
+                            ),
+                            child: Stack(
+                              alignment: AlignmentDirectional.centerStart,
+                              children: [
                                 Image.asset(
-                                  'assets/icons/icon-right-button.png',
-                                  width: 25,
-                                  height: 25,
+                                  'assets/icons/icon-user.png',
+                                  width: 20,
+                                  height: 20,
                                   fit: BoxFit.contain,
+                                ),
+                                TextField(
+                                  controller: controller.name,
+                                  style: GoogleFonts.ebGaramond(
+                                    color: Colors.black,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                  decoration: InputDecoration(
+                                    contentPadding:
+                                        const EdgeInsets.only(left: 35),
+                                    border: InputBorder.none,
+                                    hintText: 'user_your_name'.tr,
+                                    hintStyle: GoogleFonts.ebGaramond(
+                                      color: const Color(0xffD0D0D0),
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w400,
+                                    ),
+                                  ),
+                                  cursorColor: Colors.black,
                                 ),
                               ],
                             ),
                           ),
                         ),
-                      ),
-                    ],
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        GetBuilder<UserController>(
+                          init: userController,
+                          builder: (controller) => Container(
+                            width: double.infinity,
+                            height: 50,
+                            padding: const EdgeInsets.symmetric(horizontal: 15),
+                            margin: const EdgeInsets.symmetric(horizontal: 30),
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(10),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black.withOpacity(0.25),
+                                  spreadRadius: 0,
+                                  blurRadius: 4,
+                                  offset: const Offset(
+                                      0, 4), // changes position of shadow
+                                ),
+                              ],
+                            ),
+                            child: Stack(
+                              alignment: AlignmentDirectional.centerStart,
+                              children: [
+                                Image.asset(
+                                  'assets/icons/icon-phone.png',
+                                  width: 20,
+                                  height: 20,
+                                  fit: BoxFit.contain,
+                                ),
+                                TextField(
+                                  controller: controller.phone,
+                                  style: GoogleFonts.ebGaramond(
+                                    color: Colors.black,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                  decoration: InputDecoration(
+                                    contentPadding:
+                                        const EdgeInsets.only(left: 35),
+                                    border: InputBorder.none,
+                                    hintText: 'login_your_phone'.tr,
+                                    hintStyle: GoogleFonts.ebGaramond(
+                                      color: const Color(0xffD0D0D0),
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w400,
+                                    ),
+                                  ),
+                                  cursorColor: Colors.black,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        GetBuilder<UserController>(
+                          init: userController,
+                          builder: (controller) => Container(
+                            width: double.infinity,
+                            height: 50,
+                            padding: const EdgeInsets.symmetric(horizontal: 15),
+                            margin: const EdgeInsets.symmetric(horizontal: 30),
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(10),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black.withOpacity(0.25),
+                                  spreadRadius: 0,
+                                  blurRadius: 4,
+                                  offset: const Offset(
+                                      0, 4), // changes position of shadow
+                                ),
+                              ],
+                            ),
+                            child: Stack(
+                              alignment: AlignmentDirectional.centerStart,
+                              children: [
+                                Image.asset(
+                                  'assets/icons/icon-email.png',
+                                  width: 20,
+                                  height: 20,
+                                  fit: BoxFit.contain,
+                                ),
+                                TextField(
+                                  controller: controller.email,
+                                  style: GoogleFonts.ebGaramond(
+                                    color: Colors.black,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                  decoration: InputDecoration(
+                                    contentPadding:
+                                        const EdgeInsets.only(left: 35),
+                                    border: InputBorder.none,
+                                    hintText: 'register_your_email'.tr,
+                                    hintStyle: GoogleFonts.ebGaramond(
+                                      color: const Color(0xffD0D0D0),
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w400,
+                                    ),
+                                  ),
+                                  cursorColor: Colors.black,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 30),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              GestureDetector(
+                                onTap: () {
+                                  Get.to(
+                                      AddressPage(
+                                        id: widget.id,
+                                      ),
+                                      id: widget.id);
+                                },
+                                child: Row(
+                                  children: [
+                                    Text(
+                                      'cart_address'.tr,
+                                      style: GoogleFonts.ebGaramond(
+                                        color: Colors.black,
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w400,
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                      width: 10,
+                                    ),
+                                    Image.asset(
+                                      'assets/icons/icon-address.png',
+                                      width: 20,
+                                      height: 20,
+                                      fit: BoxFit.contain,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              TextButton(
+                                onPressed: () {
+                                  Get.offAll(const DashboardPage());
+                                },
+                                child: Text(
+                                  'user_skip'.tr,
+                                  style: GoogleFonts.ebGaramond(
+                                    color: Colors.black,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 40,
+                        ),
+                        GetBuilder<UserController>(
+                          init: userController,
+                          builder: (controller) => SizedBox(
+                            width: double.infinity,
+                            child: GestureDetector(
+                              onTap: () {
+                                if (controller.name.text.isEmpty ||
+                                    controller.phone.text.isEmpty ||
+                                    controller.email.text.isEmpty) {
+                                  Get.snackbar(
+                                    'validation'.tr,
+                                    'name_phone_email_empty'.tr,
+                                    colorText: Colors.black,
+                                    backgroundColor: Colors.white,
+                                  );
+                                  return;
+                                }
+                                if (controller.phone.text.length != 10) {
+                                  Get.snackbar(
+                                    'validation'.tr,
+                                    'enter_diff_ten_phone'.tr,
+                                    colorText: Colors.black,
+                                    backgroundColor: Colors.white,
+                                  );
+                                  return;
+                                }
+                                controller.updateProfile(
+                                  controller.name.text,
+                                  controller.phone.text,
+                                  controller.email.text,
+                                  controller.imageUser ?? "",
+                                );
+                              },
+                              child: Stack(
+                                alignment: AlignmentDirectional.center,
+                                children: [
+                                  ClipOval(
+                                    child: Container(
+                                      width: 60,
+                                      height: 60,
+                                      color: Colors.black,
+                                    ),
+                                  ),
+                                  Image.asset(
+                                    'assets/icons/icon-right-button.png',
+                                    width: 25,
+                                    height: 25,
+                                    fit: BoxFit.contain,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            )
-          ],
+              )
+            ],
+          ),
         ),
       ),
     );

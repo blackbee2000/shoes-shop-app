@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:currency_text_input_formatter/currency_text_input_formatter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
@@ -276,25 +277,14 @@ class ProductPage extends GetView<ProductController> {
                                             .listCompany[index].nameCompany!;
                                         if (ApiToken.to.isTokenExisted ==
                                             true) {
-                                          controller.pagingController
-                                              .addPageRequestListener(
-                                                  (pageKey) {
-                                            controller.getListProductFavorite(
-                                                controller.listCompany[index]
-                                                        .id ??
-                                                    '',
-                                                pageKey);
-                                          });
+                                          controller.getListProductFavorite(
+                                              controller
+                                                      .listCompany[index].id ??
+                                                  '');
                                         } else {
-                                          controller.pagingController
-                                              .addPageRequestListener(
-                                                  (pageKey) {
-                                            controller.getAllProduct(
-                                                controller
-                                                    .listCompany[index].id!,
-                                                [],
-                                                pageKey);
-                                          });
+                                          controller.getAllProduct(
+                                              controller.listCompany[index].id!,
+                                              []);
                                         }
                                         controller.update();
                                       },
@@ -652,7 +642,21 @@ class ProductPage extends GetView<ProductController> {
                                                     textAlign: TextAlign.start,
                                                     text: TextSpan(
                                                       text:
-                                                          '${controller.listProduct[index].price ?? '--'}',
+                                                          CurrencyTextInputFormatter(
+                                                        locale: AppTranslation
+                                                                    .instance
+                                                                    .language ==
+                                                                AppTranslation
+                                                                    .english
+                                                            ? "vi_VN"
+                                                            : "en_US",
+                                                        decimalDigits: 0,
+                                                        symbol: "",
+                                                      ).format((controller
+                                                                  .listProduct[
+                                                                      index]
+                                                                  .price)
+                                                              .toString()),
                                                       style: GoogleFonts
                                                           .ebGaramond(
                                                         color: theme.theme ==

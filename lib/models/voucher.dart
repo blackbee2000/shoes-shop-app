@@ -5,6 +5,7 @@ part 'voucher.g.dart';
 class Voucher {
   String? id;
   String? title;
+  String? image;
   String? voucherCode;
   int? discount;
   int? maxDiscount;
@@ -18,6 +19,7 @@ class Voucher {
   Voucher(
     this.id,
     this.title,
+    this.image,
     this.voucherCode,
     this.discount,
     this.maxDiscount,
