@@ -776,19 +776,6 @@ class CartState extends State<CartPage> {
                                 ),
                                 GestureDetector(
                                   onTap: () {
-                                    // if (controller
-                                    //     .listCartSelected.isNotEmpty) {
-
-                                    // } else {
-                                    //   Get.snackbar(
-                                    //     'warning'.tr,
-                                    //     'please_choose_product'.tr,
-                                    //     colorText: Colors.white,
-                                    //     backgroundColor:
-                                    //         const Color(0xffe5b700),
-                                    //   );
-                                    //   controller.update();
-                                    // }
                                     controller.getListCartSelected(widget.id);
                                     controller.update();
                                   },

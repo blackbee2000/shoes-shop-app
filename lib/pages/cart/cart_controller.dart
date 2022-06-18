@@ -99,18 +99,36 @@ class CartController extends GetxController {
 
   getListCartSelected(idWidget) {
     if (selectAll.value == true) {
-      Future.delayed(const Duration(milliseconds: 500)).then((_) {
-        Get.to(PaymentPage(id: idWidget), id: idWidget);
-      });
+      if (listCartSelected.isEmpty) {
+        Get.snackbar(
+          'warning'.tr,
+          'please_choose_product'.tr,
+          colorText: Colors.white,
+          backgroundColor: const Color(0xffe5b700),
+        );
+      } else {
+        Future.delayed(const Duration(milliseconds: 500)).then((_) {
+          Get.to(PaymentPage(id: idWidget), id: idWidget);
+        });
+      }
     } else {
       for (var e in listCart) {
         if (e.isChecked == true) {
           listCartSelected.add(e);
         }
       }
-      Future.delayed(const Duration(milliseconds: 500)).then((_) {
-        Get.to(PaymentPage(id: idWidget), id: idWidget);
-      });
+      if (listCartSelected.isEmpty) {
+        Get.snackbar(
+          'warning'.tr,
+          'please_choose_product'.tr,
+          colorText: Colors.white,
+          backgroundColor: const Color(0xffe5b700),
+        );
+      } else {
+        Future.delayed(const Duration(milliseconds: 500)).then((_) {
+          Get.to(PaymentPage(id: idWidget), id: idWidget);
+        });
+      }
     }
   }
 
@@ -121,6 +139,14 @@ class CartController extends GetxController {
     }
 
     listCartSelected = listCart;
+    if (listCartSelected.isEmpty) {
+      Get.snackbar(
+        'warning'.tr,
+        'please_choose_product'.tr,
+        colorText: Colors.white,
+        backgroundColor: const Color(0xffe5b700),
+      );
+    }
     update();
   }
 
@@ -130,7 +156,16 @@ class CartController extends GetxController {
       for (var e in listCart) {
         listCartDelete.add(e.id ?? '');
       }
-      deleteCart(listCartDelete);
+      if (listCartDelete.isEmpty) {
+        Get.snackbar(
+          'warning'.tr,
+          'please_choose_product'.tr,
+          colorText: Colors.white,
+          backgroundColor: const Color(0xffe5b700),
+        );
+      } else {
+        deleteCart(listCartDelete);
+      }
     } else {
       List<String> listCartDelete = [];
       for (var e in listCart) {
@@ -138,7 +173,16 @@ class CartController extends GetxController {
           listCartDelete.add(e.id ?? '');
         }
       }
-      deleteCart(listCartDelete);
+      if (listCartDelete.isEmpty) {
+        Get.snackbar(
+          'warning'.tr,
+          'please_choose_product'.tr,
+          colorText: Colors.white,
+          backgroundColor: const Color(0xffe5b700),
+        );
+      } else {
+        deleteCart(listCartDelete);
+      }
     }
   }
 
@@ -174,6 +218,8 @@ class CartController extends GetxController {
           colorText: Colors.white,
           backgroundColor: const Color(0xff00FF00),
         );
+        listCartSelected.clear();
+        listCartDelete.clear();
         getAllCart();
         update();
       },

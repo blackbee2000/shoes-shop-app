@@ -6,10 +6,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:shoes_shop_app/pages/dashboard/dashboard_page.dart';
+import 'package:shoes_shop_app/pages/dashboard/dashboard_controller.dart';
 import 'package:shoes_shop_app/pages/profile/profile_controller.dart';
 import 'package:shoes_shop_app/pages/user/user_provider.dart';
 import 'package:shoes_shop_app/services/api_token.dart';
+import 'package:shoes_shop_app/utils/app_constant.dart';
 
 class UserController extends GetxController with StateMixin {
   TextEditingController name = TextEditingController();
@@ -18,6 +19,7 @@ class UserController extends GetxController with StateMixin {
   String? imageUser;
   final profileController = Get.put(ProfileController());
   bool isLoading = false;
+  final dashboardController = Get.put(DashboardController());
 
   @override
   void onInit() async {
@@ -127,7 +129,12 @@ class UserController extends GetxController with StateMixin {
         profileController.onInit();
         profileController.update();
         Get.back();
-        Get.offAll(const DashboardPage());
+        dashboardController.tabIndex.value = 4;
+        while (Get.nestedKey(AppConstant.PROFILE)!.currentState?.canPop() ==
+            true) {
+          Get.nestedKey(AppConstant.PROFILE)?.currentState?.pop();
+        }
+        dashboardController.update();
         update();
       },
       onError: (e) {

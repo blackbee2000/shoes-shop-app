@@ -2,8 +2,8 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shoes_shop_app/pages/change-password/change_password_provider.dart';
+import 'package:shoes_shop_app/pages/dashboard/dashboard_controller.dart';
 import 'package:shoes_shop_app/pages/profile/profile_controller.dart';
-import 'package:shoes_shop_app/pages/profile/profile_page.dart';
 import 'package:shoes_shop_app/services/api_token.dart';
 import 'package:shoes_shop_app/utils/app_constant.dart';
 
@@ -12,6 +12,7 @@ class ChangePasswordController extends GetxController {
   TextEditingController newPassword = TextEditingController();
   TextEditingController confirmPassword = TextEditingController();
   final profileController = Get.put(ProfileController());
+  final dashboardController = Get.put(DashboardController());
 
   @override
   void onInit() async {
@@ -46,12 +47,12 @@ class ChangePasswordController extends GetxController {
       onSuccess: (res) {
         profileController.profile.value = res.data!;
         Get.back();
-        Get.snackbar(
-          'success'.tr,
-          'change_password_success'.tr,
-          colorText: Colors.white,
-          backgroundColor: const Color(0xff00FF00),
-        );
+        dashboardController.tabIndex.value = 4;
+        while (Get.nestedKey(AppConstant.PROFILE)!.currentState?.canPop() ==
+            true) {
+          Get.nestedKey(AppConstant.PROFILE)?.currentState?.pop();
+        }
+        dashboardController.update();
 
         update();
       },

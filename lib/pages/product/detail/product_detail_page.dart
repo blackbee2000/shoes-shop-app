@@ -746,17 +746,18 @@ class ProductDetailState extends State<ProductDetailPage>
                                             decoration: productDetailController
                                                         .productDetail
                                                         .value
-                                                        .discount !=
+                                                        .discount ==
                                                     0
-                                                ? TextDecoration.lineThrough
-                                                : TextDecoration.none,
+                                                ? TextDecoration.none
+                                                : TextDecoration.lineThrough,
                                           ),
                                         ),
                                       ),
                                       productDetailController.productDetail
-                                                  .value.discount !=
+                                                  .value.discount ==
                                               0
-                                          ? RichText(
+                                          ? Container()
+                                          : RichText(
                                               text: TextSpan(
                                                 text:
                                                     ' - ${productDetailController.productDetail.value.discount ?? 0} %',
@@ -766,47 +767,51 @@ class ProductDetailState extends State<ProductDetailPage>
                                                   fontWeight: FontWeight.w600,
                                                 ),
                                               ),
-                                            )
-                                          : Container(),
+                                            ),
                                     ],
                                   ),
                                   const SizedBox(
                                     height: 5,
                                   ),
-                                  Container(
-                                    alignment: Alignment.topLeft,
-                                    child: RichText(
-                                      text: TextSpan(
-                                        text: CurrencyTextInputFormatter(
-                                          locale: AppTranslation
-                                                      .instance.language ==
-                                                  AppTranslation.english
-                                              ? "vi_VN"
-                                              : "en_US",
-                                          decimalDigits: 0,
-                                          symbol: "",
-                                        ).format(((productDetailController
-                                                        .productDetail
-                                                        .value
-                                                        .price! *
-                                                    (100 -
-                                                        productDetailController
-                                                            .productDetail
-                                                            .value
-                                                            .discount!) /
-                                                    100) /
-                                                10)
-                                            .toString()),
-                                        style: GoogleFonts.ebGaramond(
-                                          color: theme.theme == ThemeMode.light
-                                              ? Colors.black
-                                              : Colors.white,
-                                          fontSize: 25,
-                                          fontWeight: FontWeight.w600,
+                                  productDetailController
+                                              .productDetail.value.discount ==
+                                          0
+                                      ? Container()
+                                      : Container(
+                                          alignment: Alignment.topLeft,
+                                          child: RichText(
+                                            text: TextSpan(
+                                              text: CurrencyTextInputFormatter(
+                                                locale: AppTranslation.instance
+                                                            .language ==
+                                                        AppTranslation.english
+                                                    ? "vi_VN"
+                                                    : "en_US",
+                                                decimalDigits: 0,
+                                                symbol: "",
+                                              ).format(((productDetailController
+                                                              .productDetail
+                                                              .value
+                                                              .price! *
+                                                          (100 -
+                                                              productDetailController
+                                                                  .productDetail
+                                                                  .value
+                                                                  .discount!) /
+                                                          100) /
+                                                      10)
+                                                  .toString()),
+                                              style: GoogleFonts.ebGaramond(
+                                                color: theme.theme ==
+                                                        ThemeMode.light
+                                                    ? Colors.black
+                                                    : Colors.white,
+                                                fontSize: 25,
+                                                fontWeight: FontWeight.w600,
+                                              ),
+                                            ),
+                                          ),
                                         ),
-                                      ),
-                                    ),
-                                  ),
                                   const SizedBox(
                                     height: 5,
                                   ),
