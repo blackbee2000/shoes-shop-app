@@ -3,10 +3,10 @@ import 'package:currency_text_input_formatter/currency_text_input_formatter.dart
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:get/get.dart';
+import 'package:shoes_shop_app/pages/cart/cart_controller.dart';
 import 'package:shoes_shop_app/pages/cart/cart_page.dart';
 import 'package:shoes_shop_app/pages/dashboard/dashboard_controller.dart';
 import 'package:shoes_shop_app/pages/home/all-product/all_product_controller.dart';
-import 'package:shoes_shop_app/pages/home/all-product/all_product_page.dart';
 import 'package:shoes_shop_app/pages/home/home_controller.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:shoes_shop_app/pages/product/detail/product_detail_page.dart';
@@ -146,96 +146,64 @@ class HomePageState extends State<HomePage> {
                                         width: double.infinity,
                                         child: Stack(
                                           children: [
-                                            Expanded(
-                                              flex: 7,
-                                              child: Column(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.start,
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Text(
-                                                    'home_new_collection'.tr,
-                                                    style:
-                                                        GoogleFonts.ebGaramond(
-                                                      color: theme.theme ==
-                                                              ThemeMode.light
-                                                          ? Colors.black
-                                                          : Colors.white,
-                                                      fontSize: 22,
-                                                      fontWeight:
-                                                          FontWeight.w600,
-                                                    ),
+                                            Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  'home_new_collection'.tr,
+                                                  style: GoogleFonts.ebGaramond(
+                                                    color: theme.theme ==
+                                                            ThemeMode.light
+                                                        ? Colors.black
+                                                        : Colors.white,
+                                                    fontSize: 22,
+                                                    fontWeight: FontWeight.w600,
                                                   ),
-                                                  const SizedBox(
-                                                    height: 5,
+                                                ),
+                                                const SizedBox(
+                                                  height: 5,
+                                                ),
+                                                Text(
+                                                  'Sneaker Original 2022',
+                                                  style: GoogleFonts.ebGaramond(
+                                                    color: theme.theme ==
+                                                            ThemeMode.light
+                                                        ? Colors.black
+                                                        : Colors.white,
+                                                    fontSize: 12,
+                                                    fontWeight: FontWeight.w400,
                                                   ),
-                                                  Text(
-                                                    'Sneaker Original 2022',
-                                                    style:
-                                                        GoogleFonts.ebGaramond(
-                                                      color: theme.theme ==
-                                                              ThemeMode.light
-                                                          ? Colors.black
-                                                          : Colors.white,
-                                                      fontSize: 12,
-                                                      fontWeight:
-                                                          FontWeight.w400,
-                                                    ),
+                                                ),
+                                                const SizedBox(
+                                                  height: 50,
+                                                ),
+                                                Container(
+                                                  width: double.infinity,
+                                                  padding:
+                                                      const EdgeInsets.all(20),
+                                                  decoration: BoxDecoration(
+                                                    color: theme.theme ==
+                                                            ThemeMode.light
+                                                        ? Colors.black
+                                                        : Colors.white,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            10),
                                                   ),
-                                                  const SizedBox(
-                                                    height: 50,
-                                                  ),
-                                                  Container(
-                                                    width: double.infinity,
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            20),
-                                                    decoration: BoxDecoration(
-                                                      color: theme.theme ==
-                                                              ThemeMode.light
-                                                          ? Colors.black
-                                                          : Colors.white,
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              10),
-                                                    ),
-                                                    child: Column(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .start,
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .start,
-                                                      children: [
-                                                        SizedBox(
-                                                          width: 200,
-                                                          child: Text(
-                                                            '${AppTranslation.instance.language == AppTranslation.english ? (e.product!.nameProductEn != null && e.product!.nameProductEn!.isNotEmpty ? e.product!.nameProductEn : '--') : (e.product!.nameProductVi != null && e.product!.nameProductVi!.isNotEmpty ? e.product!.nameProductVi : '--')}',
-                                                            style: GoogleFonts
-                                                                .ebGaramond(
-                                                              color: theme.theme ==
-                                                                      ThemeMode
-                                                                          .light
-                                                                  ? Colors.white
-                                                                  : Colors
-                                                                      .black,
-                                                              fontSize: 16,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w600,
-                                                            ),
-                                                            maxLines: 1,
-                                                            overflow:
-                                                                TextOverflow
-                                                                    .ellipsis,
-                                                          ),
-                                                        ),
-                                                        const SizedBox(
-                                                          height: 5,
-                                                        ),
-                                                        Text(
-                                                          '${e.companyName != null && e.companyName!.isNotEmpty ? e.companyName : '--'}',
+                                                  child: Column(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.start,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      SizedBox(
+                                                        width: 200,
+                                                        child: Text(
+                                                          '${AppTranslation.instance.language == AppTranslation.english ? (e.product!.nameProductEn != null && e.product!.nameProductEn!.isNotEmpty ? e.product!.nameProductEn : '--') : (e.product!.nameProductVi != null && e.product!.nameProductVi!.isNotEmpty ? e.product!.nameProductVi : '--')}',
                                                           style: GoogleFonts
                                                               .ebGaramond(
                                                             color: theme.theme ==
@@ -243,30 +211,143 @@ class HomePageState extends State<HomePage> {
                                                                         .light
                                                                 ? Colors.white
                                                                 : Colors.black,
-                                                            fontSize: 12,
+                                                            fontSize: 16,
                                                             fontWeight:
-                                                                FontWeight.w400,
+                                                                FontWeight.w600,
                                                           ),
                                                           maxLines: 1,
                                                           overflow: TextOverflow
                                                               .ellipsis,
                                                         ),
-                                                        const SizedBox(
-                                                          height: 20,
+                                                      ),
+                                                      const SizedBox(
+                                                        height: 5,
+                                                      ),
+                                                      Text(
+                                                        '${e.companyName != null && e.companyName!.isNotEmpty ? e.companyName : '--'}',
+                                                        style: GoogleFonts
+                                                            .ebGaramond(
+                                                          color: theme.theme ==
+                                                                  ThemeMode
+                                                                      .light
+                                                              ? Colors.white
+                                                              : Colors.black,
+                                                          fontSize: 12,
+                                                          fontWeight:
+                                                              FontWeight.w400,
                                                         ),
-                                                        GestureDetector(
-                                                          onTap: () {
-                                                            dashboardController
-                                                                .tabIndex
-                                                                .value = 2;
-                                                          },
-                                                          child: Container(
-                                                            width: 120,
-                                                            height: 30,
-                                                            decoration:
-                                                                BoxDecoration(
-                                                              border:
-                                                                  Border.all(
+                                                        maxLines: 1,
+                                                        overflow: TextOverflow
+                                                            .ellipsis,
+                                                      ),
+                                                      const SizedBox(
+                                                        height: 20,
+                                                      ),
+                                                      GestureDetector(
+                                                        onTap: () {
+                                                          productController
+                                                                  .nameBrand
+                                                                  .value =
+                                                              controller
+                                                                  .listCompany
+                                                                  .firstWhere(
+                                                                      (element) =>
+                                                                          element
+                                                                              .nameCompany ==
+                                                                          e.companyName)
+                                                                  .nameCompany!;
+                                                          if (ApiToken.to
+                                                                  .isTokenExisted ==
+                                                              true) {
+                                                            productController
+                                                                .getListProductFavorite(controller
+                                                                    .listCompany
+                                                                    .firstWhere((element) =>
+                                                                        element
+                                                                            .nameCompany ==
+                                                                        e.companyName)
+                                                                    .id!);
+                                                          } else {
+                                                            productController.getAllProduct(
+                                                                controller
+                                                                    .listCompany
+                                                                    .firstWhere((element) =>
+                                                                        element
+                                                                            .nameCompany ==
+                                                                        e.companyName)
+                                                                    .id!,
+                                                                []);
+                                                          }
+                                                          productController
+                                                              .update();
+                                                          controller.update();
+                                                          dashboardController
+                                                              .tabIndex
+                                                              .value = 1;
+                                                          while (Get.nestedKey(
+                                                                      AppConstant
+                                                                          .PRODUCT)!
+                                                                  .currentState
+                                                                  ?.canPop() ==
+                                                              true) {
+                                                            Get.nestedKey(
+                                                                    AppConstant
+                                                                        .PRODUCT)
+                                                                ?.currentState
+                                                                ?.pop();
+                                                          }
+                                                          dashboardController
+                                                              .update();
+                                                        },
+                                                        child: Container(
+                                                          width: 120,
+                                                          height: 30,
+                                                          decoration:
+                                                              BoxDecoration(
+                                                            border: Border.all(
+                                                              color: theme.theme ==
+                                                                      ThemeMode
+                                                                          .light
+                                                                  ? Colors.white
+                                                                  : Colors
+                                                                      .black,
+                                                            ),
+                                                          ),
+                                                          child: Row(
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .center,
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .center,
+                                                            children: [
+                                                              Text(
+                                                                'home_shop_now'
+                                                                    .tr,
+                                                                style: GoogleFonts
+                                                                    .ebGaramond(
+                                                                  color: theme.theme ==
+                                                                          ThemeMode
+                                                                              .light
+                                                                      ? Colors
+                                                                          .white
+                                                                      : Colors
+                                                                          .black,
+                                                                  fontSize: 14,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w400,
+                                                                ),
+                                                              ),
+                                                              const SizedBox(
+                                                                width: 10,
+                                                              ),
+                                                              Image.asset(
+                                                                "assets/icons/icon_arrow_right.png",
+                                                                width: 20,
+                                                                height: 20,
+                                                                fit: BoxFit
+                                                                    .contain,
                                                                 color: theme.theme ==
                                                                         ThemeMode
                                                                             .light
@@ -275,60 +356,14 @@ class HomePageState extends State<HomePage> {
                                                                     : Colors
                                                                         .black,
                                                               ),
-                                                            ),
-                                                            child: Row(
-                                                              mainAxisAlignment:
-                                                                  MainAxisAlignment
-                                                                      .center,
-                                                              crossAxisAlignment:
-                                                                  CrossAxisAlignment
-                                                                      .center,
-                                                              children: [
-                                                                Text(
-                                                                  'home_shop_now'
-                                                                      .tr,
-                                                                  style: GoogleFonts
-                                                                      .ebGaramond(
-                                                                    color: theme.theme ==
-                                                                            ThemeMode
-                                                                                .light
-                                                                        ? Colors
-                                                                            .white
-                                                                        : Colors
-                                                                            .black,
-                                                                    fontSize:
-                                                                        14,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w400,
-                                                                  ),
-                                                                ),
-                                                                const SizedBox(
-                                                                  width: 10,
-                                                                ),
-                                                                Image.asset(
-                                                                  "assets/icons/icon_arrow_right.png",
-                                                                  width: 20,
-                                                                  height: 20,
-                                                                  fit: BoxFit
-                                                                      .contain,
-                                                                  color: theme.theme ==
-                                                                          ThemeMode
-                                                                              .light
-                                                                      ? Colors
-                                                                          .white
-                                                                      : Colors
-                                                                          .black,
-                                                                ),
-                                                              ],
-                                                            ),
+                                                            ],
                                                           ),
-                                                        )
-                                                      ],
-                                                    ),
-                                                  )
-                                                ],
-                                              ),
+                                                        ),
+                                                      )
+                                                    ],
+                                                  ),
+                                                )
+                                              ],
                                             ),
                                             Positioned(
                                               top: 0,
@@ -430,8 +465,7 @@ class HomePageState extends State<HomePage> {
                                       allProductController.listProduct.clear();
                                       allProductController.getDiscountProduct();
                                       allProductController.update();
-                                      Get.to(const AllProductPage(),
-                                          id: AppConstant.HOME);
+                                      controller.update();
                                     },
                                     child: Row(
                                       children: [
@@ -578,19 +612,20 @@ class HomePageState extends State<HomePage> {
                                                   decoration: controller
                                                               .listDiscountProduct[
                                                                   index]
-                                                              .discount !=
+                                                              .discount ==
                                                           0
-                                                      ? TextDecoration
-                                                          .lineThrough
-                                                      : TextDecoration.none,
+                                                      ? TextDecoration.none
+                                                      : TextDecoration
+                                                          .lineThrough,
                                                 ),
                                               ),
                                             ),
                                           ),
                                           controller.listDiscountProduct[index]
-                                                      .discount !=
+                                                      .discount ==
                                                   0
-                                              ? Container(
+                                              ? Container()
+                                              : Container(
                                                   alignment: Alignment.topLeft,
                                                   child: RichText(
                                                     text: TextSpan(
@@ -605,48 +640,54 @@ class HomePageState extends State<HomePage> {
                                                       ),
                                                     ),
                                                   ),
-                                                )
-                                              : Container(),
+                                                ),
                                         ],
                                       ),
                                       const SizedBox(
                                         height: 5,
                                       ),
-                                      Container(
-                                        alignment: Alignment.topLeft,
-                                        child: RichText(
-                                          text: TextSpan(
-                                            text: CurrencyTextInputFormatter(
-                                              locale: AppTranslation
-                                                          .instance.language ==
-                                                      AppTranslation.english
-                                                  ? "vi_VN"
-                                                  : "en_US",
-                                              decimalDigits: 0,
-                                              symbol: "",
-                                            ).format(((controller
-                                                            .listDiscountProduct[
-                                                                index]
-                                                            .price! *
-                                                        (100 -
-                                                            controller
-                                                                .listDiscountProduct[
-                                                                    index]
-                                                                .discount!) /
-                                                        100) /
-                                                    10)
-                                                .toString()),
-                                            style: GoogleFonts.ebGaramond(
-                                              color:
-                                                  theme.theme == ThemeMode.light
-                                                      ? Colors.white
-                                                      : Colors.black,
-                                              fontSize: 20,
-                                              fontWeight: FontWeight.w600,
+                                      controller.listDiscountProduct[index]
+                                                  .discount ==
+                                              0
+                                          ? Container()
+                                          : Container(
+                                              alignment: Alignment.topLeft,
+                                              child: RichText(
+                                                text: TextSpan(
+                                                  text:
+                                                      CurrencyTextInputFormatter(
+                                                    locale: AppTranslation
+                                                                .instance
+                                                                .language ==
+                                                            AppTranslation
+                                                                .english
+                                                        ? "vi_VN"
+                                                        : "en_US",
+                                                    decimalDigits: 0,
+                                                    symbol: "",
+                                                  ).format(((controller
+                                                                      .listDiscountProduct[
+                                                                          index]
+                                                                      .price! *
+                                                                  (100 -
+                                                                      controller
+                                                                          .listDiscountProduct[
+                                                                              index]
+                                                                          .discount!) /
+                                                                  100) /
+                                                              10)
+                                                          .toString()),
+                                                  style: GoogleFonts.ebGaramond(
+                                                    color: theme.theme ==
+                                                            ThemeMode.light
+                                                        ? Colors.white
+                                                        : Colors.black,
+                                                    fontSize: 20,
+                                                    fontWeight: FontWeight.w600,
+                                                  ),
+                                                ),
+                                              ),
                                             ),
-                                          ),
-                                        ),
-                                      ),
                                       const SizedBox(
                                         height: 10,
                                       ),
@@ -776,6 +817,15 @@ class HomePageState extends State<HomePage> {
                                     productController.update();
                                     controller.update();
                                     dashboardController.tabIndex.value = 1;
+                                    while (Get.nestedKey(AppConstant.PRODUCT)!
+                                            .currentState
+                                            ?.canPop() ==
+                                        true) {
+                                      Get.nestedKey(AppConstant.PRODUCT)
+                                          ?.currentState
+                                          ?.pop();
+                                    }
+                                    dashboardController.update();
                                   },
                                   child: Container(
                                     margin: const EdgeInsets.symmetric(
@@ -858,8 +908,7 @@ class HomePageState extends State<HomePage> {
                                       allProductController.listProduct.clear();
                                       allProductController.getTrendingProduct();
                                       allProductController.update();
-                                      Get.to(const AllProductPage(),
-                                          id: AppConstant.HOME);
+                                      controller.update();
                                     },
                                     child: Row(
                                       children: [
@@ -1023,7 +1072,7 @@ class HomePageState extends State<HomePage> {
                                             ProductDetailPage(
                                               product: controller
                                                   .listTrendingProduct[index],
-                                              id: AppConstant.PRODUCT,
+                                              id: AppConstant.HOME,
                                             ),
                                             id: AppConstant.HOME),
                                         child: Container(

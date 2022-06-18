@@ -387,7 +387,7 @@ class ProductPage extends GetView<ProductController> {
                                     ? GridView.builder(
                                         gridDelegate:
                                             const SliverGridDelegateWithFixedCrossAxisCount(
-                                          childAspectRatio: 0.55,
+                                          childAspectRatio: 0.52,
                                           crossAxisSpacing: 20,
                                           mainAxisSpacing: 20,
                                           crossAxisCount: 2,
@@ -671,72 +671,83 @@ class ProductPage extends GetView<ProductController> {
                                                           decoration: controller
                                                                       .listProduct[
                                                                           index]
-                                                                      .discount !=
+                                                                      .discount ==
                                                                   0
                                                               ? TextDecoration
-                                                                  .lineThrough
+                                                                  .none
                                                               : TextDecoration
-                                                                  .none,
+                                                                  .lineThrough,
                                                         ),
                                                       ),
                                                     ),
-                                                    RichText(
-                                                      text: TextSpan(
-                                                        text:
-                                                            ' - ${controller.listProduct[index].discount} %',
-                                                        style: GoogleFonts
-                                                            .ebGaramond(
-                                                          color: Colors.amber,
-                                                          fontSize: 14,
-                                                          fontWeight:
-                                                              FontWeight.w600,
-                                                        ),
-                                                      ),
-                                                    ),
+                                                    controller
+                                                                .listProduct[
+                                                                    index]
+                                                                .discount ==
+                                                            0
+                                                        ? Container()
+                                                        : RichText(
+                                                            text: TextSpan(
+                                                              text:
+                                                                  ' - ${controller.listProduct[index].discount} %',
+                                                              style: GoogleFonts
+                                                                  .ebGaramond(
+                                                                color: Colors
+                                                                    .amber,
+                                                                fontSize: 14,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w600,
+                                                              ),
+                                                            ),
+                                                          ),
                                                   ],
                                                 ),
                                                 const SizedBox(
                                                   height: 5,
                                                 ),
-                                                Align(
-                                                  alignment: Alignment.topLeft,
-                                                  child: RichText(
-                                                    text: TextSpan(
-                                                      text:
-                                                          CurrencyTextInputFormatter(
-                                                        locale: AppTranslation
-                                                                    .instance
-                                                                    .language ==
-                                                                AppTranslation
-                                                                    .english
-                                                            ? "vi_VN"
-                                                            : "en_US",
-                                                        decimalDigits: 0,
-                                                        symbol: "",
-                                                      ).format(((controller
-                                                                          .listProduct[
-                                                                              index]
-                                                                          .price! *
-                                                                      (100 -
-                                                                          controller
-                                                                              .listProduct[index]
-                                                                              .discount!) /
-                                                                      100) /
-                                                                  10)
-                                                              .toString()),
-                                                      style: GoogleFonts
-                                                          .ebGaramond(
-                                                        color: theme.theme ==
-                                                                ThemeMode.light
-                                                            ? Colors.black
-                                                            : Colors.white,
-                                                        fontSize: 20,
-                                                        fontWeight:
-                                                            FontWeight.w600,
+                                                controller.listProduct[index]
+                                                            .discount ==
+                                                        0
+                                                    ? Container()
+                                                    : Align(
+                                                        alignment:
+                                                            Alignment.topLeft,
+                                                        child: RichText(
+                                                          text: TextSpan(
+                                                            text:
+                                                                CurrencyTextInputFormatter(
+                                                              locale: AppTranslation
+                                                                          .instance
+                                                                          .language ==
+                                                                      AppTranslation
+                                                                          .english
+                                                                  ? "vi_VN"
+                                                                  : "en_US",
+                                                              decimalDigits: 0,
+                                                              symbol: "",
+                                                            ).format(((controller.listProduct[index].price! *
+                                                                            (100 -
+                                                                                controller.listProduct[index].discount!) /
+                                                                            100) /
+                                                                        10)
+                                                                    .toString()),
+                                                            style: GoogleFonts
+                                                                .ebGaramond(
+                                                              color: theme.theme ==
+                                                                      ThemeMode
+                                                                          .light
+                                                                  ? Colors.black
+                                                                  : Colors
+                                                                      .white,
+                                                              fontSize: 20,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w600,
+                                                            ),
+                                                          ),
+                                                        ),
                                                       ),
-                                                    ),
-                                                  ),
-                                                ),
                                                 const SizedBox(
                                                   height: 5,
                                                 ),

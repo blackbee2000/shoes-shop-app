@@ -280,7 +280,7 @@ class AllProductState extends State<AllProductPage> {
                               ? GridView.builder(
                                   gridDelegate:
                                       const SliverGridDelegateWithFixedCrossAxisCount(
-                                    childAspectRatio: 0.55,
+                                    childAspectRatio: 0.52,
                                     crossAxisSpacing: 20,
                                     mainAxisSpacing: 20,
                                     crossAxisCount: 2,

@@ -48,9 +48,9 @@ class CartController extends GetxController {
     if (amount < 1) {
       Get.snackbar(
         'warning'.tr,
-        ''.tr,
+        'choose_amount'.tr,
         colorText: Colors.white,
-        backgroundColor: Colors.black,
+        backgroundColor: const Color(0xffe5b700),
       );
       return;
     }

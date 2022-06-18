@@ -7,7 +7,7 @@ import 'package:shoes_shop_app/services/api_token.dart';
 
 class YourOrderDetailController extends GetxController
     with GetSingleTickerProviderStateMixin {
-  final ratingController = 0.0.obs;
+  final ratingController = 5.0.obs;
   final rateProductNowOfAccount = Rating.fromJson({}).obs;
   @override
   void onInit() {
@@ -31,11 +31,11 @@ class YourOrderDetailController extends GetxController
       onSuccess: (res) {
         if (res.data != null) {
           rateProductNowOfAccount.value = res.data!;
-          ratingController.value = (rateProductNowOfAccount.value.rating != null
-              ? double.tryParse(rateProductNowOfAccount.value.rating.toString())
-              : 0.0)!;
+          ratingController.value = double.tryParse(
+                  rateProductNowOfAccount.value.rating.toString()) ??
+              5.0;
         } else {
-          ratingController.value = 0.0;
+          ratingController.value = 5.0;
         }
         update();
         print('GET RATING BY ACCOUNT SUCCESS ===> ${res.data.toString()}');
@@ -49,7 +49,7 @@ class YourOrderDetailController extends GetxController
 
   createRating(dynamic rating, String idProduct) {
     ProductProvider().createRating(
-      params: {"idProduct": idProduct, "rating": double.parse(rating)},
+      params: {"idProduct": idProduct, "rating": rating},
       option: Options(
         headers: {
           'Content-Type': 'application/json; charset=UTF-8',

@@ -4,7 +4,7 @@ Rating _$RatingFromJson(Map<String, dynamic> json) {
   return Rating(
     json['_id'] as String?,
     json['idProduct'] as String?,
-    json['rating'] as double?,
+    json['rating'] as dynamic,
     json['isDeleted'] as bool?,
     json['createdAt'] as String?,
     json['updatedAt'] as String?,

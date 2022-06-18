@@ -31,8 +31,8 @@ class ProductDetailController extends GetxController
       Get.snackbar(
         'warning'.tr,
         'choose_amount'.tr,
-        colorText: Colors.black,
-        backgroundColor: Colors.white,
+        colorText: Colors.white,
+        backgroundColor: const Color(0xffe5b700),
       );
       return;
     }

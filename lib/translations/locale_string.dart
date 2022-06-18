@@ -174,6 +174,9 @@ class LocaleString extends Translations {
           "choose_amount": "Choose the wrong quantity",
           "quantity": "Quantity",
           "no_user": "No have user information, login now please",
+          "cart_delete_popup": "Delete product in cart",
+          "please_choose_product": "Please choose product",
+          "order_rate_warning": "No reviews allowed",
         },
         "vi_VN": {
           "product_title": "Sản phẩm",
@@ -350,6 +353,9 @@ class LocaleString extends Translations {
           "choose_amount": "Chọn số lượng không phù hợp",
           "quantity": "Số lượng",
           "no_user": "Không có thông tin tài khoản, vui lòng đăng nhập",
+          "cart_delete_popup": "Xóa sản phẩm trong giỏ hàng",
+          "please_choose_product": "Vui lòng chọn sản phẩm",
+          "order_rate_warning": "Không được phép đánh giá",
         }
       };
 }

@@ -5,7 +5,7 @@ part 'rating.g.dart';
 class Rating {
   String? id;
   String? idProduct;
-  double? rating;
+  dynamic rating;
   bool? isDeleted;
   String? createdAt;
   String? updatedAt;

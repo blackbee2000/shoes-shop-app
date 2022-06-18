@@ -87,8 +87,7 @@ class YourOrderDetailState extends State<YourOrderDetailPage> {
                     color: Colors.amber,
                   ),
                   onRatingUpdate: (rating) {
-                    controller.ratingController.value =
-                        double.tryParse(rating.toString()) ?? 0.0;
+                    controller.ratingController.value = rating;
                     controller.update();
                   },
                 ),
@@ -132,20 +131,15 @@ class YourOrderDetailState extends State<YourOrderDetailPage> {
                               if (controller.rateProductNowOfAccount.value
                                       .idProduct ==
                                   idProduct) {
-                                controller
-                                        .rateProductNowOfAccount.value.rating =
-                                    double.tryParse(controller
-                                        .ratingController.value
-                                        .toString());
+                                controller.rateProductNowOfAccount.value
+                                    .rating = controller.ratingController.value;
                                 print(
                                     'RATING ===> ${controller.rateProductNowOfAccount.value.rating}');
                                 controller.updateRateByAccount(
                                     controller.rateProductNowOfAccount.value);
                               } else {
                                 controller.createRating(
-                                    double.tryParse(controller
-                                        .ratingController.value
-                                        .toString()),
+                                    controller.ratingController.value,
                                     idProduct);
                               }
                               Get.back();
@@ -585,12 +579,29 @@ class YourOrderDetailState extends State<YourOrderDetailPage> {
                                                 right: 20,
                                                 child: GestureDetector(
                                                   onTap: () {
-                                                    controller
-                                                        .getRatingByAccount(
-                                                            e.lstProduct!.id!);
-                                                    Get.bottomSheet(
-                                                        ratingDialog(context,
-                                                            e.lstProduct!.id!));
+                                                    if (widget.order
+                                                            .statusPayment ==
+                                                        true) {
+                                                      controller
+                                                          .getRatingByAccount(e
+                                                              .lstProduct!.id!);
+                                                      Get.bottomSheet(
+                                                          ratingDialog(
+                                                              context,
+                                                              e.lstProduct!
+                                                                  .id!));
+                                                      controller.update();
+                                                    } else {
+                                                      Get.snackbar(
+                                                        'warning'.tr,
+                                                        'order_rate_warning'.tr,
+                                                        colorText: Colors.white,
+                                                        backgroundColor:
+                                                            const Color(
+                                                                0xffe5b700),
+                                                      );
+                                                      controller.update();
+                                                    }
                                                   },
                                                   child: Container(
                                                     width: 100,

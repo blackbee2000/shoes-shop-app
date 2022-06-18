@@ -2,10 +2,12 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shoes_shop_app/models/product.dart';
+import 'package:shoes_shop_app/pages/home/all-product/all_product_page.dart';
 import 'package:shoes_shop_app/pages/home/home_provider.dart';
 import 'package:shoes_shop_app/pages/product/product_provider.dart';
 import 'package:shoes_shop_app/pages/profile/profile_provider.dart';
 import 'package:shoes_shop_app/services/api_token.dart';
+import 'package:shoes_shop_app/utils/app_constant.dart';
 
 class AllProductController extends GetxController {
   List<Product> listProduct = <Product>[].obs;
@@ -43,6 +45,7 @@ class AllProductController extends GetxController {
           getListProductFavorite(listProduct);
         }
         Get.back();
+        Get.to(const AllProductPage(), id: AppConstant.HOME);
         update();
       },
       onError: (e) {
@@ -79,6 +82,7 @@ class AllProductController extends GetxController {
           getListProductFavorite(listProduct);
         }
         Get.back();
+        Get.to(const AllProductPage(), id: AppConstant.HOME);
         update();
       },
       onError: (e) {

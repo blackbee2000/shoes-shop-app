@@ -11,7 +11,7 @@ class BlogDetailController extends GetxController {
   }
 
   getAllBlogDifferent(String idBlog) {
-    BlogProvider().getAllBlog(
+    BlogProvider().getAllBlogDifferent(
       params: {'getId': idBlog},
       option: Options(
         headers: {
