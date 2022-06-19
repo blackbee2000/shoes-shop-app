@@ -6,6 +6,7 @@ import 'package:shoes_shop_app/models/address.dart';
 import 'package:shoes_shop_app/models/district.dart';
 import 'package:shoes_shop_app/models/province.dart';
 import 'package:shoes_shop_app/models/ward.dart';
+import 'package:shoes_shop_app/theme/theme_controller.dart';
 import 'address_controller.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:back_button_interceptor/back_button_interceptor.dart';
@@ -1361,399 +1362,233 @@ class AddressState extends State<AddressPage> {
         if (details.primaryVelocity! > 0) {Get.back(id: widget.id)}
       },
       child: SafeArea(
-        child: Container(
-          width: double.infinity,
-          height: double.infinity,
-          color: Colors.white,
-          child: Stack(
-            children: [
-              Scaffold(
-                backgroundColor: Colors.white,
-                appBar: AppBar(
-                  backgroundColor: Colors.white,
-                  leading: IconButton(
-                    onPressed: () {
-                      Get.back(id: widget.id);
-                    },
-                    icon: const Icon(
-                      Icons.arrow_back_ios,
-                      size: 20,
-                      color: Colors.black,
+        child: GetBuilder<ThemeController>(
+          builder: (theme) => Container(
+            width: double.infinity,
+            height: double.infinity,
+            color: theme.theme == ThemeMode.light ? Colors.white : Colors.black,
+            child: Stack(
+              children: [
+                Scaffold(
+                  backgroundColor: theme.theme == ThemeMode.light
+                      ? Colors.white
+                      : Colors.black,
+                  appBar: AppBar(
+                    bottom: theme.theme == ThemeMode.dark
+                        ? PreferredSize(
+                            child: Container(
+                              width: double.infinity,
+                              color: const Color(0xffF01101),
+                              height: 1,
+                            ),
+                            preferredSize: const Size.fromHeight(0),
+                          )
+                        : PreferredSize(
+                            child: Container(),
+                            preferredSize: const Size.fromHeight(0),
+                          ),
+                    backgroundColor: theme.theme == ThemeMode.light
+                        ? Colors.white
+                        : Colors.black,
+                    leading: IconButton(
+                      onPressed: () {
+                        Get.back(id: widget.id);
+                      },
+                      icon: Icon(
+                        Icons.arrow_back_ios,
+                        size: 20,
+                        color: theme.theme == ThemeMode.light
+                            ? Colors.black
+                            : Colors.white,
+                      ),
                     ),
+                    title: Text(
+                      'cart_address'.tr,
+                      style: GoogleFonts.ebGaramond(
+                        color: theme.theme == ThemeMode.light
+                            ? Colors.black
+                            : Colors.white,
+                        fontSize: 20,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    centerTitle: true,
                   ),
-                  title: Text(
-                    'cart_address'.tr,
-                    style: GoogleFonts.ebGaramond(
-                      color: Colors.black,
-                      fontSize: 20,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                  centerTitle: true,
-                ),
-                body: GetBuilder<AddressController>(
-                  init: addressController,
-                  builder: (controller) => Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 20,
-                    ),
-                    width: double.infinity,
-                    height: double.infinity,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        const SizedBox(
-                          height: 30,
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Text(
-                              'address_default'.tr,
-                              style: GoogleFonts.ebGaramond(
-                                color: Colors.black,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w600,
+                  body: GetBuilder<AddressController>(
+                    init: addressController,
+                    builder: (controller) => Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 20,
+                      ),
+                      width: double.infinity,
+                      height: double.infinity,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          const SizedBox(
+                            height: 30,
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Text(
+                                'address_default'.tr,
+                                style: GoogleFonts.ebGaramond(
+                                  color: theme.theme == ThemeMode.light
+                                      ? Colors.black
+                                      : Colors.white,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w600,
+                                ),
                               ),
-                            ),
-                            const SizedBox(
-                              height: 5,
-                            ),
-                            Container(
-                              width: 30,
-                              height: 2,
-                              color: Colors.black,
-                            ),
-                          ],
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        controller.listAddressDefault.value.id != null
-                            ? GestureDetector(
-                                onTap: () {
-                                  controller.chooseAddressPayment(
-                                      controller.listAddressDefault.value,
-                                      widget.id);
-                                  controller.update();
-                                },
-                                child: Container(
-                                  width: double.infinity,
-                                  height: 100,
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.circular(10),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Colors.black.withOpacity(0.25),
-                                        spreadRadius: 0,
-                                        blurRadius: 4,
-                                        offset: const Offset(
-                                            0, 4), // changes position of shadow
-                                      ),
-                                    ],
-                                  ),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: [
-                                      Expanded(
-                                        child: Container(
-                                          padding: const EdgeInsets.all(20),
-                                          height: double.infinity,
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              Text(
-                                                '${controller.listAddressDefault.value.nameReciever != null && controller.listAddressDefault.value.nameReciever!.isNotEmpty ? controller.listAddressDefault.value.nameReciever : '--'} - ${controller.listAddressDefault.value.phoneReciever != null && controller.listAddressDefault.value.phoneReciever!.isNotEmpty ? controller.listAddressDefault.value.phoneReciever : '--'}',
-                                                style: GoogleFonts.ebGaramond(
-                                                  color: Colors.black,
-                                                  fontSize: 14,
-                                                  fontWeight: FontWeight.w600,
+                              const SizedBox(
+                                height: 5,
+                              ),
+                              Container(
+                                width: 30,
+                                height: 2,
+                                color: theme.theme == ThemeMode.light
+                                    ? Colors.black
+                                    : Colors.white,
+                              ),
+                            ],
+                          ),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          controller.listAddressDefault.value.id != null
+                              ? GestureDetector(
+                                  onTap: () {
+                                    controller.chooseAddressPayment(
+                                        controller.listAddressDefault.value,
+                                        widget.id);
+                                    controller.update();
+                                  },
+                                  child: Container(
+                                    width: double.infinity,
+                                    height: 100,
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(10),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.black.withOpacity(0.25),
+                                          spreadRadius: 0,
+                                          blurRadius: 4,
+                                          offset: const Offset(0,
+                                              4), // changes position of shadow
+                                        ),
+                                      ],
+                                    ),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        Expanded(
+                                          child: Container(
+                                            padding: const EdgeInsets.all(20),
+                                            height: double.infinity,
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                Text(
+                                                  '${controller.listAddressDefault.value.nameReciever != null && controller.listAddressDefault.value.nameReciever!.isNotEmpty ? controller.listAddressDefault.value.nameReciever : '--'} - ${controller.listAddressDefault.value.phoneReciever != null && controller.listAddressDefault.value.phoneReciever!.isNotEmpty ? controller.listAddressDefault.value.phoneReciever : '--'}',
+                                                  style: GoogleFonts.ebGaramond(
+                                                    color: Colors.black,
+                                                    fontSize: 14,
+                                                    fontWeight: FontWeight.w600,
+                                                  ),
                                                 ),
-                                              ),
-                                              const SizedBox(
-                                                height: 3,
-                                              ),
-                                              Text(
-                                                '${controller.listAddressDefault.value.street != null && controller.listAddressDefault.value.street!.isNotEmpty ? controller.listAddressDefault.value.street : '--'}' +
-                                                    ', ' +
-                                                    '${controller.listAddressDefault.value.ward != null && controller.listAddressDefault.value.ward!.isNotEmpty ? controller.listAddressDefault.value.ward : '--'}' +
-                                                    ', ' +
-                                                    '${controller.listAddressDefault.value.district != null && controller.listAddressDefault.value.district!.isNotEmpty ? controller.listAddressDefault.value.district : '--'}' +
-                                                    ', ' +
-                                                    '${controller.listAddressDefault.value.province != null && controller.listAddressDefault.value.province!.isNotEmpty ? controller.listAddressDefault.value.province : '--'}',
-                                                style: GoogleFonts.ebGaramond(
-                                                  color: Colors.black,
-                                                  fontSize: 14,
-                                                  fontWeight: FontWeight.w400,
+                                                const SizedBox(
+                                                  height: 3,
                                                 ),
-                                                maxLines: 2,
-                                                overflow: TextOverflow.ellipsis,
-                                              ),
-                                            ],
+                                                Text(
+                                                  '${controller.listAddressDefault.value.street != null && controller.listAddressDefault.value.street!.isNotEmpty ? controller.listAddressDefault.value.street : '--'}' +
+                                                      ', ' +
+                                                      '${controller.listAddressDefault.value.ward != null && controller.listAddressDefault.value.ward!.isNotEmpty ? controller.listAddressDefault.value.ward : '--'}' +
+                                                      ', ' +
+                                                      '${controller.listAddressDefault.value.district != null && controller.listAddressDefault.value.district!.isNotEmpty ? controller.listAddressDefault.value.district : '--'}' +
+                                                      ', ' +
+                                                      '${controller.listAddressDefault.value.province != null && controller.listAddressDefault.value.province!.isNotEmpty ? controller.listAddressDefault.value.province : '--'}',
+                                                  style: GoogleFonts.ebGaramond(
+                                                    color: Colors.black,
+                                                    fontSize: 14,
+                                                    fontWeight: FontWeight.w400,
+                                                  ),
+                                                  maxLines: 2,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                ),
+                                              ],
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                      const SizedBox(
-                                        width: 30,
-                                      ),
-                                      Row(
-                                        children: [
-                                          Container(
-                                            width: 10,
-                                            height: double.infinity,
-                                            color: const Color(0xffFFD9D9),
-                                          ),
-                                          const SizedBox(
-                                            width: 15,
-                                          ),
-                                          GestureDetector(
-                                            onTap: () {
-                                              Get.bottomSheet(
-                                                editAddress(
-                                                    context,
-                                                    controller
-                                                        .listAddressDefault
-                                                        .value),
-                                                isScrollControlled: true,
-                                              );
-                                            },
-                                            child: Image.asset(
-                                              'assets/icons/icon-edit.png',
-                                              width: 20,
-                                              height: 20,
-                                              fit: BoxFit.contain,
-                                            ),
-                                          ),
-                                          const SizedBox(
-                                            width: 10,
-                                          ),
-                                          GestureDetector(
-                                            onTap: () {
-                                              Get.bottomSheet(
-                                                deleteAddress(
-                                                    context,
-                                                    controller
-                                                        .listAddressDefault
-                                                        .value
-                                                        .id!),
-                                                isScrollControlled: true,
-                                              );
-                                            },
-                                            child: Image.asset(
-                                              'assets/icons/icon-trash.png',
-                                              width: 20,
-                                              height: 20,
-                                              fit: BoxFit.contain,
-                                            ),
-                                          ),
-                                          const SizedBox(
-                                            width: 15,
-                                          ),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              )
-                            : Container(
-                                alignment: Alignment.center,
-                                child: Column(
-                                  children: [
-                                    Image.asset(
-                                      'assets/icons/icon-box.png',
-                                      width: 45,
-                                      color: Colors.black,
-                                    ),
-                                    const SizedBox(
-                                      height: 10,
-                                    ),
-                                    Text(
-                                      'no_information'.tr,
-                                      style: GoogleFonts.ebGaramond(
-                                        color: Colors.black,
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.w600,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                        const SizedBox(
-                          height: 30,
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Text(
-                              'address_other'.tr,
-                              style: GoogleFonts.ebGaramond(
-                                color: Colors.black,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 5,
-                            ),
-                            Container(
-                              width: 30,
-                              height: 2,
-                              color: Colors.black,
-                            ),
-                          ],
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        Expanded(
-                          child: controller.listAddress.isNotEmpty
-                              ? ListView.builder(
-                                  itemCount: controller.listAddress.length,
-                                  itemBuilder: (context, index) =>
-                                      GestureDetector(
-                                    onTap: () {
-                                      controller.chooseAddressPayment(
-                                          controller.listAddress[index],
-                                          widget.id);
-                                    },
-                                    child: Container(
-                                      width: double.infinity,
-                                      height: 100,
-                                      margin: const EdgeInsets.only(bottom: 20),
-                                      decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        borderRadius: BorderRadius.circular(10),
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color:
-                                                Colors.black.withOpacity(0.25),
-                                            spreadRadius: 0,
-                                            blurRadius: 4,
-                                            offset: const Offset(0,
-                                                4), // changes position of shadow
-                                          ),
-                                        ],
-                                      ),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        children: [
-                                          Expanded(
-                                            child: Container(
-                                              padding: const EdgeInsets.all(20),
+                                        const SizedBox(
+                                          width: 30,
+                                        ),
+                                        Row(
+                                          children: [
+                                            Container(
+                                              width: 10,
                                               height: double.infinity,
-                                              child: Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                children: [
-                                                  Text(
-                                                    '${controller.listAddress[index].nameReciever != null && controller.listAddress[index].nameReciever!.isNotEmpty ? controller.listAddress[index].nameReciever : '--'} - ${controller.listAddress[index].phoneReciever != null && controller.listAddress[index].phoneReciever!.isNotEmpty ? controller.listAddress[index].phoneReciever : '--'}',
-                                                    style:
-                                                        GoogleFonts.ebGaramond(
-                                                      color: Colors.black,
-                                                      fontSize: 14,
-                                                      fontWeight:
-                                                          FontWeight.w600,
-                                                    ),
-                                                  ),
-                                                  const SizedBox(
-                                                    height: 3,
-                                                  ),
-                                                  Text(
-                                                    '${controller.listAddress[index].street != null && controller.listAddress[index].street!.isNotEmpty ? controller.listAddress[index].street : '--'}' +
-                                                        ', ' +
-                                                        '${controller.listAddress[index].ward != null && controller.listAddress[index].ward!.isNotEmpty ? controller.listAddress[index].ward : '--'}' +
-                                                        ', ' +
-                                                        '${controller.listAddress[index].district != null && controller.listAddress[index].district!.isNotEmpty ? controller.listAddress[index].district : '--'}' +
-                                                        ', ' +
-                                                        '${controller.listAddress[index].province != null && controller.listAddress[index].province!.isNotEmpty ? controller.listAddress[index].province : '--'}',
-                                                    style:
-                                                        GoogleFonts.ebGaramond(
-                                                      color: Colors.black,
-                                                      fontSize: 14,
-                                                      fontWeight:
-                                                          FontWeight.w400,
-                                                    ),
-                                                    maxLines: 2,
-                                                    overflow:
-                                                        TextOverflow.ellipsis,
-                                                  ),
-                                                ],
+                                              color: const Color(0xffFFD9D9),
+                                            ),
+                                            const SizedBox(
+                                              width: 15,
+                                            ),
+                                            GestureDetector(
+                                              onTap: () {
+                                                Get.bottomSheet(
+                                                  editAddress(
+                                                      context,
+                                                      controller
+                                                          .listAddressDefault
+                                                          .value),
+                                                  isScrollControlled: true,
+                                                );
+                                              },
+                                              child: Image.asset(
+                                                'assets/icons/icon-edit.png',
+                                                width: 20,
+                                                height: 20,
+                                                fit: BoxFit.contain,
                                               ),
                                             ),
-                                          ),
-                                          const SizedBox(
-                                            width: 30,
-                                          ),
-                                          Row(
-                                            children: [
-                                              Container(
-                                                width: 10,
-                                                height: double.infinity,
-                                                color: const Color(0xffFFD9D9),
+                                            const SizedBox(
+                                              width: 10,
+                                            ),
+                                            GestureDetector(
+                                              onTap: () {
+                                                Get.bottomSheet(
+                                                  deleteAddress(
+                                                      context,
+                                                      controller
+                                                          .listAddressDefault
+                                                          .value
+                                                          .id!),
+                                                  isScrollControlled: true,
+                                                );
+                                              },
+                                              child: Image.asset(
+                                                'assets/icons/icon-trash.png',
+                                                width: 20,
+                                                height: 20,
+                                                fit: BoxFit.contain,
                                               ),
-                                              const SizedBox(
-                                                width: 15,
-                                              ),
-                                              GestureDetector(
-                                                onTap: () {
-                                                  Get.bottomSheet(
-                                                    editAddress(
-                                                        context,
-                                                        controller.listAddress[
-                                                            index]),
-                                                    isScrollControlled: true,
-                                                  );
-                                                },
-                                                child: Image.asset(
-                                                  'assets/icons/icon-edit.png',
-                                                  width: 20,
-                                                  height: 20,
-                                                  fit: BoxFit.contain,
-                                                ),
-                                              ),
-                                              const SizedBox(
-                                                width: 10,
-                                              ),
-                                              GestureDetector(
-                                                onTap: () {
-                                                  Get.bottomSheet(
-                                                    deleteAddress(
-                                                        context,
-                                                        controller
-                                                            .listAddress[index]
-                                                            .id!),
-                                                    isScrollControlled: true,
-                                                  );
-                                                },
-                                                child: Image.asset(
-                                                  'assets/icons/icon-trash.png',
-                                                  width: 20,
-                                                  height: 20,
-                                                  fit: BoxFit.contain,
-                                                ),
-                                              ),
-                                              const SizedBox(
-                                                width: 15,
-                                              ),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
+                                            ),
+                                            const SizedBox(
+                                              width: 15,
+                                            ),
+                                          ],
+                                        ),
+                                      ],
                                     ),
                                   ),
                                 )
@@ -1764,7 +1599,9 @@ class AddressState extends State<AddressPage> {
                                       Image.asset(
                                         'assets/icons/icon-box.png',
                                         width: 45,
-                                        color: Colors.black,
+                                        color: theme.theme == ThemeMode.light
+                                            ? Colors.black
+                                            : Colors.white,
                                       ),
                                       const SizedBox(
                                         height: 10,
@@ -1772,7 +1609,9 @@ class AddressState extends State<AddressPage> {
                                       Text(
                                         'no_information'.tr,
                                         style: GoogleFonts.ebGaramond(
-                                          color: Colors.black,
+                                          color: theme.theme == ThemeMode.light
+                                              ? Colors.black
+                                              : Colors.white,
                                           fontSize: 18,
                                           fontWeight: FontWeight.w600,
                                         ),
@@ -1780,71 +1619,291 @@ class AddressState extends State<AddressPage> {
                                     ],
                                   ),
                                 ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-              Positioned(
-                bottom: 80,
-                right: 0,
-                child: GestureDetector(
-                  onTap: () {
-                    Get.bottomSheet(
-                      addAddress(context),
-                      isScrollControlled: true,
-                    );
-                  },
-                  child: Container(
-                    width: 170,
-                    height: 45,
-                    decoration: const BoxDecoration(
-                      color: Colors.black,
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(30),
-                        bottomLeft: Radius.circular(30),
+                          const SizedBox(
+                            height: 30,
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Text(
+                                'address_other'.tr,
+                                style: GoogleFonts.ebGaramond(
+                                  color: theme.theme == ThemeMode.light
+                                      ? Colors.black
+                                      : Colors.white,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                              const SizedBox(
+                                height: 5,
+                              ),
+                              Container(
+                                width: 30,
+                                height: 2,
+                                color: theme.theme == ThemeMode.light
+                                    ? Colors.black
+                                    : Colors.white,
+                              ),
+                            ],
+                          ),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          Expanded(
+                            child: controller.listAddress.isNotEmpty
+                                ? ListView.builder(
+                                    itemCount: controller.listAddress.length,
+                                    itemBuilder: (context, index) =>
+                                        GestureDetector(
+                                      onTap: () {
+                                        controller.chooseAddressPayment(
+                                            controller.listAddress[index],
+                                            widget.id);
+                                      },
+                                      child: Container(
+                                        width: double.infinity,
+                                        height: 100,
+                                        margin:
+                                            const EdgeInsets.only(bottom: 20),
+                                        decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          boxShadow: [
+                                            BoxShadow(
+                                              color: Colors.black
+                                                  .withOpacity(0.25),
+                                              spreadRadius: 0,
+                                              blurRadius: 4,
+                                              offset: const Offset(0,
+                                                  4), // changes position of shadow
+                                            ),
+                                          ],
+                                        ),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: [
+                                            Expanded(
+                                              child: Container(
+                                                padding:
+                                                    const EdgeInsets.all(20),
+                                                height: double.infinity,
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    Text(
+                                                      '${controller.listAddress[index].nameReciever != null && controller.listAddress[index].nameReciever!.isNotEmpty ? controller.listAddress[index].nameReciever : '--'} - ${controller.listAddress[index].phoneReciever != null && controller.listAddress[index].phoneReciever!.isNotEmpty ? controller.listAddress[index].phoneReciever : '--'}',
+                                                      style: GoogleFonts
+                                                          .ebGaramond(
+                                                        color: Colors.black,
+                                                        fontSize: 14,
+                                                        fontWeight:
+                                                            FontWeight.w600,
+                                                      ),
+                                                    ),
+                                                    const SizedBox(
+                                                      height: 3,
+                                                    ),
+                                                    Text(
+                                                      '${controller.listAddress[index].street != null && controller.listAddress[index].street!.isNotEmpty ? controller.listAddress[index].street : '--'}' +
+                                                          ', ' +
+                                                          '${controller.listAddress[index].ward != null && controller.listAddress[index].ward!.isNotEmpty ? controller.listAddress[index].ward : '--'}' +
+                                                          ', ' +
+                                                          '${controller.listAddress[index].district != null && controller.listAddress[index].district!.isNotEmpty ? controller.listAddress[index].district : '--'}' +
+                                                          ', ' +
+                                                          '${controller.listAddress[index].province != null && controller.listAddress[index].province!.isNotEmpty ? controller.listAddress[index].province : '--'}',
+                                                      style: GoogleFonts
+                                                          .ebGaramond(
+                                                        color: Colors.black,
+                                                        fontSize: 14,
+                                                        fontWeight:
+                                                            FontWeight.w400,
+                                                      ),
+                                                      maxLines: 2,
+                                                      overflow:
+                                                          TextOverflow.ellipsis,
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                            const SizedBox(
+                                              width: 30,
+                                            ),
+                                            Row(
+                                              children: [
+                                                Container(
+                                                  width: 10,
+                                                  height: double.infinity,
+                                                  color:
+                                                      const Color(0xffFFD9D9),
+                                                ),
+                                                const SizedBox(
+                                                  width: 15,
+                                                ),
+                                                GestureDetector(
+                                                  onTap: () {
+                                                    Get.bottomSheet(
+                                                      editAddress(
+                                                          context,
+                                                          controller
+                                                                  .listAddress[
+                                                              index]),
+                                                      isScrollControlled: true,
+                                                    );
+                                                  },
+                                                  child: Image.asset(
+                                                    'assets/icons/icon-edit.png',
+                                                    width: 20,
+                                                    height: 20,
+                                                    fit: BoxFit.contain,
+                                                  ),
+                                                ),
+                                                const SizedBox(
+                                                  width: 10,
+                                                ),
+                                                GestureDetector(
+                                                  onTap: () {
+                                                    Get.bottomSheet(
+                                                      deleteAddress(
+                                                          context,
+                                                          controller
+                                                              .listAddress[
+                                                                  index]
+                                                              .id!),
+                                                      isScrollControlled: true,
+                                                    );
+                                                  },
+                                                  child: Image.asset(
+                                                    'assets/icons/icon-trash.png',
+                                                    width: 20,
+                                                    height: 20,
+                                                    fit: BoxFit.contain,
+                                                  ),
+                                                ),
+                                                const SizedBox(
+                                                  width: 15,
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  )
+                                : Container(
+                                    alignment: Alignment.center,
+                                    child: Column(
+                                      children: [
+                                        Image.asset(
+                                          'assets/icons/icon-box.png',
+                                          width: 45,
+                                          color: theme.theme == ThemeMode.light
+                                              ? Colors.black
+                                              : Colors.white,
+                                        ),
+                                        const SizedBox(
+                                          height: 10,
+                                        ),
+                                        Text(
+                                          'no_information'.tr,
+                                          style: GoogleFonts.ebGaramond(
+                                            color:
+                                                theme.theme == ThemeMode.light
+                                                    ? Colors.black
+                                                    : Colors.white,
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.w600,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                          ),
+                        ],
                       ),
                     ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Container(
-                          width: 30,
-                          height: 30,
-                          decoration: BoxDecoration(
-                            color: Colors.black,
-                            border: Border.all(color: Colors.white),
-                            shape: BoxShape.circle,
-                          ),
-                          child: Center(
-                            child: Image.asset(
-                              'assets/icons/icon-address-add.png',
-                              width: 20,
-                              height: 20,
-                              fit: BoxFit.contain,
-                              color: Colors.white,
+                  ),
+                ),
+                Positioned(
+                  bottom: 80,
+                  right: 0,
+                  child: GestureDetector(
+                    onTap: () {
+                      Get.bottomSheet(
+                        addAddress(context),
+                        isScrollControlled: true,
+                      );
+                    },
+                    child: Container(
+                      width: 170,
+                      height: 45,
+                      decoration: BoxDecoration(
+                        color: theme.theme == ThemeMode.light
+                            ? Colors.black
+                            : Colors.white,
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(30),
+                          bottomLeft: Radius.circular(30),
+                        ),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Container(
+                            width: 30,
+                            height: 30,
+                            decoration: BoxDecoration(
+                              color: theme.theme == ThemeMode.light
+                                  ? Colors.black
+                                  : Colors.white,
+                              border: Border.all(
+                                  color: theme.theme == ThemeMode.light
+                                      ? Colors.white
+                                      : Colors.black),
+                              shape: BoxShape.circle,
+                            ),
+                            child: Center(
+                              child: Image.asset(
+                                'assets/icons/icon-address-add.png',
+                                width: 20,
+                                height: 20,
+                                fit: BoxFit.contain,
+                                color: theme.theme == ThemeMode.light
+                                    ? Colors.white
+                                    : Colors.black,
+                              ),
                             ),
                           ),
-                        ),
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        Text(
-                          'address_new_add'.tr,
-                          style: GoogleFonts.ebGaramond(
-                            color: Colors.white,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w400,
+                          const SizedBox(
+                            width: 10,
                           ),
-                        ),
-                      ],
+                          Text(
+                            'address_new_add'.tr,
+                            style: GoogleFonts.ebGaramond(
+                              color: theme.theme == ThemeMode.light
+                                  ? Colors.white
+                                  : Colors.black,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

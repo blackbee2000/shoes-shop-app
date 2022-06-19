@@ -177,6 +177,14 @@ class LocaleString extends Translations {
           "cart_delete_popup": "Delete product in cart",
           "please_choose_product": "Please choose product",
           "order_rate_warning": "No reviews allowed",
+          "about": "About Us",
+          "text_1":
+              "I see a shoe I like and I buy it without knowing if it fits my foot",
+          "who_we_are": "Who we are?",
+          "text_2":
+              "We are the ones who bring narcissism to your feet, offering classic and modern texturing. We are LifeKicky.",
+          "contact_info": "Contact information",
+          "member": "Member",
         },
         "vi_VN": {
           "product_title": "Sản phẩm",
@@ -356,6 +364,14 @@ class LocaleString extends Translations {
           "cart_delete_popup": "Xóa sản phẩm trong giỏ hàng",
           "please_choose_product": "Vui lòng chọn sản phẩm",
           "order_rate_warning": "Không được phép đánh giá",
+          "about": "Về chúng tôi",
+          "text_1":
+              "Tôi thấy một đôi giầy tôi thích và tôi mua nó mà không cần biết là nó có vừa chân mình không",
+          "who_we_are": "Chúng tôi là ai?",
+          "text_2":
+              "Chúng tôi là những người mang đến sự tự ái cho đôi chân của bạn, mang đến những văn bản hóa cổ điển và hiện đại. Chúng tôi chính là LifeKicky.",
+          "contact_info": "Thông tin liên lạc",
+          "member": "Thành viên",
         }
       };
 }

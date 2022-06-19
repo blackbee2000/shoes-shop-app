@@ -3,6 +3,7 @@ import 'package:currency_text_input_formatter/currency_text_input_formatter.dart
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:get/get.dart';
+import 'package:shoes_shop_app/pages/about/about_page.dart';
 import 'package:shoes_shop_app/pages/cart/cart_page.dart';
 import 'package:shoes_shop_app/pages/dashboard/dashboard_controller.dart';
 import 'package:shoes_shop_app/pages/home/all-product/all_product_controller.dart';
@@ -64,10 +65,15 @@ class HomePageState extends State<HomePage> {
                           child: Container(),
                           preferredSize: const Size.fromHeight(0),
                         ),
-                  title: Image.asset(
-                    "assets/images/logo.png",
-                    width: 50,
-                    fit: BoxFit.contain,
+                  title: GestureDetector(
+                    onTap: () {
+                      Get.to(AboutPage(), id: AppConstant.HOME);
+                    },
+                    child: Image.asset(
+                      "assets/images/logo.png",
+                      width: 50,
+                      fit: BoxFit.contain,
+                    ),
                   ),
                   centerTitle: false,
                   actions: [

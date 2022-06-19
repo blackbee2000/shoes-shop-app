@@ -458,42 +458,6 @@ class LoginState extends State<LoginPage> {
                         const SizedBox(
                           height: 30,
                         ),
-                        // GestureDetector(
-                        //   onTap: () {
-                        //     Get.to(SignInDemo());
-                        //   },
-                        //   child: Row(
-                        //     mainAxisAlignment: MainAxisAlignment.center,
-                        //     children: [
-                        //       Text(
-                        //         'login_with_google'.tr,
-                        //         style: GoogleFonts.ebGaramond(
-                        //           color: Colors.black,
-                        //           fontSize: 16,
-                        //           fontWeight: FontWeight.w400,
-                        //         ),
-                        //       ),
-                        //       const SizedBox(
-                        //         width: 10,
-                        //       ),
-                        //       Image.asset(
-                        //         'assets/icons/icon-google.png',
-                        //         width: 25,
-                        //         height: 25,
-                        //         fit: BoxFit.contain,
-                        //       ),
-                        //     ],
-                        //   ),
-                        // ),
-                        // const SizedBox(
-                        //   height: 10,
-                        // ),
-                        // Container(
-                        //   alignment: AlignmentDirectional.center,
-                        //   width: 170,
-                        //   height: 1,
-                        //   color: Colors.black,
-                        // )
                       ],
                     ),
                   ),

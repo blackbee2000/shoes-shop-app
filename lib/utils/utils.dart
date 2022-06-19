@@ -53,7 +53,24 @@ Future<void> launchUniversalLinkIos(Uri url) async {
   }
 }
 
-Future<void> makePhoneCall(String phoneNumber) async {
+String? encodeQueryParameters(Map<String, String> params) {
+  return params.entries
+      .map((e) =>
+          '${Uri.encodeComponent(e.key)}=${Uri.encodeComponent(e.value)}')
+      .join('&');
+}
+
+Future<void> launchMailTo(String emailAddress, String subject) async {
+  final Uri emailLaunchUri = Uri(
+    scheme: 'mailto',
+    path: emailAddress,
+    query: encodeQueryParameters(<String, String>{'subject': subject}),
+  );
+
+  launchUrl(emailLaunchUri);
+}
+
+Future<void> launchCall(String phoneNumber) async {
   final Uri launchUri = Uri(
     scheme: 'tel',
     path: phoneNumber,
