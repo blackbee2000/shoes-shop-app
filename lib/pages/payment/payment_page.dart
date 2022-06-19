@@ -571,7 +571,35 @@ class PaymentState extends State<PaymentPage> {
                                       child: Container(
                                         width: 60,
                                         height: 60,
-                                        color: Colors.black,
+                                        child: CachedNetworkImage(
+                                          width: double.infinity,
+                                          height: double.infinity,
+                                          fit: BoxFit.cover,
+                                          imageUrl:
+                                              controller.voucher.value.image ??
+                                                  '',
+                                          useOldImageOnUrlChange: false,
+                                          progressIndicatorBuilder: (context,
+                                                  url, downloadProgress) =>
+                                              SizedBox(
+                                            height: 15,
+                                            width: 15,
+                                            child: Center(
+                                              child: CircularProgressIndicator(
+                                                value:
+                                                    downloadProgress.progress,
+                                                valueColor:
+                                                    const AlwaysStoppedAnimation(
+                                                        Colors.white),
+                                                strokeWidth: 2,
+                                              ),
+                                            ),
+                                          ),
+                                          errorWidget: (context, url, error) =>
+                                              ClipOval(
+                                            child: Container(),
+                                          ),
+                                        ),
                                       ),
                                     ),
                                     const SizedBox(
@@ -835,30 +863,44 @@ class PaymentState extends State<PaymentPage> {
                       const SizedBox(
                         height: 30,
                       ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 20),
-                        child: RichText(
-                          text: TextSpan(
-                            text: 'payment_shipping'.tr,
-                            style: GoogleFonts.ebGaramond(
-                              color: theme.theme == ThemeMode.light
-                                  ? Colors.black
-                                  : Colors.white,
-                              fontSize: 18,
-                              fontWeight: FontWeight.w400,
-                            ),
-                            children: [
-                              TextSpan(
-                                text: '2',
-                                style: GoogleFonts.ebGaramond(
-                                  color: theme.theme == ThemeMode.light
-                                      ? Colors.black
-                                      : Colors.white,
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                ),
+                      Obx(
+                        () => Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 20),
+                          child: RichText(
+                            text: TextSpan(
+                              text: 'voucher'.tr,
+                              style: GoogleFonts.ebGaramond(
+                                color: theme.theme == ThemeMode.light
+                                    ? Colors.black
+                                    : Colors.white,
+                                fontSize: 18,
+                                fontWeight: FontWeight.w400,
                               ),
-                            ],
+                              children: [
+                                paymentController.voucher.value.discount ==
+                                            null &&
+                                        paymentController
+                                                .voucher.value.discount ==
+                                            0
+                                    ? TextSpan(
+                                        text: '0',
+                                        style: GoogleFonts.ebGaramond(
+                                          color: Colors.amber,
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      )
+                                    : TextSpan(
+                                        text:
+                                            '  - ${paymentController.voucher.value.discount ?? 0}%',
+                                        style: GoogleFonts.ebGaramond(
+                                          color: Colors.amber,
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                              ],
+                            ),
                           ),
                         ),
                       ),
@@ -895,30 +937,64 @@ class PaymentState extends State<PaymentPage> {
                       const SizedBox(
                         height: 5,
                       ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 20),
-                        child: RichText(
-                          text: TextSpan(
-                            text: 'payment_total_bill'.tr,
-                            style: GoogleFonts.ebGaramond(
-                              color: theme.theme == ThemeMode.light
-                                  ? Colors.black
-                                  : Colors.white,
-                              fontSize: 18,
-                              fontWeight: FontWeight.w400,
-                            ),
-                            children: [
-                              TextSpan(
-                                text: '252',
-                                style: GoogleFonts.ebGaramond(
-                                  color: theme.theme == ThemeMode.light
-                                      ? Colors.black
-                                      : Colors.white,
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                ),
+                      Obx(
+                        () => Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 20),
+                          child: RichText(
+                            text: TextSpan(
+                              text: 'payment_total_bill'.tr,
+                              style: GoogleFonts.ebGaramond(
+                                color: theme.theme == ThemeMode.light
+                                    ? Colors.black
+                                    : Colors.white,
+                                fontSize: 18,
+                                fontWeight: FontWeight.w400,
                               ),
-                            ],
+                              children: [
+                                paymentController.voucher.value.discount ==
+                                            null &&
+                                        paymentController
+                                                .voucher.value.discount ==
+                                            0
+                                    ? TextSpan(
+                                        text: '$total',
+                                        style: GoogleFonts.ebGaramond(
+                                          color: theme.theme == ThemeMode.light
+                                              ? Colors.black
+                                              : Colors.white,
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      )
+                                    : TextSpan(
+                                        text: CurrencyTextInputFormatter(
+                                          locale: AppTranslation
+                                                      .instance.language ==
+                                                  AppTranslation.english
+                                              ? "vi_VN"
+                                              : "en_US",
+                                          decimalDigits: 0,
+                                          symbol: "",
+                                        ).format(((total *
+                                                    (100 -
+                                                        (paymentController
+                                                                .voucher
+                                                                .value
+                                                                .discount ??
+                                                            0)) /
+                                                    100) /
+                                                10)
+                                            .toString()),
+                                        style: GoogleFonts.ebGaramond(
+                                          color: theme.theme == ThemeMode.light
+                                              ? Colors.black
+                                              : Colors.white,
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                              ],
+                            ),
                           ),
                         ),
                       ),
