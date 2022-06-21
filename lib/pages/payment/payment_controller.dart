@@ -80,6 +80,7 @@ class PaymentController extends GetxController {
           );
         } else {
           var url = data['data'];
+          Get.back();
           launchInWebViewOrVC(Uri.parse(url));
         }
 
