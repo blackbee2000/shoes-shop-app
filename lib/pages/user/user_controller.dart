@@ -12,6 +12,8 @@ import 'package:shoes_shop_app/pages/user/user_provider.dart';
 import 'package:shoes_shop_app/services/api_token.dart';
 import 'package:shoes_shop_app/utils/app_constant.dart';
 
+import '../dashboard/dashboard_page.dart';
+
 class UserController extends GetxController with StateMixin {
   TextEditingController name = TextEditingController();
   TextEditingController phone = TextEditingController();
@@ -85,7 +87,8 @@ class UserController extends GetxController with StateMixin {
     update();
   }
 
-  updateProfile(String name, String phone, String email, String image) {
+  updateProfile(
+      String name, String phone, String email, String image, bool isRegister) {
     UserProvider().updateProfile(
       params: {
         "fullName": name,
@@ -122,7 +125,7 @@ class UserController extends GetxController with StateMixin {
       onSuccess: (res) {
         profileController.onInit();
         profileController.update();
-        Get.back();
+        isRegister ? Get.offAll(const DashboardPage()) : Get.back();
         dashboardController.tabIndex.value = 4;
         while (Get.nestedKey(AppConstant.PROFILE)!.currentState?.canPop() ==
             true) {
