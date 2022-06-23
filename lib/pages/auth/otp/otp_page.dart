@@ -173,9 +173,7 @@ class OtpPage extends GetView<OtpController> {
                         tween: Tween(
                             begin: const Duration(minutes: 2),
                             end: Duration.zero),
-                        onEnd: () {
-                          print('Timer ended');
-                        },
+                        onEnd: () {},
                         builder: (BuildContext context, Duration value,
                             Widget? child) {
                           final minutes = value.inMinutes;

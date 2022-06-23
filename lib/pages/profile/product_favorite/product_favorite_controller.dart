@@ -30,12 +30,9 @@ class ProductFavoriteController extends GetxController {
         } else {
           listProductAll = [];
         }
-        print(
-            'GET ALLL PRODUCT IN PROFILE SUCESSS ===> ${listProductAll.toString()}');
         update();
       },
       onError: (e) {
-        print('GET ALLL PRODUCT IN PROFILE FAIL ===> ${e.toString()}');
         update();
       },
     );
@@ -59,12 +56,9 @@ class ProductFavoriteController extends GetxController {
             }
           }
         }
-        print(
-            'GET ALLL PRODUCT FAVORITE ===> ${listProductFavoriteFinal.first.isLike.toString()}');
         update();
       },
       onError: (e) {
-        print('GET ALLL PRODUCT FAVORITE ===> ${e.toString()}');
         update();
       },
     );

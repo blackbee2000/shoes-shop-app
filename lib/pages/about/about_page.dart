@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:shoes_shop_app/pages/auth/login/login_controller.dart';
-import 'package:shoes_shop_app/pages/auth/register/register_page.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shoes_shop_app/pages/cart/cart_page.dart';
-import 'package:shoes_shop_app/pages/dashboard/dashboard_page.dart';
 import 'package:shoes_shop_app/pages/profile/product_favorite/product_favorite_page.dart';
 import 'package:shoes_shop_app/theme/theme_controller.dart';
 import 'package:shoes_shop_app/translations/app_translation.dart';

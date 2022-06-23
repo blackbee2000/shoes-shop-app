@@ -95,7 +95,6 @@ class ProductDetailController extends GetxController
         update();
       },
       onError: (e) {
-        print(e.toString());
         Get.snackbar(
           'fail'.tr,
           'happen_error'.tr,

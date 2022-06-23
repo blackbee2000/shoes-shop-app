@@ -33,12 +33,10 @@ class CartController extends GetxController {
       ),
       beforeSend: () {},
       onSuccess: (data) {
-        print('SUCESSSS ==> ${data.toString()}');
         getAllCart();
         update();
       },
       onError: (e) {
-        print('FAILLL ==> ${e.toString()}');
         update();
       },
     );
@@ -65,12 +63,10 @@ class CartController extends GetxController {
       ),
       beforeSend: () {},
       onSuccess: (data) {
-        print('SUCESSSS ==> ${data.toString()}');
         getAllCart();
         update();
       },
       onError: (e) {
-        print('FAILLL ==> ${e.toString()}');
         update();
       },
     );

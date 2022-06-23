@@ -85,12 +85,9 @@ class YourOrderController extends GetxController
       beforeSend: () {},
       onSuccess: (res) {
         listOrder = res.data ?? [];
-        print(
-            'SUCESSSS ===> ${res.data?.first.lstCart?.first.lstProduct?.rating.toString()}');
         update();
       },
       onError: (e) {
-        print('FAIL ===> ${e.toString()}');
         update();
       },
     );

@@ -48,14 +48,11 @@ class UserController extends GetxController with StateMixin {
       //Upload to Firebase
       var snapshot = await fireStorage.ref().child(imagefilename).putFile(file);
       var download = await snapshot.ref.getDownloadURL();
-      print(download);
 
       imageUser = download;
       isLoading = false;
       update();
-    } else {
-      print('Grant Permission and try again');
-    }
+    } else {}
   }
 
   Future getPhoto(String id) async {
@@ -80,14 +77,11 @@ class UserController extends GetxController with StateMixin {
       //Upload to Firebase
       var snapshot = await fireStorage.ref().child(imagefilename).putFile(file);
       var download = await snapshot.ref.getDownloadURL();
-      print(download);
 
       imageUser = download;
       isLoading = false;
       update();
-    } else {
-      print('Grant Permission and try again');
-    }
+    } else {}
     update();
   }
 

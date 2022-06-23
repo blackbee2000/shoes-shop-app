@@ -227,7 +227,7 @@ class LocaleString extends Translations {
           "payment_method": "Phương thức thanh toán",
           "payment_shipping": "Tiền giao hàng: ",
           "payment_total_product": "Tổng tiền sản phẩm: ",
-          "payment_total_bill": "Tổng hoá đơn: ",
+          "payment_total_bill": "Tổng tiền: ",
           "product_detail_size": "Kích thước: ",
           "product_detail_add_cart": "Thêm vào giỏ",
           "product_detail_description": "Mô tả",

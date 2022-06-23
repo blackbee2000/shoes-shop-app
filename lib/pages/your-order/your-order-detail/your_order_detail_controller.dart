@@ -38,10 +38,8 @@ class YourOrderDetailController extends GetxController
           ratingController.value = 5.0;
         }
         update();
-        print('GET RATING BY ACCOUNT SUCCESS ===> ${res.data.toString()}');
       },
       onError: (e) {
-        print('GET RATING BY ACCOUNT FAIL  ===> ${e.toString()}');
         update();
       },
     );
@@ -127,10 +125,8 @@ class YourOrderDetailController extends GetxController
           backgroundColor: const Color(0xff00FF00),
         );
         update();
-        print('UPDATEEEE BY ACCOUNT SUCCESS ===> ${res.data.toString()}');
       },
       onError: (e) {
-        print('UPDATEEEE BY ACCOUNT FAIL  ===> ${e.toString()}');
         Get.back();
         Get.snackbar(
           'fail'.tr,

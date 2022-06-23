@@ -133,8 +133,6 @@ class YourOrderDetailState extends State<YourOrderDetailPage> {
                                   idProduct) {
                                 controller.rateProductNowOfAccount.value
                                     .rating = controller.ratingController.value;
-                                print(
-                                    'RATING ===> ${controller.rateProductNowOfAccount.value.rating}');
                                 controller.updateRateByAccount(
                                     controller.rateProductNowOfAccount.value);
                               } else {

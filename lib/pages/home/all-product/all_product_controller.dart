@@ -74,7 +74,6 @@ class AllProductController extends GetxController {
         );
       },
       onSuccess: (res) {
-        print('ALL PRODUCt ====> ${res.toString()}');
         listProduct = res.data ?? [];
         for (var e in listProduct) {
           e.isLike = false;
@@ -87,7 +86,6 @@ class AllProductController extends GetxController {
         update();
       },
       onError: (e) {
-        print('ALL PRODUCt ====> ${e.toString()}');
         Get.back();
         update();
       },
