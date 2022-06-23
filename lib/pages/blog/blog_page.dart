@@ -133,9 +133,7 @@ class BlogPage extends StatelessWidget {
                               itemBuilder: (context, item, index) =>
                                   GestureDetector(
                                 onTap: () {
-                                  Get.to(
-                                      BlogDetailPage(
-                                          blog: controller.listBlog[index]),
+                                  Get.to(BlogDetailPage(blog: item),
                                       id: AppConstant.BLOG);
                                 },
                                 child: Container(
@@ -176,9 +174,7 @@ class BlogPage extends StatelessWidget {
                                         ),
                                         child: CachedNetworkImage(
                                           fit: BoxFit.cover,
-                                          imageUrl: controller
-                                                  .listBlog[index].imageBlog ??
-                                              '',
+                                          imageUrl: item.imageBlog ?? '',
                                           useOldImageOnUrlChange: false,
                                           progressIndicatorBuilder: (context,
                                                   url, downloadProgress) =>
@@ -223,7 +219,7 @@ class BlogPage extends StatelessWidget {
                                                 MainAxisAlignment.start,
                                             children: [
                                               Text(
-                                                '${AppTranslation.instance.language == AppTranslation.english ? (controller.listBlog[index].titleEn != null && controller.listBlog[index].titleEn!.isNotEmpty ? controller.listBlog[index].titleEn : '--') : (controller.listBlog[index].titleVi != null && controller.listBlog[index].titleVi!.isNotEmpty ? controller.listBlog[index].titleVi : '--')}',
+                                                '${AppTranslation.instance.language == AppTranslation.english ? (item.titleEn != null && item.titleEn!.isNotEmpty ? item.titleEn : '--') : (item.titleVi != null && item.titleVi!.isNotEmpty ? item.titleVi : '--')}',
                                                 style: GoogleFonts.ebGaramond(
                                                   color: Colors.black,
                                                   fontSize: 16,
@@ -237,7 +233,7 @@ class BlogPage extends StatelessWidget {
                                                 height: 5,
                                               ),
                                               Text(
-                                                '${AppTranslation.instance.language == AppTranslation.english ? (controller.listBlog[index].descriptionShortEn != null && controller.listBlog[index].descriptionShortEn!.isNotEmpty ? controller.listBlog[index].descriptionShortEn : '--') : (controller.listBlog[index].descriptionShortVi != null && controller.listBlog[index].descriptionShortVi!.isNotEmpty ? controller.listBlog[index].descriptionShortVi : '--')}',
+                                                '${AppTranslation.instance.language == AppTranslation.english ? (item.descriptionShortEn != null && item.descriptionShortEn!.isNotEmpty ? item.descriptionShortEn : '--') : (item.descriptionShortVi != null && item.descriptionShortVi!.isNotEmpty ? item.descriptionShortVi : '--')}',
                                                 style: GoogleFonts.ebGaramond(
                                                   color: Colors.black,
                                                   fontSize: 13,
@@ -265,20 +261,14 @@ class BlogPage extends StatelessWidget {
                                                     width: 10,
                                                   ),
                                                   Text(
-                                                    controller.listBlog[index]
-                                                                    .createdAt !=
-                                                                null &&
-                                                            controller
-                                                                .listBlog[index]
-                                                                .createdAt!
+                                                    item.createdAt != null &&
+                                                            item.createdAt!
                                                                 .isNotEmpty
                                                         ? DateFormat(
                                                                 'HH:mm dd/MM/yyyy')
-                                                            .format(DateTime.parse(controller
-                                                                        .listBlog[
-                                                                            index]
-                                                                        .createdAt ??
-                                                                    '')
+                                                            .format(DateTime.parse(
+                                                                    item.createdAt ??
+                                                                        '')
                                                                 .toLocal())
                                                         : '--',
                                                     style:
@@ -301,219 +291,6 @@ class BlogPage extends StatelessWidget {
                               ),
                             ),
                           ),
-                          // controller.listBlog.isNotEmpty
-                          //     ? ListView.builder(
-                          //         itemCount: controller.listBlog.length,
-                          //         itemBuilder: (context, index) =>
-                          //             GestureDetector(
-                          //           onTap: () {
-                          //             Get.to(
-                          //                 BlogDetailPage(
-                          //                     blog: controller.listBlog[index]),
-                          //                 id: AppConstant.BLOG);
-                          //           },
-                          //           child: Container(
-                          //             width: double.infinity,
-                          //             margin: const EdgeInsets.only(
-                          //               bottom: 20,
-                          //               left: 20,
-                          //               right: 20,
-                          //             ),
-                          //             height: 130,
-                          //             decoration: BoxDecoration(
-                          //               color: Colors.white,
-                          //               borderRadius: BorderRadius.circular(10),
-                          //               boxShadow: [
-                          //                 BoxShadow(
-                          //                   color:
-                          //                       Colors.black.withOpacity(0.25),
-                          //                   spreadRadius: 0,
-                          //                   blurRadius: 4,
-                          //                   offset: const Offset(0,
-                          //                       4), // changes position of shadow
-                          //                 ),
-                          //               ],
-                          //             ),
-                          //             padding: const EdgeInsets.only(
-                          //               left: 15,
-                          //               right: 20,
-                          //             ),
-                          //             child: Row(
-                          //               children: [
-                          //                 Container(
-                          //                   width: 110,
-                          //                   height: double.infinity,
-                          //                   decoration: const BoxDecoration(
-                          //                     borderRadius: BorderRadius.only(
-                          //                       topLeft: Radius.circular(10),
-                          //                       bottomLeft: Radius.circular(10),
-                          //                     ),
-                          //                   ),
-                          //                   child: CachedNetworkImage(
-                          //                     fit: BoxFit.cover,
-                          //                     imageUrl: controller
-                          //                             .listBlog[index]
-                          //                             .imageBlog ??
-                          //                         '',
-                          //                     useOldImageOnUrlChange: false,
-                          //                     progressIndicatorBuilder:
-                          //                         (context, url,
-                          //                                 downloadProgress) =>
-                          //                             SizedBox(
-                          //                       height: 15,
-                          //                       width: 15,
-                          //                       child: Center(
-                          //                         child:
-                          //                             CircularProgressIndicator(
-                          //                           value: downloadProgress
-                          //                               .progress,
-                          //                           valueColor:
-                          //                               const AlwaysStoppedAnimation(
-                          //                                   Colors.white),
-                          //                           strokeWidth: 2,
-                          //                         ),
-                          //                       ),
-                          //                     ),
-                          //                     errorWidget:
-                          //                         (context, url, error) =>
-                          //                             ClipOval(
-                          //                       child: Container(),
-                          //                     ),
-                          //                   ),
-                          //                 ),
-                          //                 Container(
-                          //                   width: 5,
-                          //                   height: double.infinity,
-                          //                   color: const Color(0xffFFD9D9),
-                          //                 ),
-                          //                 const SizedBox(
-                          //                   width: 15,
-                          //                 ),
-                          //                 Expanded(
-                          //                   child: Container(
-                          //                     padding: const EdgeInsets.only(
-                          //                       top: 15,
-                          //                       bottom: 15,
-                          //                     ),
-                          //                     child: Column(
-                          //                       crossAxisAlignment:
-                          //                           CrossAxisAlignment.start,
-                          //                       mainAxisAlignment:
-                          //                           MainAxisAlignment.start,
-                          //                       children: [
-                          //                         Text(
-                          //                           '${AppTranslation.instance.language == AppTranslation.english ? (controller.listBlog[index].titleEn != null && controller.listBlog[index].titleEn!.isNotEmpty ? controller.listBlog[index].titleEn : '--') : (controller.listBlog[index].titleVi != null && controller.listBlog[index].titleVi!.isNotEmpty ? controller.listBlog[index].titleVi : '--')}',
-                          //                           style:
-                          //                               GoogleFonts.ebGaramond(
-                          //                             color: Colors.black,
-                          //                             fontSize: 16,
-                          //                             fontWeight:
-                          //                                 FontWeight.w600,
-                          //                           ),
-                          //                           maxLines: 1,
-                          //                           overflow:
-                          //                               TextOverflow.ellipsis,
-                          //                           textAlign: TextAlign.left,
-                          //                         ),
-                          //                         const SizedBox(
-                          //                           height: 5,
-                          //                         ),
-                          //                         Text(
-                          //                           '${AppTranslation.instance.language == AppTranslation.english ? (controller.listBlog[index].descriptionShortEn != null && controller.listBlog[index].descriptionShortEn!.isNotEmpty ? controller.listBlog[index].descriptionShortEn : '--') : (controller.listBlog[index].descriptionShortVi != null && controller.listBlog[index].descriptionShortVi!.isNotEmpty ? controller.listBlog[index].descriptionShortVi : '--')}',
-                          //                           style:
-                          //                               GoogleFonts.ebGaramond(
-                          //                             color: Colors.black,
-                          //                             fontSize: 13,
-                          //                             fontWeight:
-                          //                                 FontWeight.w400,
-                          //                           ),
-                          //                           maxLines: 3,
-                          //                           overflow:
-                          //                               TextOverflow.ellipsis,
-                          //                           textAlign: TextAlign.left,
-                          //                         ),
-                          //                         const SizedBox(
-                          //                           height: 5,
-                          //                         ),
-                          //                         Row(
-                          //                           mainAxisAlignment:
-                          //                               MainAxisAlignment.end,
-                          //                           children: [
-                          //                             Image.asset(
-                          //                               "assets/icons/icon_calendar.png",
-                          //                               width: 10,
-                          //                               height: 10,
-                          //                               fit: BoxFit.contain,
-                          //                               color: Colors.black,
-                          //                             ),
-                          //                             const SizedBox(
-                          //                               width: 10,
-                          //                             ),
-                          //                             Text(
-                          //                               controller
-                          //                                               .listBlog[
-                          //                                                   index]
-                          //                                               .createdAt !=
-                          //                                           null &&
-                          //                                       controller
-                          //                                           .listBlog[
-                          //                                               index]
-                          //                                           .createdAt!
-                          //                                           .isNotEmpty
-                          //                                   ? DateFormat(
-                          //                                           'HH:mm dd/MM/yyyy')
-                          //                                       .format(DateTime.parse(
-                          //                                               controller.listBlog[index].createdAt ??
-                          //                                                   '')
-                          //                                           .toLocal())
-                          //                                   : '--',
-                          //                               style: GoogleFonts
-                          //                                   .ebGaramond(
-                          //                                 color: Colors.black,
-                          //                                 fontSize: 12,
-                          //                                 fontWeight:
-                          //                                     FontWeight.w400,
-                          //                               ),
-                          //                             ),
-                          //                           ],
-                          //                         ),
-                          //                       ],
-                          //                     ),
-                          //                   ),
-                          //                 ),
-                          //               ],
-                          //             ),
-                          //           ),
-                          //         ),
-                          //       )
-                          //     : Container(
-                          //         alignment: Alignment.center,
-                          //         margin: EdgeInsets.only(top: 30),
-                          //         child: Column(
-                          //           children: [
-                          //             Image.asset(
-                          //               'assets/icons/icon-box.png',
-                          //               width: 45,
-                          //               color: theme.theme == ThemeMode.light
-                          //                   ? Colors.black
-                          //                   : Colors.white,
-                          //             ),
-                          //             const SizedBox(
-                          //               height: 10,
-                          //             ),
-                          //             Text(
-                          //               'no_information'.tr,
-                          //               style: GoogleFonts.ebGaramond(
-                          //                 color: theme.theme == ThemeMode.light
-                          //                     ? Colors.black
-                          //                     : Colors.white,
-                          //                 fontSize: 18,
-                          //                 fontWeight: FontWeight.w600,
-                          //               ),
-                          //             ),
-                          //           ],
-                          //         ),
-                          //       ),
                         ),
                       ),
                     ),

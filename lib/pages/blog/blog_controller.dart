@@ -5,7 +5,7 @@ import 'package:shoes_shop_app/models/blog.dart';
 import 'package:shoes_shop_app/pages/blog/blog_provider.dart';
 
 class BlogController extends GetxController {
-  final limit = 20;
+  final limit = 10;
   final skip = 1.obs;
   List<Blog> listBlog = <Blog>[].obs;
   final PagingController<int, Blog> pagingController =
@@ -27,7 +27,7 @@ class BlogController extends GetxController {
 
   getAllBlog(int pageKey) {
     BlogProvider().getAllBlog(
-      params: {"limit": limit, "skip": 1},
+      params: {"limit": limit, "skip": skip.value},
       option: Options(
         headers: {
           'Content-Type': 'application/json; charset=UTF-8',
