@@ -12,10 +12,12 @@ import '../profile/profile_controller.dart';
 class UserPage extends StatefulWidget {
   final int id;
   final String idProfile;
+  final bool isRegister;
   const UserPage({
     Key? key,
     required this.idProfile,
     required this.id,
+    required this.isRegister,
   }) : super(key: key);
 
   @override
@@ -29,6 +31,7 @@ class _UserPageState extends State<UserPage> {
   @override
   void initState() {
     BackButtonInterceptor.add(myInterceptor);
+    print(widget.isRegister);
     userController.name.text = profileController.profile.value.fullName ?? "";
     userController.phone.text =
         profileController.profile.value.phoneNumber ?? "";
@@ -403,8 +406,9 @@ class _UserPageState extends State<UserPage> {
                                   height: 20,
                                   fit: BoxFit.contain,
                                 ),
-                                TextField(
+                                TextFormField(
                                   controller: controller.phone,
+                                  readOnly: false,
                                   style: GoogleFonts.ebGaramond(
                                     color: Colors.black,
                                     fontSize: 14,
@@ -568,11 +572,11 @@ class _UserPageState extends State<UserPage> {
                                   return;
                                 }
                                 controller.updateProfile(
-                                  controller.name.text,
-                                  controller.phone.text,
-                                  controller.email.text,
-                                  controller.imageUser ?? "",
-                                );
+                                    controller.name.text,
+                                    controller.phone.text,
+                                    controller.email.text,
+                                    controller.imageUser ?? "",
+                                    widget.isRegister);
                               },
                               child: Stack(
                                 alignment: AlignmentDirectional.center,

@@ -323,10 +323,10 @@ class ProfilePage extends GetView<ProfileController> {
                                                 onTap: () {
                                                   Get.to(
                                                     UserPage(
-                                                      id: AppConstant.PROFILE,
-                                                      idProfile: controller
-                                                          .profile.value.id!,
-                                                    ),
+                                                        id: AppConstant.PROFILE,
+                                                        idProfile: controller
+                                                            .profile.value.id!,
+                                                        isRegister: false),
                                                     id: AppConstant.PROFILE,
                                                   );
                                                 },

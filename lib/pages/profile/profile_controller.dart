@@ -55,9 +55,7 @@ class ProfileController extends GetxController {
           Future.delayed(const Duration(milliseconds: 500)).then((_) {
             Get.to(
               UserPage(
-                id: 1,
-                idProfile: profile.value.id ?? '',
-              ),
+                  id: 1, idProfile: profile.value.id ?? '', isRegister: true),
             );
           });
         }
