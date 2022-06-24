@@ -70,7 +70,7 @@ class CartState extends State<CartPage> {
                   children: [
                     Text(
                       'cart_delete_popup'.tr,
-                      style: GoogleFonts.ebGaramond(
+                      style: TextStyle(
                         color: Colors.black,
                         fontSize: 16,
                         fontWeight: FontWeight.w600,
@@ -103,7 +103,7 @@ class CartState extends State<CartPage> {
               alignment: Alignment.center,
               child: Text(
                 'address_warning'.tr,
-                style: GoogleFonts.ebGaramond(
+                style: TextStyle(
                   color: Colors.black,
                   fontSize: 16,
                   fontWeight: FontWeight.w600,
@@ -133,7 +133,7 @@ class CartState extends State<CartPage> {
                         child: Center(
                           child: Text(
                             'address_cancel'.tr,
-                            style: GoogleFonts.ebGaramond(
+                            style: TextStyle(
                               color: Colors.black,
                               fontSize: 14,
                               fontWeight: FontWeight.w600,
@@ -164,7 +164,7 @@ class CartState extends State<CartPage> {
                           child: Center(
                             child: Text(
                               'address_confirm'.tr,
-                              style: GoogleFonts.ebGaramond(
+                              style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 14,
                                 fontWeight: FontWeight.w600,
@@ -228,7 +228,7 @@ class CartState extends State<CartPage> {
                 ),
                 title: Text(
                   'cart_title'.tr,
-                  style: GoogleFonts.ebGaramond(
+                  style: TextStyle(
                     color: theme.theme == ThemeMode.light
                         ? Colors.black
                         : Colors.white,
@@ -568,7 +568,7 @@ class CartState extends State<CartPage> {
                                                                               Text(
                                                                             '-',
                                                                             style:
-                                                                                GoogleFonts.ebGaramond(
+                                                                                TextStyle(
                                                                               color: Colors.white,
                                                                               fontSize: 14,
                                                                               fontWeight: FontWeight.w400,
@@ -622,7 +622,7 @@ class CartState extends State<CartPage> {
                                                                               Text(
                                                                             '+',
                                                                             style:
-                                                                                GoogleFonts.ebGaramond(
+                                                                                TextStyle(
                                                                               color: Colors.white,
                                                                               fontSize: 14,
                                                                               fontWeight: FontWeight.w400,
@@ -662,7 +662,7 @@ class CartState extends State<CartPage> {
                                         ),
                                         Text(
                                           'no_cart'.tr,
-                                          style: GoogleFonts.ebGaramond(
+                                          style: TextStyle(
                                             color:
                                                 theme.theme == ThemeMode.light
                                                     ? Colors.black
@@ -709,7 +709,7 @@ class CartState extends State<CartPage> {
                                             child: Center(
                                               child: Text(
                                                 'go_to_product'.tr,
-                                                style: GoogleFonts.ebGaramond(
+                                                style: TextStyle(
                                                   color: theme.theme ==
                                                           ThemeMode.light
                                                       ? Colors.black
@@ -764,7 +764,7 @@ class CartState extends State<CartPage> {
                                   },
                                   child: Text(
                                     'cart_select_all'.tr,
-                                    style: GoogleFonts.ebGaramond(
+                                    style: TextStyle(
                                       color: Colors.black,
                                       fontSize: 16,
                                       fontWeight: FontWeight.w400,
@@ -789,7 +789,7 @@ class CartState extends State<CartPage> {
                                     child: Center(
                                       child: Text(
                                         'cart_payment'.tr,
-                                        style: GoogleFonts.ebGaramond(
+                                        style: TextStyle(
                                           color: Colors.white,
                                           fontSize: 16,
                                           fontWeight: FontWeight.w400,
@@ -807,7 +807,7 @@ class CartState extends State<CartPage> {
                                   },
                                   child: Text(
                                     'cart_delete'.tr,
-                                    style: GoogleFonts.ebGaramond(
+                                    style: TextStyle(
                                       color: Colors.black,
                                       fontSize: 16,
                                       fontWeight: FontWeight.w400,

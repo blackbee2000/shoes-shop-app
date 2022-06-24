@@ -69,7 +69,7 @@ class AddressState extends State<AddressPage> {
                     children: [
                       Text(
                         'address_add'.tr,
-                        style: GoogleFonts.ebGaramond(
+                        style: TextStyle(
                           color: Colors.black,
                           fontSize: 16,
                           fontWeight: FontWeight.w600,
@@ -103,7 +103,7 @@ class AddressState extends State<AddressPage> {
               ),
               Text(
                 'addresss_name'.tr,
-                style: GoogleFonts.ebGaramond(
+                style: TextStyle(
                   color: Colors.black,
                   fontSize: 13,
                   fontWeight: FontWeight.w400,
@@ -121,7 +121,7 @@ class AddressState extends State<AddressPage> {
                 ),
                 child: TextField(
                   controller: addressController.customerName,
-                  style: GoogleFonts.ebGaramond(
+                  style: TextStyle(
                     color: Colors.black,
                     fontSize: 13,
                     fontWeight: FontWeight.w400,
@@ -133,7 +133,7 @@ class AddressState extends State<AddressPage> {
                       left: 15,
                     ),
                     hintText: 'address_enter_name'.tr,
-                    hintStyle: GoogleFonts.ebGaramond(
+                    hintStyle: TextStyle(
                       color: const Color(0xffD0D0D0),
                       fontSize: 13,
                       fontWeight: FontWeight.w400,
@@ -148,7 +148,7 @@ class AddressState extends State<AddressPage> {
               ),
               Text(
                 'addresss_phone'.tr,
-                style: GoogleFonts.ebGaramond(
+                style: TextStyle(
                   color: Colors.black,
                   fontSize: 13,
                   fontWeight: FontWeight.w400,
@@ -166,7 +166,7 @@ class AddressState extends State<AddressPage> {
                 ),
                 child: TextField(
                   controller: addressController.customerPhone,
-                  style: GoogleFonts.ebGaramond(
+                  style: TextStyle(
                     color: Colors.black,
                     fontSize: 13,
                     fontWeight: FontWeight.w400,
@@ -178,7 +178,7 @@ class AddressState extends State<AddressPage> {
                       left: 15,
                     ),
                     hintText: 'address_enter_phone'.tr,
-                    hintStyle: GoogleFonts.ebGaramond(
+                    hintStyle: TextStyle(
                       color: const Color(0xffD0D0D0),
                       fontSize: 13,
                       fontWeight: FontWeight.w400,
@@ -193,7 +193,7 @@ class AddressState extends State<AddressPage> {
               ),
               Text(
                 'addresss_province'.tr,
-                style: GoogleFonts.ebGaramond(
+                style: TextStyle(
                   color: Colors.black,
                   fontSize: 13,
                   fontWeight: FontWeight.w400,
@@ -236,7 +236,7 @@ class AddressState extends State<AddressPage> {
                       padding: const EdgeInsets.all(16),
                       child: Text(
                         item.name ?? '',
-                        style: GoogleFonts.ebGaramond(
+                        style: TextStyle(
                           color: Colors.black,
                           fontSize: 13,
                           fontWeight: FontWeight.w400,
@@ -249,7 +249,7 @@ class AddressState extends State<AddressPage> {
                     dropdownBuilder: (context, item) {
                       return Text(
                         item?.name ?? 'select_province'.tr,
-                        style: GoogleFonts.ebGaramond(
+                        style: TextStyle(
                           color: item == null
                               ? const Color(0xffD0D0D0)
                               : Colors.black,
@@ -270,7 +270,7 @@ class AddressState extends State<AddressPage> {
                       contentPadding: const EdgeInsets.only(left: 15),
                       isDense: true,
                       border: InputBorder.none,
-                      hintStyle: GoogleFonts.ebGaramond(
+                      hintStyle: TextStyle(
                         color: const Color(0xffD0D0D0),
                         fontSize: 13,
                         fontWeight: FontWeight.w400,
@@ -284,7 +284,7 @@ class AddressState extends State<AddressPage> {
               ),
               Text(
                 'addresss_district'.tr,
-                style: GoogleFonts.ebGaramond(
+                style: TextStyle(
                   color: Colors.black,
                   fontSize: 13,
                   fontWeight: FontWeight.w400,
@@ -327,7 +327,7 @@ class AddressState extends State<AddressPage> {
                       padding: const EdgeInsets.all(16),
                       child: Text(
                         item.name ?? '',
-                        style: GoogleFonts.ebGaramond(
+                        style: TextStyle(
                           color: Colors.black,
                           fontSize: 13,
                           fontWeight: FontWeight.w400,
@@ -340,7 +340,7 @@ class AddressState extends State<AddressPage> {
                     dropdownBuilder: (context, item) {
                       return Text(
                         item?.name ?? 'select_district'.tr,
-                        style: GoogleFonts.ebGaramond(
+                        style: TextStyle(
                           color: item == null
                               ? const Color(0xffD0D0D0)
                               : Colors.black,
@@ -361,7 +361,7 @@ class AddressState extends State<AddressPage> {
                       contentPadding: const EdgeInsets.only(left: 15),
                       isDense: true,
                       border: InputBorder.none,
-                      hintStyle: GoogleFonts.ebGaramond(
+                      hintStyle: TextStyle(
                         color: const Color(0xffD0D0D0),
                         fontSize: 13,
                         fontWeight: FontWeight.w400,
@@ -375,7 +375,7 @@ class AddressState extends State<AddressPage> {
               ),
               Text(
                 'address_ward'.tr,
-                style: GoogleFonts.ebGaramond(
+                style: TextStyle(
                   color: Colors.black,
                   fontSize: 13,
                   fontWeight: FontWeight.w400,
@@ -418,7 +418,7 @@ class AddressState extends State<AddressPage> {
                       padding: const EdgeInsets.all(16),
                       child: Text(
                         item.name ?? '',
-                        style: GoogleFonts.ebGaramond(
+                        style: TextStyle(
                           color: Colors.black,
                           fontSize: 13,
                           fontWeight: FontWeight.w400,
@@ -431,7 +431,7 @@ class AddressState extends State<AddressPage> {
                     dropdownBuilder: (context, item) {
                       return Text(
                         item?.name ?? 'select_ward'.tr,
-                        style: GoogleFonts.ebGaramond(
+                        style: TextStyle(
                           color: item == null
                               ? const Color(0xffD0D0D0)
                               : Colors.black,
@@ -451,7 +451,7 @@ class AddressState extends State<AddressPage> {
                       contentPadding: const EdgeInsets.only(left: 15),
                       isDense: true,
                       border: InputBorder.none,
-                      hintStyle: GoogleFonts.ebGaramond(
+                      hintStyle: TextStyle(
                         color: const Color(0xffD0D0D0),
                         fontSize: 13,
                         fontWeight: FontWeight.w400,
@@ -465,7 +465,7 @@ class AddressState extends State<AddressPage> {
               ),
               Text(
                 'addresss_street'.tr,
-                style: GoogleFonts.ebGaramond(
+                style: TextStyle(
                   color: Colors.black,
                   fontSize: 13,
                   fontWeight: FontWeight.w400,
@@ -483,7 +483,7 @@ class AddressState extends State<AddressPage> {
                 ),
                 child: TextField(
                   controller: addressController.customerStreet,
-                  style: GoogleFonts.ebGaramond(
+                  style: TextStyle(
                     color: Colors.black,
                     fontSize: 13,
                     fontWeight: FontWeight.w400,
@@ -495,7 +495,7 @@ class AddressState extends State<AddressPage> {
                       left: 15,
                     ),
                     hintText: 'address_enter_street'.tr,
-                    hintStyle: GoogleFonts.ebGaramond(
+                    hintStyle: TextStyle(
                       color: const Color(0xffD0D0D0),
                       fontSize: 13,
                       fontWeight: FontWeight.w400,
@@ -531,7 +531,7 @@ class AddressState extends State<AddressPage> {
                           child: Center(
                             child: Text(
                               'address_cancel'.tr,
-                              style: GoogleFonts.ebGaramond(
+                              style: TextStyle(
                                 color: Colors.black,
                                 fontSize: 14,
                                 fontWeight: FontWeight.w600,
@@ -582,7 +582,7 @@ class AddressState extends State<AddressPage> {
                             child: Center(
                               child: Text(
                                 'address_confirm'.tr,
-                                style: GoogleFonts.ebGaramond(
+                                style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 14,
                                   fontWeight: FontWeight.w600,
@@ -639,7 +639,7 @@ class AddressState extends State<AddressPage> {
                     children: [
                       Text(
                         'address_edit'.tr,
-                        style: GoogleFonts.ebGaramond(
+                        style: TextStyle(
                           color: Colors.black,
                           fontSize: 16,
                           fontWeight: FontWeight.w600,
@@ -670,7 +670,7 @@ class AddressState extends State<AddressPage> {
               ),
               Text(
                 'addresss_name'.tr,
-                style: GoogleFonts.ebGaramond(
+                style: TextStyle(
                   color: Colors.black,
                   fontSize: 13,
                   fontWeight: FontWeight.w400,
@@ -688,7 +688,7 @@ class AddressState extends State<AddressPage> {
                 ),
                 child: TextField(
                   controller: addressController.customerName,
-                  style: GoogleFonts.ebGaramond(
+                  style: TextStyle(
                     color: Colors.black,
                     fontSize: 13,
                     fontWeight: FontWeight.w400,
@@ -700,7 +700,7 @@ class AddressState extends State<AddressPage> {
                       left: 15,
                     ),
                     hintText: 'address_enter_name'.tr,
-                    hintStyle: GoogleFonts.ebGaramond(
+                    hintStyle: TextStyle(
                       color: const Color(0xffD0D0D0),
                       fontSize: 13,
                       fontWeight: FontWeight.w400,
@@ -715,7 +715,7 @@ class AddressState extends State<AddressPage> {
               ),
               Text(
                 'addresss_phone'.tr,
-                style: GoogleFonts.ebGaramond(
+                style: TextStyle(
                   color: Colors.black,
                   fontSize: 13,
                   fontWeight: FontWeight.w400,
@@ -733,7 +733,7 @@ class AddressState extends State<AddressPage> {
                 ),
                 child: TextField(
                   controller: addressController.customerPhone,
-                  style: GoogleFonts.ebGaramond(
+                  style: TextStyle(
                     color: Colors.black,
                     fontSize: 13,
                     fontWeight: FontWeight.w400,
@@ -745,7 +745,7 @@ class AddressState extends State<AddressPage> {
                       left: 15,
                     ),
                     hintText: 'address_enter_phone'.tr,
-                    hintStyle: GoogleFonts.ebGaramond(
+                    hintStyle: TextStyle(
                       color: const Color(0xffD0D0D0),
                       fontSize: 13,
                       fontWeight: FontWeight.w400,
@@ -760,7 +760,7 @@ class AddressState extends State<AddressPage> {
               ),
               Text(
                 'addresss_province'.tr,
-                style: GoogleFonts.ebGaramond(
+                style: TextStyle(
                   color: Colors.black,
                   fontSize: 13,
                   fontWeight: FontWeight.w400,
@@ -805,7 +805,7 @@ class AddressState extends State<AddressPage> {
                       padding: const EdgeInsets.all(16),
                       child: Text(
                         item,
-                        style: GoogleFonts.ebGaramond(
+                        style: TextStyle(
                           color: Colors.black,
                           fontSize: 13,
                           fontWeight: FontWeight.w400,
@@ -818,7 +818,7 @@ class AddressState extends State<AddressPage> {
                     dropdownBuilder: (context, item) {
                       return Text(
                         item ?? 'select_province'.tr,
-                        style: GoogleFonts.ebGaramond(
+                        style: TextStyle(
                           color: item == null
                               ? const Color(0xffD0D0D0)
                               : Colors.black,
@@ -843,7 +843,7 @@ class AddressState extends State<AddressPage> {
                       contentPadding: const EdgeInsets.only(left: 15),
                       isDense: true,
                       border: InputBorder.none,
-                      hintStyle: GoogleFonts.ebGaramond(
+                      hintStyle: TextStyle(
                         color: const Color(0xffD0D0D0),
                         fontSize: 13,
                         fontWeight: FontWeight.w400,
@@ -857,7 +857,7 @@ class AddressState extends State<AddressPage> {
               ),
               Text(
                 'addresss_district'.tr,
-                style: GoogleFonts.ebGaramond(
+                style: TextStyle(
                   color: Colors.black,
                   fontSize: 13,
                   fontWeight: FontWeight.w400,
@@ -900,7 +900,7 @@ class AddressState extends State<AddressPage> {
                       padding: const EdgeInsets.all(16),
                       child: Text(
                         item,
-                        style: GoogleFonts.ebGaramond(
+                        style: TextStyle(
                           color: Colors.black,
                           fontSize: 13,
                           fontWeight: FontWeight.w400,
@@ -913,7 +913,7 @@ class AddressState extends State<AddressPage> {
                     dropdownBuilder: (context, item) {
                       return Text(
                         item ?? 'select_district'.tr,
-                        style: GoogleFonts.ebGaramond(
+                        style: TextStyle(
                           color: item == null
                               ? const Color(0xffD0D0D0)
                               : Colors.black,
@@ -938,7 +938,7 @@ class AddressState extends State<AddressPage> {
                       contentPadding: const EdgeInsets.only(left: 15),
                       isDense: true,
                       border: InputBorder.none,
-                      hintStyle: GoogleFonts.ebGaramond(
+                      hintStyle: TextStyle(
                         color: const Color(0xffD0D0D0),
                         fontSize: 13,
                         fontWeight: FontWeight.w400,
@@ -952,7 +952,7 @@ class AddressState extends State<AddressPage> {
               ),
               Text(
                 'address_ward'.tr,
-                style: GoogleFonts.ebGaramond(
+                style: TextStyle(
                   color: Colors.black,
                   fontSize: 13,
                   fontWeight: FontWeight.w400,
@@ -995,7 +995,7 @@ class AddressState extends State<AddressPage> {
                       padding: const EdgeInsets.all(16),
                       child: Text(
                         item,
-                        style: GoogleFonts.ebGaramond(
+                        style: TextStyle(
                           color: Colors.black,
                           fontSize: 13,
                           fontWeight: FontWeight.w400,
@@ -1008,7 +1008,7 @@ class AddressState extends State<AddressPage> {
                     dropdownBuilder: (context, item) {
                       return Text(
                         item ?? 'select_ward'.tr,
-                        style: GoogleFonts.ebGaramond(
+                        style: TextStyle(
                           color: item == null
                               ? const Color(0xffD0D0D0)
                               : Colors.black,
@@ -1028,7 +1028,7 @@ class AddressState extends State<AddressPage> {
                       contentPadding: const EdgeInsets.only(left: 15),
                       isDense: true,
                       border: InputBorder.none,
-                      hintStyle: GoogleFonts.ebGaramond(
+                      hintStyle: TextStyle(
                         color: const Color(0xffD0D0D0),
                         fontSize: 13,
                         fontWeight: FontWeight.w400,
@@ -1042,7 +1042,7 @@ class AddressState extends State<AddressPage> {
               ),
               Text(
                 'addresss_street'.tr,
-                style: GoogleFonts.ebGaramond(
+                style: TextStyle(
                   color: Colors.black,
                   fontSize: 13,
                   fontWeight: FontWeight.w400,
@@ -1060,7 +1060,7 @@ class AddressState extends State<AddressPage> {
                 ),
                 child: TextField(
                   controller: addressController.customerStreet,
-                  style: GoogleFonts.ebGaramond(
+                  style: TextStyle(
                     color: Colors.black,
                     fontSize: 13,
                     fontWeight: FontWeight.w400,
@@ -1072,7 +1072,7 @@ class AddressState extends State<AddressPage> {
                       left: 15,
                     ),
                     hintText: 'address_enter_street'.tr,
-                    hintStyle: GoogleFonts.ebGaramond(
+                    hintStyle: TextStyle(
                       color: const Color(0xffD0D0D0),
                       fontSize: 13,
                       fontWeight: FontWeight.w400,
@@ -1107,7 +1107,7 @@ class AddressState extends State<AddressPage> {
                     ),
                     Text(
                       'address_set_default_address'.tr,
-                      style: GoogleFonts.ebGaramond(
+                      style: TextStyle(
                         color: Colors.black,
                         fontSize: 14,
                         fontWeight: FontWeight.w400,
@@ -1139,7 +1139,7 @@ class AddressState extends State<AddressPage> {
                           child: Center(
                             child: Text(
                               'address_cancel'.tr,
-                              style: GoogleFonts.ebGaramond(
+                              style: TextStyle(
                                 color: Colors.black,
                                 fontSize: 14,
                                 fontWeight: FontWeight.w600,
@@ -1192,7 +1192,7 @@ class AddressState extends State<AddressPage> {
                             child: Center(
                               child: Text(
                                 'address_confirm'.tr,
-                                style: GoogleFonts.ebGaramond(
+                                style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 14,
                                   fontWeight: FontWeight.w600,
@@ -1241,7 +1241,7 @@ class AddressState extends State<AddressPage> {
                   children: [
                     Text(
                       'address_delete'.tr,
-                      style: GoogleFonts.ebGaramond(
+                      style: TextStyle(
                         color: Colors.black,
                         fontSize: 16,
                         fontWeight: FontWeight.w600,
@@ -1274,7 +1274,7 @@ class AddressState extends State<AddressPage> {
               alignment: Alignment.center,
               child: Text(
                 'address_warning'.tr,
-                style: GoogleFonts.ebGaramond(
+                style: TextStyle(
                   color: Colors.black,
                   fontSize: 16,
                   fontWeight: FontWeight.w600,
@@ -1304,7 +1304,7 @@ class AddressState extends State<AddressPage> {
                         child: Center(
                           child: Text(
                             'address_cancel'.tr,
-                            style: GoogleFonts.ebGaramond(
+                            style: TextStyle(
                               color: Colors.black,
                               fontSize: 14,
                               fontWeight: FontWeight.w600,
@@ -1335,7 +1335,7 @@ class AddressState extends State<AddressPage> {
                           child: Center(
                             child: Text(
                               'address_confirm'.tr,
-                              style: GoogleFonts.ebGaramond(
+                              style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 14,
                                 fontWeight: FontWeight.w600,
@@ -1404,7 +1404,7 @@ class AddressState extends State<AddressPage> {
                     ),
                     title: Text(
                       'cart_address'.tr,
-                      style: GoogleFonts.ebGaramond(
+                      style: TextStyle(
                         color: theme.theme == ThemeMode.light
                             ? Colors.black
                             : Colors.white,
@@ -1435,7 +1435,7 @@ class AddressState extends State<AddressPage> {
                             children: [
                               Text(
                                 'address_default'.tr,
-                                style: GoogleFonts.ebGaramond(
+                                style: TextStyle(
                                   color: theme.theme == ThemeMode.light
                                       ? Colors.black
                                       : Colors.white,
@@ -1500,7 +1500,7 @@ class AddressState extends State<AddressPage> {
                                               children: [
                                                 Text(
                                                   '${controller.listAddressDefault.value.nameReciever != null && controller.listAddressDefault.value.nameReciever!.isNotEmpty ? controller.listAddressDefault.value.nameReciever : '--'} - ${controller.listAddressDefault.value.phoneReciever != null && controller.listAddressDefault.value.phoneReciever!.isNotEmpty ? controller.listAddressDefault.value.phoneReciever : '--'}',
-                                                  style: GoogleFonts.ebGaramond(
+                                                  style: TextStyle(
                                                     color: Colors.black,
                                                     fontSize: 14,
                                                     fontWeight: FontWeight.w600,
@@ -1517,7 +1517,7 @@ class AddressState extends State<AddressPage> {
                                                       '${controller.listAddressDefault.value.district != null && controller.listAddressDefault.value.district!.isNotEmpty ? controller.listAddressDefault.value.district : '--'}' +
                                                       ', ' +
                                                       '${controller.listAddressDefault.value.province != null && controller.listAddressDefault.value.province!.isNotEmpty ? controller.listAddressDefault.value.province : '--'}',
-                                                  style: GoogleFonts.ebGaramond(
+                                                  style: TextStyle(
                                                     color: Colors.black,
                                                     fontSize: 14,
                                                     fontWeight: FontWeight.w400,
@@ -1608,7 +1608,7 @@ class AddressState extends State<AddressPage> {
                                       ),
                                       Text(
                                         'no_information'.tr,
-                                        style: GoogleFonts.ebGaramond(
+                                        style: TextStyle(
                                           color: theme.theme == ThemeMode.light
                                               ? Colors.black
                                               : Colors.white,
@@ -1628,7 +1628,7 @@ class AddressState extends State<AddressPage> {
                             children: [
                               Text(
                                 'address_other'.tr,
-                                style: GoogleFonts.ebGaramond(
+                                style: TextStyle(
                                   color: theme.theme == ThemeMode.light
                                       ? Colors.black
                                       : Colors.white,
@@ -1815,7 +1815,7 @@ class AddressState extends State<AddressPage> {
                                         ),
                                         Text(
                                           'no_information'.tr,
-                                          style: GoogleFonts.ebGaramond(
+                                          style: TextStyle(
                                             color:
                                                 theme.theme == ThemeMode.light
                                                     ? Colors.black
@@ -1889,7 +1889,7 @@ class AddressState extends State<AddressPage> {
                           ),
                           Text(
                             'address_new_add'.tr,
-                            style: GoogleFonts.ebGaramond(
+                            style: TextStyle(
                               color: theme.theme == ThemeMode.light
                                   ? Colors.white
                                   : Colors.black,

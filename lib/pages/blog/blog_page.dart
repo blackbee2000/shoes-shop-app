@@ -51,7 +51,7 @@ class BlogPage extends StatelessWidget {
                       backgroundColor: Colors.black.withOpacity(0),
                       title: Text(
                         "blog_title".tr,
-                        style: GoogleFonts.ebGaramond(
+                        style: TextStyle(
                           color: Colors.white,
                           fontSize: 20,
                           fontWeight: FontWeight.w600,
@@ -111,21 +111,28 @@ class BlogPage extends StatelessWidget {
                             builderDelegate: PagedChildBuilderDelegate<Blog>(
                               noItemsFoundIndicatorBuilder: (context) =>
                                   Container(
+                                alignment: Alignment.center,
                                 child: Column(
                                   children: [
                                     Image.asset(
-                                      'asset/icons/no_data.png',
-                                      width: 30,
-                                      height: 30,
-                                      fit: BoxFit.contain,
+                                      'assets/icons/icon-box.png',
+                                      width: 45,
+                                      color: theme.theme == ThemeMode.light
+                                          ? Colors.black
+                                          : Colors.white,
+                                    ),
+                                    const SizedBox(
+                                      height: 10,
                                     ),
                                     Text(
-                                      'no_data'.tr,
+                                      'no_information'.tr,
                                       style: TextStyle(
-                                        color: Color(0xff404040),
-                                        fontSize: 12,
+                                        color: theme.theme == ThemeMode.light
+                                            ? Colors.black
+                                            : Colors.white,
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.w600,
                                       ),
-                                      textAlign: TextAlign.center,
                                     ),
                                   ],
                                 ),
@@ -220,7 +227,7 @@ class BlogPage extends StatelessWidget {
                                             children: [
                                               Text(
                                                 '${AppTranslation.instance.language == AppTranslation.english ? (item.titleEn != null && item.titleEn!.isNotEmpty ? item.titleEn : '--') : (item.titleVi != null && item.titleVi!.isNotEmpty ? item.titleVi : '--')}',
-                                                style: GoogleFonts.ebGaramond(
+                                                style: TextStyle(
                                                   color: Colors.black,
                                                   fontSize: 16,
                                                   fontWeight: FontWeight.w600,
@@ -234,7 +241,7 @@ class BlogPage extends StatelessWidget {
                                               ),
                                               Text(
                                                 '${AppTranslation.instance.language == AppTranslation.english ? (item.descriptionShortEn != null && item.descriptionShortEn!.isNotEmpty ? item.descriptionShortEn : '--') : (item.descriptionShortVi != null && item.descriptionShortVi!.isNotEmpty ? item.descriptionShortVi : '--')}',
-                                                style: GoogleFonts.ebGaramond(
+                                                style: TextStyle(
                                                   color: Colors.black,
                                                   fontSize: 13,
                                                   fontWeight: FontWeight.w400,
@@ -271,8 +278,7 @@ class BlogPage extends StatelessWidget {
                                                                         '')
                                                                 .toLocal())
                                                         : '--',
-                                                    style:
-                                                        GoogleFonts.ebGaramond(
+                                                    style: TextStyle(
                                                       color: Colors.black,
                                                       fontSize: 12,
                                                       fontWeight:

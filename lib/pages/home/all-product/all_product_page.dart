@@ -71,7 +71,7 @@ class AllProductState extends State<AllProductPage> {
                   children: [
                     Text(
                       'notification'.tr,
-                      style: GoogleFonts.ebGaramond(
+                      style: TextStyle(
                         color: Colors.black,
                         fontSize: 16,
                         fontWeight: FontWeight.w600,
@@ -104,7 +104,7 @@ class AllProductState extends State<AllProductPage> {
               alignment: Alignment.center,
               child: Text(
                 'login_popup'.tr,
-                style: GoogleFonts.ebGaramond(
+                style: TextStyle(
                   color: Colors.black,
                   fontSize: 16,
                   fontWeight: FontWeight.w600,
@@ -134,7 +134,7 @@ class AllProductState extends State<AllProductPage> {
                         child: Center(
                           child: Text(
                             'address_cancel'.tr,
-                            style: GoogleFonts.ebGaramond(
+                            style: TextStyle(
                               color: Colors.black,
                               fontSize: 14,
                               fontWeight: FontWeight.w600,
@@ -161,7 +161,7 @@ class AllProductState extends State<AllProductPage> {
                         child: Center(
                           child: Text(
                             'address_confirm'.tr,
-                            style: GoogleFonts.ebGaramond(
+                            style: TextStyle(
                               color: Colors.white,
                               fontSize: 14,
                               fontWeight: FontWeight.w600,
@@ -210,7 +210,7 @@ class AllProductState extends State<AllProductPage> {
                 ),
                 title: Text(
                   "product_title".tr,
-                  style: GoogleFonts.ebGaramond(
+                  style: TextStyle(
                     color: theme.theme == ThemeMode.light
                         ? Colors.black
                         : Colors.white,
@@ -492,7 +492,7 @@ class AllProductState extends State<AllProductPage> {
                                             alignment: Alignment.topLeft,
                                             child: Text(
                                               '${AppTranslation.instance.language == AppTranslation.english ? (controller.listProduct[index].nameProductEn != null && controller.listProduct[index].nameProductEn!.isNotEmpty ? controller.listProduct[index].nameProductEn : '--') : (controller.listProduct[index].nameProductVi != null && controller.listProduct[index].nameProductVi!.isNotEmpty ? controller.listProduct[index].nameProductVi : '--')}',
-                                              style: GoogleFonts.ebGaramond(
+                                              style: TextStyle(
                                                 color: theme.theme ==
                                                         ThemeMode.light
                                                     ? Colors.black
@@ -529,12 +529,12 @@ class AllProductState extends State<AllProductPage> {
                                                                   index]
                                                               .price)
                                                           .toString()),
-                                                  style: GoogleFonts.ebGaramond(
+                                                  style: TextStyle(
                                                     color: theme.theme ==
                                                             ThemeMode.light
                                                         ? Colors.black
                                                         : Colors.white,
-                                                    fontSize: 20,
+                                                    fontSize: 18,
                                                     fontWeight: FontWeight.w600,
                                                     decoration: controller
                                                                 .listProduct[
@@ -555,8 +555,7 @@ class AllProductState extends State<AllProductPage> {
                                                       text: TextSpan(
                                                         text:
                                                             ' - ${controller.listProduct[index].discount} %',
-                                                        style: GoogleFonts
-                                                            .ebGaramond(
+                                                        style: TextStyle(
                                                           color: Colors.amber,
                                                           fontSize: 14,
                                                           fontWeight:
@@ -599,13 +598,12 @@ class AllProductState extends State<AllProductPage> {
                                                                       100) /
                                                                   10)
                                                               .toString()),
-                                                      style: GoogleFonts
-                                                          .ebGaramond(
+                                                      style: TextStyle(
                                                         color: theme.theme ==
                                                                 ThemeMode.light
                                                             ? Colors.black
                                                             : Colors.white,
-                                                        fontSize: 20,
+                                                        fontSize: 18,
                                                         fontWeight:
                                                             FontWeight.w600,
                                                       ),
@@ -621,7 +619,7 @@ class AllProductState extends State<AllProductPage> {
                                               rating: double.tryParse(controller
                                                       .listProduct[index].rating
                                                       .toString()) ??
-                                                  0.0,
+                                                  5.0,
                                               itemBuilder: (context, index) =>
                                                   const Icon(
                                                 Icons.star,
@@ -653,7 +651,7 @@ class AllProductState extends State<AllProductPage> {
                                       ),
                                       Text(
                                         'no_information'.tr,
-                                        style: GoogleFonts.ebGaramond(
+                                        style: TextStyle(
                                           color: theme.theme == ThemeMode.light
                                               ? Colors.black
                                               : Colors.white,

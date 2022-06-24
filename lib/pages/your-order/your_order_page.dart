@@ -64,7 +64,7 @@ class YourOrderState extends State<YourOrderPage> {
                   children: [
                     Text(
                       'order_cancel'.tr,
-                      style: GoogleFonts.ebGaramond(
+                      style: TextStyle(
                         color: Colors.black,
                         fontSize: 16,
                         fontWeight: FontWeight.w600,
@@ -97,7 +97,7 @@ class YourOrderState extends State<YourOrderPage> {
               alignment: Alignment.center,
               child: Text(
                 'order_warning'.tr,
-                style: GoogleFonts.ebGaramond(
+                style: TextStyle(
                   color: Colors.black,
                   fontSize: 16,
                   fontWeight: FontWeight.w600,
@@ -127,7 +127,7 @@ class YourOrderState extends State<YourOrderPage> {
                         child: Center(
                           child: Text(
                             'address_cancel'.tr,
-                            style: GoogleFonts.ebGaramond(
+                            style: TextStyle(
                               color: Colors.black,
                               fontSize: 14,
                               fontWeight: FontWeight.w600,
@@ -158,7 +158,7 @@ class YourOrderState extends State<YourOrderPage> {
                           child: Center(
                             child: Text(
                               'address_confirm'.tr,
-                              style: GoogleFonts.ebGaramond(
+                              style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 14,
                                 fontWeight: FontWeight.w600,
@@ -224,7 +224,7 @@ class YourOrderState extends State<YourOrderPage> {
                 ),
                 title: Text(
                   'bill_and_order'.tr,
-                  style: GoogleFonts.ebGaramond(
+                  style: TextStyle(
                     color: theme.theme == ThemeMode.light
                         ? Colors.black
                         : Colors.white,
@@ -350,7 +350,7 @@ class YourOrderState extends State<YourOrderPage> {
                                   ),
                                   Text(
                                     '${controller.listTabOrderStatus[index].name}',
-                                    style: GoogleFonts.ebGaramond(
+                                    style: TextStyle(
                                       color: controller.tabController.index ==
                                               index
                                           ? theme.theme == ThemeMode.light
@@ -392,7 +392,7 @@ class YourOrderState extends State<YourOrderPage> {
                                           ),
                                           Text(
                                             'no_information'.tr,
-                                            style: GoogleFonts.ebGaramond(
+                                            style: TextStyle(
                                               color:
                                                   theme.theme == ThemeMode.light
                                                       ? Colors.black
@@ -437,7 +437,7 @@ class YourOrderState extends State<YourOrderPage> {
                                                       left: 20,
                                                       right: 20,
                                                     ),
-                                          height: 100,
+                                          height: 110,
                                           decoration: BoxDecoration(
                                             color: Colors.white,
                                             borderRadius:
@@ -459,7 +459,7 @@ class YourOrderState extends State<YourOrderPage> {
                                           child: Row(
                                             children: [
                                               Container(
-                                                width: 120,
+                                                width: 100,
                                                 height: double.infinity,
                                                 color: controller
                                                             .listOrder[index]
@@ -503,8 +503,7 @@ class YourOrderState extends State<YourOrderPage> {
                                                     children: [
                                                       Text(
                                                         '${controller.listOrder[index].id != null && controller.listOrder[index].id!.isNotEmpty ? controller.listOrder[index].id : '--'}',
-                                                        style: GoogleFonts
-                                                            .ebGaramond(
+                                                        style: TextStyle(
                                                           color: Colors.black,
                                                           fontSize: 16,
                                                           fontWeight:
@@ -519,8 +518,7 @@ class YourOrderState extends State<YourOrderPage> {
                                                       ),
                                                       Text(
                                                         '${'payment_total_bill'.tr} ${controller.listOrder[index].totalPrice ?? '--'}',
-                                                        style: GoogleFonts
-                                                            .ebGaramond(
+                                                        style: TextStyle(
                                                           color: Colors.black,
                                                           fontSize: 14,
                                                           fontWeight:
@@ -538,8 +536,7 @@ class YourOrderState extends State<YourOrderPage> {
                                                                 true
                                                             ? 'delivered'.tr
                                                             : 'delivering'.tr,
-                                                        style: GoogleFonts
-                                                            .ebGaramond(
+                                                        style: TextStyle(
                                                           color: controller
                                                                       .listOrder[
                                                                           index]
@@ -610,7 +607,7 @@ class YourOrderState extends State<YourOrderPage> {
                                           ),
                                           Text(
                                             'no_information'.tr,
-                                            style: GoogleFonts.ebGaramond(
+                                            style: TextStyle(
                                               color: Colors.black,
                                               fontSize: 18,
                                               fontWeight: FontWeight.w600,
@@ -652,7 +649,7 @@ class YourOrderState extends State<YourOrderPage> {
                                                       left: 20,
                                                       right: 20,
                                                     ),
-                                          height: 100,
+                                          height: 110,
                                           decoration: BoxDecoration(
                                             color: Colors.white,
                                             borderRadius:
@@ -674,7 +671,7 @@ class YourOrderState extends State<YourOrderPage> {
                                           child: Row(
                                             children: [
                                               Container(
-                                                width: 120,
+                                                width: 100,
                                                 height: double.infinity,
                                                 color: controller
                                                             .listOrder[index]
@@ -718,8 +715,7 @@ class YourOrderState extends State<YourOrderPage> {
                                                     children: [
                                                       Text(
                                                         '${controller.listOrder[index].id != null && controller.listOrder[index].id!.isNotEmpty ? controller.listOrder[index].id : '--'}',
-                                                        style: GoogleFonts
-                                                            .ebGaramond(
+                                                        style: TextStyle(
                                                           color: Colors.black,
                                                           fontSize: 16,
                                                           fontWeight:
@@ -734,8 +730,7 @@ class YourOrderState extends State<YourOrderPage> {
                                                       ),
                                                       Text(
                                                         '${'payment_total_bill'.tr} ${controller.listOrder[index].totalPrice ?? '--'}',
-                                                        style: GoogleFonts
-                                                            .ebGaramond(
+                                                        style: TextStyle(
                                                           color: Colors.black,
                                                           fontSize: 14,
                                                           fontWeight:

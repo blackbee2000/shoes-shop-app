@@ -46,7 +46,7 @@ class LoginState extends State<LoginPage> {
                   children: [
                     Text(
                       'enter_number_phone'.tr,
-                      style: GoogleFonts.ebGaramond(
+                      style: TextStyle(
                         color: Colors.black,
                         fontSize: 16,
                         fontWeight: FontWeight.w600,
@@ -84,7 +84,7 @@ class LoginState extends State<LoginPage> {
               ),
               child: TextField(
                 controller: loginController.numberPhone,
-                style: GoogleFonts.ebGaramond(
+                style: TextStyle(
                   color: Colors.black,
                   fontSize: 13,
                   fontWeight: FontWeight.w400,
@@ -96,7 +96,7 @@ class LoginState extends State<LoginPage> {
                     left: 15,
                   ),
                   hintText: 'login_your_phone'.tr,
-                  hintStyle: GoogleFonts.ebGaramond(
+                  hintStyle: TextStyle(
                     color: const Color(0xffD0D0D0),
                     fontSize: 13,
                     fontWeight: FontWeight.w400,
@@ -133,7 +133,7 @@ class LoginState extends State<LoginPage> {
                         child: Center(
                           child: Text(
                             'address_cancel'.tr,
-                            style: GoogleFonts.ebGaramond(
+                            style: TextStyle(
                               color: Colors.black,
                               fontSize: 14,
                               fontWeight: FontWeight.w600,
@@ -181,7 +181,7 @@ class LoginState extends State<LoginPage> {
                         child: Center(
                           child: Text(
                             'address_confirm'.tr,
-                            style: GoogleFonts.ebGaramond(
+                            style: TextStyle(
                               color: Colors.white,
                               fontSize: 14,
                               fontWeight: FontWeight.w600,
@@ -232,7 +232,7 @@ class LoginState extends State<LoginPage> {
                         ),
                         Text(
                           'sign_in'.tr,
-                          style: GoogleFonts.ebGaramond(
+                          style: TextStyle(
                             color: Colors.white,
                             fontSize: 50,
                             fontWeight: FontWeight.w700,
@@ -273,7 +273,7 @@ class LoginState extends State<LoginPage> {
                                 ),
                                 TextField(
                                   controller: controller.phone,
-                                  style: GoogleFonts.ebGaramond(
+                                  style: TextStyle(
                                     color: Colors.black,
                                     fontSize: 14,
                                     fontWeight: FontWeight.w400,
@@ -283,7 +283,7 @@ class LoginState extends State<LoginPage> {
                                         const EdgeInsets.only(left: 35),
                                     border: InputBorder.none,
                                     hintText: 'login_your_phone'.tr,
-                                    hintStyle: GoogleFonts.ebGaramond(
+                                    hintStyle: TextStyle(
                                       color: const Color(0xffD0D0D0),
                                       fontSize: 14,
                                       fontWeight: FontWeight.w400,
@@ -334,7 +334,7 @@ class LoginState extends State<LoginPage> {
                                 TextField(
                                   controller: controller.password,
                                   obscureText: true,
-                                  style: GoogleFonts.ebGaramond(
+                                  style: TextStyle(
                                     color: Colors.black,
                                     fontSize: 14,
                                     fontWeight: FontWeight.w400,
@@ -344,7 +344,7 @@ class LoginState extends State<LoginPage> {
                                         const EdgeInsets.only(left: 35),
                                     border: InputBorder.none,
                                     hintText: 'login_your_password'.tr,
-                                    hintStyle: GoogleFonts.ebGaramond(
+                                    hintStyle: TextStyle(
                                       color: const Color(0xffD0D0D0),
                                       fontSize: 14,
                                       fontWeight: FontWeight.w400,
@@ -371,7 +371,7 @@ class LoginState extends State<LoginPage> {
                                 },
                                 child: Text(
                                   'login_not_account'.tr,
-                                  style: GoogleFonts.ebGaramond(
+                                  style: TextStyle(
                                     color: Colors.black,
                                     fontSize: 14,
                                     fontWeight: FontWeight.w400,
@@ -387,7 +387,7 @@ class LoginState extends State<LoginPage> {
                                 },
                                 child: Text(
                                   'login_forget_password'.tr,
-                                  style: GoogleFonts.ebGaramond(
+                                  style: TextStyle(
                                     color: Colors.black,
                                     fontSize: 14,
                                     fontWeight: FontWeight.w400,

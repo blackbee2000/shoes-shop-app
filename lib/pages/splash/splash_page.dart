@@ -38,7 +38,7 @@ class SpalshPage extends StatelessWidget {
                 children: [
                   Text(
                     'Wellcome',
-                    style: GoogleFonts.ebGaramond(
+                    style: TextStyle(
                       color: Colors.white,
                       fontSize: 45,
                       fontWeight: FontWeight.w900,
@@ -50,7 +50,7 @@ class SpalshPage extends StatelessWidget {
                   ),
                   Text(
                     'Hello there, nice to meet you!',
-                    style: GoogleFonts.ebGaramond(
+                    style: TextStyle(
                       color: Colors.white,
                       fontSize: 22,
                       fontWeight: FontWeight.w400,
@@ -95,7 +95,7 @@ class SpalshPage extends StatelessWidget {
                           padding: const EdgeInsets.only(top: 20),
                           child: Text(
                             'Start',
-                            style: GoogleFonts.ebGaramond(
+                            style: TextStyle(
                               color: Colors.white,
                               fontSize: 35,
                               fontWeight: FontWeight.w900,

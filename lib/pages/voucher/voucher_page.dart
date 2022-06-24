@@ -41,7 +41,7 @@ class VoucherPage extends StatelessWidget {
                 ),
                 title: Text(
                   'voucher'.tr,
-                  style: GoogleFonts.ebGaramond(
+                  style: TextStyle(
                     color: Colors.white,
                     fontSize: 20,
                     fontWeight: FontWeight.w600,
@@ -163,7 +163,7 @@ class VoucherPage extends StatelessWidget {
                                 children: [
                                   Text(
                                     '${controller.listVoucher[index].title != null && controller.listVoucher[index].title!.isNotEmpty ? controller.listVoucher[index].title : 'no_information'.tr}',
-                                    style: GoogleFonts.ebGaramond(
+                                    style: TextStyle(
                                       color: Colors.black,
                                       fontSize: 16,
                                       fontWeight: FontWeight.w600,
@@ -174,7 +174,7 @@ class VoucherPage extends StatelessWidget {
                                   ),
                                   Text(
                                     'Giảm giá: ${controller.listVoucher[index].discount ?? '--'}',
-                                    style: GoogleFonts.ebGaramond(
+                                    style: TextStyle(
                                       color: Colors.black,
                                       fontSize: 16,
                                       fontWeight: FontWeight.w600,
@@ -186,7 +186,7 @@ class VoucherPage extends StatelessWidget {
                                   Text(
                                     'Thời hạn: '
                                     '${controller.listVoucher[index].expiry != null && controller.listVoucher[index].expiry!.isNotEmpty ? DateFormat('HH:mm - dd/MM/yyyy').format(DateTime.parse(controller.listVoucher[index].expiry ?? '').toLocal()) : '--'}',
-                                    style: GoogleFonts.ebGaramond(
+                                    style: TextStyle(
                                       color: Colors.black,
                                       fontSize: 16,
                                       fontWeight: FontWeight.w600,

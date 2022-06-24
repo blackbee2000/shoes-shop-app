@@ -56,7 +56,7 @@ class OtpPage extends GetView<OtpController> {
               centerTitle: true,
               title: Text(
                 'otp'.tr,
-                style: GoogleFonts.ebGaramond(
+                style: TextStyle(
                   color: theme.theme == ThemeMode.light
                       ? Colors.black
                       : Colors.white,
@@ -75,7 +75,7 @@ class OtpPage extends GetView<OtpController> {
                     padding: const EdgeInsets.only(left: 40, right: 40),
                     child: Text(
                       'otp_enter'.tr,
-                      style: GoogleFonts.ebGaramond(
+                      style: TextStyle(
                         color: theme.theme == ThemeMode.light
                             ? Colors.black
                             : Colors.white,
@@ -134,7 +134,7 @@ class OtpPage extends GetView<OtpController> {
                       },
                       onChanged: (value) {},
                       hintCharacter: '*',
-                      hintStyle: GoogleFonts.ebGaramond(
+                      hintStyle: TextStyle(
                         color: theme.theme == ThemeMode.light
                             ? Colors.black.withOpacity(0.5)
                             : Colors.white.withOpacity(0.5),
@@ -157,7 +157,7 @@ class OtpPage extends GetView<OtpController> {
                     children: [
                       Text(
                         'otp_expires'.tr,
-                        style: GoogleFonts.ebGaramond(
+                        style: TextStyle(
                           color: theme.theme == ThemeMode.light
                               ? Colors.black
                               : Colors.white,
@@ -183,7 +183,7 @@ class OtpPage extends GetView<OtpController> {
                             child: Text(
                               '$minutes:$seconds',
                               textAlign: TextAlign.center,
-                              style: GoogleFonts.ebGaramond(
+                              style: TextStyle(
                                 color: theme.theme == ThemeMode.light
                                     ? Colors.black
                                     : Colors.white,

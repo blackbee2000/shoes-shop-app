@@ -47,7 +47,7 @@ class ProfilePage extends GetView<ProfileController> {
               padding: const EdgeInsets.only(bottom: 15),
               child: Text(
                 'profile_english'.tr,
-                style: GoogleFonts.ebGaramond(
+                style: TextStyle(
                   color: Colors.black,
                   fontSize: 16,
                   fontWeight: FontWeight.w400,
@@ -71,7 +71,7 @@ class ProfilePage extends GetView<ProfileController> {
               padding: const EdgeInsets.only(top: 15),
               child: Text(
                 'profile_vietnames'.tr,
-                style: GoogleFonts.ebGaramond(
+                style: TextStyle(
                   color: Colors.black,
                   fontSize: 16,
                   fontWeight: FontWeight.w400,
@@ -116,7 +116,7 @@ class ProfilePage extends GetView<ProfileController> {
                         ),
                   title: Text(
                     'profile_title'.tr,
-                    style: GoogleFonts.ebGaramond(
+                    style: TextStyle(
                       color: theme.theme == ThemeMode.light
                           ? Colors.black
                           : Colors.white,
@@ -198,7 +198,7 @@ class ProfilePage extends GetView<ProfileController> {
                                           ),
                                           Text(
                                             'no_user'.tr,
-                                            style: GoogleFonts.ebGaramond(
+                                            style: TextStyle(
                                               color:
                                                   theme.theme == ThemeMode.light
                                                       ? Colors.black
@@ -313,7 +313,7 @@ class ProfilePage extends GetView<ProfileController> {
                                             children: [
                                               Text(
                                                 'profile_information'.tr,
-                                                style: GoogleFonts.ebGaramond(
+                                                style: TextStyle(
                                                   color: Colors.black,
                                                   fontSize: 18,
                                                   fontWeight: FontWeight.w600,
@@ -388,7 +388,7 @@ class ProfilePage extends GetView<ProfileController> {
                                                 ),
                                                 Text(
                                                   '${controller.profile.value.fullName != null && controller.profile.value.fullName!.isNotEmpty ? controller.profile.value.fullName : 'no_information'.tr}',
-                                                  style: GoogleFonts.ebGaramond(
+                                                  style: TextStyle(
                                                     color: Colors.black,
                                                     fontSize: 14,
                                                     fontWeight: FontWeight.w400,
@@ -417,7 +417,7 @@ class ProfilePage extends GetView<ProfileController> {
                                                 ),
                                                 Text(
                                                   '${controller.profile.value.phoneNumber != null && controller.profile.value.phoneNumber!.isNotEmpty ? controller.profile.value.phoneNumber : 'no_information'.tr}',
-                                                  style: GoogleFonts.ebGaramond(
+                                                  style: TextStyle(
                                                     color: Colors.black,
                                                     fontSize: 14,
                                                     fontWeight: FontWeight.w400,
@@ -446,7 +446,7 @@ class ProfilePage extends GetView<ProfileController> {
                                                 ),
                                                 Text(
                                                   '${controller.profile.value.email != null && controller.profile.value.email!.isNotEmpty ? controller.profile.value.email : 'no_information'.tr}',
-                                                  style: GoogleFonts.ebGaramond(
+                                                  style: TextStyle(
                                                     color: Colors.black,
                                                     fontSize: 14,
                                                     fontWeight: FontWeight.w400,
@@ -487,7 +487,7 @@ class ProfilePage extends GetView<ProfileController> {
                                   children: [
                                     Text(
                                       'profile_language'.tr,
-                                      style: GoogleFonts.ebGaramond(
+                                      style: TextStyle(
                                         color: Colors.black,
                                         fontSize: 16,
                                         fontWeight: FontWeight.w600,
@@ -506,7 +506,7 @@ class ProfilePage extends GetView<ProfileController> {
                                                       const Locale('en', 'US')
                                                   ? 'profile_english'.tr
                                                   : 'profile_vietnames'.tr,
-                                              style: GoogleFonts.ebGaramond(
+                                              style: TextStyle(
                                                 color: Colors.black,
                                                 fontSize: 14,
                                                 fontWeight: FontWeight.w400,
@@ -555,7 +555,7 @@ class ProfilePage extends GetView<ProfileController> {
                                   children: [
                                     Text(
                                       'profile_dark_theme'.tr,
-                                      style: GoogleFonts.ebGaramond(
+                                      style: TextStyle(
                                         color: Colors.black,
                                         fontSize: 16,
                                         fontWeight: FontWeight.w600,
@@ -604,7 +604,7 @@ class ProfilePage extends GetView<ProfileController> {
                                               'change_password'
                                                   .tr
                                                   .toUpperCase(),
-                                              style: GoogleFonts.ebGaramond(
+                                              style: TextStyle(
                                                 color: Colors.white,
                                                 fontSize: 16,
                                                 fontWeight: FontWeight.w600,
@@ -647,8 +647,7 @@ class ProfilePage extends GetView<ProfileController> {
                                                     'profile_favorite'
                                                         .tr
                                                         .toUpperCase(),
-                                                    style:
-                                                        GoogleFonts.ebGaramond(
+                                                    style: TextStyle(
                                                       color: Colors.black,
                                                       fontSize: 14,
                                                       fontWeight:
@@ -681,8 +680,7 @@ class ProfilePage extends GetView<ProfileController> {
                                                 child: Center(
                                                   child: Text(
                                                     'bill'.tr.toUpperCase(),
-                                                    style:
-                                                        GoogleFonts.ebGaramond(
+                                                    style: TextStyle(
                                                       color: Colors.black,
                                                       fontSize: 14,
                                                       fontWeight:
@@ -722,7 +720,7 @@ class ProfilePage extends GetView<ProfileController> {
                                         ApiToken().isTokenExisted
                                             ? 'profile_logout'.tr.toUpperCase()
                                             : 'sign_in'.tr.toUpperCase(),
-                                        style: GoogleFonts.ebGaramond(
+                                        style: TextStyle(
                                           color: Colors.white,
                                           fontSize: 16,
                                           fontWeight: FontWeight.w600,

@@ -81,7 +81,7 @@ class BlogDetailState extends State<BlogDetailPage> {
                   backgroundColor: Colors.white,
                   title: Text(
                     "blog_detail_title".tr,
-                    style: GoogleFonts.ebGaramond(
+                    style: TextStyle(
                       color: Colors.black,
                       fontSize: 20,
                       fontWeight: FontWeight.w600,
@@ -188,7 +188,7 @@ class BlogDetailState extends State<BlogDetailPage> {
                                 children: [
                                   Text(
                                     '${AppTranslation.instance.language == AppTranslation.english ? (widget.blog.titleEn != null && widget.blog.titleEn!.isNotEmpty ? widget.blog.titleEn : '--') : (widget.blog.titleVi != null && widget.blog.titleVi!.isNotEmpty ? widget.blog.titleVi : '--')}',
-                                    style: GoogleFonts.ebGaramond(
+                                    style: TextStyle(
                                       color: Colors.black,
                                       fontSize: 22,
                                       fontWeight: FontWeight.w600,
@@ -224,7 +224,7 @@ class BlogDetailState extends State<BlogDetailPage> {
                                                             '')
                                                     .toLocal())
                                             : '--',
-                                        style: GoogleFonts.ebGaramond(
+                                        style: TextStyle(
                                           color: Colors.black,
                                           fontSize: 13,
                                           fontWeight: FontWeight.w400,
@@ -309,7 +309,7 @@ class BlogDetailState extends State<BlogDetailPage> {
                                       ),
                                       Text(
                                         'no_information'.tr,
-                                        style: GoogleFonts.ebGaramond(
+                                        style: TextStyle(
                                           color: const Color(0xff404040),
                                           fontSize: 12,
                                         ),
@@ -332,7 +332,7 @@ class BlogDetailState extends State<BlogDetailPage> {
                                       ),
                                       Text(
                                         'no_information'.tr,
-                                        style: GoogleFonts.ebGaramond(
+                                        style: TextStyle(
                                           color: const Color(0xff404040),
                                           fontSize: 12,
                                         ),
@@ -346,7 +346,7 @@ class BlogDetailState extends State<BlogDetailPage> {
                       ),
                       Text(
                         'blog_detail_related'.tr,
-                        style: GoogleFonts.ebGaramond(
+                        style: TextStyle(
                           color: Colors.black,
                           fontSize: 16,
                           fontWeight: FontWeight.w600,

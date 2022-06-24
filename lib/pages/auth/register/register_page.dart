@@ -41,7 +41,7 @@ class RegisterPage extends StatelessWidget {
                         ),
                         Text(
                           'register'.tr,
-                          style: GoogleFonts.ebGaramond(
+                          style: TextStyle(
                             color: Colors.white,
                             fontSize: 50,
                             fontWeight: FontWeight.w700,
@@ -82,7 +82,7 @@ class RegisterPage extends StatelessWidget {
                                 ),
                                 TextField(
                                   controller: controller.phone,
-                                  style: GoogleFonts.ebGaramond(
+                                  style: TextStyle(
                                     color: Colors.black,
                                     fontSize: 14,
                                     fontWeight: FontWeight.w400,
@@ -92,7 +92,7 @@ class RegisterPage extends StatelessWidget {
                                         const EdgeInsets.only(left: 35),
                                     border: InputBorder.none,
                                     hintText: 'login_your_phone'.tr,
-                                    hintStyle: GoogleFonts.ebGaramond(
+                                    hintStyle: TextStyle(
                                       color: const Color(0xffD0D0D0),
                                       fontSize: 14,
                                       fontWeight: FontWeight.w400,
@@ -143,7 +143,7 @@ class RegisterPage extends StatelessWidget {
                                 TextField(
                                   controller: controller.password,
                                   obscureText: true,
-                                  style: GoogleFonts.ebGaramond(
+                                  style: TextStyle(
                                     color: Colors.black,
                                     fontSize: 14,
                                     fontWeight: FontWeight.w400,
@@ -153,7 +153,7 @@ class RegisterPage extends StatelessWidget {
                                         const EdgeInsets.only(left: 35),
                                     border: InputBorder.none,
                                     hintText: 'login_your_password'.tr,
-                                    hintStyle: GoogleFonts.ebGaramond(
+                                    hintStyle: TextStyle(
                                       color: const Color(0xffD0D0D0),
                                       fontSize: 14,
                                       fontWeight: FontWeight.w400,
@@ -203,7 +203,7 @@ class RegisterPage extends StatelessWidget {
                                       EmailValidator.validate(value!)
                                           ? null
                                           : "please_enter_a_valid_email".tr,
-                                  style: GoogleFonts.ebGaramond(
+                                  style: TextStyle(
                                     color: Colors.black,
                                     fontSize: 14,
                                     fontWeight: FontWeight.w400,
@@ -213,7 +213,7 @@ class RegisterPage extends StatelessWidget {
                                         const EdgeInsets.only(left: 35),
                                     border: InputBorder.none,
                                     hintText: 'register_your_email'.tr,
-                                    hintStyle: GoogleFonts.ebGaramond(
+                                    hintStyle: TextStyle(
                                       color: const Color(0xffD0D0D0),
                                       fontSize: 14,
                                       fontWeight: FontWeight.w400,

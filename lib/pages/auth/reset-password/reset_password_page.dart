@@ -53,7 +53,7 @@ class ResetPasswordPage extends StatelessWidget {
               centerTitle: true,
               title: Text(
                 'reset_password'.tr,
-                style: GoogleFonts.ebGaramond(
+                style: TextStyle(
                   color: theme.theme == ThemeMode.light
                       ? Colors.black
                       : Colors.white,
@@ -72,7 +72,7 @@ class ResetPasswordPage extends StatelessWidget {
                     padding: const EdgeInsets.only(left: 40, right: 40),
                     child: Text(
                       'enter_new_password_please'.tr,
-                      style: GoogleFonts.ebGaramond(
+                      style: TextStyle(
                         color: theme.theme == ThemeMode.light
                             ? Colors.black
                             : Colors.white,
@@ -106,7 +106,7 @@ class ResetPasswordPage extends StatelessWidget {
                     child: TextField(
                       obscureText: true,
                       controller: controller.password,
-                      style: GoogleFonts.ebGaramond(
+                      style: TextStyle(
                         color: theme.theme == ThemeMode.light
                             ? Colors.black
                             : Colors.white,
@@ -120,7 +120,7 @@ class ResetPasswordPage extends StatelessWidget {
                           right: 15,
                         ),
                         hintText: 'login_your_password'.tr,
-                        hintStyle: GoogleFonts.ebGaramond(
+                        hintStyle: TextStyle(
                           color: const Color(0xffD0D0D0),
                           fontSize: 15,
                           fontWeight: FontWeight.w400,
@@ -169,7 +169,7 @@ class ResetPasswordPage extends StatelessWidget {
                         child: Center(
                           child: Text(
                             'cofirm_change'.tr.toUpperCase(),
-                            style: GoogleFonts.ebGaramond(
+                            style: TextStyle(
                               color: theme.theme == ThemeMode.light
                                   ? Colors.white
                                   : Colors.black,

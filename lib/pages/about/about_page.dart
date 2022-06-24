@@ -63,7 +63,7 @@ class AboutState extends State<AboutPage> {
                 centerTitle: true,
                 title: Text(
                   'about'.tr,
-                  style: GoogleFonts.ebGaramond(
+                  style: TextStyle(
                     color: theme.theme == ThemeMode.light
                         ? Colors.black
                         : Colors.white,
@@ -129,7 +129,7 @@ class AboutState extends State<AboutPage> {
                         alignment: Alignment.center,
                         child: Text(
                           'text_1'.tr,
-                          style: GoogleFonts.ebGaramond(
+                          style: TextStyle(
                             color: theme.theme == ThemeMode.light
                                 ? Colors.black
                                 : Colors.white,
@@ -146,7 +146,7 @@ class AboutState extends State<AboutPage> {
                         alignment: Alignment.center,
                         child: Text(
                           '-  Keira Knightley -',
-                          style: GoogleFonts.ebGaramond(
+                          style: TextStyle(
                             color: theme.theme == ThemeMode.light
                                 ? Colors.black
                                 : Colors.white,
@@ -173,7 +173,7 @@ class AboutState extends State<AboutPage> {
                         alignment: Alignment.center,
                         child: Text(
                           'who_we_are'.tr,
-                          style: GoogleFonts.ebGaramond(
+                          style: TextStyle(
                             color: theme.theme == ThemeMode.light
                                 ? Colors.black
                                 : Colors.white,
@@ -202,7 +202,7 @@ class AboutState extends State<AboutPage> {
                         alignment: Alignment.center,
                         child: Text(
                           'text_2'.tr,
-                          style: GoogleFonts.ebGaramond(
+                          style: TextStyle(
                             color: theme.theme == ThemeMode.light
                                 ? Colors.black
                                 : Colors.white,
@@ -219,7 +219,7 @@ class AboutState extends State<AboutPage> {
                         alignment: Alignment.center,
                         child: Text(
                           'contact_info'.tr,
-                          style: GoogleFonts.ebGaramond(
+                          style: TextStyle(
                             color: theme.theme == ThemeMode.light
                                 ? Colors.black
                                 : Colors.white,
@@ -263,7 +263,7 @@ class AboutState extends State<AboutPage> {
                           Flexible(
                             child: Text(
                               '${AppTranslation.instance.language == AppTranslation.english ? '101 Truong Chinh, Tan Thoi Nhat, 12 District, Ho Chi Minh City' : '101 Trường Chinh, Tân Thới Nhất, Quận 12, Thành Phố Hồ Chí Minh'}',
-                              style: GoogleFonts.ebGaramond(
+                              style: TextStyle(
                                 color: theme.theme == ThemeMode.light
                                     ? Colors.black
                                     : Colors.white,
@@ -303,7 +303,7 @@ class AboutState extends State<AboutPage> {
                             Flexible(
                               child: Text(
                                 '0988224455',
-                                style: GoogleFonts.ebGaramond(
+                                style: TextStyle(
                                   color: theme.theme == ThemeMode.light
                                       ? Colors.black
                                       : Colors.white,
@@ -345,7 +345,7 @@ class AboutState extends State<AboutPage> {
                             Flexible(
                               child: Text(
                                 'lifekicky101@gmail.com',
-                                style: GoogleFonts.ebGaramond(
+                                style: TextStyle(
                                   color: theme.theme == ThemeMode.light
                                       ? Colors.black
                                       : Colors.white,
@@ -431,7 +431,7 @@ class AboutState extends State<AboutPage> {
                         alignment: Alignment.center,
                         child: Text(
                           'member'.tr,
-                          style: GoogleFonts.ebGaramond(
+                          style: TextStyle(
                             color: theme.theme == ThemeMode.light
                                 ? Colors.black
                                 : Colors.white,
@@ -481,7 +481,7 @@ class AboutState extends State<AboutPage> {
                                 children: [
                                   Text(
                                     '${AppTranslation.instance.language == AppTranslation.english ? 'Thái Duy Linh' : 'Thái Duy Linh'}',
-                                    style: GoogleFonts.ebGaramond(
+                                    style: TextStyle(
                                       color: theme.theme == ThemeMode.light
                                           ? Colors.white
                                           : Colors.black,
@@ -494,7 +494,7 @@ class AboutState extends State<AboutPage> {
                                   ),
                                   Text(
                                     '20/09/2000',
-                                    style: GoogleFonts.ebGaramond(
+                                    style: TextStyle(
                                       color: theme.theme == ThemeMode.light
                                           ? Colors.white
                                           : Colors.black,
@@ -507,7 +507,7 @@ class AboutState extends State<AboutPage> {
                                   ),
                                   Text(
                                     '0329011888',
-                                    style: GoogleFonts.ebGaramond(
+                                    style: TextStyle(
                                       color: theme.theme == ThemeMode.light
                                           ? Colors.white
                                           : Colors.black,
@@ -520,7 +520,7 @@ class AboutState extends State<AboutPage> {
                                   ),
                                   Text(
                                     'Founder',
-                                    style: GoogleFonts.ebGaramond(
+                                    style: TextStyle(
                                       color: theme.theme == ThemeMode.light
                                           ? Colors.white
                                           : Colors.black,
@@ -578,7 +578,7 @@ class AboutState extends State<AboutPage> {
                                 children: [
                                   Text(
                                     '${AppTranslation.instance.language == AppTranslation.english ? 'Tran Thai Tuan' : 'Trần Thái Tuấn'}',
-                                    style: GoogleFonts.ebGaramond(
+                                    style: TextStyle(
                                       color: theme.theme == ThemeMode.light
                                           ? Colors.white
                                           : Colors.black,
@@ -591,7 +591,7 @@ class AboutState extends State<AboutPage> {
                                   ),
                                   Text(
                                     '18/09/2000',
-                                    style: GoogleFonts.ebGaramond(
+                                    style: TextStyle(
                                       color: theme.theme == ThemeMode.light
                                           ? Colors.white
                                           : Colors.black,
@@ -604,7 +604,7 @@ class AboutState extends State<AboutPage> {
                                   ),
                                   Text(
                                     '0329011999',
-                                    style: GoogleFonts.ebGaramond(
+                                    style: TextStyle(
                                       color: theme.theme == ThemeMode.light
                                           ? Colors.white
                                           : Colors.black,
@@ -617,7 +617,7 @@ class AboutState extends State<AboutPage> {
                                   ),
                                   Text(
                                     'Co-Founder',
-                                    style: GoogleFonts.ebGaramond(
+                                    style: TextStyle(
                                       color: theme.theme == ThemeMode.light
                                           ? Colors.white
                                           : Colors.black,

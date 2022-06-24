@@ -107,7 +107,7 @@ class ProductDetailState extends State<ProductDetailPage>
                   children: [
                     Text(
                       'notification'.tr,
-                      style: GoogleFonts.ebGaramond(
+                      style: TextStyle(
                         color: Colors.black,
                         fontSize: 16,
                         fontWeight: FontWeight.w600,
@@ -140,7 +140,7 @@ class ProductDetailState extends State<ProductDetailPage>
               alignment: Alignment.center,
               child: Text(
                 'login_popup'.tr,
-                style: GoogleFonts.ebGaramond(
+                style: TextStyle(
                   color: Colors.black,
                   fontSize: 16,
                   fontWeight: FontWeight.w600,
@@ -170,7 +170,7 @@ class ProductDetailState extends State<ProductDetailPage>
                         child: Center(
                           child: Text(
                             'address_cancel'.tr,
-                            style: GoogleFonts.ebGaramond(
+                            style: TextStyle(
                               color: Colors.black,
                               fontSize: 14,
                               fontWeight: FontWeight.w600,
@@ -197,7 +197,7 @@ class ProductDetailState extends State<ProductDetailPage>
                         child: Center(
                           child: Text(
                             'address_confirm'.tr,
-                            style: GoogleFonts.ebGaramond(
+                            style: TextStyle(
                               color: Colors.white,
                               fontSize: 14,
                               fontWeight: FontWeight.w600,
@@ -250,7 +250,7 @@ class ProductDetailState extends State<ProductDetailPage>
                   children: [
                     Text(
                       'notification'.tr,
-                      style: GoogleFonts.ebGaramond(
+                      style: TextStyle(
                         color: Colors.black,
                         fontSize: 16,
                         fontWeight: FontWeight.w600,
@@ -283,7 +283,7 @@ class ProductDetailState extends State<ProductDetailPage>
               alignment: Alignment.center,
               child: Text(
                 'add_to_cart'.tr,
-                style: GoogleFonts.ebGaramond(
+                style: TextStyle(
                   color: Colors.black,
                   fontSize: 16,
                   fontWeight: FontWeight.w600,
@@ -313,7 +313,7 @@ class ProductDetailState extends State<ProductDetailPage>
                         child: Center(
                           child: Text(
                             'address_cancel'.tr,
-                            style: GoogleFonts.ebGaramond(
+                            style: TextStyle(
                               color: Colors.black,
                               fontSize: 14,
                               fontWeight: FontWeight.w600,
@@ -345,7 +345,7 @@ class ProductDetailState extends State<ProductDetailPage>
                           child: Center(
                             child: Text(
                               'address_confirm'.tr,
-                              style: GoogleFonts.ebGaramond(
+                              style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 14,
                                 fontWeight: FontWeight.w600,
@@ -393,7 +393,7 @@ class ProductDetailState extends State<ProductDetailPage>
                   children: [
                     Text(
                       'product_detail_size_choose'.tr,
-                      style: GoogleFonts.ebGaramond(
+                      style: TextStyle(
                         color: Colors.black,
                         fontSize: 16,
                         fontWeight: FontWeight.w600,
@@ -442,7 +442,7 @@ class ProductDetailState extends State<ProductDetailPage>
                         },
                         child: Text(
                           e.toString(),
-                          style: GoogleFonts.ebGaramond(
+                          style: TextStyle(
                             color: Colors.black,
                             fontSize: 20,
                             fontWeight: FontWeight.w500,
@@ -504,7 +504,7 @@ class ProductDetailState extends State<ProductDetailPage>
                 ),
                 title: Text(
                   'product_detail_title'.tr,
-                  style: GoogleFonts.ebGaramond(
+                  style: TextStyle(
                     color: theme.theme == ThemeMode.light
                         ? Colors.black
                         : Colors.white,
@@ -707,11 +707,11 @@ class ProductDetailState extends State<ProductDetailPage>
                                     width: double.infinity,
                                     child: Text(
                                       '${AppTranslation.instance.language == AppTranslation.english ? (productDetailController.productDetail.value.nameProductEn != null && productDetailController.productDetail.value.nameProductEn!.isNotEmpty ? productDetailController.productDetail.value.nameProductEn : '--') : (productDetailController.productDetail.value.nameProductVi != null && productDetailController.productDetail.value.nameProductVi!.isNotEmpty ? productDetailController.productDetail.value.nameProductVi : '--')}',
-                                      style: GoogleFonts.ebGaramond(
+                                      style: TextStyle(
                                         color: theme.theme == ThemeMode.light
                                             ? Colors.black
                                             : Colors.white,
-                                        fontSize: 20,
+                                        fontSize: 17,
                                         fontWeight: FontWeight.w600,
                                       ),
                                       maxLines: 2,
@@ -736,12 +736,12 @@ class ProductDetailState extends State<ProductDetailPage>
                                           ).format((productDetailController
                                                   .productDetail.value.price)
                                               .toString()),
-                                          style: GoogleFonts.ebGaramond(
+                                          style: TextStyle(
                                             color:
                                                 theme.theme == ThemeMode.light
                                                     ? Colors.black
                                                     : Colors.white,
-                                            fontSize: 25,
+                                            fontSize: 21,
                                             fontWeight: FontWeight.w600,
                                             decoration: productDetailController
                                                         .productDetail
@@ -761,9 +761,9 @@ class ProductDetailState extends State<ProductDetailPage>
                                               text: TextSpan(
                                                 text:
                                                     ' - ${productDetailController.productDetail.value.discount ?? 0} %',
-                                                style: GoogleFonts.ebGaramond(
+                                                style: TextStyle(
                                                   color: Colors.amber,
-                                                  fontSize: 25,
+                                                  fontSize: 17,
                                                   fontWeight: FontWeight.w600,
                                                 ),
                                               ),
@@ -801,12 +801,12 @@ class ProductDetailState extends State<ProductDetailPage>
                                                           100) /
                                                       10)
                                                   .toString()),
-                                              style: GoogleFonts.ebGaramond(
+                                              style: TextStyle(
                                                 color: theme.theme ==
                                                         ThemeMode.light
                                                     ? Colors.black
                                                     : Colors.white,
-                                                fontSize: 25,
+                                                fontSize: 21,
                                                 fontWeight: FontWeight.w600,
                                               ),
                                             ),
@@ -822,7 +822,7 @@ class ProductDetailState extends State<ProductDetailPage>
                                               productDetailController
                                                   .productDetail.value.rating
                                                   .toString()) ??
-                                          0.0,
+                                          5.0,
                                       itemBuilder: (context, index) =>
                                           const Icon(
                                         Icons.star,
@@ -846,7 +846,7 @@ class ProductDetailState extends State<ProductDetailPage>
                                       children: [
                                         Text(
                                           'product_detail_size'.tr,
-                                          style: GoogleFonts.ebGaramond(
+                                          style: TextStyle(
                                             color:
                                                 theme.theme == ThemeMode.light
                                                     ? Colors.black
@@ -862,7 +862,7 @@ class ProductDetailState extends State<ProductDetailPage>
                                           () => Text(
                                             productDetailController
                                                 .sizeShoes.value,
-                                            style: GoogleFonts.ebGaramond(
+                                            style: TextStyle(
                                               color:
                                                   theme.theme == ThemeMode.light
                                                       ? Colors.black
@@ -950,7 +950,7 @@ class ProductDetailState extends State<ProductDetailPage>
                                             child: Center(
                                               child: Text(
                                                 '-',
-                                                style: GoogleFonts.ebGaramond(
+                                                style: TextStyle(
                                                   color: theme.theme ==
                                                           ThemeMode.light
                                                       ? Colors.white
@@ -972,7 +972,7 @@ class ProductDetailState extends State<ProductDetailPage>
                                             child: Center(
                                               child: Text(
                                                 controller.amount.toString(),
-                                                style: GoogleFonts.ebGaramond(
+                                                style: TextStyle(
                                                   color: theme.theme ==
                                                           ThemeMode.light
                                                       ? Colors.black
@@ -1009,7 +1009,7 @@ class ProductDetailState extends State<ProductDetailPage>
                                             child: Center(
                                               child: Text(
                                                 '+',
-                                                style: GoogleFonts.ebGaramond(
+                                                style: TextStyle(
                                                   color: theme.theme ==
                                                           ThemeMode.light
                                                       ? Colors.white
@@ -1062,7 +1062,7 @@ class ProductDetailState extends State<ProductDetailPage>
                                       children: [
                                         Text(
                                           'product_detail_add_cart'.tr,
-                                          style: GoogleFonts.ebGaramond(
+                                          style: TextStyle(
                                             color:
                                                 theme.theme == ThemeMode.light
                                                     ? Colors.white
@@ -1183,7 +1183,7 @@ class ProductDetailState extends State<ProductDetailPage>
                             Tab(
                               child: Text(
                                 'product_detail_description'.tr,
-                                style: GoogleFonts.ebGaramond(
+                                style: TextStyle(
                                   color: theme.theme == ThemeMode.light
                                       ? Colors.black
                                       : Colors.white,
@@ -1195,7 +1195,7 @@ class ProductDetailState extends State<ProductDetailPage>
                             Tab(
                               child: Text(
                                 'product_detail_other'.tr,
-                                style: GoogleFonts.ebGaramond(
+                                style: TextStyle(
                                   color: theme.theme == ThemeMode.light
                                       ? Colors.black
                                       : Colors.white,
@@ -1222,7 +1222,7 @@ class ProductDetailState extends State<ProductDetailPage>
                                   const EdgeInsets.symmetric(horizontal: 20),
                               child: Text(
                                 '${AppTranslation.instance.language == AppTranslation.english ? (productDetailController.productDetail.value.descriptionEn != null && productDetailController.productDetail.value.descriptionEn!.isNotEmpty ? productDetailController.productDetail.value.descriptionEn : '--') : (productDetailController.productDetail.value.descriptionVi != null && productDetailController.productDetail.value.descriptionVi!.isNotEmpty ? productDetailController.productDetail.value.descriptionVi : '--')}',
-                                style: GoogleFonts.ebGaramond(
+                                style: TextStyle(
                                   color: theme.theme == ThemeMode.light
                                       ? Colors.black
                                       : Colors.white,
@@ -1240,7 +1240,7 @@ class ProductDetailState extends State<ProductDetailPage>
                                 children: [
                                   Text(
                                     'Material: Canvas',
-                                    style: GoogleFonts.ebGaramond(
+                                    style: TextStyle(
                                       color: theme.theme == ThemeMode.light
                                           ? Colors.black
                                           : Colors.white,
@@ -1250,7 +1250,7 @@ class ProductDetailState extends State<ProductDetailPage>
                                   ),
                                   Text(
                                     'Shoe code: ${productDetailController.productDetail.value.productCode}',
-                                    style: GoogleFonts.ebGaramond(
+                                    style: TextStyle(
                                       color: theme.theme == ThemeMode.light
                                           ? Colors.black
                                           : Colors.white,
@@ -1274,7 +1274,7 @@ class ProductDetailState extends State<ProductDetailPage>
                           children: [
                             Text(
                               'product_detail_related'.tr,
-                              style: GoogleFonts.ebGaramond(
+                              style: TextStyle(
                                 color: theme.theme == ThemeMode.light
                                     ? Colors.black
                                     : Colors.white,
@@ -1367,7 +1367,7 @@ class ProductDetailState extends State<ProductDetailPage>
                                             ),
                                             Text(
                                               '${e.nameProductEn != null && e.nameProductEn!.isNotEmpty ? e.nameProductEn : '--'}',
-                                              style: GoogleFonts.ebGaramond(
+                                              style: TextStyle(
                                                 color: theme.theme ==
                                                         ThemeMode.light
                                                     ? Colors.white
@@ -1399,7 +1399,7 @@ class ProductDetailState extends State<ProductDetailPage>
                                     ),
                                     Text(
                                       'no_information'.tr,
-                                      style: GoogleFonts.ebGaramond(
+                                      style: TextStyle(
                                         color: theme.theme == ThemeMode.light
                                             ? Colors.black
                                             : Colors.white,

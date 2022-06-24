@@ -66,7 +66,7 @@ class YourOrderDetailState extends State<YourOrderDetailPage> {
               children: [
                 Text(
                   'rate_product'.tr,
-                  style: GoogleFonts.ebGaramond(
+                  style: TextStyle(
                     color: Colors.black,
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
@@ -112,7 +112,7 @@ class YourOrderDetailState extends State<YourOrderDetailPage> {
                               child: Center(
                                 child: Text(
                                   'address_cancel'.tr,
-                                  style: GoogleFonts.ebGaramond(
+                                  style: TextStyle(
                                     color: Colors.black,
                                     fontSize: 14,
                                     fontWeight: FontWeight.w600,
@@ -152,7 +152,7 @@ class YourOrderDetailState extends State<YourOrderDetailPage> {
                               child: Center(
                                 child: Text(
                                   'address_confirm'.tr,
-                                  style: GoogleFonts.ebGaramond(
+                                  style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 14,
                                     fontWeight: FontWeight.w600,
@@ -206,7 +206,7 @@ class YourOrderDetailState extends State<YourOrderDetailPage> {
                   ),
                   title: Text(
                     'your_order_detail'.tr,
-                    style: GoogleFonts.ebGaramond(
+                    style: TextStyle(
                       color: Colors.white,
                       fontSize: 20,
                       fontWeight: FontWeight.w600,
@@ -316,7 +316,7 @@ class YourOrderDetailState extends State<YourOrderDetailPage> {
                                     children: [
                                       Text(
                                         '${widget.order.id != null && widget.order.id!.isNotEmpty ? widget.order.id : '--'}',
-                                        style: GoogleFonts.ebGaramond(
+                                        style: TextStyle(
                                           color: Colors.black,
                                           fontSize: 16,
                                           fontWeight: FontWeight.w600,
@@ -327,7 +327,7 @@ class YourOrderDetailState extends State<YourOrderDetailPage> {
                                       ),
                                       Text(
                                         '${'payment_total_bill'.tr} ${widget.order.totalPrice ?? '--'}',
-                                        style: GoogleFonts.ebGaramond(
+                                        style: TextStyle(
                                           color: Colors.black,
                                           fontSize: 14,
                                           fontWeight: FontWeight.w400,
@@ -342,7 +342,7 @@ class YourOrderDetailState extends State<YourOrderDetailPage> {
                                           widget.order.statusPayment == true
                                               ? 'delivered'.tr
                                               : 'delivering'.tr,
-                                          style: GoogleFonts.ebGaramond(
+                                          style: TextStyle(
                                             color: widget.order.statusPayment ==
                                                     true
                                                 ? const Color(0xff00C32B)
@@ -519,7 +519,7 @@ class YourOrderDetailState extends State<YourOrderDetailPage> {
                                                                         .lstProduct!
                                                                         .rating
                                                                         .toString()) ??
-                                                                    0.0,
+                                                                    5.0,
                                                                 itemBuilder: (context,
                                                                         index) =>
                                                                     const Icon(
@@ -618,8 +618,7 @@ class YourOrderDetailState extends State<YourOrderDetailPage> {
                                                     child: Center(
                                                       child: Text(
                                                         'rate'.tr,
-                                                        style: GoogleFonts
-                                                            .ebGaramond(
+                                                        style: TextStyle(
                                                           color: Colors.white,
                                                           fontSize: 12,
                                                           fontWeight:
@@ -649,7 +648,7 @@ class YourOrderDetailState extends State<YourOrderDetailPage> {
                                               ),
                                               Text(
                                                 'no_information'.tr,
-                                                style: GoogleFonts.ebGaramond(
+                                                style: TextStyle(
                                                   color: Colors.white,
                                                   fontSize: 18,
                                                   fontWeight: FontWeight.w600,

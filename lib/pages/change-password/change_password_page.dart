@@ -68,7 +68,7 @@ class ChangePasswordState extends State<ChangePasswordPage> {
                   ),
                   title: Text(
                     'change_password'.tr,
-                    style: GoogleFonts.ebGaramond(
+                    style: TextStyle(
                       color: Colors.white,
                       fontSize: 20,
                       fontWeight: FontWeight.w600,
@@ -118,7 +118,7 @@ class ChangePasswordState extends State<ChangePasswordPage> {
                                 TextField(
                                   controller: controller.oldPassword,
                                   obscureText: true,
-                                  style: GoogleFonts.ebGaramond(
+                                  style: TextStyle(
                                     color: Colors.black,
                                     fontSize: 14,
                                     fontWeight: FontWeight.w400,
@@ -128,7 +128,7 @@ class ChangePasswordState extends State<ChangePasswordPage> {
                                         const EdgeInsets.only(left: 35),
                                     border: InputBorder.none,
                                     hintText: 'user_old_password'.tr,
-                                    hintStyle: GoogleFonts.ebGaramond(
+                                    hintStyle: TextStyle(
                                       color: const Color(0xffD0D0D0),
                                       fontSize: 14,
                                       fontWeight: FontWeight.w400,
@@ -175,7 +175,7 @@ class ChangePasswordState extends State<ChangePasswordPage> {
                                 TextField(
                                   controller: controller.newPassword,
                                   obscureText: true,
-                                  style: GoogleFonts.ebGaramond(
+                                  style: TextStyle(
                                     color: Colors.black,
                                     fontSize: 14,
                                     fontWeight: FontWeight.w400,
@@ -185,7 +185,7 @@ class ChangePasswordState extends State<ChangePasswordPage> {
                                         const EdgeInsets.only(left: 35),
                                     border: InputBorder.none,
                                     hintText: 'user_new_password'.tr,
-                                    hintStyle: GoogleFonts.ebGaramond(
+                                    hintStyle: TextStyle(
                                       color: const Color(0xffD0D0D0),
                                       fontSize: 14,
                                       fontWeight: FontWeight.w400,
@@ -232,7 +232,7 @@ class ChangePasswordState extends State<ChangePasswordPage> {
                                 TextField(
                                   controller: controller.confirmPassword,
                                   obscureText: true,
-                                  style: GoogleFonts.ebGaramond(
+                                  style: TextStyle(
                                     color: Colors.black,
                                     fontSize: 14,
                                     fontWeight: FontWeight.w400,
@@ -242,7 +242,7 @@ class ChangePasswordState extends State<ChangePasswordPage> {
                                         const EdgeInsets.only(left: 35),
                                     border: InputBorder.none,
                                     hintText: 'confirm_password'.tr,
-                                    hintStyle: GoogleFonts.ebGaramond(
+                                    hintStyle: TextStyle(
                                       color: const Color(0xffD0D0D0),
                                       fontSize: 14,
                                       fontWeight: FontWeight.w400,

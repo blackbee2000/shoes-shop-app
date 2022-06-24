@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 ThemeData darkTheme = ThemeData(
+  fontFamily: 'MMC',
   brightness: Brightness.dark,
   cardColor: Colors.black,
   scaffoldBackgroundColor: Colors.black,

@@ -75,7 +75,7 @@ class _UserPageState extends State<UserPage> {
               padding: const EdgeInsets.only(bottom: 15),
               child: Text(
                 'user_camera'.tr,
-                style: GoogleFonts.ebGaramond(
+                style: TextStyle(
                   color: Colors.black,
                   fontSize: 16,
                   fontWeight: FontWeight.w400,
@@ -97,7 +97,7 @@ class _UserPageState extends State<UserPage> {
               padding: const EdgeInsets.only(top: 15),
               child: Text(
                 'user_galery'.tr,
-                style: GoogleFonts.ebGaramond(
+                style: TextStyle(
                   color: Colors.black,
                   fontSize: 16,
                   fontWeight: FontWeight.w400,
@@ -146,7 +146,7 @@ class _UserPageState extends State<UserPage> {
                       : Container(),
                   title: Text(
                     'user_update_information'.tr,
-                    style: GoogleFonts.ebGaramond(
+                    style: TextStyle(
                       color: Colors.white,
                       fontSize: 20,
                       fontWeight: FontWeight.w600,
@@ -352,7 +352,7 @@ class _UserPageState extends State<UserPage> {
                                 ),
                                 TextField(
                                   controller: controller.name,
-                                  style: GoogleFonts.ebGaramond(
+                                  style: TextStyle(
                                     color: Colors.black,
                                     fontSize: 14,
                                     fontWeight: FontWeight.w400,
@@ -362,7 +362,7 @@ class _UserPageState extends State<UserPage> {
                                         const EdgeInsets.only(left: 35),
                                     border: InputBorder.none,
                                     hintText: 'user_your_name'.tr,
-                                    hintStyle: GoogleFonts.ebGaramond(
+                                    hintStyle: TextStyle(
                                       color: const Color(0xffD0D0D0),
                                       fontSize: 14,
                                       fontWeight: FontWeight.w400,
@@ -408,8 +408,8 @@ class _UserPageState extends State<UserPage> {
                                 ),
                                 TextFormField(
                                   controller: controller.phone,
-                                  readOnly: false,
-                                  style: GoogleFonts.ebGaramond(
+                                  readOnly: true,
+                                  style: TextStyle(
                                     color: Colors.black,
                                     fontSize: 14,
                                     fontWeight: FontWeight.w400,
@@ -419,7 +419,7 @@ class _UserPageState extends State<UserPage> {
                                         const EdgeInsets.only(left: 35),
                                     border: InputBorder.none,
                                     hintText: 'login_your_phone'.tr,
-                                    hintStyle: GoogleFonts.ebGaramond(
+                                    hintStyle: TextStyle(
                                       color: const Color(0xffD0D0D0),
                                       fontSize: 14,
                                       fontWeight: FontWeight.w400,
@@ -465,7 +465,7 @@ class _UserPageState extends State<UserPage> {
                                 ),
                                 TextField(
                                   controller: controller.email,
-                                  style: GoogleFonts.ebGaramond(
+                                  style: TextStyle(
                                     color: Colors.black,
                                     fontSize: 14,
                                     fontWeight: FontWeight.w400,
@@ -475,7 +475,7 @@ class _UserPageState extends State<UserPage> {
                                         const EdgeInsets.only(left: 35),
                                     border: InputBorder.none,
                                     hintText: 'register_your_email'.tr,
-                                    hintStyle: GoogleFonts.ebGaramond(
+                                    hintStyle: TextStyle(
                                       color: const Color(0xffD0D0D0),
                                       fontSize: 14,
                                       fontWeight: FontWeight.w400,
@@ -508,7 +508,7 @@ class _UserPageState extends State<UserPage> {
                                   children: [
                                     Text(
                                       'cart_address'.tr,
-                                      style: GoogleFonts.ebGaramond(
+                                      style: TextStyle(
                                         color: Colors.black,
                                         fontSize: 14,
                                         fontWeight: FontWeight.w400,
@@ -532,7 +532,7 @@ class _UserPageState extends State<UserPage> {
                                 },
                                 child: Text(
                                   'user_skip'.tr,
-                                  style: GoogleFonts.ebGaramond(
+                                  style: TextStyle(
                                     color: Colors.black,
                                     fontSize: 14,
                                     fontWeight: FontWeight.w400,

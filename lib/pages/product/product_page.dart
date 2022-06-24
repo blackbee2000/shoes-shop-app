@@ -47,7 +47,7 @@ class ProductPage extends GetView<ProductController> {
                   children: [
                     Text(
                       'notification'.tr,
-                      style: GoogleFonts.ebGaramond(
+                      style: TextStyle(
                         color: Colors.black,
                         fontSize: 16,
                         fontWeight: FontWeight.w600,
@@ -80,7 +80,7 @@ class ProductPage extends GetView<ProductController> {
               alignment: Alignment.center,
               child: Text(
                 'login_popup'.tr,
-                style: GoogleFonts.ebGaramond(
+                style: TextStyle(
                   color: Colors.black,
                   fontSize: 16,
                   fontWeight: FontWeight.w600,
@@ -110,7 +110,7 @@ class ProductPage extends GetView<ProductController> {
                         child: Center(
                           child: Text(
                             'address_cancel'.tr,
-                            style: GoogleFonts.ebGaramond(
+                            style: TextStyle(
                               color: Colors.black,
                               fontSize: 14,
                               fontWeight: FontWeight.w600,
@@ -137,7 +137,7 @@ class ProductPage extends GetView<ProductController> {
                         child: Center(
                           child: Text(
                             'address_confirm'.tr,
-                            style: GoogleFonts.ebGaramond(
+                            style: TextStyle(
                               color: Colors.white,
                               fontSize: 14,
                               fontWeight: FontWeight.w600,
@@ -186,7 +186,7 @@ class ProductPage extends GetView<ProductController> {
                           : Colors.white.withOpacity(0),
                       title: Text(
                         "product_title".tr,
-                        style: GoogleFonts.ebGaramond(
+                        style: TextStyle(
                           color: Colors.white,
                           fontSize: 20,
                           fontWeight: FontWeight.w600,
@@ -347,7 +347,7 @@ class ProductPage extends GetView<ProductController> {
                                             ),
                                             Text(
                                               '${controller.listCompany[index].nameCompany != null && controller.listCompany[index].nameCompany!.isNotEmpty ? controller.listCompany[index].nameCompany : '--'}',
-                                              style: GoogleFonts.ebGaramond(
+                                              style: TextStyle(
                                                 color: Colors.black,
                                                 fontSize: 15,
                                                 fontWeight: FontWeight.w400,
@@ -369,7 +369,7 @@ class ProductPage extends GetView<ProductController> {
                                   alignment: Alignment.centerLeft,
                                   child: Text(
                                     '${productController.nameBrand}',
-                                    style: GoogleFonts.ebGaramond(
+                                    style: TextStyle(
                                       color: theme.theme == ThemeMode.light
                                           ? Colors.black
                                           : Colors.white,
@@ -618,8 +618,7 @@ class ProductPage extends GetView<ProductController> {
                                                   alignment: Alignment.topLeft,
                                                   child: Text(
                                                     '${AppTranslation.instance.language == AppTranslation.english ? (controller.listProduct[index].nameProductEn != null && controller.listProduct[index].nameProductEn!.isNotEmpty ? controller.listProduct[index].nameProductEn : '--') : (controller.listProduct[index].nameProductVi != null && controller.listProduct[index].nameProductVi!.isNotEmpty ? controller.listProduct[index].nameProductVi : '--')}',
-                                                    style:
-                                                        GoogleFonts.ebGaramond(
+                                                    style: TextStyle(
                                                       color: theme.theme ==
                                                               ThemeMode.light
                                                           ? Colors.black
@@ -658,14 +657,13 @@ class ProductPage extends GetView<ProductController> {
                                                                         index]
                                                                     .price)
                                                                 .toString()),
-                                                        style: GoogleFonts
-                                                            .ebGaramond(
+                                                        style: TextStyle(
                                                           color: theme.theme ==
                                                                   ThemeMode
                                                                       .light
                                                               ? Colors.black
                                                               : Colors.white,
-                                                          fontSize: 20,
+                                                          fontSize: 18,
                                                           fontWeight:
                                                               FontWeight.w600,
                                                           decoration: controller
@@ -690,8 +688,7 @@ class ProductPage extends GetView<ProductController> {
                                                             text: TextSpan(
                                                               text:
                                                                   ' - ${controller.listProduct[index].discount} %',
-                                                              style: GoogleFonts
-                                                                  .ebGaramond(
+                                                              style: TextStyle(
                                                                 color: Colors
                                                                     .amber,
                                                                 fontSize: 14,
@@ -732,15 +729,14 @@ class ProductPage extends GetView<ProductController> {
                                                                             100) /
                                                                         10)
                                                                     .toString()),
-                                                            style: GoogleFonts
-                                                                .ebGaramond(
+                                                            style: TextStyle(
                                                               color: theme.theme ==
                                                                       ThemeMode
                                                                           .light
                                                                   ? Colors.black
                                                                   : Colors
                                                                       .white,
-                                                              fontSize: 20,
+                                                              fontSize: 18,
                                                               fontWeight:
                                                                   FontWeight
                                                                       .w600,
@@ -760,7 +756,7 @@ class ProductPage extends GetView<ProductController> {
                                                                     index]
                                                                 .rating
                                                                 .toString()) ??
-                                                        0.0,
+                                                        5.0,
                                                     itemBuilder:
                                                         (context, index) =>
                                                             const Icon(
@@ -794,7 +790,7 @@ class ProductPage extends GetView<ProductController> {
                                             ),
                                             Text(
                                               'no_information'.tr,
-                                              style: GoogleFonts.ebGaramond(
+                                              style: TextStyle(
                                                 color: theme.theme ==
                                                         ThemeMode.light
                                                     ? Colors.black

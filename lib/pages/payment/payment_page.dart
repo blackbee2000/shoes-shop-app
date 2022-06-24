@@ -32,7 +32,7 @@ class PaymentState extends State<PaymentPage> {
   void initState() {
     BackButtonInterceptor.add(myInterceptor);
     for (var e in cartController.listCartSelected) {
-      total += e.totalPrice!;
+      total += (e.lstProduct!.price! * e.amount!);
     }
     super.initState();
   }
@@ -95,7 +95,7 @@ class PaymentState extends State<PaymentPage> {
                 ),
                 title: Text(
                   'cart_payment'.tr,
-                  style: GoogleFonts.ebGaramond(
+                  style: TextStyle(
                     color: theme.theme == ThemeMode.light
                         ? Colors.black
                         : Colors.white,
@@ -169,7 +169,7 @@ class PaymentState extends State<PaymentPage> {
                                       children: [
                                         Text(
                                           'cart_address'.tr,
-                                          style: GoogleFonts.ebGaramond(
+                                          style: TextStyle(
                                             color: Colors.black,
                                             fontSize: 16,
                                             fontWeight: FontWeight.w600,
@@ -191,7 +191,7 @@ class PaymentState extends State<PaymentPage> {
                                     ),
                                     Text(
                                       '${controller.addressSelected.value.nameReciever != null && controller.addressSelected.value.nameReciever!.isNotEmpty ? controller.addressSelected.value.nameReciever : '--'} - ${controller.addressSelected.value.phoneReciever != null && controller.addressSelected.value.phoneReciever!.isNotEmpty ? controller.addressSelected.value.phoneReciever : '--'}',
-                                      style: GoogleFonts.ebGaramond(
+                                      style: TextStyle(
                                         color: Colors.black,
                                         fontSize: 14,
                                         fontWeight: FontWeight.w600,
@@ -208,7 +208,7 @@ class PaymentState extends State<PaymentPage> {
                                           '${controller.addressSelected.value.district != null && controller.addressSelected.value.district!.isNotEmpty ? controller.addressSelected.value.district : '--'}' +
                                           ', ' +
                                           '${controller.addressSelected.value.province != null && controller.addressSelected.value.province!.isNotEmpty ? controller.addressSelected.value.province : '--'}',
-                                      style: GoogleFonts.ebGaramond(
+                                      style: TextStyle(
                                         color: Colors.black,
                                         fontSize: 14,
                                         fontWeight: FontWeight.w400,
@@ -263,7 +263,7 @@ class PaymentState extends State<PaymentPage> {
                           children: [
                             Text(
                               'product_title'.tr,
-                              style: GoogleFonts.ebGaramond(
+                              style: TextStyle(
                                 color: theme.theme == ThemeMode.light
                                     ? Colors.black
                                     : Colors.white,
@@ -381,7 +381,7 @@ class PaymentState extends State<PaymentPage> {
                                             children: [
                                               Text(
                                                 '${e.value.lstProduct!.nameProductEn != null && e.value.lstProduct!.nameProductEn!.isNotEmpty ? e.value.lstProduct!.nameProductEn : '--'}',
-                                                style: GoogleFonts.ebGaramond(
+                                                style: TextStyle(
                                                   color: Colors.black,
                                                   fontSize: 16,
                                                   fontWeight: FontWeight.w600,
@@ -407,7 +407,7 @@ class PaymentState extends State<PaymentPage> {
                                                     ).format((e.value
                                                             .lstProduct!.price)
                                                         .toString()),
-                                                style: GoogleFonts.ebGaramond(
+                                                style: TextStyle(
                                                   color: Colors.black,
                                                   fontSize: 14,
                                                   fontWeight: FontWeight.w400,
@@ -419,7 +419,7 @@ class PaymentState extends State<PaymentPage> {
                                               Text(
                                                 'quantity'.tr +
                                                     '${e.value.amount ?? '--'}',
-                                                style: GoogleFonts.ebGaramond(
+                                                style: TextStyle(
                                                   color: Colors.black,
                                                   fontSize: 14,
                                                   fontWeight: FontWeight.w400,
@@ -440,10 +440,13 @@ class PaymentState extends State<PaymentPage> {
                                                           : "en_US",
                                                       decimalDigits: 0,
                                                       symbol: "",
-                                                    ).format(
-                                                        (e.value.totalPrice)
-                                                            .toString()),
-                                                style: GoogleFonts.ebGaramond(
+                                                    ).format((e
+                                                                .value
+                                                                .lstProduct!
+                                                                .price! *
+                                                            e.value.amount!)
+                                                        .toString()),
+                                                style: TextStyle(
                                                   color: Colors.black,
                                                   fontSize: 14,
                                                   fontWeight: FontWeight.w400,
@@ -485,7 +488,7 @@ class PaymentState extends State<PaymentPage> {
                               children: [
                                 Text(
                                   'voucher'.tr,
-                                  style: GoogleFonts.ebGaramond(
+                                  style: TextStyle(
                                     color: theme.theme == ThemeMode.light
                                         ? Colors.black
                                         : Colors.white,
@@ -514,7 +517,7 @@ class PaymentState extends State<PaymentPage> {
                                 children: [
                                   Text(
                                     'voucher_select'.tr,
-                                    style: GoogleFonts.ebGaramond(
+                                    style: TextStyle(
                                       color: theme.theme == ThemeMode.light
                                           ? Colors.black
                                           : Colors.white,
@@ -614,7 +617,7 @@ class PaymentState extends State<PaymentPage> {
                                         children: [
                                           Text(
                                             '${controller.voucher.value.title != null && controller.voucher.value.title!.isNotEmpty ? controller.voucher.value.title : 'no_information'.tr}',
-                                            style: GoogleFonts.ebGaramond(
+                                            style: TextStyle(
                                               color: Colors.black,
                                               fontSize: 16,
                                               fontWeight: FontWeight.w600,
@@ -625,7 +628,7 @@ class PaymentState extends State<PaymentPage> {
                                           ),
                                           Text(
                                             'Giảm giá: ${controller.voucher.value.discount ?? '--'}',
-                                            style: GoogleFonts.ebGaramond(
+                                            style: TextStyle(
                                               color: Colors.black,
                                               fontSize: 16,
                                               fontWeight: FontWeight.w600,
@@ -639,7 +642,7 @@ class PaymentState extends State<PaymentPage> {
                                             child: Text(
                                               'Thời hạn: '
                                               '${controller.voucher.value.expiry != null && controller.voucher.value.expiry!.isNotEmpty ? DateFormat('HH:mm - dd/MM/yyyy').format(DateTime.parse(controller.voucher.value.expiry ?? '').toLocal()) : '--'}',
-                                              style: GoogleFonts.ebGaramond(
+                                              style: TextStyle(
                                                 color: Colors.black,
                                                 fontSize: 16,
                                                 fontWeight: FontWeight.w600,
@@ -666,7 +669,7 @@ class PaymentState extends State<PaymentPage> {
                                     ),
                                     Text(
                                       'voucher_select'.tr,
-                                      style: GoogleFonts.ebGaramond(
+                                      style: TextStyle(
                                         color: Colors.black,
                                         fontSize: 18,
                                         fontWeight: FontWeight.w600,
@@ -697,7 +700,7 @@ class PaymentState extends State<PaymentPage> {
                           children: [
                             Text(
                               'payment_method'.tr,
-                              style: GoogleFonts.ebGaramond(
+                              style: TextStyle(
                                 color: theme.theme == ThemeMode.light
                                     ? Colors.black
                                     : Colors.white,
@@ -759,7 +762,7 @@ class PaymentState extends State<PaymentPage> {
                                           child: Center(
                                             child: Text(
                                               '${e.value.name}',
-                                              style: GoogleFonts.ebGaramond(
+                                              style: TextStyle(
                                                 color: Colors.black,
                                                 fontSize: 16,
                                                 fontWeight: FontWeight.w400,
@@ -869,7 +872,7 @@ class PaymentState extends State<PaymentPage> {
                           child: RichText(
                             text: TextSpan(
                               text: 'voucher'.tr,
-                              style: GoogleFonts.ebGaramond(
+                              style: TextStyle(
                                 color: theme.theme == ThemeMode.light
                                     ? Colors.black
                                     : Colors.white,
@@ -877,28 +880,56 @@ class PaymentState extends State<PaymentPage> {
                                 fontWeight: FontWeight.w400,
                               ),
                               children: [
-                                paymentController.voucher.value.discount ==
+                                paymentController.voucher.value.maxDiscount !=
                                             null &&
                                         paymentController
-                                                .voucher.value.discount ==
-                                            0
-                                    ? TextSpan(
-                                        text: '0',
-                                        style: GoogleFonts.ebGaramond(
+                                                .voucher.value.maxDiscount! >
+                                            total
+                                    ? paymentController
+                                                    .voucher.value.discount ==
+                                                null &&
+                                            paymentController
+                                                    .voucher.value.discount ==
+                                                0
+                                        ? TextSpan(
+                                            text: '0',
+                                            style: TextStyle(
+                                              color: Colors.amber,
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          )
+                                        : TextSpan(
+                                            text:
+                                                '  - ${paymentController.voucher.value.discount ?? 0}%',
+                                            style: TextStyle(
+                                              color: Colors.amber,
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          )
+                                    : TextSpan(
+                                        text: '  - ' +
+                                            CurrencyTextInputFormatter(
+                                              locale: AppTranslation
+                                                          .instance.language ==
+                                                      AppTranslation.english
+                                                  ? "vi_VN"
+                                                  : "en_US",
+                                              decimalDigits: 0,
+                                              symbol: "",
+                                            ).format(
+                                              (paymentController.voucher.value
+                                                          .maxDiscount ??
+                                                      0)
+                                                  .toString(),
+                                            ),
+                                        style: TextStyle(
                                           color: Colors.amber,
                                           fontSize: 18,
                                           fontWeight: FontWeight.bold,
                                         ),
                                       )
-                                    : TextSpan(
-                                        text:
-                                            '  - ${paymentController.voucher.value.discount ?? 0}%',
-                                        style: GoogleFonts.ebGaramond(
-                                          color: Colors.amber,
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
                               ],
                             ),
                           ),
@@ -912,7 +943,7 @@ class PaymentState extends State<PaymentPage> {
                         child: RichText(
                           text: TextSpan(
                             text: 'payment_total_product'.tr,
-                            style: GoogleFonts.ebGaramond(
+                            style: TextStyle(
                               color: theme.theme == ThemeMode.light
                                   ? Colors.black
                                   : Colors.white,
@@ -921,8 +952,17 @@ class PaymentState extends State<PaymentPage> {
                             ),
                             children: [
                               TextSpan(
-                                text: '$total',
-                                style: GoogleFonts.ebGaramond(
+                                text: CurrencyTextInputFormatter(
+                                  locale: AppTranslation.instance.language ==
+                                          AppTranslation.english
+                                      ? "vi_VN"
+                                      : "en_US",
+                                  decimalDigits: 0,
+                                  symbol: "",
+                                ).format(
+                                  (total).toString(),
+                                ),
+                                style: TextStyle(
                                   color: theme.theme == ThemeMode.light
                                       ? Colors.black
                                       : Colors.white,
@@ -943,7 +983,7 @@ class PaymentState extends State<PaymentPage> {
                           child: RichText(
                             text: TextSpan(
                               text: 'payment_total_bill'.tr,
-                              style: GoogleFonts.ebGaramond(
+                              style: TextStyle(
                                 color: theme.theme == ThemeMode.light
                                     ? Colors.black
                                     : Colors.white,
@@ -951,21 +991,66 @@ class PaymentState extends State<PaymentPage> {
                                 fontWeight: FontWeight.w400,
                               ),
                               children: [
-                                paymentController.voucher.value.discount ==
+                                paymentController.voucher.value.maxDiscount !=
                                             null &&
                                         paymentController
-                                                .voucher.value.discount ==
-                                            0
-                                    ? TextSpan(
-                                        text: '$total',
-                                        style: GoogleFonts.ebGaramond(
-                                          color: theme.theme == ThemeMode.light
-                                              ? Colors.black
-                                              : Colors.white,
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      )
+                                                .voucher.value.maxDiscount! >
+                                            total
+                                    ? paymentController
+                                                    .voucher.value.discount ==
+                                                null &&
+                                            paymentController
+                                                    .voucher.value.discount ==
+                                                0
+                                        ? TextSpan(
+                                            text: CurrencyTextInputFormatter(
+                                              locale: AppTranslation
+                                                          .instance.language ==
+                                                      AppTranslation.english
+                                                  ? "vi_VN"
+                                                  : "en_US",
+                                              decimalDigits: 0,
+                                              symbol: "",
+                                            ).format(
+                                              (total).toString(),
+                                            ),
+                                            style: TextStyle(
+                                              color:
+                                                  theme.theme == ThemeMode.light
+                                                      ? Colors.black
+                                                      : Colors.white,
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          )
+                                        : TextSpan(
+                                            text: CurrencyTextInputFormatter(
+                                              locale: AppTranslation
+                                                          .instance.language ==
+                                                      AppTranslation.english
+                                                  ? "vi_VN"
+                                                  : "en_US",
+                                              decimalDigits: 0,
+                                              symbol: "",
+                                            ).format(((total *
+                                                        (100 -
+                                                            (paymentController
+                                                                    .voucher
+                                                                    .value
+                                                                    .discount ??
+                                                                0)) /
+                                                        100) /
+                                                    10)
+                                                .toString()),
+                                            style: TextStyle(
+                                              color:
+                                                  theme.theme == ThemeMode.light
+                                                      ? Colors.black
+                                                      : Colors.white,
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          )
                                     : TextSpan(
                                         text: CurrencyTextInputFormatter(
                                           locale: AppTranslation
@@ -975,17 +1060,12 @@ class PaymentState extends State<PaymentPage> {
                                               : "en_US",
                                           decimalDigits: 0,
                                           symbol: "",
-                                        ).format(((total *
-                                                    (100 -
-                                                        (paymentController
-                                                                .voucher
-                                                                .value
-                                                                .discount ??
-                                                            0)) /
-                                                    100) /
-                                                10)
+                                        ).format((total -
+                                                (paymentController.voucher.value
+                                                        .maxDiscount ??
+                                                    0))
                                             .toString()),
-                                        style: GoogleFonts.ebGaramond(
+                                        style: TextStyle(
                                           color: theme.theme == ThemeMode.light
                                               ? Colors.black
                                               : Colors.white,
@@ -1025,7 +1105,7 @@ class PaymentState extends State<PaymentPage> {
                             child: Center(
                               child: Text(
                                 'cart_payment'.tr.toUpperCase(),
-                                style: GoogleFonts.ebGaramond(
+                                style: TextStyle(
                                   color: theme.theme == ThemeMode.light
                                       ? Colors.white
                                       : Colors.black,

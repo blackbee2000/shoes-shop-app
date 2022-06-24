@@ -87,7 +87,7 @@ class ProductFavoriteState extends State<ProductFavoritePage> {
                 ),
                 title: Text(
                   "product_favorite_title".tr,
-                  style: GoogleFonts.ebGaramond(
+                  style: TextStyle(
                     color: theme.theme == ThemeMode.light
                         ? Colors.black
                         : Colors.white,
@@ -329,7 +329,7 @@ class ProductFavoriteState extends State<ProductFavoritePage> {
                                       alignment: Alignment.topLeft,
                                       child: Text(
                                         '${AppTranslation.instance.language == AppTranslation.english ? (controller.listProductFavoriteFinal[index].nameProductEn != null && controller.listProductFavoriteFinal[index].nameProductEn!.isNotEmpty ? controller.listProductFavoriteFinal[index].nameProductEn : '--') : (controller.listProductFavoriteFinal[index].nameProductVi != null && controller.listProductFavoriteFinal[index].nameProductVi!.isNotEmpty ? controller.listProductFavoriteFinal[index].nameProductVi : '--')}',
-                                        style: GoogleFonts.ebGaramond(
+                                        style: TextStyle(
                                           color: theme.theme == ThemeMode.light
                                               ? Colors.black
                                               : Colors.white,
@@ -361,7 +361,7 @@ class ProductFavoriteState extends State<ProductFavoritePage> {
                                                       index]
                                                   .price)
                                               .toString()),
-                                          style: GoogleFonts.ebGaramond(
+                                          style: TextStyle(
                                             color:
                                                 theme.theme == ThemeMode.light
                                                     ? Colors.black
@@ -414,7 +414,7 @@ class ProductFavoriteState extends State<ProductFavoritePage> {
                                 ),
                                 Text(
                                   'no_information'.tr,
-                                  style: GoogleFonts.ebGaramond(
+                                  style: TextStyle(
                                     color: theme.theme == ThemeMode.light
                                         ? Colors.black
                                         : Colors.white,

@@ -49,7 +49,7 @@ class SearchPage extends StatelessWidget {
                 padding: const EdgeInsets.only(bottom: 15),
                 child: Text(
                   'search_price'.tr,
-                  style: GoogleFonts.ebGaramond(
+                  style: TextStyle(
                     color: Colors.black,
                     fontSize: 16,
                     fontWeight: FontWeight.w400,
@@ -72,7 +72,7 @@ class SearchPage extends StatelessWidget {
                 padding: const EdgeInsets.only(top: 15),
                 child: Text(
                   'search_shoes_name'.tr,
-                  style: GoogleFonts.ebGaramond(
+                  style: TextStyle(
                     color: Colors.black,
                     fontSize: 16,
                     fontWeight: FontWeight.w400,
@@ -114,7 +114,7 @@ class SearchPage extends StatelessWidget {
                   children: [
                     Text(
                       'notification'.tr,
-                      style: GoogleFonts.ebGaramond(
+                      style: TextStyle(
                         color: Colors.black,
                         fontSize: 16,
                         fontWeight: FontWeight.w600,
@@ -147,7 +147,7 @@ class SearchPage extends StatelessWidget {
               alignment: Alignment.center,
               child: Text(
                 'login_popup'.tr,
-                style: GoogleFonts.ebGaramond(
+                style: TextStyle(
                   color: Colors.black,
                   fontSize: 16,
                   fontWeight: FontWeight.w600,
@@ -177,7 +177,7 @@ class SearchPage extends StatelessWidget {
                         child: Center(
                           child: Text(
                             'address_cancel'.tr,
-                            style: GoogleFonts.ebGaramond(
+                            style: TextStyle(
                               color: Colors.black,
                               fontSize: 14,
                               fontWeight: FontWeight.w600,
@@ -204,7 +204,7 @@ class SearchPage extends StatelessWidget {
                         child: Center(
                           child: Text(
                             'address_confirm'.tr,
-                            style: GoogleFonts.ebGaramond(
+                            style: TextStyle(
                               color: Colors.white,
                               fontSize: 14,
                               fontWeight: FontWeight.w600,
@@ -245,7 +245,7 @@ class SearchPage extends StatelessWidget {
                       : Colors.black,
                   title: Text(
                     "search_title".tr,
-                    style: GoogleFonts.ebGaramond(
+                    style: TextStyle(
                       color: theme.theme == ThemeMode.light
                           ? Colors.black
                           : Colors.white,
@@ -291,20 +291,6 @@ class SearchPage extends StatelessWidget {
                         ),
                       ),
                     ),
-                    // Padding(
-                    //   padding: const EdgeInsets.only(left: 10, right: 20),
-                    //   child: GestureDetector(
-                    //     child: Image.asset(
-                    //       "assets/icons/icon_message.png",
-                    //       width: 20,
-                    //       height: 20,
-                    //       color: theme.theme == ThemeMode.light
-                    //           ? Colors.black
-                    //           : Colors.white,
-                    //       fit: BoxFit.contain,
-                    //     ),
-                    //   ),
-                    // ),
                   ],
                 ),
                 body: GetBuilder<SearchController>(
@@ -331,7 +317,7 @@ class SearchPage extends StatelessWidget {
                           ),
                           child: TextField(
                             controller: controller.shoeName,
-                            style: GoogleFonts.ebGaramond(
+                            style: TextStyle(
                               color: theme.theme == ThemeMode.light
                                   ? Colors.black
                                   : Colors.white,
@@ -345,7 +331,7 @@ class SearchPage extends StatelessWidget {
                                 left: 15,
                               ),
                               hintText: 'search_enter_shoes_name'.tr,
-                              hintStyle: GoogleFonts.ebGaramond(
+                              hintStyle: TextStyle(
                                 color: theme.theme == ThemeMode.light
                                     ? Colors.black
                                     : Colors.white,
@@ -401,7 +387,7 @@ class SearchPage extends StatelessWidget {
                               padding: const EdgeInsets.all(16),
                               child: Text(
                                 item.nameCompany ?? '',
-                                style: GoogleFonts.ebGaramond(
+                                style: TextStyle(
                                   color: theme.theme == ThemeMode.light
                                       ? Colors.black
                                       : Colors.white,
@@ -417,7 +403,7 @@ class SearchPage extends StatelessWidget {
                             dropdownBuilder: (context, item) {
                               return Text(
                                 item?.nameCompany ?? 'search_select_brand'.tr,
-                                style: GoogleFonts.ebGaramond(
+                                style: TextStyle(
                                   color: item == null
                                       ? const Color(0xffD0D0D0)
                                       : theme.theme == ThemeMode.light
@@ -441,7 +427,7 @@ class SearchPage extends StatelessWidget {
                               contentPadding: const EdgeInsets.only(left: 15),
                               isDense: true,
                               border: InputBorder.none,
-                              hintStyle: GoogleFonts.ebGaramond(
+                              hintStyle: TextStyle(
                                 color: const Color(0xffD0D0D0),
                                 fontSize: 13,
                                 fontWeight: FontWeight.w400,
@@ -479,7 +465,7 @@ class SearchPage extends StatelessWidget {
                                     child: Center(
                                       child: Text(
                                         'search_title'.tr,
-                                        style: GoogleFonts.ebGaramond(
+                                        style: TextStyle(
                                           color: theme.theme == ThemeMode.light
                                               ? Colors.white
                                               : Colors.black,
@@ -517,7 +503,7 @@ class SearchPage extends StatelessWidget {
                                     child: Center(
                                       child: Text(
                                         'search_clear'.tr,
-                                        style: GoogleFonts.ebGaramond(
+                                        style: TextStyle(
                                           color: theme.theme == ThemeMode.light
                                               ? Colors.white
                                               : Colors.black,
@@ -565,7 +551,7 @@ class SearchPage extends StatelessWidget {
                                 ),
                                 Text(
                                   searchController.sortSelected.value,
-                                  style: GoogleFonts.ebGaramond(
+                                  style: TextStyle(
                                     color: theme.theme == ThemeMode.light
                                         ? Colors.black
                                         : Colors.white,
@@ -800,7 +786,7 @@ class SearchPage extends StatelessWidget {
                                             alignment: Alignment.topLeft,
                                             child: Text(
                                               '${AppTranslation.instance.language == AppTranslation.english ? (controller.listProductSearch[index].nameProductEn != null && controller.listProductSearch[index].nameProductEn!.isNotEmpty ? controller.listProductSearch[index].nameProductEn : '--') : (controller.listProductSearch[index].nameProductVi != null && controller.listProductSearch[index].nameProductVi!.isNotEmpty ? controller.listProductSearch[index].nameProductVi : '--')}',
-                                              style: GoogleFonts.ebGaramond(
+                                              style: TextStyle(
                                                 color: theme.theme ==
                                                         ThemeMode.light
                                                     ? Colors.black
@@ -835,12 +821,12 @@ class SearchPage extends StatelessWidget {
                                                                 index]
                                                             .price)
                                                         .toString()),
-                                                style: GoogleFonts.ebGaramond(
+                                                style: TextStyle(
                                                   color: theme.theme ==
                                                           ThemeMode.light
                                                       ? Colors.black
                                                       : Colors.white,
-                                                  fontSize: 20,
+                                                  fontSize: 18,
                                                   fontWeight: FontWeight.w600,
                                                 ),
                                               ),
@@ -856,7 +842,7 @@ class SearchPage extends StatelessWidget {
                                                       .listProductSearch[index]
                                                       .rating
                                                       .toString()) ??
-                                                  0.0,
+                                                  5.0,
                                               itemBuilder: (context, index) =>
                                                   const Icon(
                                                 Icons.star,
@@ -888,7 +874,7 @@ class SearchPage extends StatelessWidget {
                                       ),
                                       Text(
                                         'no_information'.tr,
-                                        style: GoogleFonts.ebGaramond(
+                                        style: TextStyle(
                                           color: theme.theme == ThemeMode.light
                                               ? Colors.black
                                               : Colors.white,

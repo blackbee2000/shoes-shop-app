@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 ThemeData lightTheme = ThemeData(
+  fontFamily: 'MMC',
   brightness: Brightness.light,
   cardColor: Colors.white,
   scaffoldBackgroundColor: Colors.white,

@@ -159,7 +159,7 @@ class HomePageState extends State<HomePage> {
                                               children: [
                                                 Text(
                                                   'home_new_collection'.tr,
-                                                  style: GoogleFonts.ebGaramond(
+                                                  style: TextStyle(
                                                     color: theme.theme ==
                                                             ThemeMode.light
                                                         ? Colors.black
@@ -173,7 +173,7 @@ class HomePageState extends State<HomePage> {
                                                 ),
                                                 Text(
                                                   'Sneaker Original 2022',
-                                                  style: GoogleFonts.ebGaramond(
+                                                  style: TextStyle(
                                                     color: theme.theme ==
                                                             ThemeMode.light
                                                         ? Colors.black
@@ -206,11 +206,10 @@ class HomePageState extends State<HomePage> {
                                                             .start,
                                                     children: [
                                                       SizedBox(
-                                                        width: 200,
+                                                        width: 170,
                                                         child: Text(
                                                           '${AppTranslation.instance.language == AppTranslation.english ? (e.product!.nameProductEn != null && e.product!.nameProductEn!.isNotEmpty ? e.product!.nameProductEn : '--') : (e.product!.nameProductVi != null && e.product!.nameProductVi!.isNotEmpty ? e.product!.nameProductVi : '--')}',
-                                                          style: GoogleFonts
-                                                              .ebGaramond(
+                                                          style: TextStyle(
                                                             color: theme.theme ==
                                                                     ThemeMode
                                                                         .light
@@ -230,8 +229,7 @@ class HomePageState extends State<HomePage> {
                                                       ),
                                                       Text(
                                                         '${e.companyName != null && e.companyName!.isNotEmpty ? e.companyName : '--'}',
-                                                        style: GoogleFonts
-                                                            .ebGaramond(
+                                                        style: TextStyle(
                                                           color: theme.theme ==
                                                                   ThemeMode
                                                                       .light
@@ -329,8 +327,8 @@ class HomePageState extends State<HomePage> {
                                                               Text(
                                                                 'home_shop_now'
                                                                     .tr,
-                                                                style: GoogleFonts
-                                                                    .ebGaramond(
+                                                                style:
+                                                                    TextStyle(
                                                                   color: theme.theme ==
                                                                           ThemeMode
                                                                               .light
@@ -457,7 +455,7 @@ class HomePageState extends State<HomePage> {
                                 children: [
                                   Text(
                                     'home_sales'.tr,
-                                    style: GoogleFonts.ebGaramond(
+                                    style: TextStyle(
                                       color: theme.theme == ThemeMode.light
                                           ? Colors.black
                                           : Colors.white,
@@ -476,7 +474,7 @@ class HomePageState extends State<HomePage> {
                                       children: [
                                         Text(
                                           'home_view_all'.tr,
-                                          style: GoogleFonts.ebGaramond(
+                                          style: TextStyle(
                                             color:
                                                 theme.theme == ThemeMode.light
                                                     ? Colors.black
@@ -533,7 +531,7 @@ class HomePageState extends State<HomePage> {
                                     children: [
                                       Text(
                                         '${AppTranslation.instance.language == AppTranslation.english ? (controller.listDiscountProduct[index].nameProductEn != null && controller.listDiscountProduct[index].nameProductEn!.isNotEmpty ? controller.listDiscountProduct[index].nameProductEn : '--') : (controller.listDiscountProduct[index].nameProductVi != null && controller.listDiscountProduct[index].nameProductVi!.isNotEmpty ? controller.listDiscountProduct[index].nameProductVi : '--')}',
-                                        style: GoogleFonts.ebGaramond(
+                                        style: TextStyle(
                                           color: theme.theme == ThemeMode.light
                                               ? Colors.white
                                               : Colors.black,
@@ -607,12 +605,12 @@ class HomePageState extends State<HomePage> {
                                                                 index]
                                                             .price)
                                                         .toString()),
-                                                style: GoogleFonts.ebGaramond(
+                                                style: TextStyle(
                                                   color: theme.theme ==
                                                           ThemeMode.light
                                                       ? Colors.white
                                                       : Colors.black,
-                                                  fontSize: 20,
+                                                  fontSize: 18,
                                                   fontWeight: FontWeight.w600,
                                                   decoration: controller
                                                               .listDiscountProduct[
@@ -636,10 +634,9 @@ class HomePageState extends State<HomePage> {
                                                     text: TextSpan(
                                                       text:
                                                           ' - ${controller.listDiscountProduct[index].discount ?? 0} %',
-                                                      style: GoogleFonts
-                                                          .ebGaramond(
+                                                      style: TextStyle(
                                                         color: Colors.amber,
-                                                        fontSize: 20,
+                                                        fontSize: 14,
                                                         fontWeight:
                                                             FontWeight.w600,
                                                       ),
@@ -682,12 +679,12 @@ class HomePageState extends State<HomePage> {
                                                                   100) /
                                                               10)
                                                           .toString()),
-                                                  style: GoogleFonts.ebGaramond(
+                                                  style: TextStyle(
                                                     color: theme.theme ==
                                                             ThemeMode.light
                                                         ? Colors.white
                                                         : Colors.black,
-                                                    fontSize: 20,
+                                                    fontSize: 18,
                                                     fontWeight: FontWeight.w600,
                                                   ),
                                                 ),
@@ -703,7 +700,7 @@ class HomePageState extends State<HomePage> {
                                                   .listDiscountProduct[index]
                                                   .rating
                                                   .toString()) ??
-                                              0.0,
+                                              5.0,
                                           itemBuilder: (context, index) =>
                                               const Icon(
                                             Icons.star,
@@ -744,7 +741,7 @@ class HomePageState extends State<HomePage> {
                                             children: [
                                               Text(
                                                 'home_go_detail'.tr,
-                                                style: GoogleFonts.ebGaramond(
+                                                style: TextStyle(
                                                   color: theme.theme ==
                                                           ThemeMode.light
                                                       ? Colors.white
@@ -784,7 +781,7 @@ class HomePageState extends State<HomePage> {
                                   const EdgeInsets.symmetric(horizontal: 20),
                               child: Text(
                                 'home_brands'.tr,
-                                style: GoogleFonts.ebGaramond(
+                                style: TextStyle(
                                   color: theme.theme == ThemeMode.light
                                       ? Colors.black
                                       : Colors.white,
@@ -900,7 +897,7 @@ class HomePageState extends State<HomePage> {
                                 children: [
                                   Text(
                                     'home_news_trending'.tr,
-                                    style: GoogleFonts.ebGaramond(
+                                    style: TextStyle(
                                       color: theme.theme == ThemeMode.light
                                           ? Colors.black
                                           : Colors.white,
@@ -919,7 +916,7 @@ class HomePageState extends State<HomePage> {
                                       children: [
                                         Text(
                                           'home_view_all'.tr,
-                                          style: GoogleFonts.ebGaramond(
+                                          style: TextStyle(
                                             color:
                                                 theme.theme == ThemeMode.light
                                                     ? Colors.black
@@ -974,7 +971,7 @@ class HomePageState extends State<HomePage> {
                                     children: [
                                       Text(
                                         '${AppTranslation.instance.language == AppTranslation.english ? (controller.listTrendingProduct[index].nameProductEn != null && controller.listTrendingProduct[index].nameProductEn!.isNotEmpty ? controller.listTrendingProduct[index].nameProductEn : '--') : (controller.listTrendingProduct[index].nameProductVi != null && controller.listTrendingProduct[index].nameProductVi!.isNotEmpty ? controller.listTrendingProduct[index].nameProductVi : '--')}',
-                                        style: GoogleFonts.ebGaramond(
+                                        style: TextStyle(
                                           color: theme.theme == ThemeMode.light
                                               ? Colors.white
                                               : Colors.black,
@@ -1037,12 +1034,12 @@ class HomePageState extends State<HomePage> {
                                                     .listTrendingProduct[index]
                                                     .price)
                                                 .toString()),
-                                            style: GoogleFonts.ebGaramond(
+                                            style: TextStyle(
                                               color:
                                                   theme.theme == ThemeMode.light
                                                       ? Colors.white
                                                       : Colors.black,
-                                              fontSize: 20,
+                                              fontSize: 18,
                                               fontWeight: FontWeight.w600,
                                             ),
                                           ),
@@ -1058,7 +1055,7 @@ class HomePageState extends State<HomePage> {
                                                   .listTrendingProduct[index]
                                                   .rating
                                                   .toString()) ??
-                                              0.0,
+                                              5.0,
                                           itemBuilder: (context, index) =>
                                               const Icon(
                                             Icons.star,
@@ -1099,7 +1096,7 @@ class HomePageState extends State<HomePage> {
                                             children: [
                                               Text(
                                                 'home_go_detail'.tr,
-                                                style: GoogleFonts.ebGaramond(
+                                                style: TextStyle(
                                                   color: theme.theme ==
                                                           ThemeMode.light
                                                       ? Colors.white
