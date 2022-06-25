@@ -851,7 +851,7 @@ class ProductDetailState extends State<ProductDetailPage>
                                                 theme.theme == ThemeMode.light
                                                     ? Colors.black
                                                     : Colors.white,
-                                            fontSize: 20,
+                                            fontSize: 18,
                                             fontWeight: FontWeight.w600,
                                           ),
                                         ),
@@ -867,7 +867,7 @@ class ProductDetailState extends State<ProductDetailPage>
                                                   theme.theme == ThemeMode.light
                                                       ? Colors.black
                                                       : Colors.white,
-                                              fontSize: 20,
+                                              fontSize: 18,
                                               fontWeight: FontWeight.w600,
                                             ),
                                           ),

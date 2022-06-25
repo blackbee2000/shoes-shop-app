@@ -34,6 +34,11 @@ class PaymentState extends State<PaymentPage> {
     for (var e in cartController.listCartSelected) {
       total += (e.lstProduct!.price! * e.amount!);
     }
+    paymentController.getShipFee(
+        street: paymentController.addressSelected.value.street!,
+        ward: paymentController.addressSelected.value.ward!,
+        province: paymentController.addressSelected.value.province!,
+        district: paymentController.addressSelected.value.district!);
     super.initState();
   }
 
@@ -871,6 +876,48 @@ class PaymentState extends State<PaymentPage> {
                           padding: const EdgeInsets.symmetric(horizontal: 20),
                           child: RichText(
                             text: TextSpan(
+                              text: 'payment_shipping'.tr,
+                              style: TextStyle(
+                                color: theme.theme == ThemeMode.light
+                                    ? Colors.black
+                                    : Colors.white,
+                                fontSize: 18,
+                                fontWeight: FontWeight.w400,
+                              ),
+                              children: [
+                                TextSpan(
+                                  text: '  - ' +
+                                      CurrencyTextInputFormatter(
+                                        locale:
+                                            AppTranslation.instance.language ==
+                                                    AppTranslation.english
+                                                ? "vi_VN"
+                                                : "en_US",
+                                        decimalDigits: 0,
+                                        symbol: "",
+                                      ).format(
+                                        (paymentController.shippingMoney.value)
+                                            .toString(),
+                                      ),
+                                  style: TextStyle(
+                                    color: Colors.amber,
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 5,
+                      ),
+                      Obx(
+                        () => Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 20),
+                          child: RichText(
+                            text: TextSpan(
                               text: 'voucher'.tr,
                               style: TextStyle(
                                 color: theme.theme == ThemeMode.light
@@ -1012,7 +1059,10 @@ class PaymentState extends State<PaymentPage> {
                                               decimalDigits: 0,
                                               symbol: "",
                                             ).format(
-                                              (total).toString(),
+                                              (total +
+                                                      paymentController
+                                                          .shippingMoney.value)
+                                                  .toString(),
                                             ),
                                             style: TextStyle(
                                               color:
@@ -1032,15 +1082,17 @@ class PaymentState extends State<PaymentPage> {
                                                   : "en_US",
                                               decimalDigits: 0,
                                               symbol: "",
-                                            ).format(((total *
-                                                        (100 -
-                                                            (paymentController
-                                                                    .voucher
-                                                                    .value
-                                                                    .discount ??
-                                                                0)) /
-                                                        100) /
-                                                    10)
+                                            ).format((((total *
+                                                            (100 -
+                                                                (paymentController
+                                                                        .voucher
+                                                                        .value
+                                                                        .discount ??
+                                                                    0)) /
+                                                            100) /
+                                                        10) +
+                                                    paymentController
+                                                        .shippingMoney.value)
                                                 .toString()),
                                             style: TextStyle(
                                               color:
@@ -1060,10 +1112,14 @@ class PaymentState extends State<PaymentPage> {
                                               : "en_US",
                                           decimalDigits: 0,
                                           symbol: "",
-                                        ).format((total -
-                                                (paymentController.voucher.value
-                                                        .maxDiscount ??
-                                                    0))
+                                        ).format(((total -
+                                                    (paymentController
+                                                            .voucher
+                                                            .value
+                                                            .maxDiscount ??
+                                                        0)) +
+                                                paymentController
+                                                    .shippingMoney.value)
                                             .toString()),
                                         style: TextStyle(
                                           color: theme.theme == ThemeMode.light

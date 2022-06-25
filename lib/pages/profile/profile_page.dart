@@ -181,7 +181,9 @@ class ProfilePage extends GetView<ProfileController> {
                                   ? Container()
                                   : Container(
                                       margin: const EdgeInsets.symmetric(
-                                          vertical: 20),
+                                        vertical: 20,
+                                        horizontal: 20,
+                                      ),
                                       alignment: Alignment.center,
                                       child: Column(
                                         children: [
@@ -206,6 +208,7 @@ class ProfilePage extends GetView<ProfileController> {
                                               fontSize: 18,
                                               fontWeight: FontWeight.w600,
                                             ),
+                                            textAlign: TextAlign.center,
                                           ),
                                         ],
                                       ),

@@ -366,6 +366,11 @@ class AddressController extends GetxController {
 
   chooseAddressPayment(Address address, int id) {
     paymentController.addressSelected.value = address;
+    paymentController.getShipFee(
+        street: address.street!,
+        ward: address.ward!,
+        province: address.province!,
+        district: address.district!);
     paymentController.update();
     update();
     Get.back(id: id);

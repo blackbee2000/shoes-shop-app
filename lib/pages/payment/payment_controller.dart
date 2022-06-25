@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -19,6 +21,7 @@ class PaymentController extends GetxController {
   final profileController = Get.put(ProfileController());
   final typePayment = ''.obs;
   final addressSelected = Address.fromJson({}).obs;
+  final shippingMoney = 0.obs;
 
   @override
   void onInit() {
@@ -33,14 +36,14 @@ class PaymentController extends GetxController {
     update();
   }
 
-  payment(String voucherCode, String typePayment, int totalPriceProduct,
+  payment(String voucherCode, String typePaymentMethod, int totalPriceProduct,
       Address address) {
     OrderProvider().payment(
       params: {
         "lstCart": cartController.listCartSelected,
         "idAccount": profileController.profile.value.id,
         "status": 1,
-        "typePayment": typePayment,
+        "typePayment": typePaymentMethod,
         "statusPayment": false,
         "voucher": voucherCode,
         "totalShipping": 12000,
@@ -69,7 +72,7 @@ class PaymentController extends GetxController {
         );
       },
       onSuccess: (data) {
-        if (typePayment == 'COD') {
+        if (typePaymentMethod == 'COD') {
           Get.back();
           Get.offAll(const DashboardPage());
           Get.snackbar(
@@ -84,6 +87,8 @@ class PaymentController extends GetxController {
           launchInWebViewOrVC(Uri.parse(url));
         }
 
+        voucher.value = Voucher.fromJson({});
+        typePayment.value = '';
         cartController.listCartSelected.clear();
         cartController.onInit();
         cartController.update();
@@ -100,5 +105,36 @@ class PaymentController extends GetxController {
         update();
       },
     );
+  }
+
+  getShipFee(
+      {required String street,
+      required String ward,
+      required String province,
+      required String district}) {
+    OrderProvider().checkShipping(
+        params: {
+          "address": street + ',' + ward + ',' + district,
+          "province": province,
+          "district": district,
+          "pick_province": 'Hồ Chí Minh',
+          "pick_district": 'Thủ Đức',
+          "weight": 5,
+        },
+        option: Options(
+          headers: {
+            'Token': '83b5796301Fc00A131eb690fA9d8B9B5cCf0497b',
+          },
+        ),
+        beforeSend: () {},
+        onSuccess: (res) {
+          print('RESSSS ===> ${res.toString()}');
+          shippingMoney.value = res.fee!.fee!;
+          update();
+        },
+        onError: (e) {
+          print('Fail ===> ${e.toString()}');
+          update();
+        });
   }
 }
