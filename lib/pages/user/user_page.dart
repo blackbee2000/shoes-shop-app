@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:shoes_shop_app/pages/address/address_page.dart';
 import 'package:shoes_shop_app/pages/dashboard/dashboard_page.dart';
 import 'package:shoes_shop_app/pages/user/user_controller.dart';
@@ -8,6 +9,7 @@ import 'package:shoes_shop_app/utils/app_constant.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:back_button_interceptor/back_button_interceptor.dart';
 import '../profile/profile_controller.dart';
+import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 
 class UserPage extends StatefulWidget {
   final int id;
@@ -28,6 +30,8 @@ class _UserPageState extends State<UserPage> {
   final userController = Get.put(UserController());
   final profileController = Get.put(ProfileController());
 
+  DateFormat formatDate = DateFormat('dd/MM/yyyy');
+
   @override
   void initState() {
     BackButtonInterceptor.add(myInterceptor);
@@ -44,6 +48,12 @@ class _UserPageState extends State<UserPage> {
     BackButtonInterceptor.remove(myInterceptor);
     super.dispose();
   }
+
+  Future<DateTime?> selectDateTime(BuildContext context) => showDatePicker(
+      context: context,
+      initialDate: DateTime.now().add(Duration(seconds: 1)),
+      firstDate: DateTime(1900),
+      lastDate: DateTime.now());
 
   bool myInterceptor(bool stopDefaultButtonEvent, RouteInfo info) {
     Get.back(id: widget.id);
@@ -435,6 +445,137 @@ class _UserPageState extends State<UserPage> {
                           height: 20,
                         ),
                         GetBuilder<UserController>(
+                            init: userController,
+                            builder: (controller) => Container(
+                                  width: double.infinity,
+                                  height: 50,
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 15),
+                                  margin: const EdgeInsets.symmetric(
+                                      horizontal: 30),
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(10),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.black.withOpacity(0.25),
+                                        spreadRadius: 0,
+                                        blurRadius: 4,
+                                        offset: const Offset(
+                                            0, 4), // changes position of shadow
+                                      ),
+                                    ],
+                                  ),
+                                  child: DropdownButtonFormField<String>(
+                                    value:
+                                        controller.gender.value ? 'Nam' : 'Nữ',
+                                    icon: const Icon(Icons.arrow_downward),
+                                    iconSize: 18,
+                                    elevation: 16,
+                                    borderRadius: BorderRadius.circular(0),
+                                    dropdownColor: Colors.white,
+                                    onChanged: (val) {
+                                      val == 'Nam'
+                                          ? controller.gender.value = true
+                                          : controller.gender.value = false;
+                                      controller.update();
+                                    },
+                                    items: <String>['Nam', 'Nữ']
+                                        .map<DropdownMenuItem<String>>(
+                                            (String value) {
+                                      return DropdownMenuItem<String>(
+                                          value: value,
+                                          child: Row(children: [
+                                            Icon(LineAwesomeIcons.genderless,
+                                                size: 20),
+                                            SizedBox(
+                                              width: 15,
+                                            ),
+                                            Text(
+                                              value,
+                                              style: GoogleFonts.ebGaramond(
+                                                color: Colors.black,
+                                                fontSize: 14,
+                                                fontWeight: FontWeight.w400,
+                                              ),
+                                            ),
+                                          ]));
+                                    }).toList(),
+                                  ),
+                                )),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        GetBuilder<UserController>(
+                            init: userController,
+                            builder: (controller) => GestureDetector(
+                                onTap: () async {
+                                  final selectedDate =
+                                      await selectDateTime(context);
+                                  if (selectedDate != null) {
+                                    controller.selectedDate.value = DateTime(
+                                      selectedDate.year,
+                                      selectedDate.month,
+                                      selectedDate.day,
+                                    );
+                                    controller.birthday.text = formatDate
+                                        .format(controller.selectedDate.value);
+                                    controller.update();
+                                  }
+                                },
+                                child: Container(
+                                    width: double.infinity,
+                                    height: 50,
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 15),
+                                    margin: const EdgeInsets.symmetric(
+                                        horizontal: 30),
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(10),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.black.withOpacity(0.25),
+                                          spreadRadius: 0,
+                                          blurRadius: 4,
+                                          offset: const Offset(0,
+                                              4), // changes position of shadow
+                                        ),
+                                      ],
+                                    ),
+                                    child: Stack(
+                                      alignment:
+                                          AlignmentDirectional.centerStart,
+                                      children: [
+                                        Icon(LineAwesomeIcons.birthday_cake,
+                                            size: 20),
+                                        TextField(
+                                          controller: controller.birthday,
+                                          readOnly: true,
+                                          style: GoogleFonts.ebGaramond(
+                                            color: Colors.black,
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.w400,
+                                          ),
+                                          decoration: InputDecoration(
+                                            contentPadding:
+                                                const EdgeInsets.only(left: 35),
+                                            border: InputBorder.none,
+                                            hintText: "Chọn ngày sinh của bạn",
+                                            hintStyle: GoogleFonts.ebGaramond(
+                                              color: const Color(0xffD0D0D0),
+                                              fontSize: 14,
+                                              fontWeight: FontWeight.w400,
+                                            ),
+                                          ),
+                                          cursorColor: Colors.black,
+                                        ),
+                                      ],
+                                    )))),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        GetBuilder<UserController>(
                           init: userController,
                           builder: (controller) => Container(
                             width: double.infinity,
@@ -576,6 +717,8 @@ class _UserPageState extends State<UserPage> {
                                     controller.phone.text,
                                     controller.email.text,
                                     controller.imageUser ?? "",
+                                    controller.gender.value,
+                                    controller.birthday.text,
                                     widget.isRegister);
                               },
                               child: Stack(

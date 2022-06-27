@@ -184,7 +184,7 @@ class LocaleString extends Translations {
           "text_2":
               "We are the ones who bring narcissism to your feet, offering classic and modern texturing. We are LifeKicky.",
           "contact_info": "Contact information",
-          "member": "Member",
+          "member": "Member"
         },
         "vi_VN": {
           "product_title": "Sản phẩm",

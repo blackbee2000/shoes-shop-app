@@ -18,6 +18,9 @@ class UserController extends GetxController with StateMixin {
   TextEditingController name = TextEditingController();
   TextEditingController phone = TextEditingController();
   TextEditingController email = TextEditingController();
+  final gender = true.obs;
+  TextEditingController birthday = TextEditingController();
+  final selectedDate = DateTime.now().obs;
   String? imageUser;
   final profileController = Get.put(ProfileController());
   bool isLoading = false;
@@ -87,12 +90,14 @@ class UserController extends GetxController with StateMixin {
     update();
   }
 
-  updateProfile(
-      String name, String phone, String email, String image, bool isRegister) {
+  updateProfile(String name, String phone, String email, String image,
+      bool gender, String birthday, bool isRegister) {
     UserProvider().updateProfile(
       params: {
         "fullName": name,
         "phoneNumber": phone,
+        "gender": gender,
+        "birthday": birthday,
         "avatar": image,
         "email": email,
         "password": profileController.profile.value.password,

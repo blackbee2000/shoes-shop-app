@@ -10,6 +10,8 @@ class Profile {
   String? email;
   String? password;
   String? role;
+  String? birthday;
+  bool? gender;
   int? otp;
   bool? isDeleted;
   String? createdAt;
@@ -25,6 +27,8 @@ class Profile {
     this.email,
     this.password,
     this.role,
+    this.gender,
+    this.birthday,
     this.otp,
     this.isDeleted,
     this.createdAt,
