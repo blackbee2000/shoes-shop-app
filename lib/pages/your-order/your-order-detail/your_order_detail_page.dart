@@ -326,7 +326,20 @@ class YourOrderDetailState extends State<YourOrderDetailPage> {
                                         height: 5,
                                       ),
                                       Text(
-                                        '${'payment_total_bill'.tr} ${widget.order.totalPrice ?? '--'}',
+                                        '${'payment_total_bill'.tr}' +
+                                            CurrencyTextInputFormatter(
+                                              locale: AppTranslation
+                                                          .instance.language ==
+                                                      AppTranslation.english
+                                                  ? "vi_VN"
+                                                  : "en_US",
+                                              decimalDigits: 0,
+                                              symbol: "",
+                                            ).format(
+                                              ({
+                                                widget.order.totalPrice ?? '--'
+                                              }).toString(),
+                                            ),
                                         style: TextStyle(
                                           color: Colors.black,
                                           fontSize: 14,
@@ -554,7 +567,20 @@ class YourOrderDetailState extends State<YourOrderDetailPage> {
                                                             ),
                                                             Text(
                                                               'total'.tr +
-                                                                  '${e.totalPrice ?? '--'}',
+                                                                  CurrencyTextInputFormatter(
+                                                                    locale: AppTranslation.instance.language ==
+                                                                            AppTranslation.english
+                                                                        ? "vi_VN"
+                                                                        : "en_US",
+                                                                    decimalDigits:
+                                                                        0,
+                                                                    symbol: "",
+                                                                  ).format(
+                                                                    ({
+                                                                      e.totalPrice ??
+                                                                          '--'
+                                                                    }).toString(),
+                                                                  ),
                                                               style: GoogleFonts
                                                                   .ebGaramond(
                                                                 color: Colors

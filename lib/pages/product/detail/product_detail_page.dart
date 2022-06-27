@@ -856,7 +856,7 @@ class ProductDetailState extends State<ProductDetailPage>
                                           ),
                                         ),
                                         const SizedBox(
-                                          width: 15,
+                                          width: 10,
                                         ),
                                         Obx(
                                           () => Text(
@@ -873,14 +873,14 @@ class ProductDetailState extends State<ProductDetailPage>
                                           ),
                                         ),
                                         const SizedBox(
-                                          width: 15,
+                                          width: 10,
                                         ),
                                         Icon(
                                           Icons.arrow_drop_down,
                                           color: theme.theme == ThemeMode.light
                                               ? Colors.black
                                               : Colors.white,
-                                          size: 20,
+                                          size: 18,
                                         ),
                                       ],
                                     ),

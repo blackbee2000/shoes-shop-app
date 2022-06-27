@@ -1,9 +1,11 @@
+import 'package:currency_text_input_formatter/currency_text_input_formatter.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shoes_shop_app/pages/cart/cart_page.dart';
 import 'package:shoes_shop_app/pages/profile/product_favorite/product_favorite_page.dart';
 import 'package:shoes_shop_app/pages/your-order/your_order_controller.dart';
 import 'package:shoes_shop_app/theme/theme_controller.dart';
+import 'package:shoes_shop_app/translations/app_translation.dart';
 import 'package:shoes_shop_app/utils/app_constant.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'your-order-detail/your_order_detail_page.dart';
@@ -517,7 +519,26 @@ class YourOrderState extends State<YourOrderPage> {
                                                         height: 5,
                                                       ),
                                                       Text(
-                                                        '${'payment_total_bill'.tr} ${controller.listOrder[index].totalPrice ?? '--'}',
+                                                        '${'payment_total_bill'.tr}' +
+                                                            CurrencyTextInputFormatter(
+                                                              locale: AppTranslation
+                                                                          .instance
+                                                                          .language ==
+                                                                      AppTranslation
+                                                                          .english
+                                                                  ? "vi_VN"
+                                                                  : "en_US",
+                                                              decimalDigits: 0,
+                                                              symbol: "",
+                                                            ).format(
+                                                              ({
+                                                                controller
+                                                                        .listOrder[
+                                                                            index]
+                                                                        .totalPrice ??
+                                                                    '--'
+                                                              }).toString(),
+                                                            ),
                                                         style: TextStyle(
                                                           color: Colors.black,
                                                           fontSize: 14,
@@ -729,7 +750,26 @@ class YourOrderState extends State<YourOrderPage> {
                                                         height: 5,
                                                       ),
                                                       Text(
-                                                        '${'payment_total_bill'.tr} ${controller.listOrder[index].totalPrice ?? '--'}',
+                                                        '${'payment_total_bill'.tr}' +
+                                                            CurrencyTextInputFormatter(
+                                                              locale: AppTranslation
+                                                                          .instance
+                                                                          .language ==
+                                                                      AppTranslation
+                                                                          .english
+                                                                  ? "vi_VN"
+                                                                  : "en_US",
+                                                              decimalDigits: 0,
+                                                              symbol: "",
+                                                            ).format(
+                                                              ({
+                                                                controller
+                                                                        .listOrder[
+                                                                            index]
+                                                                        .totalPrice ??
+                                                                    '--'
+                                                              }).toString(),
+                                                            ),
                                                         style: TextStyle(
                                                           color: Colors.black,
                                                           fontSize: 14,

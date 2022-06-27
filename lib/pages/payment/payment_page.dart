@@ -886,8 +886,8 @@ class PaymentState extends State<PaymentPage> {
                               ),
                               children: [
                                 TextSpan(
-                                  text: '  - ' +
-                                      CurrencyTextInputFormatter(
+                                  text: 
+                                     CurrencyTextInputFormatter (
                                         locale:
                                             AppTranslation.instance.language ==
                                                     AppTranslation.english
@@ -900,7 +900,7 @@ class PaymentState extends State<PaymentPage> {
                                             .toString(),
                                       ),
                                   style: TextStyle(
-                                    color: Colors.amber,
+                                    color: Colors.black,
                                     fontSize: 18,
                                     fontWeight: FontWeight.bold,
                                   ),
