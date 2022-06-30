@@ -519,17 +519,26 @@ class YourOrderState extends State<YourOrderPage> {
                                                         height: 5,
                                                       ),
                                                       Text(
-                                                        '${'payment_total_bill'.tr} ${CurrencyTextInputFormatter(
-                                                          locale: AppTranslation
-                                                                      .instance
-                                                                      .language ==
-                                                                  AppTranslation
-                                                                      .english
-                                                              ? "vi_VN"
-                                                              : "en_US",
-                                                          decimalDigits: 0,
-                                                          symbol: "",
-                                                        ).format((controller.listOrder[index].totalPrice).toString())}',
+                                                        '${'payment_total_bill'.tr}' +
+                                                            CurrencyTextInputFormatter(
+                                                              locale: AppTranslation
+                                                                          .instance
+                                                                          .language ==
+                                                                      AppTranslation
+                                                                          .english
+                                                                  ? "vi_VN"
+                                                                  : "en_US",
+                                                              decimalDigits: 0,
+                                                              symbol: "",
+                                                            ).format(
+                                                              ({
+                                                                controller
+                                                                        .listOrder[
+                                                                            index]
+                                                                        .totalPrice ??
+                                                                    '--'
+                                                              }).toString(),
+                                                            ),
                                                         style: TextStyle(
                                                           color: Colors.black,
                                                           fontSize: 14,
@@ -741,17 +750,26 @@ class YourOrderState extends State<YourOrderPage> {
                                                         height: 5,
                                                       ),
                                                       Text(
-                                                        '${'payment_total_bill'.tr} ${CurrencyTextInputFormatter(
-                                                          locale: AppTranslation
-                                                                      .instance
-                                                                      .language ==
-                                                                  AppTranslation
-                                                                      .english
-                                                              ? "vi_VN"
-                                                              : "en_US",
-                                                          decimalDigits: 0,
-                                                          symbol: "",
-                                                        ).format((controller.listOrder[index].totalPrice).toString())}',
+                                                        '${'payment_total_bill'.tr}' +
+                                                            CurrencyTextInputFormatter(
+                                                              locale: AppTranslation
+                                                                          .instance
+                                                                          .language ==
+                                                                      AppTranslation
+                                                                          .english
+                                                                  ? "vi_VN"
+                                                                  : "en_US",
+                                                              decimalDigits: 0,
+                                                              symbol: "",
+                                                            ).format(
+                                                              ({
+                                                                controller
+                                                                        .listOrder[
+                                                                            index]
+                                                                        .totalPrice ??
+                                                                    '--'
+                                                              }).toString(),
+                                                            ),
                                                         style: TextStyle(
                                                           color: Colors.black,
                                                           fontSize: 14,

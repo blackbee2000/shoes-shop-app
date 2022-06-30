@@ -129,6 +129,7 @@ class PaymentController extends GetxController {
         beforeSend: () {},
         onSuccess: (res) {
           print('RESSSS ===> ${res.toString()}');
+          print(res.fee!.fee!);
           shippingMoney.value = res.fee!.fee!;
           update();
         },

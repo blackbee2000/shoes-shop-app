@@ -1589,6 +1589,33 @@ class ProductDetailState extends State<ProductDetailPage>
                                             fontWeight: FontWeight.w600,
                                           ),
                                         ),
+                                        const SizedBox(
+                                          width: 10,
+                                        ),
+                                        Obx(
+                                          () => Text(
+                                            productDetailController
+                                                .sizeShoes.value,
+                                            style: TextStyle(
+                                              color:
+                                                  theme.theme == ThemeMode.light
+                                                      ? Colors.black
+                                                      : Colors.white,
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.w600,
+                                            ),
+                                          ),
+                                        ),
+                                        const SizedBox(
+                                          width: 10,
+                                        ),
+                                        Icon(
+                                          Icons.arrow_drop_down,
+                                          color: theme.theme == ThemeMode.light
+                                              ? Colors.black
+                                              : Colors.white,
+                                          size: 18,
+                                        ),
                                       ],
                                     ),
                                   ),

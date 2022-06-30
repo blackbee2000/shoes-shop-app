@@ -55,6 +55,7 @@ class OrderProvider extends OrderAPIProtocol {
     ).get(
       beforeSend: () => {beforeSend()},
       onSuccess: (data) {
+        print(data);
         onSuccess(ShippingRes.fromJson(data));
       },
       onError: (error) => {onError(error)},
