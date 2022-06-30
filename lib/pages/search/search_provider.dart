@@ -26,7 +26,10 @@ class SearchProvider extends SearchAPIProtocol {
       path: ApiConstant.SEARCHPRODUCT,
       option: option,
     ).post(
-      beforeSend: () => {beforeSend()},
+      beforeSend: () {
+        print('Paramssss $params');
+        beforeSend();
+      },
       onSuccess: (data) {
         onSuccess(ProductResponse.fromJson(data));
       },

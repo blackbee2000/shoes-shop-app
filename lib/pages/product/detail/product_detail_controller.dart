@@ -21,6 +21,8 @@ class ProductDetailController extends GetxController
   final profileController = Get.put(ProfileController());
   final cartController = Get.put(CartController());
   final isLike = false.obs;
+  final isShowPopup = false.obs;
+  final indexSelected = 0.obs;
 
   plusAmount() {
     amount.value = amount.value + 1;

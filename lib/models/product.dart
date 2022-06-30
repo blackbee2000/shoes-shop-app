@@ -14,6 +14,8 @@ class Product {
   int? quantitySold;
   int? discount;
   List<TypeProduct>? type;
+  List<String>? listImageDetail;
+  String? style;
   String? idCompany;
   int? price;
   String? productCode;
@@ -34,6 +36,8 @@ class Product {
     this.quantitySold,
     this.discount,
     this.type,
+    this.listImageDetail,
+    this.style,
     this.idCompany,
     this.price,
     this.productCode,

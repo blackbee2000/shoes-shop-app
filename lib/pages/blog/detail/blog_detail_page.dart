@@ -15,8 +15,10 @@ import 'package:flutter_html/flutter_html.dart';
 import 'package:back_button_interceptor/back_button_interceptor.dart';
 
 class BlogDetailPage extends StatefulWidget {
+  final int id;
   final Blog blog;
-  BlogDetailPage({Key? key, required this.blog}) : super(key: key);
+  BlogDetailPage({Key? key, required this.id, required this.blog})
+      : super(key: key);
 
   @override
   State<BlogDetailPage> createState() => BlogDetailState();
@@ -25,10 +27,12 @@ class BlogDetailPage extends StatefulWidget {
 class BlogDetailState extends State<BlogDetailPage> {
   final blogDetailController = Get.put(BlogDetailController());
   final blogController = Get.put(BlogController());
+  ScrollController scrollController = ScrollController();
 
   @override
   void initState() {
     super.initState();
+    blogDetailController.blogDetail.value = widget.blog;
     BackButtonInterceptor.add(myInterceptor);
     blogDetailController.getAllBlogDifferent(widget.blog.id ?? '');
   }
@@ -40,8 +44,11 @@ class BlogDetailState extends State<BlogDetailPage> {
   }
 
   bool myInterceptor(bool stopDefaultButtonEvent, RouteInfo info) {
-    Get.back(id: AppConstant.BLOG);
-    return true;
+    if (widget.id == AppConstant.BLOG) {
+      Get.back(id: AppConstant.BLOG);
+      return true;
+    }
+    return false;
   }
 
   Future<void> share(title, description, link) async {
@@ -121,23 +128,10 @@ class BlogDetailState extends State<BlogDetailPage> {
                         ),
                       ),
                     ),
-                    // Padding(
-                    //   padding: const EdgeInsets.only(left: 10, right: 20),
-                    //   child: GestureDetector(
-                    //     child: Image.asset(
-                    //       "assets/icons/icon_message.png",
-                    //       width: 20,
-                    //       height: 20,
-                    //       color: theme.theme == ThemeMode.light
-                    //           ? Colors.black
-                    //           : Colors.white,
-                    //       fit: BoxFit.contain,
-                    //     ),
-                    //   ),
-                    // ),
                   ],
                 ),
                 body: SingleChildScrollView(
+                  controller: scrollController,
                   child: Column(
                     children: [
                       const SizedBox(
@@ -152,7 +146,9 @@ class BlogDetailState extends State<BlogDetailPage> {
                         ),
                         child: CachedNetworkImage(
                           fit: BoxFit.cover,
-                          imageUrl: widget.blog.imageBlog ?? '',
+                          imageUrl:
+                              blogDetailController.blogDetail.value.imageBlog ??
+                                  '',
                           useOldImageOnUrlChange: false,
                           progressIndicatorBuilder:
                               (context, url, downloadProgress) => SizedBox(
@@ -215,12 +211,17 @@ class BlogDetailState extends State<BlogDetailPage> {
                                         width: 10,
                                       ),
                                       Text(
-                                        widget.blog.createdAt != null &&
-                                                widget
-                                                    .blog.createdAt!.isNotEmpty
+                                        blogDetailController.blogDetail.value
+                                                        .createdAt !=
+                                                    null &&
+                                                blogDetailController.blogDetail
+                                                    .value.createdAt!.isNotEmpty
                                             ? DateFormat('HH:mm dd/MM/yyyy')
                                                 .format(DateTime.parse(
-                                                        widget.blog.createdAt ??
+                                                        blogDetailController
+                                                                .blogDetail
+                                                                .value
+                                                                .createdAt ??
                                                             '')
                                                     .toLocal())
                                             : '--',
@@ -241,16 +242,23 @@ class BlogDetailState extends State<BlogDetailPage> {
                                 alignment: Alignment.centerRight,
                                 child: GestureDetector(
                                   onTap: () {
-                                    AppTranslation.instance.language ==
+                                    AppTranslation
+                                                .instance.language ==
                                             AppTranslation.english
                                         ? share(
-                                            widget.blog.titleEn,
-                                            widget.blog.descriptionShortEn,
-                                            widget.blog.link)
+                                            blogDetailController
+                                                .blogDetail.value.titleEn,
+                                            blogDetailController.blogDetail
+                                                .value.descriptionShortEn,
+                                            blogDetailController
+                                                .blogDetail.value.link)
                                         : share(
-                                            widget.blog.titleEn,
-                                            widget.blog.descriptionShortEn,
-                                            widget.blog.link);
+                                            blogDetailController
+                                                .blogDetail.value.titleEn,
+                                            blogDetailController.blogDetail
+                                                .value.descriptionShortEn,
+                                            blogDetailController
+                                                .blogDetail.value.link);
                                   },
                                   child: Container(
                                     width: 50,
@@ -294,12 +302,14 @@ class BlogDetailState extends State<BlogDetailPage> {
                         ),
                         child: AppTranslation.instance.language ==
                                 AppTranslation.english
-                            ? (widget.blog.contentEn != null &&
-                                    widget.blog.contentEn!.isNotEmpty
-                                ? Html(data: widget.blog.contentEn)
-                                // Text(
-                                //     parse(widget.blog.contentEn).outerHtml,
-                                //   )
+                            ? (blogDetailController
+                                            .blogDetail.value.contentEn !=
+                                        null &&
+                                    blogDetailController
+                                        .blogDetail.value.contentEn!.isNotEmpty
+                                ? Html(
+                                    data: blogDetailController
+                                        .blogDetail.value.contentEn)
                                 : Column(
                                     children: [
                                       const Icon(
@@ -317,12 +327,14 @@ class BlogDetailState extends State<BlogDetailPage> {
                                       ),
                                     ],
                                   ))
-                            : (widget.blog.contentVi != null &&
-                                    widget.blog.contentVi!.isNotEmpty
-                                ? Html(data: widget.blog.contentVi)
-                                // Text(
-                                //     parse(widget.blog.contentVi).outerHtml,
-                                //   )
+                            : (blogDetailController
+                                            .blogDetail.value.contentVi !=
+                                        null &&
+                                    blogDetailController
+                                        .blogDetail.value.contentVi!.isNotEmpty
+                                ? Html(
+                                    data: blogDetailController
+                                        .blogDetail.value.contentVi)
                                 : Column(
                                     children: [
                                       const Icon(
@@ -372,6 +384,38 @@ class BlogDetailState extends State<BlogDetailPage> {
                               ? controller.listBlogDifferent
                                   .map(
                                     (e) => GestureDetector(
+                                      onTap: () {
+                                        Get.dialog(
+                                          const SizedBox(
+                                            height: 15,
+                                            width: 15,
+                                            child: Center(
+                                              child: CircularProgressIndicator(
+                                                valueColor:
+                                                    AlwaysStoppedAnimation(
+                                                        Colors.white),
+                                                strokeWidth: 2,
+                                              ),
+                                            ),
+                                          ),
+                                          barrierDismissible: false,
+                                        );
+                                        Future.delayed(
+                                                Duration(milliseconds: 500))
+                                            .then((_) {
+                                          setState(() {
+                                            controller.blogDetail.value = e;
+                                            controller.update();
+                                          });
+                                          Get.back();
+                                          scrollController.animateTo(
+                                            0,
+                                            duration:
+                                                Duration(milliseconds: 500),
+                                            curve: Curves.linear,
+                                          );
+                                        });
+                                      },
                                       child: Container(
                                         width: double.infinity,
                                         margin: const EdgeInsets.only(

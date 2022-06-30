@@ -326,7 +326,15 @@ class YourOrderDetailState extends State<YourOrderDetailPage> {
                                         height: 5,
                                       ),
                                       Text(
-                                        '${'payment_total_bill'.tr} ${widget.order.totalPrice ?? '--'}',
+                                        '${'payment_total_bill'.tr} ${CurrencyTextInputFormatter(
+                                          locale: AppTranslation
+                                                      .instance.language ==
+                                                  AppTranslation.english
+                                              ? "vi_VN"
+                                              : "en_US",
+                                          decimalDigits: 0,
+                                          symbol: "",
+                                        ).format((widget.order.totalPrice).toString())}',
                                         style: TextStyle(
                                           color: Colors.black,
                                           fontSize: 14,
@@ -463,8 +471,7 @@ class YourOrderDetailState extends State<YourOrderDetailPage> {
                                                           children: [
                                                             Text(
                                                               '${e.lstProduct!.nameProductEn != null && e.lstProduct!.nameProductEn!.isNotEmpty ? e.lstProduct!.nameProductEn : '--'}',
-                                                              style: GoogleFonts
-                                                                  .ebGaramond(
+                                                              style: TextStyle(
                                                                 color: Colors
                                                                     .black,
                                                                 fontSize: 16,
@@ -481,23 +488,20 @@ class YourOrderDetailState extends State<YourOrderDetailPage> {
                                                               height: 5,
                                                             ),
                                                             Text(
-                                                              CurrencyTextInputFormatter(
-                                                                locale: AppTranslation
-                                                                            .instance
-                                                                            .language ==
-                                                                        AppTranslation
-                                                                            .english
-                                                                    ? "vi_VN"
-                                                                    : "en_US",
-                                                                decimalDigits:
-                                                                    0,
-                                                                symbol: "",
-                                                              ).format((e
-                                                                      .lstProduct!
-                                                                      .price)
-                                                                  .toString()),
-                                                              style: GoogleFonts
-                                                                  .ebGaramond(
+                                                              'price'.tr +
+                                                                  CurrencyTextInputFormatter(
+                                                                    locale: AppTranslation.instance.language ==
+                                                                            AppTranslation.english
+                                                                        ? "vi_VN"
+                                                                        : "en_US",
+                                                                    decimalDigits:
+                                                                        0,
+                                                                    symbol: "",
+                                                                  ).format((e
+                                                                          .lstProduct!
+                                                                          .price)
+                                                                      .toString()),
+                                                              style: TextStyle(
                                                                 color: Colors
                                                                     .black,
                                                                 fontSize: 14,
@@ -539,8 +543,7 @@ class YourOrderDetailState extends State<YourOrderDetailPage> {
                                                             Text(
                                                               'amount'.tr +
                                                                   '${e.amount ?? '--'}',
-                                                              style: GoogleFonts
-                                                                  .ebGaramond(
+                                                              style: TextStyle(
                                                                 color: Colors
                                                                     .black,
                                                                 fontSize: 14,
@@ -554,9 +557,16 @@ class YourOrderDetailState extends State<YourOrderDetailPage> {
                                                             ),
                                                             Text(
                                                               'total'.tr +
-                                                                  '${e.totalPrice ?? '--'}',
-                                                              style: GoogleFonts
-                                                                  .ebGaramond(
+                                                                  '${CurrencyTextInputFormatter(
+                                                                    locale: AppTranslation.instance.language ==
+                                                                            AppTranslation.english
+                                                                        ? "vi_VN"
+                                                                        : "en_US",
+                                                                    decimalDigits:
+                                                                        0,
+                                                                    symbol: "",
+                                                                  ).format((e.totalPrice).toString())}',
+                                                              style: TextStyle(
                                                                 color: Colors
                                                                     .black,
                                                                 fontSize: 14,

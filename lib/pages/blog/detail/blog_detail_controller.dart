@@ -5,6 +5,7 @@ import 'package:shoes_shop_app/pages/blog/blog_provider.dart';
 
 class BlogDetailController extends GetxController {
   List<Blog> listBlogDifferent = <Blog>[].obs;
+  final blogDetail = Blog.fromJson({}).obs;
   @override
   void onInit() async {
     super.onInit();

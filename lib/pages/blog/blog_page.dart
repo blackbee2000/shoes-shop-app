@@ -1,3 +1,4 @@
+import 'package:back_button_interceptor/back_button_interceptor.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
@@ -5,16 +6,41 @@ import 'package:shoes_shop_app/models/blog.dart';
 import 'package:shoes_shop_app/pages/blog/blog_controller.dart';
 import 'package:shoes_shop_app/pages/blog/detail/blog_detail_page.dart';
 import 'package:shoes_shop_app/pages/cart/cart_page.dart';
+import 'package:shoes_shop_app/pages/dashboard/dashboard_controller.dart';
+import 'package:shoes_shop_app/pages/dashboard/dashboard_page.dart';
 import 'package:shoes_shop_app/pages/profile/product_favorite/product_favorite_page.dart';
 import 'package:shoes_shop_app/theme/theme_controller.dart';
 import 'package:shoes_shop_app/translations/app_translation.dart';
 import 'package:shoes_shop_app/utils/app_constant.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:intl/intl.dart';
 
-class BlogPage extends StatelessWidget {
+class BlogPage extends StatefulWidget {
+  BlogPage({Key? key}) : super(key: key);
+
+  @override
+  State<BlogPage> createState() => BlogState();
+}
+
+class BlogState extends State<BlogPage> {
   final blogController = Get.put(BlogController());
+  final dashboardController = Get.put(DashboardController());
+  @override
+  void initState() {
+    super.initState();
+    BackButtonInterceptor.add(myInterceptor);
+  }
+
+  @override
+  void dispose() {
+    BackButtonInterceptor.remove(myInterceptor);
+    super.dispose();
+  }
+
+  bool myInterceptor(bool stopDefaultButtonEvent, RouteInfo info) {
+    return false;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Navigator(
@@ -140,7 +166,9 @@ class BlogPage extends StatelessWidget {
                               itemBuilder: (context, item, index) =>
                                   GestureDetector(
                                 onTap: () {
-                                  Get.to(BlogDetailPage(blog: item),
+                                  Get.to(
+                                      BlogDetailPage(
+                                          id: AppConstant.BLOG, blog: item),
                                       id: AppConstant.BLOG);
                                 },
                                 child: Container(

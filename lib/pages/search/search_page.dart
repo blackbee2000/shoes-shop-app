@@ -5,6 +5,7 @@ import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
 import 'package:shoes_shop_app/models/company.dart';
+import 'package:shoes_shop_app/models/style_shoes.dart';
 import 'package:shoes_shop_app/pages/auth/login/login_page.dart';
 import 'package:shoes_shop_app/pages/cart/cart_page.dart';
 import 'package:shoes_shop_app/pages/product/detail/product_detail_page.dart';
@@ -438,6 +439,96 @@ class SearchPage extends StatelessWidget {
                         const SizedBox(
                           height: 15,
                         ),
+                        Container(
+                          width: double.infinity,
+                          height: 40,
+                          decoration: BoxDecoration(
+                            color: theme.theme == ThemeMode.light
+                                ? const Color(0xffF0F0F0)
+                                : const Color(0xff333333),
+                            borderRadius: BorderRadius.circular(5),
+                          ),
+                          child: DropdownSearch<StyleShoes>(
+                            showClearButton:
+                                controller.showClearButtonStyle.value,
+                            clearButton: Icon(
+                              Icons.close,
+                              color: theme.theme == ThemeMode.light
+                                  ? Colors.black
+                                  : Colors.white,
+                              size: 15,
+                            ),
+                            dropDownButton: Icon(
+                              Icons.arrow_drop_down,
+                              color: theme.theme == ThemeMode.light
+                                  ? Colors.black
+                                  : Colors.white,
+                              size: 25,
+                            ),
+                            popupShape: const RoundedRectangleBorder(
+                              borderRadius: BorderRadius.vertical(
+                                top: Radius.circular(16),
+                              ),
+                            ),
+                            showSearchBox: true,
+                            mode: Mode.BOTTOM_SHEET,
+                            items: controller.listStyle,
+                            selectedItem: controller.styleValue.value,
+                            popupItemBuilder: (context, item, isSelected) =>
+                                Container(
+                              padding: const EdgeInsets.all(16),
+                              child: Text(
+                                item.name ?? '',
+                                style: TextStyle(
+                                  color: theme.theme == ThemeMode.light
+                                      ? Colors.black
+                                      : Colors.white,
+                                  fontSize: 13,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              ),
+                            ),
+                            itemAsString: (item) {
+                              return item?.name ?? 'search_select_style'.tr;
+                            },
+                            dropdownBuilder: (context, item) {
+                              return Text(
+                                item?.name ?? 'search_select_style'.tr,
+                                style: TextStyle(
+                                  color: item == null
+                                      ? const Color(0xffD0D0D0)
+                                      : theme.theme == ThemeMode.light
+                                          ? Colors.black
+                                          : Colors.white,
+                                  fontSize: 13,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              );
+                            },
+                            onSaved: (item) {},
+                            onChanged: (item) {
+                              if (item != null) {
+                                controller.showClearButtonStyle.value = true;
+                                controller.styleValue.value = item;
+                                controller.style.value = item.name!;
+                                controller.update();
+                              }
+                            },
+                            dropdownSearchDecoration: InputDecoration(
+                              contentPadding: const EdgeInsets.only(left: 15),
+                              isDense: true,
+                              border: InputBorder.none,
+                              hintStyle: TextStyle(
+                                color: const Color(0xffD0D0D0),
+                                fontSize: 13,
+                                fontWeight: FontWeight.w400,
+                              ),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 15,
+                        ),
                         SizedBox(
                           width: double.infinity,
                           height: 40,
@@ -448,8 +539,10 @@ class SearchPage extends StatelessWidget {
                                 child: GestureDetector(
                                   onTap: () {
                                     controller.listProductSearch.clear();
-                                    controller.search(controller.shoeName.text,
-                                        controller.idCompany.value);
+                                    controller.search(
+                                        controller.shoeName.text,
+                                        controller.idCompany.value,
+                                        controller.style.value);
                                     controller.sortSelected.value = '';
                                     controller.update();
                                   },
@@ -484,10 +577,17 @@ class SearchPage extends StatelessWidget {
                                 flex: 6,
                                 child: GestureDetector(
                                   onTap: () {
+                                    controller.listProductSearch.clear();
                                     controller.shoeName.clear();
+                                    controller.idCompany.value = '';
                                     controller.nameCompany.value =
                                         Company.fromJson({});
                                     controller.showClearButton.value = false;
+                                    controller.style.value = '';
+                                    controller.styleValue.value =
+                                        StyleShoes.fromJson({});
+                                    controller.showClearButtonStyle.value =
+                                        false;
                                     controller.sortSelected.value = '';
                                     controller.update();
                                   },

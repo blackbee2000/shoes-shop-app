@@ -886,19 +886,17 @@ class PaymentState extends State<PaymentPage> {
                               ),
                               children: [
                                 TextSpan(
-                                  text: '  - ' +
-                                      CurrencyTextInputFormatter(
-                                        locale:
-                                            AppTranslation.instance.language ==
-                                                    AppTranslation.english
-                                                ? "vi_VN"
-                                                : "en_US",
-                                        decimalDigits: 0,
-                                        symbol: "",
-                                      ).format(
-                                        (paymentController.shippingMoney.value)
-                                            .toString(),
-                                      ),
+                                  text: CurrencyTextInputFormatter(
+                                    locale: AppTranslation.instance.language ==
+                                            AppTranslation.english
+                                        ? "vi_VN"
+                                        : "en_US",
+                                    decimalDigits: 0,
+                                    symbol: "",
+                                  ).format(
+                                    (paymentController.shippingMoney.value)
+                                        .toString(),
+                                  ),
                                   style: TextStyle(
                                     color: Colors.amber,
                                     fontSize: 18,
@@ -948,7 +946,7 @@ class PaymentState extends State<PaymentPage> {
                                           )
                                         : TextSpan(
                                             text:
-                                                '  - ${paymentController.voucher.value.discount ?? 0}%',
+                                                '${paymentController.voucher.value.discount ?? 0}%',
                                             style: TextStyle(
                                               color: Colors.amber,
                                               fontSize: 18,
@@ -956,21 +954,20 @@ class PaymentState extends State<PaymentPage> {
                                             ),
                                           )
                                     : TextSpan(
-                                        text: '  - ' +
-                                            CurrencyTextInputFormatter(
-                                              locale: AppTranslation
-                                                          .instance.language ==
-                                                      AppTranslation.english
-                                                  ? "vi_VN"
-                                                  : "en_US",
-                                              decimalDigits: 0,
-                                              symbol: "",
-                                            ).format(
-                                              (paymentController.voucher.value
-                                                          .maxDiscount ??
-                                                      0)
-                                                  .toString(),
-                                            ),
+                                        text: CurrencyTextInputFormatter(
+                                          locale: AppTranslation
+                                                      .instance.language ==
+                                                  AppTranslation.english
+                                              ? "vi_VN"
+                                              : "en_US",
+                                          decimalDigits: 0,
+                                          symbol: "",
+                                        ).format(
+                                          (paymentController.voucher.value
+                                                      .maxDiscount ??
+                                                  0)
+                                              .toString(),
+                                        ),
                                         style: TextStyle(
                                           color: Colors.amber,
                                           fontSize: 18,

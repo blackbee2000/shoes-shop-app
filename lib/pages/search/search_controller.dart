@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shoes_shop_app/models/company.dart';
 import 'package:shoes_shop_app/models/product.dart';
+import 'package:shoes_shop_app/models/style_shoes.dart';
 import 'package:shoes_shop_app/pages/home/home_provider.dart';
 import 'package:shoes_shop_app/pages/product/product_provider.dart';
 import 'package:shoes_shop_app/pages/profile/profile_provider.dart';
@@ -15,14 +16,24 @@ class SearchController extends GetxController {
   final idCompany = ''.obs;
   final nameCompany = Company.fromJson({}).obs;
   final showClearButton = false.obs;
-
+  final showClearButtonStyle = false.obs;
+  final style = ''.obs;
+  final styleValue = StyleShoes.fromJson({}).obs;
   List<Company> listCompany = <Company>[].obs;
   List<Product> listProductSearch = <Product>[].obs;
   List<String> listProductFavorite = <String>[].obs;
+  List<StyleShoes> listStyle = <StyleShoes>[].obs;
   @override
   void onInit() async {
     super.onInit();
+    fetchData();
     getAllCompany();
+  }
+
+  fetchData() {
+    listStyle.add(StyleShoes(name: 'Thể thao', value: 'Thể thao'));
+    listStyle.add(StyleShoes(name: 'Chạy/Đi bộ', value: 'Chạy/Đi bộ'));
+    update();
   }
 
   getAllCompany() {
@@ -39,12 +50,13 @@ class SearchController extends GetxController {
     );
   }
 
-  search(String name, String idCompany) {
+  search(String name, String idCompany, String style) {
     SearchProvider().searchProduct(
       params: {
         "nameProductVi": name,
         "idCompany": idCompany,
-        "limit": 10,
+        "style": style,
+        "limit": 50,
         "skip": 1
       },
       option: Options(
@@ -68,6 +80,7 @@ class SearchController extends GetxController {
         );
       },
       onSuccess: (res) {
+        print('RESPONSE ===> ${res.data!.length}');
         listProductSearch = res.data ?? [];
         for (var e in listProductSearch) {
           e.isLike = false;

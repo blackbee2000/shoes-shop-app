@@ -30,9 +30,11 @@ class VoucherController extends GetxController {
       beforeSend: () {},
       onSuccess: (res) {
         listVoucher = res.data ?? [];
+        print('DATAAA SUCESSS ====> ${res.data.toString()}');
         update();
       },
       onError: (e) {
+        print('DATAAA FAIL ====> ${e.toString()}');
         update();
       },
     );
