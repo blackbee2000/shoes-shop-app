@@ -791,8 +791,7 @@ class YourOrderState extends State<YourOrderPage> {
                                                                   true
                                                               ? 'delivered'.tr
                                                               : 'delivering'.tr,
-                                                          style: GoogleFonts
-                                                              .ebGaramond(
+                                                          style: TextStyle(
                                                             color: controller
                                                                         .listOrder[
                                                                             index]

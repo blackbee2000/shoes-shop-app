@@ -1,5 +1,6 @@
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:get/get.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:shoes_shop_app/models/address.dart';
@@ -1701,8 +1702,7 @@ class AddressState extends State<AddressPage> {
                                                   children: [
                                                     Text(
                                                       '${controller.listAddress[index].nameReciever != null && controller.listAddress[index].nameReciever!.isNotEmpty ? controller.listAddress[index].nameReciever : '--'} - ${controller.listAddress[index].phoneReciever != null && controller.listAddress[index].phoneReciever!.isNotEmpty ? controller.listAddress[index].phoneReciever : '--'}',
-                                                      style: GoogleFonts
-                                                          .ebGaramond(
+                                                      style: TextStyle(
                                                         color: Colors.black,
                                                         fontSize: 14,
                                                         fontWeight:
@@ -1720,8 +1720,7 @@ class AddressState extends State<AddressPage> {
                                                           '${controller.listAddress[index].district != null && controller.listAddress[index].district!.isNotEmpty ? controller.listAddress[index].district : '--'}' +
                                                           ', ' +
                                                           '${controller.listAddress[index].province != null && controller.listAddress[index].province!.isNotEmpty ? controller.listAddress[index].province : '--'}',
-                                                      style: GoogleFonts
-                                                          .ebGaramond(
+                                                      style: TextStyle(
                                                         color: Colors.black,
                                                         fontSize: 14,
                                                         fontWeight:

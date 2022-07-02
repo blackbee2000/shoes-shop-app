@@ -344,7 +344,7 @@ class AddressController extends GetxController {
         init();
         Get.back();
         Get.snackbar(
-          'fail'.tr,
+          'success'.tr,
           'set_address_default_success'.tr,
           colorText: Colors.white,
           backgroundColor: const Color(0xff00FF00),

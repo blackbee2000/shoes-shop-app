@@ -502,8 +502,7 @@ class BlogDetailState extends State<BlogDetailPage> {
                                                   children: [
                                                     Text(
                                                       '${AppTranslation.instance.language == AppTranslation.english ? (e.titleEn != null && e.titleEn!.isNotEmpty ? e.titleEn : '--') : (e.titleVi != null && e.titleVi!.isNotEmpty ? e.titleVi : '--')}',
-                                                      style: GoogleFonts
-                                                          .ebGaramond(
+                                                      style: TextStyle(
                                                         color: Colors.black,
                                                         fontSize: 16,
                                                         fontWeight:
@@ -519,8 +518,7 @@ class BlogDetailState extends State<BlogDetailPage> {
                                                     ),
                                                     Text(
                                                       '${AppTranslation.instance.language == AppTranslation.english ? (e.descriptionShortEn != null && e.descriptionShortEn!.isNotEmpty ? e.descriptionShortEn : '--') : (e.descriptionShortVi != null && e.descriptionShortVi!.isNotEmpty ? e.descriptionShortVi : '--')}',
-                                                      style: GoogleFonts
-                                                          .ebGaramond(
+                                                      style: TextStyle(
                                                         color: Colors.black,
                                                         fontSize: 13,
                                                         fontWeight:
@@ -559,8 +557,7 @@ class BlogDetailState extends State<BlogDetailPage> {
                                                                               '')
                                                                       .toLocal())
                                                               : '--',
-                                                          style: GoogleFonts
-                                                              .ebGaramond(
+                                                          style: TextStyle(
                                                             color: Colors.black,
                                                             fontSize: 12,
                                                             fontWeight:

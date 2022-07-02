@@ -898,7 +898,7 @@ class PaymentState extends State<PaymentPage> {
                                         .toString(),
                                   ),
                                   style: TextStyle(
-                                    color: Colors.black,
+                                    color: Colors.amber,
                                     fontSize: 18,
                                     fontWeight: FontWeight.bold,
                                   ),

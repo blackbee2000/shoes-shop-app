@@ -96,6 +96,7 @@ class LocaleString extends Translations {
           "total": "Total: ",
           "product_favorite_title": "Product Favorite",
           "voucher": "Voucher: ",
+          "voucher_title": "Voucher",
           "voucher_select": "Select voucher",
           "addresss_name": "Receiver name",
           "addresss_province": "Province/City",
@@ -281,6 +282,7 @@ class LocaleString extends Translations {
           "amount": "Số lượng: ",
           "product_favorite_title": "Sản phẩm yêu thích",
           "voucher": "Mã giảm giá: ",
+          "voucher_title": "Mã giảm giá",
           "voucher_select": "Chọn mã giảm giá",
           "addresss_name": "Tên người nhận",
           "addresss_province": "Tỉnh/Thành phố",
@@ -373,6 +375,7 @@ class LocaleString extends Translations {
               "Chúng tôi là những người mang đến sự tự ái cho đôi chân của bạn, mang đến những văn bản hóa cổ điển và hiện đại. Chúng tôi chính là LifeKicky.",
           "contact_info": "Thông tin liên lạc",
           "member": "Thành viên",
+          "search_select_style": "Chọn loại giày"
         }
       };
 }

@@ -463,8 +463,8 @@ class CartState extends State<CartPage> {
                                                             children: [
                                                               Text(
                                                                 '${e.value.lstProduct!.nameProductEn != null && e.value.lstProduct!.nameProductEn!.isNotEmpty ? e.value.lstProduct!.nameProductEn : '--'}',
-                                                                style: GoogleFonts
-                                                                    .ebGaramond(
+                                                                style:
+                                                                    TextStyle(
                                                                   color: Colors
                                                                       .black,
                                                                   fontSize: 16,
@@ -496,8 +496,8 @@ class CartState extends State<CartPage> {
                                                                             .lstProduct!
                                                                             .price)
                                                                         .toString()),
-                                                                style: GoogleFonts
-                                                                    .ebGaramond(
+                                                                style:
+                                                                    TextStyle(
                                                                   color: Colors
                                                                       .black,
                                                                   fontSize: 14,
@@ -525,8 +525,8 @@ class CartState extends State<CartPage> {
                                                                     ).format((e.value.lstProduct!.price! *
                                                                             e.value.amount!)
                                                                         .toString()),
-                                                                style: GoogleFonts
-                                                                    .ebGaramond(
+                                                                style:
+                                                                    TextStyle(
                                                                   color: Colors
                                                                       .black,
                                                                   fontSize: 14,
@@ -583,8 +583,8 @@ class CartState extends State<CartPage> {
                                                                   ),
                                                                   Text(
                                                                     '${e.value.amount ?? 1}',
-                                                                    style: GoogleFonts
-                                                                        .ebGaramond(
+                                                                    style:
+                                                                        TextStyle(
                                                                       color: Colors
                                                                           .black,
                                                                       fontSize:

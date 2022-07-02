@@ -339,8 +339,7 @@ class ProfilePage extends GetView<ProfileController> {
                                                   children: [
                                                     Text(
                                                       'profile_edit'.tr,
-                                                      style: GoogleFonts
-                                                          .ebGaramond(
+                                                      style: TextStyle(
                                                         color: Colors.black,
                                                         fontSize: 14,
                                                         fontWeight:

@@ -576,8 +576,7 @@ class YourOrderDetailState extends State<YourOrderDetailPage> {
                                                                           '--'
                                                                     }).toString(),
                                                                   ),
-                                                              style: GoogleFonts
-                                                                  .ebGaramond(
+                                                              style: TextStyle(
                                                                 color: Colors
                                                                     .black,
                                                                 fontSize: 14,

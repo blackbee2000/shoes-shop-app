@@ -62,7 +62,7 @@ class VoucherState extends State<VoucherPage> {
                   ),
                 ),
                 title: Text(
-                  'voucher'.tr,
+                  'voucher_title'.tr,
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 20,

@@ -382,7 +382,7 @@ class ProductFavoriteState extends State<ProductFavoritePage> {
                                                 .listProductFavoriteFinal[index]
                                                 .rating
                                                 .toString()) ??
-                                            0.0,
+                                            5.0,
                                         itemBuilder: (context, index) =>
                                             const Icon(
                                           Icons.star,
