@@ -105,21 +105,20 @@ class BlogState extends State<BlogPage> {
                         Padding(
                           padding: const EdgeInsets.only(left: 10, right: 20),
                           child: GetBuilder<CartController>(
-                            builder: (controller) => Badge(
-                              value: controller.listCart.length,
-                              child: GestureDetector(
-                                onTap: () {
-                            
-                                  Get.to(
-                                    const CartPage(id: AppConstant.HOME),
-                                    id: AppConstant.HOME,
-                                  );
-                                },
+                            builder: (controller) => GestureDetector(
+                              onTap: () {
+                                Get.to(
+                                  const CartPage(id: AppConstant.BLOG),
+                                  id: AppConstant.BLOG,
+                                );
+                              },
+                              child: Badge(
+                                value: controller.listCart.length,
                                 child: Image.asset(
                                   "assets/icons/icon_cart.png",
                                   width: 20,
                                   height: 20,
-                                  color:Colors.white,
+                                  color: Colors.white,
                                   fit: BoxFit.contain,
                                 ),
                               ),

@@ -218,15 +218,15 @@ class YourOrderDetailState extends State<YourOrderDetailPage> {
                   centerTitle: false,
                   actions: [
                     GetBuilder<CartController>(
-                      builder: (controller) => Badge(
-                        value: controller.listCart.length,
-                        child: GestureDetector(
-                          onTap: () {
-                            Get.to(
-                              const CartPage(id: AppConstant.HOME),
-                              id: AppConstant.HOME,
-                            );
-                          },
+                      builder: (controller) => GestureDetector(
+                        onTap: () {
+                          Get.to(
+                            const CartPage(id: AppConstant.PROFILE),
+                            id: AppConstant.PROFILE,
+                          );
+                        },
+                        child: Badge(
+                          value: controller.listCart.length,
                           child: Image.asset(
                             "assets/icons/icon_cart.png",
                             width: 20,

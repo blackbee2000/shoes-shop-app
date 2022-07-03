@@ -6,6 +6,8 @@ import 'package:shoes_shop_app/models/product_new.dart';
 import 'package:shoes_shop_app/pages/address/address_controller.dart';
 import 'package:shoes_shop_app/pages/home/home_provider.dart';
 
+import '../cart/cart_controller.dart';
+
 class HomeController extends GetxController {
   final indexSelected = 0.obs;
   List<Company> listCompany = <Company>[].obs;
@@ -13,6 +15,7 @@ class HomeController extends GetxController {
   List<Product> listDiscountProduct = <Product>[].obs;
   List<Product> listTrendingProduct = <Product>[].obs;
   final addressController = Get.put(AddressController());
+  final cartController = Get.put(CartController());
 
   @override
   void onInit() {
@@ -23,6 +26,8 @@ class HomeController extends GetxController {
     getTrendingProduct();
     addressController.getAddressDefault();
     addressController.update();
+    cartController.getAllCart();
+    cartController.update();
   }
 
   getAllCompany() {

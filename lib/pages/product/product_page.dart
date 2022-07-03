@@ -213,17 +213,16 @@ class ProductPage extends GetView<ProductController> {
                         ),
                         Padding(
                           padding: const EdgeInsets.only(left: 10, right: 20),
-                          child:  GetBuilder<CartController>(
-                            builder: (controller) => Badge(
-                              value: controller.listCart.length,
-                              child: GestureDetector(
-                                onTap: () {
-                            
-                                  Get.to(
-                                    const CartPage(id: AppConstant.HOME),
-                                    id: AppConstant.HOME,
-                                  );
-                                },
+                          child: GetBuilder<CartController>(
+                            builder: (cartController) => GestureDetector(
+                              onTap: () {
+                                Get.to(
+                                  const CartPage(id: AppConstant.PRODUCT),
+                                  id: AppConstant.PRODUCT,
+                                );
+                              },
+                              child: Badge(
+                                value: cartController.listCart.length,
                                 child: Image.asset(
                                   "assets/icons/icon_cart.png",
                                   width: 20,

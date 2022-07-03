@@ -9,6 +9,8 @@ import 'package:shoes_shop_app/services/api_token.dart';
 import 'package:shoes_shop_app/theme/app_theme.dart';
 import 'package:shoes_shop_app/translations/app_translation.dart';
 
+import '../cart/cart_controller.dart';
+
 class ProfileController extends GetxController {
   final tabIndex = 0.obs;
   final indexSelected = 0.obs;
@@ -17,6 +19,7 @@ class ProfileController extends GetxController {
   final storage = GetStorage();
   final profile = Profile.fromJson({}).obs;
   String imageSelected = "";
+  final cartController = Get.put(CartController());
 
   @override
   void onInit() async {
@@ -36,6 +39,7 @@ class ProfileController extends GetxController {
 
   logOut() async {
     profile.value = Profile.fromJson({});
+    cartController.logOutCart();
     update();
     await removeToken();
     Get.to(const LoginPage());

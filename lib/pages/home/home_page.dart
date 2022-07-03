@@ -100,16 +100,16 @@ class HomePageState extends State<HomePage> {
                     Padding(
                       padding: const EdgeInsets.only(left: 10, right: 20),
                       child: GetBuilder<CartController>(
-                        builder: (controller) => Badge(
-                          value: controller.listCart.length,
-                          child: GestureDetector(
-                            onTap: () {
-                        
-                              Get.to(
-                                const CartPage(id: AppConstant.HOME),
-                                id: AppConstant.HOME,
-                              );
-                            },
+                        builder: (cartController) => GestureDetector(
+                          onTap: () {
+                            print(cartController.listCart.length);
+                            Get.to(
+                              const CartPage(id: AppConstant.HOME),
+                              id: AppConstant.HOME,
+                            );
+                          },
+                          child: Badge(
+                            value: cartController.listCart.length,
                             child: Image.asset(
                               "assets/icons/icon_cart.png",
                               width: 20,

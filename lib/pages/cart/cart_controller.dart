@@ -21,6 +21,11 @@ class CartController extends GetxController {
     getAllCart();
   }
 
+  logOutCart() {
+    listCart = [];
+    update();
+  }
+
   plusAmount(String idCart, int amount) {
     amount = amount + 1;
     CartProvider().updateAmounCart(

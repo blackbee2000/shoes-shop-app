@@ -41,7 +41,7 @@ class _BadgeState extends State<Badge> {
                     minHeight: 12,
                   ),
                   child: Text(
-                  widget.value > 99 ? "99+" :widget.value.toString(),
+                  widget.value > 99 ? "99+" : widget.value.toString(),
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 8,
