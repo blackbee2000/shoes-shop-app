@@ -15,6 +15,9 @@ import 'package:shoes_shop_app/utils/app_constant.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:intl/intl.dart';
 
+import '../cart/cart_controller.dart';
+import '../home/badge.dart';
+
 class BlogPage extends StatefulWidget {
   BlogPage({Key? key}) : super(key: key);
 
@@ -101,19 +104,25 @@ class BlogState extends State<BlogPage> {
                         ),
                         Padding(
                           padding: const EdgeInsets.only(left: 10, right: 20),
-                          child: GestureDetector(
-                            onTap: () {
-                              Get.to(
-                                const CartPage(id: AppConstant.BLOG),
-                                id: AppConstant.BLOG,
-                              );
-                            },
-                            child: Image.asset(
-                              "assets/icons/icon_cart.png",
-                              width: 20,
-                              height: 20,
-                              color: Colors.white,
-                              fit: BoxFit.contain,
+                          child: GetBuilder<CartController>(
+                            builder: (controller) => Badge(
+                              value: controller.listCart.length,
+                              child: GestureDetector(
+                                onTap: () {
+                            
+                                  Get.to(
+                                    const CartPage(id: AppConstant.HOME),
+                                    id: AppConstant.HOME,
+                                  );
+                                },
+                                child: Image.asset(
+                                  "assets/icons/icon_cart.png",
+                                  width: 20,
+                                  height: 20,
+                                  color:Colors.white,
+                                  fit: BoxFit.contain,
+                                ),
+                              ),
                             ),
                           ),
                         ),

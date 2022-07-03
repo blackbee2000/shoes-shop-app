@@ -14,6 +14,9 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:back_button_interceptor/back_button_interceptor.dart';
 
+import '../../cart/cart_controller.dart';
+import '../../home/badge.dart';
+
 class BlogDetailPage extends StatefulWidget {
   final int id;
   final Blog blog;
@@ -112,19 +115,25 @@ class BlogDetailState extends State<BlogDetailPage> {
                     ),
                     Padding(
                       padding: const EdgeInsets.only(left: 10, right: 20),
-                      child: GestureDetector(
-                        onTap: () {
-                          Get.to(
-                            const CartPage(id: AppConstant.BLOG),
-                            id: AppConstant.BLOG,
-                          );
-                        },
-                        child: Image.asset(
-                          "assets/icons/icon_cart.png",
-                          width: 20,
-                          height: 20,
-                          color: Colors.black,
-                          fit: BoxFit.contain,
+                      child: GetBuilder<CartController>(
+                        builder: (controller) => Badge(
+                          value: controller.listCart.length,
+                          child: GestureDetector(
+                            onTap: () {
+                        
+                              Get.to(
+                                const CartPage(id: AppConstant.HOME),
+                                id: AppConstant.HOME,
+                              );
+                            },
+                            child: Image.asset(
+                              "assets/icons/icon_cart.png",
+                              width: 20,
+                              height: 20,
+                              color: Colors.black,
+                              fit: BoxFit.contain,
+                            ),
+                          ),
                         ),
                       ),
                     ),

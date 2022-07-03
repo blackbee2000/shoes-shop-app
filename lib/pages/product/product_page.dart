@@ -14,6 +14,9 @@ import 'package:shoes_shop_app/translations/app_translation.dart';
 import 'package:shoes_shop_app/utils/app_constant.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../cart/cart_controller.dart';
+import '../home/badge.dart';
+
 class ProductPage extends GetView<ProductController> {
   final productController = Get.put(ProductController());
 
@@ -210,19 +213,25 @@ class ProductPage extends GetView<ProductController> {
                         ),
                         Padding(
                           padding: const EdgeInsets.only(left: 10, right: 20),
-                          child: GestureDetector(
-                            onTap: () {
-                              Get.to(
-                                const CartPage(id: AppConstant.PRODUCT),
-                                id: AppConstant.PRODUCT,
-                              );
-                            },
-                            child: Image.asset(
-                              "assets/icons/icon_cart.png",
-                              width: 20,
-                              height: 20,
-                              color: Colors.white,
-                              fit: BoxFit.contain,
+                          child:  GetBuilder<CartController>(
+                            builder: (controller) => Badge(
+                              value: controller.listCart.length,
+                              child: GestureDetector(
+                                onTap: () {
+                            
+                                  Get.to(
+                                    const CartPage(id: AppConstant.HOME),
+                                    id: AppConstant.HOME,
+                                  );
+                                },
+                                child: Image.asset(
+                                  "assets/icons/icon_cart.png",
+                                  width: 20,
+                                  height: 20,
+                                  color: Colors.white,
+                                  fit: BoxFit.contain,
+                                ),
+                              ),
                             ),
                           ),
                         ),

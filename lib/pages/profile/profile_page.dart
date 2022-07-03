@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:get/get.dart';
+import 'package:shoes_shop_app/pages/cart/cart_controller.dart';
 import 'package:shoes_shop_app/pages/cart/cart_page.dart';
 import 'package:shoes_shop_app/pages/change-password/change_password_page.dart';
 import 'package:shoes_shop_app/pages/profile/product_favorite/product_favorite_page.dart';
@@ -14,6 +15,8 @@ import 'package:shoes_shop_app/theme/theme_controller.dart';
 import 'package:shoes_shop_app/translations/app_translation.dart';
 import 'package:shoes_shop_app/utils/app_constant.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import '../home/badge.dart';
 
 class ProfilePage extends GetView<ProfileController> {
   final profileController = Get.put(ProfileController());
@@ -144,21 +147,27 @@ class ProfilePage extends GetView<ProfileController> {
                     ),
                     Padding(
                       padding: const EdgeInsets.only(left: 10, right: 20),
-                      child: GestureDetector(
-                        onTap: () {
-                          Get.to(
-                            const CartPage(id: AppConstant.PROFILE),
-                            id: AppConstant.PROFILE,
-                          );
-                        },
-                        child: Image.asset(
-                          "assets/icons/icon_cart.png",
-                          width: 20,
-                          height: 20,
-                          color: theme.theme == ThemeMode.light
-                              ? Colors.black
-                              : Colors.white,
-                          fit: BoxFit.contain,
+                      child: GetBuilder<CartController>(
+                        builder: (controller) => Badge(
+                          value: controller.listCart.length,
+                          child: GestureDetector(
+                            onTap: () {
+                        
+                              Get.to(
+                                const CartPage(id: AppConstant.HOME),
+                                id: AppConstant.HOME,
+                              );
+                            },
+                            child: Image.asset(
+                              "assets/icons/icon_cart.png",
+                              width: 20,
+                              height: 20,
+                              color: theme.theme == ThemeMode.light
+                                  ? Colors.black
+                                  : Colors.white,
+                              fit: BoxFit.contain,
+                            ),
+                          ),
                         ),
                       ),
                     ),

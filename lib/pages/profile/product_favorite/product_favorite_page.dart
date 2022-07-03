@@ -3,6 +3,7 @@ import 'package:currency_text_input_formatter/currency_text_input_formatter.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
+import 'package:shoes_shop_app/pages/cart/cart_controller.dart';
 import 'package:shoes_shop_app/pages/cart/cart_page.dart';
 import 'package:shoes_shop_app/pages/product/detail/product_detail_page.dart';
 import 'package:shoes_shop_app/pages/product/product_controller.dart';
@@ -12,6 +13,8 @@ import 'package:shoes_shop_app/translations/app_translation.dart';
 import 'package:shoes_shop_app/utils/app_constant.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:back_button_interceptor/back_button_interceptor.dart';
+
+import '../../home/badge.dart';
 
 class ProductFavoritePage extends StatefulWidget {
   final int id;
@@ -99,21 +102,27 @@ class ProductFavoriteState extends State<ProductFavoritePage> {
                 actions: [
                   Padding(
                     padding: const EdgeInsets.only(left: 10, right: 20),
-                    child: GestureDetector(
-                      onTap: () {
-                        Get.to(
-                          const CartPage(id: AppConstant.PROFILE),
-                          id: AppConstant.PROFILE,
-                        );
-                      },
-                      child: Image.asset(
-                        "assets/icons/icon_cart.png",
-                        width: 20,
-                        height: 20,
-                        color: theme.theme == ThemeMode.light
-                            ? Colors.black
-                            : Colors.white,
-                        fit: BoxFit.contain,
+                    child: GetBuilder<CartController>(
+                      builder: (controller) => Badge(
+                        value: controller.listCart.length,
+                        child: GestureDetector(
+                          onTap: () {
+                      
+                            Get.to(
+                              const CartPage(id: AppConstant.HOME),
+                              id: AppConstant.HOME,
+                            );
+                          },
+                          child: Image.asset(
+                            "assets/icons/icon_cart.png",
+                            width: 20,
+                            height: 20,
+                            color: theme.theme == ThemeMode.light
+                                ? Colors.black
+                                : Colors.white,
+                            fit: BoxFit.contain,
+                          ),
+                        ),
                       ),
                     ),
                   ),

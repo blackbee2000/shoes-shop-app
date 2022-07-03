@@ -18,6 +18,9 @@ import 'package:shoes_shop_app/translations/app_translation.dart';
 import 'package:shoes_shop_app/utils/app_constant.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../cart/cart_controller.dart';
+import 'badge.dart';
+
 class HomePage extends StatefulWidget {
   HomePage({Key? key}) : super(key: key);
 
@@ -31,6 +34,7 @@ class HomePageState extends State<HomePage> {
   final dashboardController = Get.put(DashboardController());
   final productController = Get.put(ProductController());
   final allProductController = Get.put(AllProductController());
+  final cartController = Get.put(CartController());
 
   @override
   Widget build(BuildContext context) {
@@ -95,21 +99,27 @@ class HomePageState extends State<HomePage> {
                     ),
                     Padding(
                       padding: const EdgeInsets.only(left: 10, right: 20),
-                      child: GestureDetector(
-                        onTap: () {
-                          Get.to(
-                            const CartPage(id: AppConstant.HOME),
-                            id: AppConstant.HOME,
-                          );
-                        },
-                        child: Image.asset(
-                          "assets/icons/icon_cart.png",
-                          width: 20,
-                          height: 20,
-                          color: theme.theme == ThemeMode.light
-                              ? Colors.black
-                              : Colors.white,
-                          fit: BoxFit.contain,
+                      child: GetBuilder<CartController>(
+                        builder: (controller) => Badge(
+                          value: controller.listCart.length,
+                          child: GestureDetector(
+                            onTap: () {
+                        
+                              Get.to(
+                                const CartPage(id: AppConstant.HOME),
+                                id: AppConstant.HOME,
+                              );
+                            },
+                            child: Image.asset(
+                              "assets/icons/icon_cart.png",
+                              width: 20,
+                              height: 20,
+                              color: theme.theme == ThemeMode.light
+                                  ? Colors.black
+                                  : Colors.white,
+                              fit: BoxFit.contain,
+                            ),
+                          ),
                         ),
                       ),
                     ),

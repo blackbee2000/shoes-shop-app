@@ -17,6 +17,9 @@ import 'package:shoes_shop_app/translations/app_translation.dart';
 import 'package:shoes_shop_app/utils/app_constant.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../cart/cart_controller.dart';
+import '../home/badge.dart';
+
 class SearchPage extends StatelessWidget {
   final searchController = Get.put(SearchController());
 
@@ -274,21 +277,27 @@ class SearchPage extends StatelessWidget {
                     ),
                     Padding(
                       padding: const EdgeInsets.only(left: 10, right: 20),
-                      child: GestureDetector(
-                        onTap: () {
-                          Get.to(
-                            const CartPage(id: AppConstant.SEARCH),
-                            id: AppConstant.SEARCH,
-                          );
-                        },
-                        child: Image.asset(
-                          "assets/icons/icon_cart.png",
-                          width: 20,
-                          height: 20,
-                          color: theme.theme == ThemeMode.light
-                              ? Colors.black
-                              : Colors.white,
-                          fit: BoxFit.contain,
+                      child: GetBuilder<CartController>(
+                        builder: (controller) => Badge(
+                          value: controller.listCart.length,
+                          child: GestureDetector(
+                            onTap: () {
+                        
+                              Get.to(
+                                const CartPage(id: AppConstant.HOME),
+                                id: AppConstant.HOME,
+                              );
+                            },
+                            child: Image.asset(
+                              "assets/icons/icon_cart.png",
+                              width: 20,
+                              height: 20,
+                              color: theme.theme == ThemeMode.light
+                                  ? Colors.black
+                                  : Colors.white,
+                              fit: BoxFit.contain,
+                            ),
+                          ),
                         ),
                       ),
                     ),

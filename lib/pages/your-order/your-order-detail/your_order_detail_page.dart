@@ -11,6 +11,9 @@ import 'package:shoes_shop_app/utils/app_constant.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:back_button_interceptor/back_button_interceptor.dart';
 
+import '../../cart/cart_controller.dart';
+import '../../home/badge.dart';
+
 class YourOrderDetailPage extends StatefulWidget {
   final Order order;
   const YourOrderDetailPage({Key? key, required this.order}) : super(key: key);
@@ -214,17 +217,24 @@ class YourOrderDetailState extends State<YourOrderDetailPage> {
                   ),
                   centerTitle: false,
                   actions: [
-                    GestureDetector(
-                      onTap: () {
-                        Get.to(CartPage(id: AppConstant.PROFILE),
-                            id: AppConstant.PROFILE);
-                      },
-                      child: Image.asset(
-                        "assets/icons/icon_cart.png",
-                        width: 20,
-                        height: 20,
-                        fit: BoxFit.contain,
-                        color: Colors.white,
+                    GetBuilder<CartController>(
+                      builder: (controller) => Badge(
+                        value: controller.listCart.length,
+                        child: GestureDetector(
+                          onTap: () {
+                            Get.to(
+                              const CartPage(id: AppConstant.HOME),
+                              id: AppConstant.HOME,
+                            );
+                          },
+                          child: Image.asset(
+                            "assets/icons/icon_cart.png",
+                            width: 20,
+                            height: 20,
+                            color: Colors.white,
+                            fit: BoxFit.contain,
+                          ),
+                        ),
                       ),
                     ),
                     Padding(

@@ -16,6 +16,9 @@ import 'package:shoes_shop_app/translations/app_translation.dart';
 import 'package:shoes_shop_app/utils/app_constant.dart';
 import 'package:back_button_interceptor/back_button_interceptor.dart';
 
+import '../../cart/cart_controller.dart';
+import '../../home/badge.dart';
+
 class ProductDetailPage extends StatefulWidget {
   final int id;
   final Product product;
@@ -534,21 +537,27 @@ class ProductDetailState extends State<ProductDetailPage>
                       ),
                       Padding(
                         padding: const EdgeInsets.only(left: 10, right: 20),
-                        child: GestureDetector(
-                          onTap: () {
-                            Get.to(
-                              CartPage(id: widget.id),
-                              id: widget.id,
-                            );
-                          },
-                          child: Image.asset(
-                            "assets/icons/icon_cart.png",
-                            width: 20,
-                            height: 20,
-                            color: theme.theme == ThemeMode.light
-                                ? Colors.black
-                                : Colors.white,
-                            fit: BoxFit.contain,
+                        child: GetBuilder<CartController>(
+                          builder: (controller) => Badge(
+                            value: controller.listCart.length,
+                            child: GestureDetector(
+                              onTap: () {
+                          
+                                Get.to(
+                                  const CartPage(id: AppConstant.HOME),
+                                  id: AppConstant.HOME,
+                                );
+                              },
+                              child: Image.asset(
+                                "assets/icons/icon_cart.png",
+                                width: 20,
+                                height: 20,
+                                color: theme.theme == ThemeMode.light
+                                    ? Colors.black
+                                    : Colors.white,
+                                fit: BoxFit.contain,
+                              ),
+                            ),
                           ),
                         ),
                       ),
@@ -884,7 +893,7 @@ class ProductDetailState extends State<ProductDetailPage>
                                               ),
                                             ),
                                             const SizedBox(
-                                              width: 15,
+                                              width: 10,
                                             ),
                                             Obx(
                                               () => Text(
@@ -901,7 +910,7 @@ class ProductDetailState extends State<ProductDetailPage>
                                               ),
                                             ),
                                             const SizedBox(
-                                              width: 15,
+                                              width: 10,
                                             ),
                                             Icon(
                                               Icons.arrow_drop_down,
@@ -909,7 +918,7 @@ class ProductDetailState extends State<ProductDetailPage>
                                                   theme.theme == ThemeMode.light
                                                       ? Colors.black
                                                       : Colors.white,
-                                              size: 20,
+                                              size: 18,
                                             ),
                                           ],
                                         ),
