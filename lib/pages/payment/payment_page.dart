@@ -12,6 +12,7 @@ import 'package:shoes_shop_app/pages/voucher/voucher_page.dart';
 import 'package:shoes_shop_app/theme/theme_controller.dart';
 import 'package:back_button_interceptor/back_button_interceptor.dart';
 import 'package:shoes_shop_app/translations/app_translation.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 
 class PaymentPage extends StatefulWidget {
   final int id;
@@ -1142,7 +1143,8 @@ class PaymentState extends State<PaymentPage> {
                                 controller.voucher.value.voucherCode ?? '',
                                 controller.typePayment.value,
                                 total,
-                                controller.addressSelected.value);
+                                controller.addressSelected.value,
+                                context);
                             controller.update();
                           },
                           child: Container(

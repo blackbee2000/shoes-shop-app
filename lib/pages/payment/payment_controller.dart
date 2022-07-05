@@ -9,6 +9,7 @@ import 'package:shoes_shop_app/models/voucher.dart';
 import 'package:shoes_shop_app/pages/cart/cart_controller.dart';
 import 'package:shoes_shop_app/pages/dashboard/dashboard_page.dart';
 import 'package:shoes_shop_app/pages/payment/payment_provider.dart';
+import 'package:shoes_shop_app/pages/payment/web_payment.dart';
 import 'package:shoes_shop_app/pages/profile/profile_controller.dart';
 import 'package:shoes_shop_app/services/api_token.dart';
 import 'package:shoes_shop_app/utils/utils.dart';
@@ -22,6 +23,10 @@ class PaymentController extends GetxController {
   final typePayment = ''.obs;
   final addressSelected = Address.fromJson({}).obs;
   final shippingMoney = 0.obs;
+  final urlPayment = "".obs;
+  final returnURL = "".obs;
+  final cancelURL = "".obs;
+  final paymentMethod = "".obs;
 
   @override
   void onInit() {
@@ -37,7 +42,7 @@ class PaymentController extends GetxController {
   }
 
   payment(String voucherCode, String typePaymentMethod, int totalPriceProduct,
-      Address address) {
+      Address address, BuildContext context) {
     OrderProvider().payment(
       params: {
         "lstCart": cartController.listCartSelected,
@@ -72,8 +77,8 @@ class PaymentController extends GetxController {
         );
       },
       onSuccess: (data) {
+        Get.back();
         if (typePaymentMethod == 'COD') {
-          Get.back();
           Get.offAll(const DashboardPage());
           Get.snackbar(
             'success'.tr,
@@ -82,11 +87,26 @@ class PaymentController extends GetxController {
             backgroundColor: const Color(0xff00FF00),
           );
         } else {
-          var url = data['data'];
-          Get.back();
-          launchInWebViewOrVC(Uri.parse(url));
+          if (typePaymentMethod == 'Paypal') {
+            returnURL.value =
+                'https://lt-shoes-shop.herokuapp.com/api/order/success';
+            cancelURL.value =
+                'https://lt-shoes-shop.herokuapp.com/api/order/cancel';
+            paymentMethod.value = "Paypal";
+            update();
+          } else {
+            returnURL.value =
+                'https://lt-shoes-shop.herokuapp.com/api/order/successVnPay';
+            paymentMethod.value = "VnPay";
+            update();
+          }
+          urlPayment.value = data['data'];
+          update();
+          Navigator.of(context)
+              .pushReplacement(MaterialPageRoute(builder: (context) => WebPayment()));
+          // Get.back();
+          // launchInWebViewOrVC(Uri.parse(url));
         }
-
         voucher.value = Voucher.fromJson({});
         typePayment.value = '';
         cartController.listCartSelected.clear();
