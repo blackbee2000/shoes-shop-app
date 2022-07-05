@@ -51,6 +51,9 @@ class PaymentState extends State<PaymentPage> {
 
   bool myInterceptor(bool stopDefaultButtonEvent, RouteInfo info) {
     Get.back(id: widget.id);
+    cartController.listCartSelected.clear();
+    cartController.onInit();
+    cartController.update();
     return true;
   }
 
@@ -58,7 +61,13 @@ class PaymentState extends State<PaymentPage> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onHorizontalDragEnd: (details) => {
-        if (details.primaryVelocity! > 0) {Get.back(id: widget.id)}
+        if (details.primaryVelocity! > 0)
+          {
+            Get.back(id: widget.id),
+            cartController.listCartSelected.clear(),
+            cartController.onInit(),
+            cartController.update(),
+          }
       },
       child: SafeArea(
         child: GetBuilder<ThemeController>(

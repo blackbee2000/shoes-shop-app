@@ -18,6 +18,7 @@ class CartController extends GetxController {
   @override
   void onInit() async {
     super.onInit();
+    listCartSelected.clear;
     getAllCart();
   }
 

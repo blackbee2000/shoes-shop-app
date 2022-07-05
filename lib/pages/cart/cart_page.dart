@@ -294,6 +294,8 @@ class CartState extends State<CartPage> {
                                                   onTap: () {
                                                     e.value.isChecked =
                                                         !e.value.isChecked!;
+                                                    controller.selectAll.value =
+                                                        false;
                                                     controller.update();
                                                   },
                                                   child: ClipOval(
