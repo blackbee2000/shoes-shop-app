@@ -26,12 +26,21 @@ class PaymentController extends GetxController {
   final urlPayment = "".obs;
   final returnURL = "".obs;
   final cancelURL = "".obs;
-  final paymentMethod = "".obs;
 
   @override
   void onInit() {
     super.onInit();
     fetchData();
+    clearData();
+  }
+
+  clearData() {
+    typePayment.value = '';
+    voucher.value = Voucher.fromJson({});
+    addressSelected.value = Address.fromJson({});
+    returnURL.value = "";
+    cancelURL.value = "";
+    indexSelected.value = 4;
   }
 
   fetchData() {
@@ -92,18 +101,18 @@ class PaymentController extends GetxController {
                 'https://lt-shoes-shop.herokuapp.com/api/order/success';
             cancelURL.value =
                 'https://lt-shoes-shop.herokuapp.com/api/order/cancel';
-            paymentMethod.value = "Paypal";
             update();
           } else {
             returnURL.value =
                 'https://lt-shoes-shop.herokuapp.com/api/order/successVnPay';
-            paymentMethod.value = "VnPay";
+            cancelURL.value =
+                'https://lt-shoes-shop.herokuapp.com/api/order/cancel';
             update();
           }
           urlPayment.value = data['data'];
           update();
-          Navigator.of(context)
-              .pushReplacement(MaterialPageRoute(builder: (context) => WebPayment()));
+          Navigator.of(context).pushReplacement(
+              MaterialPageRoute(builder: (context) => WebPayment()));
           // Get.back();
           // launchInWebViewOrVC(Uri.parse(url));
         }
