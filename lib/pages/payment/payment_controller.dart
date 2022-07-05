@@ -95,6 +95,11 @@ class PaymentController extends GetxController {
             colorText: Colors.white,
             backgroundColor: const Color(0xff00FF00),
           );
+          voucher.value = Voucher.fromJson({});
+          typePayment.value = '';
+          cartController.listCartSelected.clear();
+          cartController.onInit();
+          cartController.update();
         } else {
           if (typePaymentMethod == 'Paypal') {
             returnURL.value =
@@ -110,17 +115,17 @@ class PaymentController extends GetxController {
             update();
           }
           urlPayment.value = data['data'];
+          voucher.value = Voucher.fromJson({});
+          typePayment.value = '';
+          cartController.listCartSelected.clear();
+          cartController.onInit();
+          cartController.update();
           update();
           Navigator.of(context).pushReplacement(
               MaterialPageRoute(builder: (context) => WebPayment()));
           // Get.back();
           // launchInWebViewOrVC(Uri.parse(url));
         }
-        voucher.value = Voucher.fromJson({});
-        typePayment.value = '';
-        cartController.listCartSelected.clear();
-        cartController.onInit();
-        cartController.update();
         update();
       },
       onError: (e) {

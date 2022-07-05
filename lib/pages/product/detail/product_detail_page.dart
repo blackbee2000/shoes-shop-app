@@ -1342,7 +1342,7 @@ class ProductDetailState extends State<ProductDetailPage>
                           ),
                           Container(
                             width: double.infinity,
-                            height: 200,
+                            height: 230,
                             margin: const EdgeInsets.symmetric(horizontal: 20),
                             child: TabBarView(
                               controller: tabController,
