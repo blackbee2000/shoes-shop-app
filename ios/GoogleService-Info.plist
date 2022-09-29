@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>114894092889-8tg68udg239cof3pa0hc8ilcucl8bmjb.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.114894092889-8tg68udg239cof3pa0hc8ilcucl8bmjb</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>114894092889-kt7pg1ohuvs9fdaduqmnq7vn9lims0p8.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDsS6FxN0dDTplamYhWcDrJHZgHfDt-xBQ</string>
+	<key>GCM_SENDER_ID</key>
+	<string>114894092889</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.lifekicky.shoponline</string>
+	<key>PROJECT_ID</key>
+	<string>shoes-shop-app-15ea1</string>
+	<key>STORAGE_BUCKET</key>
+	<string>shoes-shop-app-15ea1.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:114894092889:ios:bdac8607a00596472b0f48</string>
+</dict>
+</plist>
