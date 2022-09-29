@@ -1469,7 +1469,7 @@ class AddressState extends State<AddressPage> {
                                   },
                                   child: Container(
                                     width: double.infinity,
-                                    height: 100,
+                                    height: 120,
                                     decoration: BoxDecoration(
                                       color: Colors.white,
                                       borderRadius: BorderRadius.circular(10),
@@ -1665,7 +1665,7 @@ class AddressState extends State<AddressPage> {
                                       },
                                       child: Container(
                                         width: double.infinity,
-                                        height: 100,
+                                        height: 120,
                                         margin:
                                             const EdgeInsets.only(bottom: 20),
                                         decoration: BoxDecoration(
