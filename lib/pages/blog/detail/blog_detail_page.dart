@@ -15,7 +15,7 @@ import 'package:flutter_html/flutter_html.dart';
 import 'package:back_button_interceptor/back_button_interceptor.dart';
 
 import '../../cart/cart_controller.dart';
-import '../../home/badge.dart';
+import '../../badge.dart';
 
 class BlogDetailPage extends StatefulWidget {
   final int id;
@@ -123,7 +123,7 @@ class BlogDetailState extends State<BlogDetailPage> {
                               id: AppConstant.BLOG,
                             );
                           },
-                          child: Badge(
+                          child: BadgeCustom(
                             value: controller.listCart.length,
                             child: Image.asset(
                               "assets/icons/icon_cart.png",

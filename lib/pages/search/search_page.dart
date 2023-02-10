@@ -18,7 +18,7 @@ import 'package:shoes_shop_app/utils/app_constant.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../cart/cart_controller.dart';
-import '../home/badge.dart';
+import '../badge.dart';
 
 class SearchPage extends StatelessWidget {
   final searchController = Get.put(SearchController());
@@ -285,7 +285,7 @@ class SearchPage extends StatelessWidget {
                               id: AppConstant.SEARCH,
                             );
                           },
-                          child: Badge(
+                          child: BadgeCustom(
                             value: controller.listCart.length,
                             child: Image.asset(
                               "assets/icons/icon_cart.png",

@@ -19,7 +19,7 @@ import 'package:shoes_shop_app/utils/app_constant.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../cart/cart_controller.dart';
-import 'badge.dart';
+import '../badge.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key? key}) : super(key: key);
@@ -108,7 +108,7 @@ class HomePageState extends State<HomePage> {
                               id: AppConstant.HOME,
                             );
                           },
-                          child: Badge(
+                          child: BadgeCustom(
                             value: cartController.listCart.length,
                             child: Image.asset(
                               "assets/icons/icon_cart.png",

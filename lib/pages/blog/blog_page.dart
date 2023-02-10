@@ -16,7 +16,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:intl/intl.dart';
 
 import '../cart/cart_controller.dart';
-import '../home/badge.dart';
+import '../badge.dart';
 
 class BlogPage extends StatefulWidget {
   BlogPage({Key? key}) : super(key: key);
@@ -112,7 +112,7 @@ class BlogState extends State<BlogPage> {
                                   id: AppConstant.BLOG,
                                 );
                               },
-                              child: Badge(
+                              child: BadgeCustom(
                                 value: controller.listCart.length,
                                 child: Image.asset(
                                   "assets/icons/icon_cart.png",

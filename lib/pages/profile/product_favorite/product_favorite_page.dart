@@ -14,7 +14,7 @@ import 'package:shoes_shop_app/utils/app_constant.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:back_button_interceptor/back_button_interceptor.dart';
 
-import '../../home/badge.dart';
+import '../../badge.dart';
 
 class ProductFavoritePage extends StatefulWidget {
   final int id;
@@ -110,7 +110,7 @@ class ProductFavoriteState extends State<ProductFavoritePage> {
                             id: AppConstant.PROFILE,
                           );
                         },
-                        child: Badge(
+                        child: BadgeCustom(
                           value: controller.listCart.length,
                           child: Image.asset(
                             "assets/icons/icon_cart.png",

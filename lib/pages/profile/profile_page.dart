@@ -16,7 +16,7 @@ import 'package:shoes_shop_app/translations/app_translation.dart';
 import 'package:shoes_shop_app/utils/app_constant.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../home/badge.dart';
+import '../badge.dart';
 
 class ProfilePage extends GetView<ProfileController> {
   final profileController = Get.put(ProfileController());
@@ -155,7 +155,7 @@ class ProfilePage extends GetView<ProfileController> {
                               id: AppConstant.PROFILE,
                             );
                           },
-                          child: Badge(
+                          child: BadgeCustom(
                             value: controller.listCart.length,
                             child: Image.asset(
                               "assets/icons/icon_cart.png",

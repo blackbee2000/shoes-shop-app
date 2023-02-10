@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class Badge extends StatefulWidget {
-  const Badge({
+class BadgeCustom extends StatefulWidget {
+  const BadgeCustom({
     Key? key,
     required this.child,
     required this.value,
@@ -13,10 +13,10 @@ class Badge extends StatefulWidget {
   final Color? color;
 
   @override
-  State<Badge> createState() => _BadgeState();
+  State<BadgeCustom> createState() => _BadgeCustomState();
 }
 
-class _BadgeState extends State<Badge> {
+class _BadgeCustomState extends State<BadgeCustom> {
   @override
   Widget build(BuildContext context) {
     print(widget.value);
@@ -41,7 +41,7 @@ class _BadgeState extends State<Badge> {
                     minHeight: 12,
                   ),
                   child: Text(
-                  widget.value > 99 ? "99+" : widget.value.toString(),
+                    widget.value > 99 ? "99+" : widget.value.toString(),
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 8,

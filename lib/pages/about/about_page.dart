@@ -9,7 +9,7 @@ import 'package:shoes_shop_app/utils/app_constant.dart';
 import 'package:shoes_shop_app/utils/utils.dart';
 
 import '../cart/cart_controller.dart';
-import '../home/badge.dart';
+import '../badge.dart';
 
 class AboutPage extends StatefulWidget {
   const AboutPage({Key? key}) : super(key: key);
@@ -94,11 +94,10 @@ class AboutState extends State<AboutPage> {
                   Padding(
                     padding: const EdgeInsets.only(left: 10, right: 20),
                     child: GetBuilder<CartController>(
-                      builder: (controller) => Badge(
+                      builder: (controller) => BadgeCustom(
                         value: controller.listCart.length,
                         child: GestureDetector(
                           onTap: () {
-                      
                             Get.to(
                               const CartPage(id: AppConstant.HOME),
                               id: AppConstant.HOME,

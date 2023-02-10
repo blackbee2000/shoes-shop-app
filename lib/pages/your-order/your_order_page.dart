@@ -7,11 +7,10 @@ import 'package:shoes_shop_app/pages/your-order/your_order_controller.dart';
 import 'package:shoes_shop_app/theme/theme_controller.dart';
 import 'package:shoes_shop_app/translations/app_translation.dart';
 import 'package:shoes_shop_app/utils/app_constant.dart';
-import 'package:google_fonts/google_fonts.dart';
 import '../cart/cart_controller.dart';
-import '../home/badge.dart';
 import 'your-order-detail/your_order_detail_page.dart';
 import 'package:back_button_interceptor/back_button_interceptor.dart';
+import 'package:shoes_shop_app/pages/badge.dart';
 
 class YourOrderPage extends StatefulWidget {
   const YourOrderPage({Key? key}) : super(key: key);
@@ -264,7 +263,7 @@ class YourOrderState extends State<YourOrderPage> {
                             id: AppConstant.PROFILE,
                           );
                         },
-                        child: Badge(
+                        child: BadgeCustom(
                           value: controller.listCart.length,
                           child: Image.asset(
                             "assets/icons/icon_cart.png",

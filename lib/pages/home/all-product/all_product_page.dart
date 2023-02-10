@@ -16,7 +16,7 @@ import 'package:shoes_shop_app/translations/app_translation.dart';
 import 'package:shoes_shop_app/utils/app_constant.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../badge.dart';
+import '../../badge.dart';
 
 class AllProductPage extends StatefulWidget {
   const AllProductPage({
@@ -242,11 +242,10 @@ class AllProductState extends State<AllProductPage> {
                   Padding(
                     padding: const EdgeInsets.only(left: 10, right: 20),
                     child: GetBuilder<CartController>(
-                      builder: (controller) => Badge(
+                      builder: (controller) => BadgeCustom(
                         value: controller.listCart.length,
                         child: GestureDetector(
                           onTap: () {
-                      
                             Get.to(
                               const CartPage(id: AppConstant.HOME),
                               id: AppConstant.HOME,

@@ -15,7 +15,7 @@ import 'package:shoes_shop_app/utils/app_constant.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../cart/cart_controller.dart';
-import '../home/badge.dart';
+import '../badge.dart';
 
 class ProductPage extends GetView<ProductController> {
   final productController = Get.put(ProductController());
@@ -221,7 +221,7 @@ class ProductPage extends GetView<ProductController> {
                                   id: AppConstant.PRODUCT,
                                 );
                               },
-                              child: Badge(
+                              child: BadgeCustom(
                                 value: cartController.listCart.length,
                                 child: Image.asset(
                                   "assets/icons/icon_cart.png",
